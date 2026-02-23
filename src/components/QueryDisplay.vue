@@ -1,0 +1,269 @@
+<template>
+  <div id="query-display" class="flex flex-1 flex-col">
+    <div v-if="loading" class="flex flex-row"><ProgressSpinner /></div>
+
+    <div v-else-if="!isObjectHasKeys(query)">No expression or query definition found.</div>
+    <div v-else class="query-display-container flex flex-col gap-4">
+      <template v-if="!eclQuery">
+        <SelectButton v-model="selectedDisplayOption" :options="displayOptions" />
+      </template>
+      <template v-if="query && (selectedDisplayOption == DisplayOptions.RuleView || selectedDisplayOption == DisplayOptions.LogicalView)">
+        <div class="query-display-content rec-query-display">
+          <span v-if="query.name" v-html="query.name"> </span>
+          <div v-if="query.typeOf">
+            <span class="field" v-html="query.typeOf.name"></span>
+            <span class="include-title text-black-500">with the following features</span>
+          </div>
+          <template v-if="boolGroup">
+            <div :style="{ marginLeft: `0rem` }">
+              <div
+                v-for="(nestedQuery, index) in boolGroup"
+                :key="`nestedQueryDisplay-${index}`"
+                :class="operator === Bool.rule && index > 0 ? 'rule-box' : ''"
+              >
+                <RecursiveMatchDisplay
+                  :match="nestedQuery"
+                  :clause-index="index"
+                  :parent-operator="operator"
+                  :depth="1"
+                  :parent-match="query"
+                  :eclQuery="eclQuery"
+                />
+              </div>
+            </div>
+          </template>
+          <template v-else>
+            <div>
+              <RecursiveMatchDisplay
+                :match="query"
+                :clauseIndex="0"
+                :depth="0"
+                :parent-match="rootQuery"
+                :eclQuery="eclQuery"
+                :expanded="query.name === undefined"
+              />
+            </div>
+          </template>
+        </div>
+      </template>
+      <div v-else-if="[DisplayOptions.MySQL, DisplayOptions.PostreSQL].includes(selectedDisplayOption)" class="query-display-content flex flex-col gap-4">
+        <SQLDisplay :sql="sql" />
+      </div>
+      <div v-else-if="selectedDisplayOption == DisplayOptions.IML" class="query-display-content flex flex-col gap-4">
+        <IMLDisplay v-if="iml" :iml="iml" />
+      </div>
+      <div v-if="query && query.columnGroup">
+        <span>Output columns </span>
+        <Button text :icon="!showColumns ? 'fa-solid fa-chevron-right' : 'fa-solid fa-chevron-down'" @click="showColumns = !showColumns"></Button>
+        <div v-if="showColumns && query" class="query-display-content flex flex-col gap-4">
+          <ColumnGroupDisplay
+            v-for="(nestedQuery, index) in query?.columnGroup"
+            :match="nestedQuery"
+            :key="`nestedQuery-${index}`"
+            :matchExpanded="false"
+            :returnExpanded="true"
+            :index="index"
+            :parentQuery="query"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { isArrayHasLength, isObjectHasKeys } from "@/helpers/DataTypeCheckers";
+import RecursiveMatchDisplay from "@/components/RecursiveMatchDisplay.vue";
+import ColumnGroupDisplay from "@/components/ColumnGroupDisplay.vue";
+import { Argument, ArgumentReference, Bool, DisplayMode, IMLLanguage, Query, QueryRequest, UserRole } from "@/interfaces/AutoGen";
+import { computed, inject, onMounted, provide, ref, Ref, watch } from "vue";
+import SQLDisplay from "./SQLDisplay.vue";
+import IMLDisplay from "./IMLDisplay.vue";
+import { cloneDeep } from "lodash-es";
+import { getBooleanOperator, getBoolGroup } from "@/helpers/buildQuery";
+import injectionKeys from "@/injectionKeys/injectionKeys";
+
+enum DisplayOptions {
+  RuleView = "Rule view",
+  LogicalView = "Logical view",
+  MySQL = "MySQL",
+  PostreSQL = "PostgreSQL",
+  IML = "IMLanguage"
+}
+
+interface Props {
+  entityIri?: string;
+  definition?: string;
+  queryDefinition?: Query;
+  entityType?: string;
+  eclQuery?: boolean;
+}
+
+const props = defineProps<Props>();
+const emit = defineEmits<{
+  navigateTo: [payload: string];
+}>();
+
+const queryService = inject(injectionKeys.queryService);
+if (!queryService) throw new Error("Missing injection: queryService");
+
+const showColumns = ref(false);
+
+const query: Ref<Query | undefined> = ref<Query | undefined>(props.queryDefinition);
+const rootQuery = ref({} as Query);
+const sql: Ref<string> = ref("");
+const iml: Ref<IMLLanguage | undefined> = ref();
+const loading = ref(true);
+const showTestResults = ref(false);
+const testResults: Ref<string[]> = ref([]);
+const displayMode: Ref<DisplayMode> = ref(DisplayMode.ORIGINAL);
+const displayOptions: Ref<string[]> = ref([]);
+const selectedDisplayOption: Ref<DisplayOptions> = ref(DisplayOptions.LogicalView);
+const showArgumentSelector = ref(false);
+const checkingArguments = ref(false);
+const missingArguments: Ref<ArgumentReference[]> = ref([]);
+const requestArguments: Ref<Argument[]> = ref([]);
+const runOnConfirm = ref(false);
+const hasPermissionQueryExecute = ref(false);
+const deepQuery: Ref<Query | undefined> = ref();
+const operator = computed(() => {
+  return getBooleanOperator("Match", query.value);
+});
+const boolGroup = computed(() => {
+  return getBoolGroup("Match", query.value);
+});
+provide("queryIri", props.entityIri);
+provide("displayMode", displayMode);
+
+watch(
+  () => props.definition,
+  async () => {
+    await init();
+  }
+);
+
+watch(
+  () => props.queryDefinition,
+  () => {
+    query.value = props.queryDefinition;
+  }
+);
+
+watch(
+  () => props.entityIri,
+  async () => {
+    await init();
+  }
+);
+
+watch(selectedDisplayOption, async (newValue, oldValue) => {
+  if (!newValue) selectedDisplayOption.value = oldValue;
+  switch (selectedDisplayOption.value) {
+    case DisplayOptions.RuleView:
+      if (displayMode.value != DisplayMode.RULES) query.value = await getQueryDisplay(DisplayMode.RULES);
+      displayMode.value = DisplayMode.RULES;
+      break;
+    case DisplayOptions.LogicalView:
+      if (displayMode.value != DisplayMode.LOGICAL) query.value = await getQueryDisplay(DisplayMode.LOGICAL);
+      displayMode.value = DisplayMode.LOGICAL;
+      break;
+    case DisplayOptions.MySQL:
+      if (props.entityIri) sql.value = await queryService!.generateQuerySQL(props.entityIri, "MYSQL");
+      break;
+    case DisplayOptions.PostreSQL:
+      if (props.entityIri) sql.value = await queryService!.generateQuerySQL(props.entityIri, "POSTGRESQL");
+      break;
+    case DisplayOptions.IML:
+      if (props.entityIri) iml.value = await queryService!.generateQueryIML(props.entityIri);
+      break;
+    default:
+      break;
+  }
+});
+
+onMounted(async () => {
+  await init();
+});
+
+async function init() {
+  loading.value = true;
+  if (!query.value?.typeOf) {
+    if (props.entityIri) query.value = await queryService!.getDisplayFromQueryIri(props.entityIri, DisplayMode.ORIGINAL);
+  }
+  deepQuery.value = cloneDeep(query.value);
+  displayMode.value = query.value?.rule ? DisplayMode.RULES : DisplayMode.LOGICAL;
+  setDisplayOptions();
+  if (query.value?.rule) selectedDisplayOption.value = DisplayOptions.RuleView;
+  else selectedDisplayOption.value = DisplayOptions.LogicalView;
+  // if (isLoggedIn.value) {
+  // hasPermissionQueryExecute.value = await CasbinService.hasPermission(Resource.QUERY, Action.EXECUTE);
+  //}
+  loading.value = false;
+}
+
+function setDisplayOptions() {
+  displayOptions.value = [DisplayOptions.RuleView, DisplayOptions.LogicalView, DisplayOptions.MySQL, DisplayOptions.PostreSQL, DisplayOptions.IML];
+}
+
+async function getQueryDisplay(displayMode: DisplayMode) {
+  if (query.value?.typeOf) {
+    return await queryService!.getQueryDisplayFromQuery(query.value, displayMode);
+  } else if (props.entityIri) return await queryService!.getDisplayFromQueryIri(props.entityIri, displayMode);
+  return undefined;
+}
+
+async function getQueryRequestFromQueryIri() {
+  if (query.value?.iri) {
+    const queryDisplay = await queryService!.getDisplayFromQueryIri(query.value.iri, DisplayMode.LOGICAL);
+    return { query: queryDisplay, argument: requestArguments.value };
+  }
+  return {} as QueryRequest;
+}
+</script>
+
+<style scoped>
+.rule-box {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+}
+.confirm-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 80%;
+}
+.query-display-container {
+  width: 100%;
+  height: 100%;
+}
+
+.query-display-content {
+  overflow: auto;
+}
+
+#query-display {
+  display: flex;
+  flex: 1 1 auto;
+}
+
+.query-display-view {
+  overflow: auto;
+}
+
+.field {
+  padding-right: 1rem;
+}
+
+.rec-query-display {
+  padding: 1rem;
+}
+
+.button-bar {
+  flex: 0 1 auto;
+  padding: 1rem 1rem 1rem 0;
+  gap: 0.5rem;
+  display: flex;
+  flex-flow: row;
+  justify-content: flex-end;
+}
+</style>

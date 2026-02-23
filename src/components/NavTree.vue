@@ -1,0 +1,479 @@
+<template>
+  <div id="hierarchy-tree-bar-container" class="flex flex-col justify-start">
+    <Tree
+      v-model:expandedKeys="expandedKeys"
+      :selectionKeys="selectedKeys"
+      :loading="loading"
+      :value="root"
+      class="tree-root"
+      selectionMode="single"
+      @node-expand="expandNode"
+      @node-collapse="onNodeCollapse"
+    >
+      <template #default="{ node }">
+        <div
+          :class="allowDragAndDrop && 'grabbable'"
+          :draggable="allowDragAndDrop"
+          class="tree-row"
+          @contextmenu="onNodeContext($event, node)"
+          @click="onNodeSelect($event, node, useEmits ? useEmits : false, true)"
+          @dragstart="dragStart($event, node.data)"
+          @mouseleave="hideOverlay"
+          @mouseover="displayOverlay($event, node)"
+        >
+          <span v-if="allowDragAndDrop">
+            <IMFontAwesomeIcon class="drag-icon grabbable" icon="fa-solid fa-grip-vertical" />
+          </span>
+          <ContextMenu ref="menu" :model="items" />
+          <span v-if="!node.loading">
+            <IMFontAwesomeIcon v-if="node.typeIcon" :icon="node.typeIcon" :style="'color:' + node.color" fixed-width />
+          </span>
+          <ProgressSpinner v-if="node.loading" class="progress-spinner" />
+          <span class="row-name">{{ node.label }}</span>
+        </div>
+      </template>
+    </Tree>
+    <small class="p-1">CTRL+click to open in new tab</small>
+    <OverlaySummary ref="OS" />
+    <Dialog :closable="false" :modal="true" :visible="newFolder !== null" header="New folder">
+      <InputText v-model="newFolderName" autofocus type="text" @keyup.enter="createFolder" />
+      <template #footer>
+        <Button class="p-button-text" icon="fa-regular fa-xmark" label="Cancel" @click="newFolder = null" />
+        <Button :disabled="creating || !newFolderName" :icon="newFolderIcon" label="Create" @click="createFolder" />
+      </template>
+    </Dialog>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { computed, inject, onBeforeUnmount, onMounted, ref, Ref, watch } from "vue";
+import IMFontAwesomeIcon from "@/components/IMFontAwesomeIcon.vue";
+import OverlaySummary from "./OverlaySummary.vue";
+import { useToast } from "primevue/usetoast";
+import { isArrayHasLength, isObjectHasKeys } from "@/helpers/DataTypeCheckers";
+import { byKey } from "@/helpers/Sorters";
+import { IM } from "@/vocabulary/IM";
+import type { TreeNode } from "primevue/treenode";
+import { useTree } from "@/composables/useTree";
+import { useConfirm } from "primevue/useconfirm";
+import { useCreateNew } from "@/composables/useCreateNew";
+import { TTIriRef, UserRole } from "@/interfaces/AutoGen";
+import { useOverlay } from "@/composables/useOverlay";
+import { cloneDeep } from "lodash-es";
+import { MenuItem } from "primevue/menuitem";
+import injectionKeys from "@/injectionKeys/injectionKeys";
+
+interface Props {
+  allowDragAndDrop?: boolean;
+  allowRightClick?: boolean;
+  rootEntities?: string[];
+  selectedIri?: string;
+  findInTree?: boolean;
+  typeFilter?: string[];
+  useEmits?: boolean;
+  childLength?: number;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  rootEntities: () => [] as string[],
+  allowRightClick: false,
+  allowDragAndDrop: false
+});
+
+const emit = defineEmits<{
+  rowSelected: [payload: any];
+  rowClicked: [payload: any];
+  rowDblClicked: [payload: any];
+  foundInTree: [];
+}>();
+
+const userStore = inject(injectionKeys.userStore);
+if (!userStore) throw new Error("Missing injection: userStore");
+const entityService = inject(injectionKeys.entityService);
+if (!entityService) throw new Error("Missing injection: entityService");
+const filerService = inject(injectionKeys.filerService);
+if (!filerService) throw new Error("Missing injection: filerService");
+const directService = inject(injectionKeys.directService);
+if (!directService) throw new Error("Missing injection: directService");
+
+const toast = useToast();
+const confirmDlg = useConfirm();
+
+const currentUser = computed(() => userStore.currentUser);
+const isLoggedIn = computed(() => userStore.isLoggedIn);
+const favourites = computed(() => userStore.favourites);
+
+const { root, selectedKeys, selectedNode, expandedKeys, expandedData, createTreeNode, loadMore, onNodeExpand, onNodeCollapse, findPathToNode, customOnClick } =
+  useTree(directService, entityService, userStore.favourites, emit, props.childLength ? props.childLength : 40);
+const { getCreateOptions, checkExists } = useCreateNew(directService, entityService);
+
+const loading = ref(true);
+const overlayLocation: Ref<MouseEvent | undefined> = ref();
+const items: Ref<MenuItem[]> = ref([]);
+const newFolder: Ref<TreeNode | null> = ref(null);
+const newFolderName = ref("");
+const creating = ref(false);
+const newFolderIcon = computed(() => {
+  if (creating.value) return "fa-solid fa-spinner";
+  else return "fa-solid fa-check";
+});
+
+const menu = ref();
+const { OS, showOverlay, hideOverlay } = useOverlay();
+
+watch(
+  () => props.findInTree,
+  async newValue => {
+    if (newValue && props.selectedIri) await findPathToNode(props.selectedIri, loading, "hierarchy-tree-bar-container");
+    emit("foundInTree");
+  }
+);
+
+watch(
+  () => cloneDeep(favourites.value),
+  async () => {
+    const favouritesIndex = root.value.findIndex(node => node.data === IM.FAVOURITES);
+    if (favouritesIndex !== -1) {
+      root.value.splice(favouritesIndex, 1);
+      addFavouritesToTree();
+    }
+  }
+);
+
+watch(
+  () => cloneDeep(props.rootEntities),
+  async () => await init()
+);
+
+onMounted(async () => {
+  await init();
+});
+
+onBeforeUnmount(() => {
+  if (overlayLocation.value) {
+    hideOverlay();
+  }
+});
+
+document.addEventListener("visibilitychange", async () => {
+  if (!document.hidden) {
+    expandedKeys.value = {};
+    for (const newNode in expandedData.value) {
+      await onNodeExpand(expandedData.value[newNode]);
+    }
+  }
+});
+
+async function init() {
+  loading.value = true;
+  if (isArrayHasLength(props.rootEntities)) await addRootEntitiesToTree();
+  else await addParentFoldersToRoot();
+  //if (props.selectedIri) await findPathToNode(props.selectedIri, loading, "hierarchy-tree-bar-container");
+  loading.value = false;
+}
+
+async function expandNode(node: TreeNode) {
+  await onNodeExpand(node, props.typeFilter);
+}
+
+async function addParentFoldersToRoot() {
+  const IMChildren = await entityService!.getEntityChildren(IM.MODULE_IM);
+  if (isArrayHasLength(IMChildren)) {
+    for (let IMchild of IMChildren) {
+      const hasNode = !!root.value.find(node => node.data === IMchild.iri);
+      if (!hasNode) root.value.push(createTreeNode(IMchild.name, IMchild.iri, IMchild.type as TTIriRef[], IMchild.hasGrandChildren, null, IMchild.orderNumber));
+    }
+  }
+  root.value.sort((r1, r2) => (r1.order > r2.order ? 1 : r1.order < r2.order ? -1 : 0));
+  if (isLoggedIn.value) addFavouritesToTree();
+}
+
+function addFavouritesToTree() {
+  const favNode = createTreeNode("Favourites", IM.FAVOURITES, [], !!favourites.value.length, null, undefined);
+  favNode.typeIcon = ["fa-solid", "fa-star"];
+  favNode.color = "var(--p-yellow-500)";
+  root.value.push(favNode);
+}
+
+async function addRootEntitiesToTree() {
+  root.value = [];
+  const itemSummaries = await entityService!.getAsEntityReferenceNodes(props.rootEntities);
+  if (itemSummaries && itemSummaries.length > 0) {
+    for (const itemSummary of itemSummaries) {
+      root.value.push(createTreeNode(itemSummary.name, itemSummary.iri, itemSummary.type as TTIriRef[], itemSummary.hasChildren, null));
+    }
+  }
+  root.value.sort(byKey);
+}
+
+async function onNodeContext(event: MouseEvent, node: TreeNode) {
+  event.preventDefault();
+  items.value = [];
+  const hasPermission = currentUser.value?.roles.includes(UserRole.EDITOR)!!;
+
+  if (!currentUser.value || !hasPermission) return;
+
+  items.value = await getCreateOptions(newFolderName, newFolder, node);
+  selectedNode.value = node;
+
+  if (
+    selectedNode.value &&
+    isObjectHasKeys(selectedNode.value) &&
+    selectedNode.value.key &&
+    node.key !== selectedNode.value.key &&
+    node.typeIcon.includes("fa-folder")
+  ) {
+    const isOwnDescendant = await entityService!.getPathBetweenNodes(node.key, selectedNode.value.key);
+    if (isOwnDescendant.findIndex(pathItem => pathItem.iri === selectedNode.value?.key) === -1) {
+      items.value.push({
+        label: "Move selection here",
+        icon: "fa-solid fa-fw fa-file-import",
+        command: () => {
+          confirmMove(node);
+        }
+      });
+      items.value.push({
+        label: "Add selection here",
+        icon: "fa-solid fa-fw fa-copy",
+        command: () => {
+          confirmAdd(node);
+        }
+      });
+    }
+  }
+  if (items.value.length > 0) menu.value.show(event);
+}
+
+function confirmMove(node: TreeNode) {
+  if (selectedNode.value && isObjectHasKeys(selectedNode.value)) {
+    confirmDlg.require({
+      header: "Confirm move",
+      message: 'Are you sure you want to move "' + selectedNode.value.label + '" to "' + node.label + '" ?',
+      icon: "fa-solid fa-triangle-exclamation",
+      accept: async () => {
+        await moveConcept(node);
+      },
+      reject: () => {
+        toast.add({ severity: "warn", summary: "Cancelled", detail: "Move cancelled", life: 3000 });
+      }
+    });
+  }
+}
+
+async function moveConcept(target: TreeNode) {
+  if (
+    selectedNode.value &&
+    isObjectHasKeys(selectedNode.value) &&
+    selectedNode.value.parentNode &&
+    selectedNode.value.key &&
+    target &&
+    target.key &&
+    target.children
+  ) {
+    try {
+      await filerService!.moveFolder(selectedNode.value.key, selectedNode.value.parentNode.key, target.key);
+      toast.add({
+        severity: "success",
+        summary: "Move",
+        detail: 'Moved "' + selectedNode.value.label + '" into "' + target.label + '"',
+        life: 3000
+      });
+      selectedNode.value.parentNode.children = selectedNode.value.parentNode.children.filter((v: TreeNode) => v != selectedNode.value);
+      selectedNode.value.parentNode = target;
+      target.children.push(selectedNode.value);
+    } catch (e: any) {
+      toast.add({ severity: "error", summary: e.response.data.title, detail: e.response.data.detail, life: 3000 });
+    }
+  }
+}
+
+function confirmAdd(node: TreeNode) {
+  if (selectedNode.value && isObjectHasKeys(selectedNode.value)) {
+    confirmDlg.require({
+      header: "Confirm add",
+      message: 'Are you sure you want to add "' + selectedNode.value.label + '" to "' + node.label + '" ?',
+      icon: "fa-solid fa-triangle-exclamation",
+      accept: async () => {
+        await addConcept(node);
+      },
+      reject: () => {
+        toast.add({ severity: "warn", summary: "Cancelled", detail: "Add cancelled", life: 3000 });
+      }
+    });
+  }
+}
+
+async function addConcept(target: TreeNode) {
+  if (
+    selectedNode.value &&
+    isObjectHasKeys(selectedNode.value) &&
+    selectedNode.value.parentNode &&
+    selectedNode.value.key &&
+    target &&
+    target.key &&
+    target.children
+  ) {
+    try {
+      await filerService!.addToFolder(selectedNode.value.key, target.key);
+      toast.add({
+        severity: "success",
+        summary: "Add",
+        detail: 'Added "' + selectedNode.value.label + '" into "' + target.label + '"',
+        life: 3000
+      });
+      target.children.push(selectedNode.value);
+    } catch (e: any) {
+      toast.add({ severity: "error", summary: e.response.data.title, detail: e.response.data.detail, life: 3000 });
+    }
+  }
+}
+
+async function createFolder() {
+  if (!newFolder.value || !newFolder.value.key || !newFolderName.value) return;
+  if (await checkExists(newFolder.value.key)) return;
+  creating.value = true;
+
+  try {
+    const iri = await filerService!.createFolder(newFolder.value.key, newFolderName.value);
+    toast.add({
+      severity: "success",
+      summary: "New folder",
+      detail: 'New folder "' + newFolderName.value + '" created',
+      life: 3000
+    });
+    if (newFolder.value.children) {
+      newFolder.value.children.push(
+        createTreeNode(
+          newFolderName.value,
+          iri,
+          [
+            {
+              iri: IM.FOLDER,
+              name: "Folder"
+            } as TTIriRef
+          ],
+          false,
+          newFolder.value
+        )
+      );
+    }
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (e) {
+    toast.add({
+      severity: "error",
+      summary: "New folder",
+      detail: '"' + newFolderName.value + '" already exists',
+      life: 3000
+    });
+  } finally {
+    newFolder.value = null;
+    creating.value = false;
+    await onNodeExpand(selectedNode.value);
+  }
+}
+
+async function displayOverlay(event: MouseEvent, node: TreeNode): Promise<void> {
+  if (node.data !== "loadMore" && node.data !== "http://endhealth.info/im#Favourites") {
+    await showOverlay(event, node.key);
+  }
+}
+
+async function onNodeSelect(event: MouseEvent, node: TreeNode, useEmits?: boolean, updateSelectedKeys?: boolean) {
+  if (node.data !== IM.FAVOURITES) {
+    if (node.data === "loadMore") {
+      if (!node.loading) await loadMore(node);
+    } else await customOnClick(event, node, useEmits, updateSelectedKeys);
+  }
+}
+
+function dragStart(event: DragEvent, data: TreeNode) {
+  if (props.allowDragAndDrop) {
+    event.dataTransfer?.setData("conceptIri", JSON.stringify(data));
+    event.dataTransfer!.effectAllowed = "copy";
+    event.dataTransfer!.dropEffect = "copy";
+    hideOverlay();
+  }
+}
+</script>
+
+<style scoped>
+#hierarchy-tree-bar-container {
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.loading-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.p-tree .p-tree-container .p-tree-node .p-tree-node-content {
+  padding: 0rem !important;
+  transition: box-shadow 3600s 3600s !important;
+}
+
+#hierarchy-tree-bar-container:deep(.p-tree-node-content) {
+  padding: 0 !important;
+}
+
+.p-tree-toggler {
+  margin-right: 0 !important;
+}
+
+.tree-root {
+  height: 100%;
+  overflow: auto;
+  border: none;
+  padding: 0;
+}
+
+.tree-root ::v-deep(.p-tree-toggler) {
+  min-width: 2rem;
+}
+
+.tree-root ::v-deep(.p-tree-node-label) {
+  width: 100% !important;
+}
+
+.progress-spinner {
+  width: 1.25em !important;
+  height: 1.25em !important;
+  flex: 0 0 auto;
+}
+
+.tree-row .row-name {
+  flex: 1 1 auto;
+}
+
+.tree-row {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+
+#hierarchy-tree-bar-container::v-deep(.p-tree-toggler) {
+  height: 1.25rem !important;
+  margin: 0 0 0 0 !important;
+}
+
+.drag-icon {
+  cursor: move;
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+.grabbable:active {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing;
+}
+</style>

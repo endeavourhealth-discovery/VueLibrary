@@ -1,0 +1,107 @@
+<template>
+  <div class="graph-predicates-container">
+    <MultiSelect
+      v-model="selectedPredicates"
+      @change="updatePredicates"
+      :options="options"
+      option-label="name"
+      placeholder="Select predicates"
+      data-testid="selectedPredicates"
+    />
+    <div class="loading-container" v-if="loading">
+      <ProgressSpinner />
+    </div>
+    <GraphComponent v-else :data="data" @navigateTo="(iri: string) => emit('navigateTo', iri)" />
+  </div>
+</template>
+
+<script setup lang="ts">
+import { inject, onMounted, Ref, ref, watch } from "vue";
+import GraphComponent from "./GraphComponent.vue";
+import { TTGraphData } from "@/interfaces";
+import { translateFromEntityBundle, isObjectHasKeys } from "@/helpers";
+import { IM } from "@/vocabulary/IM";
+import { TTBundle } from "@/interfaces/ExtendedAutoGen";
+import injectionKeys from "@/injectionKeys/injectionKeys";
+
+const props = defineProps<{
+  entityIri: string;
+}>();
+
+const emit = defineEmits<{
+  navigateTo: [payload: string];
+}>();
+
+const entityService = inject(injectionKeys.entityService);
+if (!entityService) throw new Error("Missing injection: entityService");
+
+watch(
+  () => props.entityIri,
+  async newValue => await getEntityBundle(newValue)
+);
+
+const loading = ref(false);
+const data: Ref<TTGraphData> = ref({} as TTGraphData);
+const selectedPredicates: Ref<{ iri: string; name: string }[]> = ref([]);
+const selectedIris: Ref<string[]> = ref([]);
+const predicatesIris: Ref<string[]> = ref([]);
+const bundle: Ref<TTBundle> = ref({} as TTBundle);
+const options: Ref<{ iri: string; name: string }[]> = ref([]);
+
+const graphExcludePredicates: Ref<string[]> = ref([]);
+
+onMounted(async () => {
+  const result = await entityService.getEntityChildren(IM.GRAPH_EXCLUDE_PREDICATES);
+  if (result) graphExcludePredicates.value = result.map(r => r.iri);
+  await getEntityBundle(props.entityIri);
+});
+
+function updatePredicates() {
+  selectedIris.value = [];
+  selectedPredicates.value.forEach(i => {
+    selectedIris.value.push(i.iri);
+  });
+  data.value = translateFromEntityBundle(bundle.value, selectedIris.value);
+}
+
+async function getEntityBundle(iri: string) {
+  loading.value = true;
+  bundle.value = await entityService!.getBundleByPredicateExclusions(iri, [IM.HAS_MEMBER]);
+  const hasMember = await entityService!.getPartialAndTotalCount(iri, IM.HAS_MEMBER, 1, 10);
+  if (isObjectHasKeys(hasMember, ["totalCount"]) && hasMember.totalCount !== 0) {
+    bundle.value.entity[IM.HAS_MEMBER] = hasMember.result;
+    bundle.value.predicates[IM.HAS_MEMBER] = "has member";
+  }
+  if (hasMember.totalCount && hasMember.totalCount >= 10) {
+    bundle.value.entity[IM.HAS_MEMBER] = bundle.value.entity[IM.HAS_MEMBER].concat({ iri: "seeMore", name: "see more..." });
+  }
+  predicatesIris.value = Object.keys(bundle.value.entity).filter(value => value !== "iri");
+  predicatesIris.value.forEach(i => {
+    if (!graphExcludePredicates.value.find(gep => gep === i)) options.value.push({ iri: i, name: bundle.value.predicates[i] });
+  });
+  selectedPredicates.value = options.value.filter(value => !graphExcludePredicates.value.find(gep => gep === value.iri));
+  selectedPredicates.value.forEach(i => {
+    selectedIris.value.push(i.iri);
+  });
+  data.value = translateFromEntityBundle(bundle.value, selectedIris.value);
+  loading.value = false;
+}
+</script>
+
+<style scoped>
+.loading-container {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.graph-predicates-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+}
+</style>

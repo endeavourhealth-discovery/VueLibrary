@@ -1,0 +1,338 @@
+<template>
+  <Dialog
+    v-model:visible="modelShowDialog"
+    modal
+    maximizable
+    header="Search"
+    :style="{ width: '90vw', height: '90vh', minWidth: '90vw', minHeight: '90vh' }"
+    :contentStyle="{ display: 'flex', flexDirection: 'column', height: '100%' }"
+    @keyup.enter="onEnter"
+  >
+    <div class="directory-search-dialog-content">
+      <div class="search-bar">
+        <SearchBar
+          v-model:searchTerm="searchTerm"
+          :selected="selected"
+          :imQuery="imQuery"
+          :show-filters="false"
+          @to-ecl-search="showEclSearch"
+          @to-query-search="showQuerySearch"
+          @to-search="onSearch"
+        />
+      </div>
+      <Splitter stateKey="directorySearchSplitterHorizontal" stateStorage="local" @resizeend="updateSplitter" style="height: 100%; flex: 1 1 auto">
+        <SplitterPanel :size="30" :minSize="10">
+          <div style="height: 100%; display: flex; flex-direction: column">
+            <div style="flex: 1; overflow-y: auto">
+              <div v-if="directoryLoading" class="loading-container flex flex-row items-center justify-center">
+                <ProgressSpinner />
+              </div>
+              <NavTree
+                :selectedIri="treeIri"
+                :root-entities="rootEntities"
+                :typeFilter="typeFilter"
+                :find-in-tree="findInDialogTree"
+                :useEmits="true"
+                :childLength="20"
+                @found-in-tree="findInDialogTree = false"
+                @row-clicked="showDetails"
+              />
+            </div>
+          </div>
+        </SplitterPanel>
+        <SplitterPanel :size="70" :minSize="10">
+          <div style="height: 100%; display: flex; flex-direction: column">
+            <div style="flex: 1; overflow-y: auto">
+              <SearchResults
+                v-if="activePage === 0"
+                :selected="selected"
+                :show-filters="showFilters"
+                :show-quick-type-filters="isArrayHasLength(quickTypeFiltersAllowed)"
+                :quick-type-filters-allowed="quickTypeFiltersAllowed"
+                :selected-quick-type-filter="selectedQuickTypeFilter"
+                :updateSearch="updateSearch"
+                :search-term="searchTerm"
+                :im-query="imQuery"
+                :selected-filter-options="selectedFilterOptions"
+                @selectedUpdated="updateSelected"
+                @locate-in-tree="locateInTree"
+                @selected-filters-updated="onSelectedFiltersUpdate"
+                @searchResultsUpdated="updateSearchResults"
+              />
+              <DirectoryDetails
+                v-if="activePage === 1"
+                :selected-iri="detailsIri"
+                @locateInTree="locateInTree"
+                @navigateTo="navigateTo"
+                :showSelectButton="true"
+                v-model:history="directoryHistory"
+                :searchResults
+                @selected-updated="updateSelectedFromIri"
+                @go-to-search-results="goToSearchResults"
+              />
+              <span>Show the ecl search</span>
+              <EclSearch v-if="activePage === 2" @locate-in-tree="locateInTree" @selected-updated="updateSelected" />
+              <IMQuerySearch v-if="activePage === 3" @locate-in-tree="locateInTree" @selected-updated="updateSelected" />
+            </div>
+          </div>
+        </SplitterPanel>
+      </Splitter>
+    </div>
+
+    <template #footer>
+      <div class="im-dialog-footer">
+        <div v-if="selectedName" v-tooltip.right="detailsIri">Item selected: {{ selectedName }}</div>
+        <div class="button-footer">
+          <Button label="Cancel" @click="onCancel" text />
+          <Button
+            v-if="selectedName && isSelectableEntity"
+            :disabled="!isSelectableEntity"
+            data-testid="search-dialog-select-button"
+            label="Select"
+            :loading="validationLoading"
+            @click="updateSelectedFromIri(detailsIri)"
+            autofocus
+          />
+        </div>
+      </div>
+    </template>
+  </Dialog>
+</template>
+<script setup lang="ts">
+import { ref, onMounted, watch, Ref, computed, inject, ComputedRef } from "vue";
+import SearchBar from "@/components/SearchBar.vue";
+import SearchResults from "@/components/SearchResults.vue";
+import NavTree from "@/components/NavTree.vue";
+import DirectoryDetails from "@/components/DirectoryDetails.vue";
+import EclSearch from "@/components/EclSearch.vue";
+import IMQuerySearch from "@/components/IMQuerySearch.vue";
+import { cloneDeep } from "lodash-es";
+import { QueryRequest, SearchResultSummary, SearchResponse } from "@/interfaces/AutoGen";
+import { RDFS } from "@/vocabulary/RDFS";
+import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
+import { FilterOptions } from "@/interfaces";
+import { SplitterResizeEndEvent } from "primevue/splitter";
+import injectionKeys from "@/injectionKeys/injectionKeys";
+
+interface Props {
+  imQuery?: QueryRequest;
+  rootEntities?: string[];
+  searchTerm?: string;
+  selectedFilterOptions?: FilterOptions;
+  quickTypeFiltersAllowed?: string[];
+  selectedQuickTypeFilter?: string;
+  showFilters?: boolean;
+  validEntityQuery?: QueryRequest;
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  showFilters: false
+});
+
+const emit = defineEmits<{
+  updateSelectedFilters: [payload: FilterOptions];
+  cancel: [];
+}>();
+
+const directoryStore = inject(injectionKeys.directoryStore);
+if (!directoryStore) throw new Error("Missing injection: directoryStore");
+const loadingStore = inject(injectionKeys.loadingStore);
+if (!loadingStore) throw new Error("Missing injection: loadingStore");
+const entityService = inject(injectionKeys.entityService);
+if (!entityService) throw new Error("Missing injection: entityService");
+const queryService = inject(injectionKeys.queryService);
+if (!queryService) throw new Error("Missing injection: queryService");
+
+const modelShowDialog = defineModel<boolean>("showDialog", { required: true });
+const modelSelected = defineModel<SearchResultSummary | undefined>("selected");
+const directoryLoading: ComputedRef<boolean> = computed(() => loadingStore.directoryLoading);
+const updateSearch: Ref<boolean> = ref(false);
+const validationLoading: Ref<boolean> = ref(false);
+const isSelectableEntity: Ref<boolean> = ref(false);
+const findInDialogTree = ref(false);
+const searchResults: Ref<SearchResponse | undefined> = ref();
+const loading = ref(true);
+const searchLoading = ref(false);
+const treeIri = ref("");
+const searchTerm = ref(props.searchTerm ?? "");
+const lastSearchTerm = ref(searchTerm.value);
+const typeFilter = computed(() => props.selectedFilterOptions?.types.map(item => item.iri));
+
+watch(
+  () => treeIri.value,
+  () => {
+    findInDialogTree.value = true;
+  }
+);
+const detailsIri = ref("");
+
+watch(
+  () => detailsIri.value,
+  async () => {
+    if (detailsIri.value) {
+      validationLoading.value = true;
+      await setSelectedName();
+      isSelectableEntity.value = await getIsSelectableEntity();
+      validationLoading.value = false;
+    }
+  }
+);
+
+const directoryHistory: Ref<string[]> = ref([]);
+const activePage = ref(0);
+const selectedName = ref("");
+
+watch(searchResults, () => {
+  detailsIri.value = "";
+  activePage.value = 0;
+});
+
+watch(
+  () => cloneDeep(modelSelected.value),
+  () => initSelection()
+);
+
+onMounted(() => {
+  searchTerm.value = props.searchTerm ?? "";
+  initSelection();
+});
+function onCancel() {
+  modelShowDialog.value = false;
+  emit("cancel");
+}
+
+function updateSplitter(event: SplitterResizeEndEvent) {
+  directoryStore!.updateSplitterRightSize(event.sizes[1]);
+}
+function onSearch() {
+  if (searchTerm.value && searchTerm.value !== lastSearchTerm.value) {
+    lastSearchTerm.value = searchTerm.value;
+    activePage.value = 0;
+    updateSearch.value = !updateSearch.value;
+  }
+}
+
+async function setSelectedName() {
+  if (detailsIri.value) {
+    const entity = await entityService!.getPartialEntity(detailsIri.value, [RDFS.LABEL]);
+    selectedName.value = entity[RDFS.LABEL];
+  }
+}
+
+function initSelection() {
+  if (modelSelected.value && modelSelected.value.iri) {
+    navigateTo(modelSelected.value.iri);
+    locateInTree(modelSelected.value.iri);
+  }
+}
+
+function updateSelected(data: SearchResultSummary) {
+  navigateTo(data.iri);
+  locateInTree(data.iri);
+}
+
+async function updateSelectedFromIri(iri: string) {
+  const entity = await entityService!.getEntitySummary(iri);
+  modelSelected.value = entity;
+  modelShowDialog.value = false;
+}
+
+function locateInTree(iri: string) {
+  treeIri.value = iri;
+}
+
+async function showDetails(data: any) {
+  const entity = await entityService!.getEntitySummary(data);
+  detailsIri.value = data;
+  activePage.value = 1;
+}
+
+function navigateTo(iri: string) {
+  detailsIri.value = iri;
+  activePage.value = 1;
+}
+
+function resetDialog() {
+  searchResults.value = undefined;
+  searchLoading.value = false;
+  treeIri.value = "";
+  detailsIri.value = "";
+  directoryHistory.value = [];
+  activePage.value = 0;
+}
+
+function showEclSearch() {
+  activePage.value = 2;
+}
+
+function showQuerySearch() {
+  activePage.value = 3;
+}
+
+async function getIsSelectableEntity(): Promise<boolean> {
+  if (props.validEntityQuery) {
+    const existing = props.validEntityQuery.argument!.find(a => a.parameter === "entity");
+    if (existing) {
+      existing.valueIri = { iri: detailsIri.value };
+    } else props.validEntityQuery.argument!.push({ parameter: "entity", valueIri: { iri: detailsIri.value } });
+    return await queryService!.askQuery(props.validEntityQuery);
+  }
+  return true;
+}
+
+async function onEnter() {
+  if (selectedName.value && isSelectableEntity.value) await updateSelectedFromIri(detailsIri.value);
+}
+
+function onSelectedFiltersUpdate(selectedFilters: FilterOptions) {
+  emit("updateSelectedFilters", selectedFilters);
+  updateSearch.value = !updateSearch.value;
+}
+
+function updateSearchResults(newSearchResults: SearchResponse | undefined) {
+  searchResults.value = newSearchResults;
+}
+
+function goToSearchResults() {
+  activePage.value = 0;
+}
+</script>
+
+<style scoped>
+.directory-search-dialog-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border-bottom: 10px solid #ccc;
+}
+
+.search-bar {
+  height: 3.5rem;
+  flex-shrink: 0;
+  flex-flow: row nowrap;
+  align-items: center;
+  padding: 0 0.5rem;
+}
+
+.im-dialog-footer {
+  border-top: 1px solid #ccc;
+  padding: 1rem;
+}
+.dialog-body-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%;
+}
+.flex-spacer {
+  flex: 1;
+}
+
+.button-footer {
+  display: flex;
+  flex: 1 0 auto;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+}
+</style>

@@ -1,0 +1,148 @@
+<template>
+  <div id="content-table-container" class="content-wrapper">
+    <DataTable
+      :value="dataModels"
+      class="concept-data-table p-datatable-sm"
+      selectionMode="single"
+      dataKey="iri"
+      :scrollable="true"
+      scrollHeight="flex"
+      :loading="loading"
+      :lazy="true"
+      @row-select="onRowSelect"
+    >
+      <template #loading> Loading data. Please wait. </template>
+      <template #empty> No records found. </template>
+
+      <Column field="name" header="Name">
+        <template #body="{ data }: any">
+          <div>
+            <IMFontAwesomeIcon v-if="data.icon" :icon="data.icon" :style="getColourStyleFromType(data.type)" class="p-mx-1 type-icon" />
+            <span @mouseover="showOverlay($event, data.iri)" @mouseleave="hideOverlay">{{ data.name }}</span>
+          </div>
+        </template>
+      </Column>
+      <Column :exportable="false" style="justify-content: flex-end">
+        <template #body="{ data }: any">
+          <div class="buttons-container">
+            <ActionButtons
+              v-if="data.iri"
+              :buttons="['findInTree', 'view', 'edit', 'favourite']"
+              :iri="data.iri"
+              :name="data.name"
+              @locate-in-tree="locateInTree"
+            />
+          </div>
+        </template>
+      </Column>
+    </DataTable>
+    <OverlaySummary ref="OS" />
+  </div>
+</template>
+
+<script setup lang="ts">
+import { computed, inject, onMounted, Ref, ref, watch } from "vue";
+import IMFontAwesomeIcon from "@/components/IMFontAwesomeIcon.vue";
+import { cloneDeep } from "lodash-es";
+import { TTIriRef } from "@/interfaces/AutoGen";
+import { IM } from "@/vocabulary/IM";
+import { SHACL } from "@/vocabulary/SHACL";
+import OverlaySummary from "@/components/OverlaySummary.vue";
+import ActionButtons from "@/components/ActionButtons.vue";
+import { useOverlay } from "@/composables/useOverlay";
+import { getColourFromType } from "@/helpers/ConceptTypeVisuals";
+import { DataTableRowSelectEvent } from "primevue/datatable";
+import injectionKeys from "@/injectionKeys/injectionKeys";
+interface UIDataModel extends TTIriRef {
+  type?: TTIriRef[];
+  icon?: string[];
+}
+const props = defineProps<{
+  entityIri: string;
+}>();
+
+const emit = defineEmits<{
+  navigateTo: [payload: string];
+}>();
+
+const dataModelService = inject(injectionKeys.dataModelService);
+if (!dataModelService) throw new Error("Missing injection: dataModelService");
+const directoryStore = inject(injectionKeys.directoryStore);
+if (!directoryStore) throw new Error("Missing injection: directoryStore");
+const userStore = inject(injectionKeys.userStore);
+if (!userStore) throw new Error("Missing injection: userStore");
+
+const favourites = computed(() => userStore.favourites);
+const { OS, showOverlay, hideOverlay } = useOverlay();
+
+watch(
+  () => props.entityIri,
+  () => init()
+);
+
+watch(
+  () => cloneDeep(favourites.value),
+  async () => {
+    if (conceptIsFavourite.value) await init();
+  }
+);
+
+const conceptIsFavourite = computed(() => props.entityIri === IM.FAVOURITES);
+const loading = ref(false);
+const dataModels: Ref<UIDataModel[]> = ref([]);
+
+onMounted(async () => await init());
+
+async function init() {
+  if (props.entityIri) {
+    loading.value = true;
+    dataModels.value = await getDMs(props.entityIri);
+    loading.value = false;
+  }
+}
+
+function getColourStyleFromType(types: TTIriRef[]) {
+  return "color: " + getColourFromType(types);
+}
+
+async function getDMs(iri: string): Promise<UIDataModel[]> {
+  const dataModels = await dataModelService!.getDataModelsFromProperty(iri);
+  return dataModels.map(dm => {
+    return {
+      iri: dm.iri,
+      name: dm.name,
+      description: dm.description,
+      type: [{ iri: SHACL.NODESHAPE }],
+      icon: ["fa-duotone", "fa-diagram-project"]
+    };
+  });
+}
+
+function onRowSelect(event: DataTableRowSelectEvent<UIDataModel>) {
+  emit("navigateTo", event.data.iri);
+}
+
+function locateInTree(iri: string) {
+  directoryStore!.updateFindInTreeIri(iri);
+}
+</script>
+
+<style scoped>
+.buttons-container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  row-gap: 0.5rem;
+}
+
+.type-icon {
+  padding-right: 0.5rem;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
+}
+</style>

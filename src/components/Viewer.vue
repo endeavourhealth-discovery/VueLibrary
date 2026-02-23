@@ -1,0 +1,384 @@
+<template>
+  <div id="concept-main-container">
+    <div class="info-container">
+      <div class="flex flex-row">
+        <TextWithLabel label="Iri" :data="entityIri" v-if="!!entityIri" />
+        <TextWithLabel label="Code" :data="entity[IM.CODE]" v-if="!!entity[IM.CODE]" />
+      </div>
+      <div class="flex flex-row justify-start">
+        <ArrayObjectNameTagWithLabel v-if="!!entity[IM.HAS_STATUS]" label="Status" :data="entity[IM.HAS_STATUS]" />
+        <ArrayObjectNamesToStringWithLabel label="Types" :data="entity[RDF.TYPE]" v-if="!!entity[RDF.TYPE]" />
+      </div>
+      <div>
+        <TextWithLabel label="Preferred name" :data="entity[IM.PREFERRED_NAME]" v-if="!!entity[IM.PREFERRED_NAME]" />
+        <ArrayObjectNamesToStringWithLabel label="Return Type" :data="entity[IM.RETURN_TYPE]" v-if="!!entity[IM.RETURN_TYPE]" />
+      </div>
+      <TextHTMLWithLabel label="Description" :data="entity[RDFS.COMMENT]" v-if="!!entity[RDFS.COMMENT]" />
+    </div>
+    <div v-if="entity.iri === 'http://endhealth.info/im#Favourites'">
+      <Content :entityIri="entityIri" @navigateTo="(iri: string) => emit('navigateTo', iri)" />
+    </div>
+    <div v-else-if="loading" class="loading-container">
+      <ProgressSpinner />
+    </div>
+    <div v-else id="concept-content-dialogs-container">
+      <div id="concept-panel-container">
+        <Tabs id="viewer-tabs" v-model:value="activeTab" :lazy="true" scrollable>
+          <TabList id="tab-list">
+            <Tab value="0">Details</Tab>
+            <Tab v-if="showTerms" value="1">Terms</Tab>
+            <Tab v-if="showMappings" value="2">Maps</Tab>
+            <Tab v-if="isValueSet(types)" value="3">Set</Tab>
+            <Tab v-if="isValueSet(types) && isObjectHasKeys(concept, ['http://endhealth.info/im#definition'])" value="4">ECL</Tab>
+            <Tab v-if="isConcept(types)" value="5">Expression</Tab>
+            <Tab v-if="isRecordModel(types)" value="6">Data Model</Tab>
+            <Tab v-if="isRecordModel(types)" value="7">Properties</Tab>
+            <Tab v-if="isQuery(types) || isFunctionalProperty(types)" value="8">Query</Tab>
+            <Tab v-if="isIndicator(types)" value="20">Indicator</Tab>
+            <Tab v-if="isFeature(types)" value="10">Feature</Tab>
+            <Tab value="11">Contents</Tab>
+            <Tab v-if="isProperty(types)" value="12">Data Models</Tab>
+            <Tab value="13">Used In</Tab>
+            <Tab value="14">Hierarchy Position</Tab>
+            <Tab v-if="showGraph" value="15">Entity Chart</Tab>
+            <Tab v-if="isRecordModel(types)" value="16">Entity-Model Diagram</Tab>
+            <Tab value="17">Graph</Tab>
+            <Tab value="18">JSON</Tab>
+            <Tab value="19">Provenance</Tab>
+          </TabList>
+          <TabPanels>
+            <TabPanel value="0">
+              <div id="details-container" class="concept-panel-content">
+                <Details :entityIri="entityIri" @navigateTo="(iri: string) => emit('navigateTo', iri)" @on-open-tab="onOpenTab" />
+              </div>
+            </TabPanel>
+            <TabPanel v-if="showTerms" value="1">
+              <div id="term-table-container" class="concept-panel-content">
+                <TermCodeTable :entityIri="entityIri" />
+              </div>
+            </TabPanel>
+            <TabPanel v-if="showMappings" value="2">
+              <div id="mappings-container" class="concept-panel-content">
+                <Mappings :entityIri="entityIri" @navigateTo="(iri: string) => emit('navigateTo', iri)" />
+              </div>
+            </TabPanel>
+            <TabPanel v-if="isValueSet(types)" value="3">
+              <div id="set-container" class="concept-panel-content">
+                <SetDefinition :entityIri="entityIri" @navigateTo="(iri: string) => emit('navigateTo', iri)" />
+              </div>
+            </TabPanel>
+            <TabPanel v-if="isValueSet(types) && isObjectHasKeys(concept, ['http://endhealth.info/im#definition'])" value="4">
+              <div id="ecl-container" class="concept-panel-content">
+                <EclDefinition :definition="concept['http://endhealth.info/im#definition']" />
+              </div>
+            </TabPanel>
+            <TabPanel v-if="isConcept(types)" value="5">
+              <ExpressionDisplay :concept="concept" />
+            </TabPanel>
+            <TabPanel v-if="isRecordModel(types)" value="6">
+              <div id="data-model-container" class="concept-panel-content">
+                <DataModel :entityIri="entityIri" :entityName="concept[RDFS.LABEL]" @navigateTo="(iri: string) => emit('navigateTo', iri)" />
+              </div>
+            </TabPanel>
+            <TabPanel v-if="isRecordModel(types)" value="7">
+              <div id="properties-container" class="concept-panel-content">
+                <Properties :entityIri="entityIri" :entityName="concept[RDFS.LABEL]" @navigateTo="(iri: string) => emit('navigateTo', iri)" />
+              </div>
+            </TabPanel>
+            <TabPanel v-if="isQuery(types) || isFunctionalProperty(types)" value="8">
+              <div id="query-container" class="concept-panel-content">
+                <QueryDisplay :entityIri="entityIri" :show-dataset="true" />
+              </div>
+            </TabPanel>
+            <TabPanel v-if="isIndicator(types)" value="20">
+              <div id="indicator-container" class="concept-panel-content">
+                <IndicatorDisplay :entityIri="entityIri" />
+              </div>
+            </TabPanel>
+            <TabPanel v-if="isFeature(types)" value="10">
+              <div id="query-container" class="concept-panel-content">
+                <QueryDisplay :entityIri="entityIri" />
+              </div>
+            </TabPanel>
+            <TabPanel value="11">
+              <div id="definition-container" class="concept-panel-content">
+                <Content :entityIri="entityIri" @navigateTo="(iri: string) => emit('navigateTo', iri)" />
+              </div>
+            </TabPanel>
+            <TabPanel v-if="isProperty(types)" value="12">
+              <div id="definition-container" class="concept-panel-content">
+                <DataModels :entityIri="entityIri" @navigateTo="(iri: string) => emit('navigateTo', iri)" />
+              </div>
+            </TabPanel>
+            <TabPanel value="13">
+              <div id="usedin-container" class="concept-panel-content">
+                <UsedIn :entityIri="entityIri" @navigateTo="(iri: string) => emit('navigateTo', iri)" />
+              </div>
+            </TabPanel>
+            <TabPanel value="14">
+              <div id="secondary-tree-container" class="concept-panel-content">
+                <SecondaryTree :entityIri="entityIri" @row-clicked="(iri: string) => emit('navigateTo', iri)" @row-control-clicked="handleControlClick" />
+              </div>
+            </TabPanel>
+            <TabPanel v-if="showGraph" value="15">
+              <div id="entity-chart-container" class="concept-panel-content">
+                <EntityChart :entityIri="entityIri" @navigateTo="(iri: string) => emit('navigateTo', iri)" />
+              </div>
+            </TabPanel>
+            <TabPanel v-if="isRecordModel(types)" value="16">
+              <div id="entity-model-container" :class="expandWidth ? 'entity-concept-panel-content' : 'concept-panel-content'">
+                <ModelChart :entityIri="entityIri" :entityName="concept[RDFS.LABEL]" @expand-width="(expand: boolean) => (expandWidth = expand)" />
+              </div>
+            </TabPanel>
+            <TabPanel value="17">
+              <div id="graph-container" class="concept-panel-content">
+                <Graph :entityIri="entityIri" @navigateTo="(iri: string) => emit('navigateTo', iri)" />
+              </div>
+            </TabPanel>
+            <TabPanel value="18">
+              <div id="json-container" class="concept-panel-content">
+                <JSONViewer :entityIri="entityIri" />
+              </div>
+            </TabPanel>
+            <TabPanel value="19">
+              <div id="provenance-container" class="concept-panel-content">
+                <Provenance :entityIri="entityIri" />
+              </div>
+            </TabPanel>
+          </TabPanels>
+        </Tabs>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script lang="ts" setup>
+import { computed, inject, nextTick, onMounted, reactive, Ref, ref, watch } from "vue";
+import DataModel from "./DataModel.vue";
+import SetDefinition from "./SetDefinition.vue";
+import Content from "./Content.vue";
+import EntityChart from "./EntityChart.vue";
+import Graph from "./Graph.vue";
+import UsedIn from "./UsedIn.vue";
+import Mappings from "./Mappings.vue";
+import EclDefinition from "./EclDefinition.vue";
+import Properties from "./Properties.vue";
+import JSONViewer from "./JSONViewer.vue";
+import Provenance from "./Provenance.vue";
+import SecondaryTree from "@/components/SecondaryTree.vue";
+import TermCodeTable from "@/components/TermCodeTable.vue";
+import Details from "./Details.vue";
+import DataModels from "./DataModels.vue";
+import QueryDisplay from "./QueryDisplay.vue";
+import ExpressionDisplay from "@/components/ExpressionDisplay.vue";
+import TextWithLabel from "@/components/TextWithLabel.vue";
+import TextHTMLWithLabel from "@/components/TextHTMLWithLabel.vue";
+import ArrayObjectNameTagWithLabel from "@/components/ArrayObjectNameTagWithLabel.vue";
+import ArrayObjectNamesToStringWithLabel from "@/components/ArrayObjectNamesToStringWithLabel.vue";
+import ModelChart from "@/components/ModelChart.vue";
+import IndicatorDisplay from "@/components/IndicatorDisplay.vue";
+
+import { TTIriRef } from "@/interfaces/AutoGen";
+import { isObjectHasKeys } from "@/helpers/DataTypeCheckers";
+import {
+  isConcept,
+  isFeature,
+  isIndicator,
+  isFolder,
+  isFunctionalProperty,
+  isOfTypes,
+  isProperty,
+  isQuery,
+  isRecordModel,
+  isValueSet
+} from "@/helpers/ConceptTypeMethods";
+import { IM } from "@/vocabulary/IM";
+import { RDF } from "@/vocabulary/RDF";
+import { RDFS } from "@/vocabulary/RDFS";
+import { SHACL } from "@/vocabulary/SHACL";
+import { TTEntity } from "@/interfaces/ExtendedAutoGen";
+import injectionKeys from "@/injectionKeys/injectionKeys";
+
+interface Props {
+  entity: TTEntity;
+}
+
+const props = defineProps<Props>();
+
+const emit = defineEmits<{
+  navigateTo: [payload: string];
+}>();
+
+const directService = inject(injectionKeys.directService);
+if (!directService) throw new Error("Missing injection: directService");
+const entityService = inject(injectionKeys.entityService);
+if (!entityService) throw new Error("Missing injection: entityService");
+
+const loading = ref(true);
+const types: Ref<TTIriRef[]> = ref([]);
+const header = ref("");
+const concept: Ref<TTEntity> = ref({});
+
+const entityIri = ref("");
+const activeTab = ref("0");
+const showGraph = computed(() => isOfTypes(types.value, IM.CONCEPT, SHACL.NODESHAPE));
+const showMappings = computed(() => (isConcept(types.value) || isOfTypes(types.value, RDFS.CLASS)) && !isRecordModel(types.value));
+const showTerms = computed(() => !isOfTypes(types.value, IM.QUERY, SHACL.FUNCTION, IM.SET, IM.CONCEPT_SET, SHACL.NODESHAPE, IM.VALUE_SET));
+
+const tabMap = reactive(new Map<string, string>());
+
+const expandWidth = ref(false);
+
+onMounted(async () => {
+  await init();
+});
+
+watch(
+  () => props.entity,
+  async () => await init()
+);
+
+function setDefaultTab() {
+  if (isFolder(types.value)) {
+    activeTab.value = tabMap.get("Contents") ?? "0";
+  } else if (isRecordModel(types.value)) {
+    activeTab.value = tabMap.get("Data Model") ?? "0";
+  } else if (isQuery(types.value)) {
+    activeTab.value = tabMap.get("Query") ?? "0";
+  } else if (isIndicator(types.value)) {
+    activeTab.value = tabMap.get("Indicator") ?? "0";
+  } else if (isFeature(types.value)) {
+    activeTab.value = tabMap.get("Feature") ?? "0";
+  } else if (isValueSet(types.value)) {
+    activeTab.value = tabMap.get("Set") ?? "0";
+  } else if (isProperty(types.value)) {
+    activeTab.value = tabMap.get("Data models") ?? "0";
+  } else {
+    activeTab.value = "0";
+  }
+}
+
+function setTabMap() {
+  const tabList = document.getElementById("viewer-tabs")?.children?.[0]?.children?.[0]?.children?.[0]?.children as HTMLCollectionOf<HTMLElement>;
+  if (tabList?.length) {
+    for (let i = 0; i < tabList.length; i++) {
+      const index = tabList[i].id.replace("viewer-tabs_tab_", "");
+      if (tabList[i].textContent) {
+        tabMap.set(tabList[i].textContent as string, index.toString());
+      }
+    }
+  }
+}
+
+async function init(): Promise<void> {
+  loading.value = true;
+  if (props.entity.iri) {
+    entityIri.value = props.entity.iri;
+  }
+  await getConcept(entityIri.value);
+  types.value = isObjectHasKeys(concept.value, [RDF.TYPE]) ? concept.value[RDF.TYPE] : ([] as TTIriRef[]);
+  header.value = concept.value[RDFS.LABEL];
+  loading.value = false;
+  await nextTick();
+  setTabMap();
+  setDefaultTab();
+}
+
+async function getConcept(iri: string) {
+  const predicates = [RDFS.LABEL, IM.DEFINITION, RDF.TYPE, IM.CODE, RDFS.SUBCLASS_OF, IM.ROLE_GROUP, IM.DEFINITIONAL_STATUS];
+  concept.value = await entityService!.getPartialEntity(iri, predicates);
+}
+
+function onOpenTab(predicate: string) {
+  switch (predicate) {
+    case SHACL.PROPERTY:
+      activeTab.value = tabMap.get("Properties") ?? "0";
+      break;
+    case IM.DEFINITION:
+      if (isQuery(types.value) || isFeature(types.value)) {
+        activeTab.value = tabMap.get("Query") ?? "0";
+      } else if (isValueSet(types.value)) {
+        activeTab.value = tabMap.get("Set") ?? "0";
+      }
+      break;
+    default:
+      break;
+  }
+}
+
+async function handleControlClick(iri: string) {
+  await directService!.view(iri);
+}
+</script>
+<style scoped>
+#concept-main-container {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.loading-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#concept-panel-container {
+  flex: 1 1 auto;
+  display: flex;
+  flex-flow: column nowrap;
+  overflow: hidden;
+  height: 100%;
+}
+
+#concept-content-dialogs-container {
+  flex: 1 1 auto;
+  overflow: auto;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.concept-panel-content {
+  height: 100%;
+  background-color: var(--p-content-background);
+  display: flex;
+  overflow: auto;
+}
+
+#concept-panel-container:deep(.p-tabview-panels) {
+  flex: 1 1 auto;
+  overflow: auto;
+}
+
+.entity-concept-panel-content {
+  height: 100%;
+  width: 500%;
+  background-color: var(--p-content-background);
+  display: flex;
+}
+
+#concept-panel-container:deep(.p-tabpanels) {
+  overflow: auto;
+}
+
+#concept-panel-container:deep(.p-tabpanel) {
+  height: 100%;
+}
+
+#viewer-tabs {
+  height: 100%;
+  overflow: hidden;
+}
+
+#tab-list {
+  flex: 0 0 auto;
+  display: flex;
+}
+
+.info-container {
+  padding: 0.25rem;
+}
+</style>

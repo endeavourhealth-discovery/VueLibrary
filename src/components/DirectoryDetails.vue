@@ -1,0 +1,114 @@
+<template>
+  <div class="loading-container flex flex-row items-center justify-center" v-if="loading">
+    <ProgressSpinner />
+  </div>
+  <div v-else id="directory-table-container">
+    <div class="to-search-button-container">
+      <Button
+        link
+        v-if="searchResults?.entities?.length"
+        label="Back to search results"
+        icon="fa-solid fa-arrow-left"
+        class="back-to-search"
+        @click="$emit('goToSearchResults')"
+      />
+    </div>
+    <div class="header-container">
+      <ParentHierarchy
+        v-if="entity.iri"
+        :entityIri="entity?.iri"
+        @navigateTo="(iri: string) => $emit('navigateTo', iri)"
+        :history="modelHistory"
+        @update:history="(newHistory: string[]) => $emit('update:history', newHistory)"
+      />
+      <ParentHeader
+        v-if="selectedIri !== 'http://endhealth.info/im#Favourites'"
+        :entity="entity"
+        @locateInTree="(iri: string) => $emit('locateInTree', iri)"
+        :showSelectButton="showSelectButton"
+        @entitySelected="(iri: string) => emit('selectedUpdated', iri)"
+      />
+    </div>
+    <div class="datatable-container">
+      <Viewer v-if="entity.iri" :entity="entity" @navigateTo="(iri: string) => $emit('navigateTo', iri)" />
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { inject, onMounted, ref, Ref, watch } from "vue";
+import { IM } from "@/vocabulary/IM";
+import Viewer from "@/components/Viewer.vue";
+import ParentHeader from "@/components/ParentHeader.vue";
+import ParentHierarchy from "@/components/ParentHierarchy.vue";
+import { SearchResponse } from "@/interfaces/AutoGen";
+import { TTEntity } from "@/interfaces/ExtendedAutoGen";
+import injectionKeys from "@/injectionKeys/injectionKeys";
+
+interface Props {
+  selectedIri: string;
+  showSelectButton?: boolean;
+  searchResults?: SearchResponse;
+}
+const props = withDefaults(defineProps<Props>(), { showSelectButton: false });
+
+const emit = defineEmits<{
+  navigateTo: [payload: string];
+  locateInTree: [payload: string];
+  selectedUpdated: [payload: string];
+  goToSearchResults: [];
+}>();
+
+const entityService = inject(injectionKeys.entityService);
+if (!entityService) throw new Error("Missing injection: entityService");
+
+const modelHistory = defineModel<string[]>("history", { required: true });
+
+watch(
+  () => props.selectedIri,
+  async () => await init()
+);
+
+const entity: Ref<TTEntity> = ref({});
+const loading = ref(true);
+
+onMounted(async () => await init());
+
+async function init() {
+  loading.value = true;
+  entity.value = await entityService!.getEntityByPredicateExclusions(props.selectedIri, [IM.HAS_MEMBER]);
+  loading.value = false;
+}
+</script>
+<style scoped>
+.loading-container {
+  height: 100%;
+  flex: 1 1 auto;
+}
+
+#directory-table-container {
+  flex: 1 1 auto;
+  height: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.datatable-container {
+  flex: 0 1 auto;
+  overflow-y: auto;
+  margin: 0 0.5rem;
+  padding: 0.5rem 0;
+  border-top: 1px solid var(--p-content-border-color);
+}
+
+.header-container {
+  display: flex;
+  flex-flow: column nowrap;
+  padding-bottom: 0.5rem;
+}
+
+.back-to-search {
+  padding-bottom: 0;
+}
+</style>
