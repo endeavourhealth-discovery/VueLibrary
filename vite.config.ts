@@ -10,7 +10,7 @@ import dts from "vite-plugin-dts";
 export default defineConfig({
   plugins: [
     vue(),
-    dts({ insertTypesEntry: true }),
+    dts({ insertTypesEntry: true, include: ["src"] }),
     tailwindcss(),
     Components({ resolvers: [PrimeVueResolver()], dts: true, directoryAsNamespace: true, collapseSamePrefixes: true })
   ],

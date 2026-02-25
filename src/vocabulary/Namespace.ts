@@ -2,7 +2,7 @@
 
 
 
-export class Namespace {
+export class NAMESPACE {
 
   public static readonly LNWH_SY = "http://endhealth.info/lnwhsy#"
   public static readonly LNWH_SL = "http://endhealth.info/lnwhsl#"

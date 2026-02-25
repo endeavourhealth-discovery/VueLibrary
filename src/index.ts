@@ -1,5 +1,5 @@
 import { App, Plugin } from "vue";
-import * as components from "./components";
+import * as Components from "./components";
 
 export interface vueLibraryInterface {
   install: Plugin;
@@ -7,18 +7,19 @@ export interface vueLibraryInterface {
 
 const vueLibrary: vueLibraryInterface = {
   install(app: App, options: any): void {
-    for (const key in components) {
+    for (const key in Components) {
       // @ts-expect-error
-      app.component(key, components[key]);
+      app.component(key, Components[key]);
     }
   }
 };
 
 export default vueLibrary;
 
-export * as Components from "./components";
-export * as Enums from "./enums";
-export * as Composables from "./composables";
-export * as Helpers from "./helpers";
-export * as Interfaces from "./interfaces";
-export * as Vocabulary from "./vocabulary";
+export { Components };
+export * from "./enums";
+export * from "./composables";
+export * from "./helpers";
+export * from "./interfaces";
+export * from "./vocabulary";
+export * from "./models";

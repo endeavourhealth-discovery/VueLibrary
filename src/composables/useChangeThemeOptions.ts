@@ -1,5 +1,4 @@
-import PrimeVueColors from "@/enums/PrimeVueColors";
-import PrimeVuePresetThemes from "@/enums/PrimeVuePresetThemes";
+import { PrimeVueColors, PrimeVuePresetThemes } from "@/interfaces";
 import { usePreset, updatePrimaryPalette, updateSurfacePalette, palette } from "@primeuix/themes";
 import Aura from "@primeuix/themes/aura";
 import Lara from "@primeuix/themes/lara";

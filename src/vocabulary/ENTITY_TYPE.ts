@@ -3,7 +3,7 @@
 import {IM} from "@/vocabulary/IM";
 import {SHACL} from "@/vocabulary/SHACL";
 
-export class EntityType {
+export class ENTITY_TYPE {
 
   public static readonly QUERY = IM.QUERY
   public static readonly NODESHAPE = SHACL.NODESHAPE

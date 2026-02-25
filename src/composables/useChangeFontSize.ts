@@ -1,4 +1,4 @@
-import { FontSize } from "@/enums";
+import { FontSize } from "@/interfaces";
 import injectionKeys from "@/injectionKeys/injectionKeys";
 import { inject } from "vue";
 

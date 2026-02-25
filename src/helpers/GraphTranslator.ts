@@ -7,7 +7,7 @@ import { SHACL } from "../vocabulary/SHACL";
 import { isArrayHasLength, isObjectHasKeys } from "./DataTypeCheckers";
 import { TTBundle, TTEntity } from "@/interfaces/ExtendedAutoGen";
 import { GenericObject } from "@/interfaces/GenericObject";
-import { Namespace } from "@/vocabulary/Namespace";
+import { NAMESPACE } from "@/vocabulary/NAMESPACE";
 
 function translateFromEntityBundle(bundle: TTBundle, includedPredicates: string[]): TTGraphData {
   const { entity, predicates } = bundle;
@@ -62,10 +62,10 @@ function getPropertyName(nested: TTProperty): string {
 
 function getNameFromIri(iri: string): string {
   if (!iri) return iri;
-  if (iri.startsWith(Namespace.XSD) || iri.startsWith(Namespace.SNOMED)) return iri.split("#")[1];
-  if (iri.startsWith(Namespace.IM + "im:")) return iri.substring(Namespace.IM.length + "im:".length);
-  if (iri.startsWith(Namespace.IM)) return iri.substring(Namespace.IM.length);
-  if (iri.startsWith(Namespace.RDFS)) return iri.substring(Namespace.RDFS.length);
+  if (iri.startsWith(NAMESPACE.XSD) || iri.startsWith(NAMESPACE.SNOMED)) return iri.split("#")[1];
+  if (iri.startsWith(NAMESPACE.IM + "im:")) return iri.substring(NAMESPACE.IM.length + "im:".length);
+  if (iri.startsWith(NAMESPACE.IM)) return iri.substring(NAMESPACE.IM.length);
+  if (iri.startsWith(NAMESPACE.RDFS)) return iri.substring(NAMESPACE.RDFS.length);
   return "undefined";
 }
 

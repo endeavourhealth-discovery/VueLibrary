@@ -5,7 +5,7 @@
       <AutocompleteSearchBar
         v-if="header !== 'Shared members '"
         v-model:selected="modelSelectedSet"
-        :root-entities="[Namespace.IM + 'Sets']"
+        :root-entities="[NAMESPACE.IM + 'Sets']"
         :im-query="searchQuery"
       />
       <div v-if="isArrayHasLength(members)">Total members ({{ members.length }})</div>
@@ -42,7 +42,7 @@ import { Concept, QueryRequest, SearchResultSummary } from "@/interfaces/AutoGen
 import { IM } from "@/vocabulary/IM";
 import { ComputedRef, Ref, computed, inject, onMounted, ref, watch } from "vue";
 import AutocompleteSearchBar from "@/components/AutocompleteSearchBar.vue";
-import { Namespace } from "@/vocabulary/Namespace";
+import { NAMESPACE } from "@/vocabulary/NAMESPACE";
 import injectionKeys from "@/injectionKeys/injectionKeys";
 
 const props = defineProps<{

@@ -2,7 +2,7 @@
 
 
 
-export class ImportType {
+export class IMPORT_TYPE {
 
   public static readonly SNOMED = "snomed"
   public static readonly SKIP_TCT = "tct"

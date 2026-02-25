@@ -1,5 +1,9 @@
 {
   "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": false,
+    "declarationMap": true,
+    "isolatedModules": true,
     "target": "esnext",
     "module": "esnext",
     "strict": true,

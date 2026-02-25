@@ -1,5 +1,5 @@
-import { FontSize, TagSeverity } from "@/enums";
-import { FilterOptions, FiltersAsIris, Namespace, PropertyDisplay, QueryResponse, SetDiffObject, SimpleMap, TermCode } from "@/interfaces";
+import { TagSeverity } from "@/enums";
+import { FilterOptions, FiltersAsIris, FontSize, Namespace, PropertyDisplay, QueryResponse, SetDiffObject, SimpleMap, TermCode } from "@/interfaces";
 import {
   ConceptContextMap,
   DisplayMode,
@@ -8,7 +8,6 @@ import {
   IMLLanguage,
   Indicator,
   Match,
-  NamespacePermission,
   Node,
   NodeShape,
   Pageable,
@@ -20,6 +19,7 @@ import {
   TTIriRef
 } from "@/interfaces/AutoGen";
 import { ExtendedEntityReferenceNode, TTBundle, TTEntity } from "@/interfaces/ExtendedAutoGen";
+import { NamespacePermission } from "@/models";
 import { StoreGeneric } from "pinia";
 import { OrganizationChartNode } from "primevue";
 import { TreeNode } from "primevue/treenode";

@@ -21,6 +21,8 @@ import { TermCode } from "./TermCode";
 import { QueryResponse } from "./QueryResponse";
 import { Orderable } from "./Orderable";
 
+export * from "./AutoGen";
+
 export {
   type GenericObject,
   type FilterOptions,

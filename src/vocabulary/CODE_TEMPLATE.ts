@@ -3,17 +3,17 @@
 import {IM} from "@/vocabulary/IM";
 import {RDF} from "@/vocabulary/RDF";
 import {RDFS} from "@/vocabulary/RDFS";
-import {Namespace} from "@/vocabulary/Namespace";
+import {NAMESPACE} from "@/vocabulary/NAMESPACE";
 
-export class CodeTemplate {
+export class CODE_TEMPLATE {
 
   public static readonly DOMAIN = "http://endhealth.info/"
   public static readonly PREFIX = "cTemp"
-  public static readonly WRAPPER = Namespace.IM_CODE_TEMPLATE + "wrapper"
+  public static readonly WRAPPER = NAMESPACE.IM_CODE_TEMPLATE + "wrapper"
   public static readonly LABEL = RDFS.LABEL
   public static readonly DEFINITION = IM.DEFINITION
   public static readonly TYPE = RDF.TYPE
-  public static readonly DATATYPE_MAP = Namespace.IM_CODE_TEMPLATE + "datatypeMap"
-  public static readonly EXTENSION = Namespace.IM_CODE_TEMPLATE + "extension"
-  public static readonly INCLUDE_COMPLEX_TYPES = Namespace.IM_CODE_TEMPLATE + "includeComplexTypes"
+  public static readonly DATATYPE_MAP = NAMESPACE.IM_CODE_TEMPLATE + "datatypeMap"
+  public static readonly EXTENSION = NAMESPACE.IM_CODE_TEMPLATE + "extension"
+  public static readonly INCLUDE_COMPLEX_TYPES = NAMESPACE.IM_CODE_TEMPLATE + "includeComplexTypes"
 }

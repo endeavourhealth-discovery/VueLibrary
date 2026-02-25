@@ -66,7 +66,7 @@ import { computed, ComputedRef, inject, onMounted, ref, Ref, watch } from "vue";
 import { FilterOptions } from "@/interfaces";
 import { TTIriRef } from "@/interfaces/AutoGen";
 import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
-import { Namespace } from "@/vocabulary/Namespace";
+import { NAMESPACE } from "@/vocabulary/NAMESPACE";
 import injectionKeys from "@/injectionKeys/injectionKeys";
 interface Props {
   selectedFilterOptions?: FilterOptions;
@@ -165,10 +165,10 @@ function setDefaults() {
 }
 
 function setLegacy(include: boolean): void {
-  const emisScheme = selectedSchemes.value.findIndex(scheme => scheme.iri === Namespace.EMIS);
+  const emisScheme = selectedSchemes.value.findIndex(scheme => scheme.iri === NAMESPACE.EMIS);
   if (include) {
     if (emisScheme === -1) {
-      const found = storeFilterOptions.value?.schemes.find(scheme => scheme.iri === Namespace.EMIS);
+      const found = storeFilterOptions.value?.schemes.find(scheme => scheme.iri === NAMESPACE.EMIS);
       if (found) selectedSchemes.value.push(found);
     }
   } else {

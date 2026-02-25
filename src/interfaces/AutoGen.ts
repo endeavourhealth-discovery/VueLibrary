@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-02-19 16:21:39.
+// Generated using typescript-generator version 3.2.1263 on 2026-02-25 21:54:49.
 
 export interface ConceptContextMap {
     id?: string;
@@ -49,6 +49,12 @@ export interface EntityReferenceNode extends TTIriRef, Serializable {
     hasGrandChildren?: boolean;
     type?: TTArray;
     orderNumber?: number;
+}
+
+export interface Namespace {
+    iri?: string;
+    prefix?: string;
+    name?: string;
 }
 
 export interface Pageable<T> {
@@ -311,14 +317,14 @@ export interface ArgumentReference {
 }
 
 export interface Assignable {
+    description?: string;
     value?: string;
     function?: FunctionClause;
     invalid?: boolean;
     units?: TTIriRef;
-    description?: string;
-    valueLabel?: string;
     operator?: Operator;
     qualifier?: TTIriRef;
+    valueLabel?: string;
 }
 
 export interface Case {
@@ -363,8 +369,8 @@ export interface Element extends IriLD, Entailment {
 
 export interface Entailment {
     memberOf?: boolean;
-    descendantsOf?: boolean;
     ancestorsOf?: boolean;
+    descendantsOf?: boolean;
     descendantsOrSelfOf?: boolean;
 }
 
@@ -441,8 +447,8 @@ export interface Node extends Element {
     code?: string;
     inverse?: boolean;
     node?: string;
-    isCohort?: boolean;
     isResultSet?: boolean;
+    isCohort?: boolean;
 }
 
 export interface OrderDirection extends RelativeTo {
@@ -469,8 +475,8 @@ export interface Path extends Element, HasPaths {
     pathVariable?: string;
     typeOf?: Node;
     qualifier?: TTIriRef;
-    isCohort?: boolean;
     isResultSet?: boolean;
+    isCohort?: boolean;
 }
 
 export interface PathDocument {
@@ -595,8 +601,8 @@ export interface Where extends Element, Assignable {
     linked?: boolean;
     notNull?: boolean;
     isInvalid?: boolean;
-    isCohort?: boolean;
     isResultSet?: boolean;
+    isCohort?: boolean;
 }
 
 export interface DBEntry {
@@ -624,31 +630,31 @@ export interface CognitoGroupRequest {
 export interface EditRequest {
     entity?: TTEntity;
     hostUrl?: string;
-    namespace?: Namespace;
+    namespace?: NAMESPACE;
     crud?: string;
 }
 
 export interface EntityValidationRequest {
     entity?: TTEntity;
     validationIri?: string;
-    graph?: Graph;
+    graph?: GRAPH;
 }
 
 export interface FileDocumentRequest {
     document?: TTDocument;
-    insertNamespace?: Namespace;
+    insertNamespace?: NAMESPACE;
 }
 
 export interface FunctionRequest {
     functionIri?: string;
     arguments?: Argument[];
     page?: Page;
-    graph?: Graph;
+    graph?: GRAPH;
 }
 
 export interface MatchDisplayRequest {
     match?: Match;
-    graph?: Graph;
+    graph?: GRAPH;
 }
 
 export interface QueryDisplayRequest {
@@ -731,7 +737,7 @@ export interface SearchRequest {
 
 export interface SetDistillationRequest {
     conceptList?: TTIriRef[];
-    graph?: Graph;
+    graph?: GRAPH;
 }
 
 export interface SetExportRequest {
@@ -775,13 +781,13 @@ export interface EntityValidationResponse {
 }
 
 export interface LoginResponse {
-    user?: User;
+    user?: UserJava;
     state?: string;
 }
 
 export interface LoginResponseES {
     sessionId?: string;
-    user?: User;
+    user?: UserJava;
     state?: string;
 }
 
@@ -913,11 +919,11 @@ export interface TTEntity extends TTNode, Serializable {
     context?: TTContext;
     crud?: TTIriRef;
     type?: TTArray;
+    status?: TTIriRef;
+    description?: string;
     name?: string;
     scheme?: TTIriRef;
     version?: number;
-    description?: string;
-    status?: TTIriRef;
     code?: string;
     types?: TTIriRef[];
     prefixes?: TTPrefix[];
@@ -946,7 +952,7 @@ export interface EntityApproval extends Task {
 }
 
 export interface NamespaceRequest extends Task {
-    namespacePermission?: NamespacePermission;
+    namespacePermission?: NamespacePermissionJava;
 }
 
 export interface RoleRequest extends Task {
@@ -971,12 +977,6 @@ export interface TaskHistory {
     changeDate?: Date;
     modifiedBy?: string;
     dateTime?: Date;
-}
-
-export interface VocabEnum {
-}
-
-export interface VocabUtils {
 }
 
 export interface Context {
@@ -1005,8 +1005,8 @@ export interface TTArray extends Serializable {
 }
 
 export interface TTContext extends Serializable {
-    nameSpaces?: TTPrefix[];
     prefixes?: TTPrefix[];
+    nameSpaces?: TTPrefix[];
 }
 
 export interface Throwable extends Serializable {
@@ -1034,7 +1034,7 @@ export interface Exception extends Throwable {
 export interface SecurityService {
 }
 
-export interface User {
+export interface UserJava {
     id?: string;
     username?: string;
     email?: string;
@@ -1050,7 +1050,7 @@ export interface User {
     fontSize?: FontSize;
     favourites?: string[];
     recentActivity?: RecentActivityItemDto[];
-    namespaces?: NamespacePermission[];
+    namespaces?: NamespacePermissionJava[];
 }
 
 export interface Organisation {
@@ -1081,8 +1081,8 @@ export interface TTNode extends TTValue, Serializable {
     predicateMap?: { [index: string]: TTArray };
 }
 
-export interface NamespacePermission {
-    iri?: Namespace;
+export interface NamespacePermissionJava {
+    iri?: NAMESPACE;
     read?: boolean;
     write?: boolean;
 }
@@ -1352,440 +1352,7 @@ export enum TaskType {
     ENTITY_APPROVAL = "ENTITY_APPROVAL",
 }
 
-export enum BNF {
-    DOMAIN = "http://bnf.info/",
-}
-
-export enum COMPONENT {
-    DOMAIN = "http://endhealth.info/im#",
-    TAB_LAYOUT = "http://endhealth.info/im#Component_TabLayout",
-    TEXT_DISPLAY = "http://endhealth.info/im#Component_textDisplay",
-    TEXT_INPUT = "http://endhealth.info/im#Component_textInput",
-    HTML_INPUT = "http://endhealth.info/im#Component_htmlInput",
-    ENTITY_MULTI_SEARCH = "http://endhealth.info/im#Component_entityMultiSearch",
-    ENTITY_SEARCH = "http://endhealth.info/im#Component_entitySearch",
-    ENTITY_COMBOBOX = "http://endhealth.info/im#Component_entityComboBox",
-    ENTITY_DROPDOWN = "http://endhealth.info/im#Component_entityDropdown",
-    ARRAY_BUILDER = "http://endhealth.info/im#Component_arrayBuilder",
-    ENTITY_AUTO_COMPLETE = "http://endhealth.info/im#Component_entityAutoComplete",
-    MEMBERS_BUILDER = "http://endhealth.info/im#Component_membersBuilder",
-    COMPONENT_GROUP = "http://endhealth.info/im#Component_componentGroup",
-    PROPERTY_BUILDER = "http://endhealth.info/im#Component_propertyBuilder",
-    SET_DEFINITION_BUILDER = "http://endhealth.info/im#Component_SetDefinitionBuilder",
-    QUERY_DEFINITION_BUILDER = "http://endhealth.info/im#Component_QueryDefinitionBuilder",
-    TOGGLEABLE = "http://endhealth.info/im#Component_ToggleableComponent",
-    HORIZONTAL_LAYOUT = "http://endhealth.info/im#Component_HorizontalLayout",
-    VERTICAL_LAYOUT = "http://endhealth.info/im#Component_VerticalLayout",
-    DROPDOWN_TEXT_INPUT_CONCATENATOR = "http://endhealth.info/im#Component_dropdownTextInputConcatenator",
-    ROLE_GROUP_BUILDER = "http://endhealth.info/im#Component_roleGroupBuilder",
-    TERM_CODE_EDITOR = "http://endhealth.info/im#Component_termCodeEditor",
-    TEXT_DROPDOWN = "http://endhealth.info/im#Component_textDropdown",
-    ENTITY_DISPLAY = "http://endhealth.info/im#Component_entityDisplay",
-    IRI_BUILDER = "http://endhealth.info/im#Component_iriBuilder",
-    AUTOCOMPLETE_SEARCH_BAR_WRAPPER = "http://endhealth.info/im#Component_autocompleteSearchBarWrapper",
-    SUBSET_BUILDER = "http://endhealth.info/im#Component_subsetBuilder",
-    CHECKBOX_DISPLAY = "http://endhealth.info/im#Component_checkboxDisplay",
-}
-
-export enum CONFIG {
-    DOMAIN = "http://endhealth.info/",
-    PREFIX = "cfg",
-    LABEL = "http://www.w3.org/2000/01/rdf-schema#label",
-    HAS_CONFIG = "http://endhealth.info/im#hasConfig",
-    COMMENT = "http://www.w3.org/2000/01/rdf-schema#comment",
-    IMDIRECTORY_LATEST_RELEASE = "http://endhealth.info/config#IMDirectoryLatestRelease",
-    IMDIRECTORY_ALL_RELEASES = "http://endhealth.info/config#IMDirectoryAllReleases",
-    MONITORING = "http://endhealth.info/config#monitoring",
-}
-
-export enum CodeTemplate {
-    DOMAIN = "http://endhealth.info/",
-    PREFIX = "cTemp",
-    WRAPPER = "http://endhealth.info/codeTemplate#wrapper",
-    LABEL = "http://www.w3.org/2000/01/rdf-schema#label",
-    DEFINITION = "http://endhealth.info/im#definition",
-    TYPE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
-    DATATYPE_MAP = "http://endhealth.info/codeTemplate#datatypeMap",
-    EXTENSION = "http://endhealth.info/codeTemplate#extension",
-    INCLUDE_COMPLEX_TYPES = "http://endhealth.info/codeTemplate#includeComplexTypes",
-}
-
-export enum EDITOR {
-    DOMAIN = "http://endhealth.info/im#",
-    CONCEPT_SHAPE = "http://endhealth.info/im#Editor_ConceptShape",
-    CONCEPT_SET_SHAPE = "http://endhealth.info/im#Editor_ConceptSetShape",
-    VALUE_SET_SHAPE = "http://endhealth.info/im#Editor_ValueSetShape",
-    FOLDER_SHAPE = "http://endhealth.info/im#Editor_FolderShape",
-    DATA_MODEL_SHAPE = "http://endhealth.info/im#Editor_DataModelShape",
-    COHORT_QUERY_SHAPE = "http://endhealth.info/im#Editor_CohortQueryShape",
-    PROPERTY_SHAPE = "http://endhealth.info/im#Editor_PropertyShape",
-    INDICATOR_SHAPE = "http://endhealth.info/im#Editor_IndicatorShape",
-}
-
-export enum EntityType {
-    QUERY = "http://endhealth.info/im#Query",
-    NODESHAPE = "http://www.w3.org/ns/shacl#NodeShape",
-}
-
-export enum FHIR {
-    PREFIX = "fhir",
-    DSTU2 = "http://hl7.org/2-0/fhir/StructureDefinition#",
-    VALUESET_FOLDER = "http://endhealth.info/im#VSET_FHIR",
-}
-
-export enum Graph {
-    IM = "http://endhealth.info/im#",
-    PROV = "http://endhealth.info/prov#",
-    USER = "http://endhealth.info/user#",
-    WORKFLOW = "http://endhealth.info/workflow#",
-    CONFIG = "http://endhealth.info/config#",
-    SMARTLIFE = "http://smartlifehealth.info/smh#",
-}
-
-export enum IM {
-    DOMAIN = "http://endhealth.info/",
-    PREFIX = "im",
-    DISPLAY_LABEL = "http://endhealth.info/im#displayLabel",
-    HAS_SUBTYPES = "http://endhealth.info/im#hasSubtypes",
-    HAS_VALUESET = "http://endhealth.info/im#hasValueSet",
-    VALUE_SET = "http://endhealth.info/im#ValueSet",
-    DESCENDANTS_OR_SELF_OF = "http://endhealth.info/im#DescendantsOrSelfOf",
-    DESCENDANTS_OF = "http://endhealth.info/im#DescendantsOf",
-    IS_RELATIVE_VALUE = "http://endhealth.info/im#isRelativeValue",
-    FULLY_SPECIFIED_NAME = "http://endhealth.info/im#fullySpecifiedName",
-    ANCESTORS_OF = "http://endhealth.info/im#AncestorsOf",
-    ENTAILED_MEMBER = "http://endhealth.info/im#entailedMember",
-    ENTAILMENT = "http://endhealth.info/im#entailment",
-    EXCLUDE = "http://endhealth.info/im#exclude",
-    IRI = "iri",
-    IM_IRI = "http://endhealth.info/im#iri",
-    VALUE = "value",
-    TYPE = "type",
-    ID = "http://endhealth.info/im#id",
-    RELATIONSHIP_TYPE = "http://endhealth.info/im#relationshipType",
-    CODE = "http://endhealth.info/im#code",
-    KEY_TERM = "http://endhealth.info/im#keyTerm",
-    PREFERRED_NAME = "http://endhealth.info/im#preferredName",
-    HAS_SCHEME = "http://endhealth.info/im#scheme",
-    DEFAULT_SCHEME = "http://endhealth.info/im#defaultScheme",
-    BINDING = "http://endhealth.info/im#binding",
-    HAS_STATUS = "http://endhealth.info/im#status",
-    STATUS = "http://endhealth.info/im#Status",
-    CONTENT_TYPE = "http://endhealth.info/im#contentType",
-    USAGE_STATS = "http://endhealth.info/im#usageStats",
-    IN_TASK = "http://endhealth.info/im#inTask",
-    DEFINITION = "http://endhealth.info/im#definition",
-    IS = "http://endhealth.info/im#is",
-    RETURN_TYPE = "http://endhealth.info/im#returnType",
-    UPDATE_PROCEDURE = "http://endhealth.info/im#updateProcedure",
-    INVERSE_PATH = "http://endhealth.info/im#inversePath",
-    CONCEPT = "http://endhealth.info/im#Concept",
-    CODEABLE = "http://endhealth.info/im#Codeable",
-    CONCEPT_PROPERTY = "http://endhealth.info/im#concept",
-    CONCEPT_SET = "http://endhealth.info/im#ConceptSet",
-    FOLDER = "http://endhealth.info/im#Folder",
-    VALUESET = "http://endhealth.info/im#ValueSet",
-    TEXT_MAPS = "http://endhealth.info/im#TextMaps",
-    CONFIG = "http://endhealth.info/im#Config",
-    NAMESPACE = "http://endhealth.info/im#Namespace",
-    FUNCTION = "http://endhealth.info/im#FunctionClause",
-    QUERY = "http://endhealth.info/im#Query",
-    DEFAULT_COHORTS = "http://endhealth.info/im#Q_DefaultCohorts",
-    DATA_UPDATE = "http://endhealth.info/im#DataUpdate",
-    PATH_QUERY = "http://endhealth.info/im#PathQuery",
-    PATH_TO = "http://endhealth.info/im#pathTo",
-    OPENSEARCH_QUERY = "http://endhealth.info/im#OpenSearchQuery",
-    DATAMODEL_PROPERTY = "http://endhealth.info/im#dataModelProperty",
-    ONTOLOGY_PARENT_FOLDER = "http://endhealth.info/im#HealthModelOntology",
-    CONCEPT_SET_PARENT_FOLDER = "http://endhealth.info/im#QueryConceptSets",
-    PROPERTIES_FOLDER = "http://endhealth.info/im#Properties",
-    TASK = "http://endhealth.info/im#Task",
-    FIELD_GROUP = "http://endhealth.info/im#FieldGroup",
-    MATCH_CLAUSE = "http://endhealth.info/im#MatchClause",
-    FORM_GENERATOR = "http://endhealth.info/im#FormGenerator",
-    FUNCTION_PROPERTY = "http://endhealth.info/im#functionProperty",
-    MAP_GRAPH = "http://endhealth.info/im#GraphMap",
-    MAP_ENTITY = "http://endhealth.info/im#EntityMap",
-    SET = "http://endhealth.info/im#Set",
-    IS_CONTAINED_IN = "http://endhealth.info/im#isContainedIn",
-    HAS_MEMBER_PARENT = "http://endhealth.info/im#hasMemberParent",
-    FUNCTION_TEMPLATE = "http://endhealth.info/im#functionTemplate",
-    ONE_OF = "http://endhealth.info/im#oneOf",
-    COMBINATION_OF = "http://endhealth.info/im#combinationOf",
-    USE_PREDICATES = "http://endhealth.info/im#usePredicates",
-    SOME_OF = "http://endhealth.info/im#someOf",
-    HAS_CHILDREN = "http://endhealth.info/im#hasChildren",
-    IS_A = "http://endhealth.info/im#isA",
-    CONTEXT_ORDER = "http://endhealth.info/im#contextOrder",
-    CONTEXT = "http://endhealth.info/im#context",
-    IS_CHILD_OF = "http://endhealth.info/im#isChildOf",
-    PREVIOUS_ENTITY_OF = "http://endhealth.info/im#previousEntityOf",
-    SUBSUMED_BY = "http://endhealth.info/im#subsumedBy",
-    MAY_BE_SUBSUMED_BY = "http://endhealth.info/im#mayBeSubsumedBy",
-    APPROXIMATE_SUBSUMED_BY = "http://endhealth.info/im#approximateSubsumedBy",
-    LOCAL_SUBCLASS_OF = "http://endhealth.info/im#localSubClassOf",
-    HAS_CONFIG = "http://endhealth.info/im#hasConfig",
-    PROPERTY_GROUP = "http://endhealth.info/im#propertyGroup",
-    INHERITED_FROM = "http://endhealth.info/im#inheritedFrom",
-    GROUP_NUMBER = "http://endhealth.info/im#groupNumber",
-    ROLE_GROUP = "http://endhealth.info/im#roleGroup",
-    ROLE = "http://endhealth.info/im#role",
-    HAS_INHERITED_PROPERTIES = "http://endhealth.info/im#hasInheritedProperties",
-    DRAFT = "http://endhealth.info/im#Draft",
-    ACTIVE = "http://endhealth.info/im#Active",
-    INACTIVE = "http://endhealth.info/im#Inactive",
-    DEFINITIONAL_STATUS = "http://endhealth.info/im#definitionalStatus",
-    SUFFICIENTLY_DEFINED = "http://endhealth.info/im#1251000252106",
-    NECESSARY_NOT_SUFFICIENT = "http://endhealth.info/im#2771000252102",
-    UNASSIGNED = "http://endhealth.info/im#Unassigned",
-    HAS_MAP = "http://endhealth.info/im#hasMap",
-    ENTITY_MAP = "http://endhealth.info/im#entityMap",
-    MAPPED_TO = "http://endhealth.info/im#mappedTo",
-    HAS_NUMERIC = "http://endhealth.info/im#hasNumericValue",
-    SOURCE_TEXT = "http://endhealth.info/im#sourceText",
-    TARGET_TEXT = "http://endhealth.info/im#targetText",
-    HAS_TERM_CODE = "http://endhealth.info/im#hasTermCode",
-    ALTERNATIVE_CODE = "http://endhealth.info/im#alternativeCode",
-    DESCRIPTION_ID = "http://endhealth.info/im#descriptionId",
-    CODE_ID = "http://endhealth.info/im#codeId",
-    MATCHED_TO = "http://endhealth.info/im#matchedTo",
-    MAP_PRIORITY = "http://endhealth.info/im#mapPriority",
-    ASSURANCE_LEVEL = "http://endhealth.info/im#assuranceLevel",
-    MAP_ADVICE = "http://endhealth.info/im#mapAdvice",
-    NATIONALLY_ASSURED = "http://endhealth.info/im#NationallyAssuredUK",
-    SUPPLIER_ASSURED = "http://endhealth.info/im#SupplierAssured",
-    COHORT = "http://endhealth.info/im#Cohort",
-    HAS_MEMBER = "http://endhealth.info/im#hasMember",
-    IS_MEMBER_OF = "http://endhealth.info/im#isMemberOf",
-    AVOID_REPLACED_BY = "http://endhealth.info/im#avoidReplacedBy",
-    IS_SUBSET_OF = "http://endhealth.info/im#isSubsetOf",
-    HAS_SUBSET = "http://endhealth.info/im#hasSubset",
-    SOURCE_CONTEXT = "http://endhealth.info/im#sourceContext",
-    SOURCE_CONTEXT_TYPE = "http://endhealth.info/im#SourceContext",
-    SOURCE_PUBLISHER = "http://endhealth.info/im#sourcePublisher",
-    SOURCE_SYSTEM = "http://endhealth.info/im#sourceSystem",
-    SOURCE_SCHEMA = "http://endhealth.info/im#sourceSchema",
-    SOURCE_TABLE = "http://endhealth.info/im#sourceTable",
-    SOURCE_FIELD = "http://endhealth.info/im#sourceField",
-    TIME_DIFFERENCE = "http://endhealth.info/im#TimeDifference",
-    SOURCE_CODE_SCHEME = "http://endhealth.info/im#sourceCodeScheme",
-    SOURCE_VALUE = "http://endhealth.info/im#sourceValue",
-    SOURCE_REGEX = "http://endhealth.info/im#sourceRegex",
-    SOURCE_HEADING = "http://endhealth.info/im#sourceHeading",
-    TARGET_PROPERTY = "http://endhealth.info/im#targetProperty",
-    CONTEXT_NODE = "http://endhealth.info/im#contextNode",
-    REPLACE_ALL_PREDICATES = "http://endhealth.info/im#ReplaceAllPredicates",
-    ADD_QUADS = "http://endhealth.info/im#AddQuads",
-    UPDATE_PREDICATES = "http://endhealth.info/im#UpdatePredicates",
-    DELETE_ALL = "http://endhealth.info/im#DeleteAll",
-    PROV_CREATION = "http://endhealth.info/im#2001000252109",
-    PROV_UPDATE = "http://endhealth.info/im#1661000252106",
-    USES = "http://endhealth.info/im#uses",
-    COUNT = "http://endhealth.info/im#Count",
-    SUM = "http://endhealth.info/im#Sum",
-    AVERAGE = "http://endhealth.info/im#Average",
-    MIN = "http://endhealth.info/im#Min",
-    MAX = "http://endhealth.info/im#Max",
-    CONCATENATE = "http://endhealth.info/im#Concatenate",
-    IN_RESULT_SET = "http://endhealth.info/im#inResultSet",
-    HAS_PROFILE = "http://endhealth.info/im#inResultSet",
-    PROVENANCE_ACTIVITY = "http://endhealth.info/im#ProvenanceActivity",
-    PROVENANCE_TARGET = "http://endhealth.info/im#provenanceTarget",
-    PROVENANCE_ACTIVITY_TYPE = "http://endhealth.info/im#provenanceActivityType",
-    PROVENANCE_AGENT = "http://endhealth.info/im#provenanceAgent",
-    INDICATOR = "http://endhealth.info/im#Indicator",
-    START_TIME = "http://endhealth.info/im#startTime",
-    EFFECTIVE_DATE = "http://endhealth.info/im#effectiveDate",
-    END_DATE = "http://endhealth.info/im#endDate",
-    PROVENANCE_USED = "http://endhealth.info/im#usedEntity",
-    AUTHOR_ROLE = "http://endhealth.info/im#1001911000252102",
-    VERSION = "http://endhealth.info/im#version",
-    HAS_ROLE_IN = "http://endhealth.info/im#hasRoleInOrganisation",
-    IS_PERSON = "http://endhealth.info/im#isPerson",
-    HAS_CONTEXT = "http://endhealth.info/im#hasContext",
-    DISPLAY_ORDER = "http://endhealth.info/im#displayOrder",
-    USAGE_TOTAL = "http://endhealth.info/im#usageTotal",
-    DESCENDING = "http://endhealth.info/im#Descending",
-    ASCENDING = "http://endhealth.info/im#Ascending",
-    PLABEL = "http://endhealth.info/im#pLabel",
-    OLABEL = "http://endhealth.info/im#oLabel",
-    EXAMPLE = "http://endhealth.info/im#example",
-    PRIVACY_LEVEL = "http://endhealth.info/im#privacyLevel",
-    VALUE_SELECT = "http://endhealth.info/im#valueSelect",
-    VALUE_VARIABLE = "http://endhealth.info/im#valueVariable",
-    PLACEHOLDER = "http://endhealth.info/im#placeHolder",
-    FUNCTION_DEFINITION = "http://endhealth.info/im#function",
-    ADDRESS_CLASS = "http://endhealth.info/im#Address",
-    ADDRESS = "http://endhealth.info/im#address",
-    ADDRESS_LINE_1 = "http://endhealth.info/im#addressLine1",
-    ADDRESS_LINE_2 = "http://endhealth.info/im#addressLine2",
-    ADDRESS_LINE_3 = "http://endhealth.info/im#addressLine3",
-    LOCALITY = "http://endhealth.info/im#locality",
-    REGION = "http://endhealth.info/im#region",
-    POST_CODE = "http://endhealth.info/im#postCode",
-    COUNTRY = "http://endhealth.info/im#country",
-    UPRN = "http://endhealth.info/im#uprn",
-    ENTITY_TYPES = "http://endhealth.info/im#EntityTypes",
-    CONCEPT_SET_GROUP = "http://endhealth.info/im#ConceptSetGroup",
-    OLD_CODE = "http://endhealth.info/im#oldCode",
-    ORDER = "http://endhealth.info/im#order",
-    MAPPING_TASK = "http://endhealth.info/im#MappingTask",
-    UPDATE_TASK = "http://endhealth.info/im#UpdateTask",
-    MATCHED_FROM = "http://endhealth.info/im#matchedFrom",
-    MAPPED_FROM = "http://endhealth.info/im#mappedFrom",
-    SELECT = "http://endhealth.info/im#select",
-    NATIONALLY_ASSURED_UK = "http://endhealth.info/im#NationallyAssuredUK",
-    ENTITY = "http://endhealth.info/im#Entity",
-    IS_SUBINDICATOR_OF = "http://endhealth.info/im#isSubIndicatorOf",
-    QUERY_SET = "http://endhealth.info/im#QuerySet",
-    DEPENDENT_ON = "http://endhealth.info/im#dependentOn",
-    CARE_ACTIVITY = "http://endhealth.info/im#CareActivity",
-    CARE_TARGET = "http://endhealth.info/im#CareTarget",
-    QUERY_TEMPLATE = "http://endhealth.info/im#QueryTemplate",
-    NUMERATOR = "http://endhealth.info/im#numerator",
-    DENOMINATOR = "http://endhealth.info/im#denominator",
-    HAS_DATASET = "http://endhealth.info/im#dataset",
-    RECORD_TYPE = "http://endhealth.info/im#RecordType",
-    FEATURE = "http://endhealth.info/im#MatchClause",
-    DATA_PROPERTY = "http://endhealth.info/im#DataProperty",
-    ORGANISATION = "http://endhealth.info/im#Organisation",
-    MODELLING_ENTITY_TYPE = "http://endhealth.info/im#ModellingEntityType",
-    PROFILE = "http://endhealth.info/im#Profile",
-    STATS_REPORT_ENTRY = "http://endhealth.info/im#hasStatsReportEntry",
-    FAVOURITES = "http://endhealth.info/im#Favourites",
-    MODULE_ONTOLOGY = "http://endhealth.info/im#DiscoveryOntology",
-    MODULE_SETS = "http://endhealth.info/im#Sets",
-    MODULE_DATA_MODEL = "http://endhealth.info/im#DiscoveryCommonDataModel",
-    MODULE_CATALOGUE = "http://endhealth.info/im#Catalogue",
-    MODULE_QUERIES = "http://endhealth.info/im#Q_Queries",
-    MODULE_IM = "http://endhealth.info/im#InformationModel",
-    MODULE_TASKS = "http://endhealth.info/im#Tasks",
-    MODULE_FEATURES = "http://endhealth.info/im#M_MatchClauses",
-    CONCEPT_CATEGORY = "http://endhealth.info/im#ontologyOverview",
-    CONCEPT_TYPES = "http://endhealth.info/im#ontologyConceptTypes",
-    CONCEPT_SCHEMES = "http://endhealth.info/im#ontologyConceptSchemes",
-    CONCEPT_STATUS = "http://endhealth.info/im#ontologyConceptStatus",
-    HAS_VALUE = "http://endhealth.info/im#hasValue",
-    DATAMODEL_ENTITY = "http://endhealth.info/im#DataModelEntity",
-    DATAMODEL_OBJECTPROPERTY = "http://endhealth.info/im#dataModelObjectProperty",
-    DATAMODEL_DATAPROPERTY = "http://endhealth.info/im#dataModelDataProperty",
-    DATAMODEL_FUNCTIONPROPERTY = "http://endhealth.info/im#functionProperty",
-    BEST_MATCH = "http://endhealth.info/im#bestMatch",
-    ENTITY_TYPE = "http://endhealth.info/im#entityType",
-    VALUE_DATA = "http://endhealth.info/im#valueData",
-    VALUE_OBJECT = "http://endhealth.info/im#valueObject",
-    PREPOSITION = "http://endhealth.info/im#preposition",
-    VALUE_IRI = "http://endhealth.info/im#valueIri",
-    VALUE_IRI_LIST = "http://endhealth.info/im#valueIriList",
-    VALUE_DATA_LIST = "http://endhealth.info/im#valueDataList",
-    IM_1_ID = "http://endhealth.info/im#im1Id",
-    PROV_ACTIVITY_TYPE = "http://endhealth.info/im#provenanceActivityType",
-    FOLDER_VALUESETS = "http://endhealth.info/im#ValueSets",
-    FOLDER_SETS = "http://endhealth.info/im#Sets",
-    FOLDER_QUERY_CONCEPT_SETS = "http://endhealth.info/im#QueryConceptSets",
-    DATE_OF_ENTRY = "http://endhealth.info/im#dateOfEntry",
-    PARTICIPATION_TYPE = "http://endhealth.info/im#participationType",
-    PERSON_IN_ROLE = "http://endhealth.info/im#personInRole",
-    PROVENANCE_SOURCE_ENTITY = "http://endhealth.info/im#ProvenanceSourceEntity",
-    DERIVATION_TYPE = "http://endhealth.info/im#derivationType",
-    ENTITY_IDENTIFIER = "http://endhealth.info/im#entityIdentifier",
-    CODE_TEMPLATE = "http://endhealth.info/im#codeTemplate",
-    DATAMODEL_CLASSES = "http://endhealth.info/im#DataModelClasses",
-    DATE_TIME = "http://endhealth.info/im#DateTime",
-    TEMPLATE_NUMERIC_EVENT_ORDER = "http://endhealth.info/im#TEMPLATE_NumericEventOrder",
-    ORDER_BY = "http://endhealth.info/im#OrderBy",
-    PARAMETER_TEMPLATE = "http://endhealth.info/im#parameterTemplate",
-    VALUE_TEMPLATE = "http://endhealth.info/im#valueTemplate",
-    DEFAULT_VALUE = "http://endhealth.info/im#defaultValue",
-    LOAD_MORE = "http://endhealth.info/im#loadMore",
-    DATA_MODEL_PROPERTY_CONCEPT = "http://endhealth.info/im#concept",
-    NUMERIC_VALUE = "http://endhealth.info/im#NumericValue",
-    HEALTH_RECORDS = "http://endhealth.info/im#HealthRecords",
-    HAS_INCREMENTAL_FROM = "http://endhealth.info/im#hasIncrementalFrom",
-    ECL_BUILDER_SCHEMES = "http://endhealth.info/im#ECLBuilderSchemes",
-    INFERRED_PREDICATES = "http://endhealth.info/im#inferredPredicates",
-    INFERRED_EXCLUDE_PREDICATES = "http://endhealth.info/im#inferredExcludePredicates",
-    GRAPH_EXCLUDE_PREDICATES = "http://endhealth.info/im#graphExcludePredicates",
-    AGE = "http://endhealth.info/im#Age",
-    DATE = "http://endhealth.info/im#Date",
-    TIME = "http://endhealth.info/im#Time",
-    INTERVAL_UNIT = "http://endhealth.info/im#intervalUnit",
-    PARAMETER = "http://endhealth.info/im#parameter",
-    NUMERIC_DIFFERENCE = "http://endhealth.info/im#NumericDifference",
-    FISCAL_YEAR = "http://endhealth.info/im#fiscalYear",
-    YEARS = "http://endhealth.info/im#Years",
-    MONTH = "http://endhealth.info/im#month",
-    MONTHS = "http://endhealth.info/im#Months",
-    DAYS = "http://endhealth.info/im#Days",
-    HOURS = "http://endhealth.info/im#Hours",
-    MINUTES = "http://endhealth.info/im#Minutes",
-    SECONDS = "http://endhealth.info/im#Seconds",
-    DATATYPE_QUALIFIER = "http://endhealth.info/im#datatypeQualifier",
-    TYPE_FILTER_OPTIONS = "http://endhealth.info/im#TypeFilterOptions",
-    SORT_FIELD_FILTER_OPTIONS = "http://endhealth.info/im#SortFieldFilterOptions",
-    SORT_DIRECTION_FILTER_OPTIONS = "http://endhealth.info/im#SortDirectionFilterOptions",
-    STATUS_FILTER_DEFAULTS = "http://endhealth.info/im#StatusFilterDefaultOptions",
-    TYPE_FILTER_DEFAULTS = "http://endhealth.info/im#TypeFilterDefaultOptions",
-    SORT_FIELD_FILTER_DEFAULTS = "http://endhealth.info/im#SortFieldFilterDefaultOptions",
-    SORT_DIRECTION_FILTER_DEFAULTS = "http://endhealth.info/im#SortDirectionFilterDefaultOptions",
-}
-
-export enum IMQ {
-}
-
-export enum IM_FUNCTION {
-    DOMAIN = "http://endhealth.info/",
-    SNOMED_CONCEPT_GENERATOR = "http://endhealth.info/im#Function_SnomedConceptGenerator",
-    LOCAL_NAME_RETRIEVER = "http://endhealth.info/im#Function_LocalNameRetriever",
-    GET_ADDITIONAL_ALLOWABLE_TYPES = "http://endhealth.info/im#Function_GetAdditionalAllowableTypes",
-    GET_LOGIC_OPTIONS = "http://endhealth.info/im#Function_GetLogicOptions",
-    GET_SET_EDITOR_IRI_SCHEMES = "http://endhealth.info/im#Function_GetSetEditorIriSchemes",
-    IM1_SCHEME_OPTIONS = "http://endhealth.info/im#Function_IM1SchemeOptions",
-    SCHEME_FROM_IRI = "http://endhealth.info/im#Function_SchemeFromIri",
-    GET_USER_EDITABLE_SCHEMES = "http://endhealth.info/im#Function_GetUserEditableSchemes",
-    IS_TYPE = "http://endhealth.info/im#Function_IsType",
-    ALLOWABLE_PROPERTIES = "http://endhealth.info/im#Function_AllowableProperties",
-    ALLOWABLE_RANGES = "http://endhealth.info/im#Function_AllowableRanges",
-    ALLOWABLE_PROPERTY_VALUES = "http://endhealth.info/im#Function_AllowablePropertyValues",
-}
-
-export enum ImportType {
-    SNOMED = "snomed",
-    SKIP_TCT = "tct",
-    SKIP_SEARCH = "search",
-    FHIR = "fhir",
-    SMARTLIFE = "smartlifequery",
-    QOF = "qof",
-    CORE = "core",
-    SINGLE_FILE = "singlefile",
-    BNF = "bnf",
-    ICD10 = "icd10",
-    EMIS = "emis",
-    CPRD_MED = "cprd",
-    OPCS4 = "opcs4",
-    TPP = "tpp",
-    ODS = "ods",
-    PRSB = "prsb",
-    KINGS_APEX = "kingsapex",
-    KINGS_WINPATH = "kingswinpath",
-    VISION = "vision",
-    BARTS_CERNER = "barts",
-    IM1 = "imv1",
-    ENCOUNTERS = "encounters",
-    CONFIG = "config",
-    CEG = "ceg",
-    NHS_TFC = "nhstfc",
-    DELTAS = "deltas",
-    QUERY = "corequery",
-    QR = "qcodegroups",
-}
-
-export enum MAP {
-    DOMAIN = "http://endhealth.info/",
-    PREFIX = "map",
-}
-
-export enum Namespace {
+export enum NAMESPACE {
     LNWH_SY = "http://endhealth.info/lnwhsy#",
     LNWH_SL = "http://endhealth.info/lnwhsl#",
     THH_SL = "http://endhealth.info/thhsl#",
@@ -1838,255 +1405,13 @@ export enum Namespace {
     KINGS_WINPATH = "http://endhealth.info/kwp#",
 }
 
-export enum ODS {
-    BASE_NAMESPACE = "https://directory.spineservices.nhs.uk/STU3/CodeSystem/ODSAPI-",
-    ORGANISATION_ROLE_TYPE = "https://directory.spineservices.nhs.uk/STU3/CodeSystem/ODSAPI-OrganizationRole-1#ODS_RoleType",
-    ORGANISATION_RELATIONSHIP = "https://directory.spineservices.nhs.uk/STU3/CodeSystem/ODSAPI-OrganizationRelationship-1#ODS_Relationship",
-    ORGANISATION_RECORD_CLASS = "https://directory.spineservices.nhs.uk/STU3/CodeSystem/ODSAPI-OrganizationRecordClass-1#ODS_RecordClass",
-}
-
-export enum ORG {
-    ORGANISATION_RECORD_CLASS = "http://endhealth.info/im#organisationRecordClass",
-    RELATED_ORGANISATION = "http://endhealth.info/im#organisationRelationship",
-    TARGET = "http://endhealth.info/im#targetOrganisation",
-    ROLE = "http://endhealth.info/im#organisationRole",
-    ODS_CODE = "http://endhealth.info/im#odsCode",
-}
-
-export enum OWL {
-    PREFIX = "owl",
-    THING = "http://www.w3.org/2002/07/owl#Thing",
-    CLASS = "http://www.w3.org/2002/07/owl#Class",
-    EQUIVALENT_CLASS = "http://www.w3.org/2002/07/owl#equivalentClass",
-    INTERSECTION_OF = "http://www.w3.org/2002/07/owl#intersectionOf",
-    UNION_OF = "http://www.w3.org/2002/07/owl#unionOf",
-    RESTRICTION = "http://www.w3.org/2002/07/owl#Restriction",
-    ON_PROPERTY = "http://www.w3.org/2002/07/owl#onProperty",
-    ON_CLASS = "http://www.w3.org/2002/07/owl#onClass",
-    SOME_VALUES_FROM = "http://www.w3.org/2002/07/owl#someValuesFrom",
-    ALL_VALUES_FROM = "http://www.w3.org/2002/07/owl#allValuesFrom",
-    OBJECT_PROPERTY = "http://www.w3.org/2002/07/owl#ObjectProperty",
-    DATATYPE_PROPERTY = "http://www.w3.org/2002/07/owl#DatatypeProperty",
-    ANNOTATION_PROPERTY = "http://www.w3.org/2002/07/owl#AnnotationProperty",
-    INVERSE_OF = "http://www.w3.org/2002/07/owl#inverseOf",
-    INVERSE_OBJECT_PROPERTY = "http://www.w3.org/2002/07/owl#inverseOf",
-    PROPERTY_CHAIN = "http://www.w3.org/2002/07/owl#propertyChainAxiom",
-    TRANSITIVE = "http://www.w3.org/2002/07/owl#TransitiveProperty",
-    FUNCTIONAL = "http://www.w3.org/2002/07/owl#FunctionalProperty",
-    SYMMETRIC = "http://www.w3.org/2002/07/owl#SymmetricProperty",
-    REFLEXIVE = "http://www.w3.org/2002/07/owl#ReflexiveProperty",
-    ON_DATATYPE = "http://www.w3.org/2002/07/owl#onDatatype",
-    WITH_RESTRICTIONS = "http://www.w3.org/2002/07/owl#withRestrictions",
-    MAX_CARDINALITY = "http://www.w3.org/2002/07/owl#maxCardinality",
-    MIN_CARDINALITY = "http://www.w3.org/2002/07/owl#minCardinality",
-    ON_DATA_RANGE = "http://www.w3.org/2002/07/owl#onDataRange",
-    HAS_VALUE = "http://www.w3.org/2002/07/owl#hasValue",
-    COMPLEMENT_OF = "http://www.w3.org/2002/07/owl#complementOf",
-    ONE_OF = "http://www.w3.org/2002/07/owl#oneOf",
-    NAMED_INDIVIDUAL = "http://www.w3.org/2002/07/owl#NamedIndividual",
-}
-
-export enum OpenSearch {
-    NAME = "http://www.w3.org/2000/01/rdf-schema#label",
-    DESCRIPTION = "http://www.w3.org/2000/01/rdf-schema#comment",
-    CODE = "http://endhealth.info/im#code",
-    STATUS = "http://endhealth.info/im#status",
-    ALTERNATIVE_CODE = "http://endhealth.info/im#alternativeCode",
-    SCHEME = "http://endhealth.info/im#scheme",
-    TYPE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
-    USAGE_TOTAL = "http://endhealth.info/im#usageTotal",
-    BINDING = "http://endhealth.info/im#binding",
-    TERM_CODE = "http://endhealth.info/im#hasTermCode",
-    DOMAIN = "http://www.w3.org/2000/01/rdf-schema#domain",
-}
-
-export enum PRSB {
-    PREFIX = "rs",
-}
-
-export enum QR {
-    DOMAIN = "http://apiqcodes.org/",
-    PREFIX = "qc",
-}
-
-export enum QUERY {
-    DOMAIN = "http://endhealth.info/im#",
-    IS_ALLOWABLE_RANGE = "http://endhealth.info/im#Query_IsAllowableRange",
-    ALLOWABLE_RANGE_SUGGESTIONS = "http://endhealth.info/im#Query_AllowableRangeSuggestions",
-    GET_SUBCLASSES = "http://endhealth.info/im#Query_GetSubClasses",
-    GET_DESCENDANTS = "http://endhealth.info/im#Query_GetDescendants",
-    IS_VALID_DESCENDANT = "http://endhealth.info/im#Query_IsValidDescendant",
-    GET_ANCESTORS = "http://endhealth.info/im#Query_GetAncestors",
-    SEARCH_CONTAINED_IN = "http://endhealth.info/im#Query_SearchContainedIn",
-    ALLOWABLE_CHILD_TYPES = "http://endhealth.info/im#Query_AllowableChildTypes",
-    PROPERTY_RANGE = "http://endhealth.info/im#Query_PropertyRange",
-    OBJECT_PROPERTY_RANGE_SUGGESTIONS = "http://endhealth.info/im#Query_ObjectPropertyRangeSuggestions",
-    DATA_PROPERTY_RANGE_SUGGESTIONS = "http://endhealth.info/im#Query_DataPropertyRangeSuggestions",
-    ALLOWABLE_PROPERTIES = "http://endhealth.info/im#Query_AllowableProperties",
-    ALLOWABLE_PROPERTY_ANCESTORS = "http://endhealth.info/im#Query_AllowablePropertyAncestors",
-    IS_VALID_PROPERTY = "http://endhealth.info/im#Query_IsValidProperty",
-    ENTITY_FILTER = "http://endhealth.info/im#Query_EntityFilter",
-    SEARCH_ENTITIES = "http://endhealth.info/im#Query_SearchEntities",
-    SEARCH_FOLDERS = "http://endhealth.info/im#Query_SearchFolders",
-    SEARCH_ALLOWABLE_CONTAINED_IN = "http://endhealth.info/im#Query_SearchAllowableContainedIn",
-    SEARCH_MAIN_TYPES = "http://endhealth.info/im#Query_SearchmainTypes",
-    DM_PROPERTY = "http://endhealth.info/im#Query_DataModelPropertyByShape",
-    SEARCH_ALLOWABLE_SUBCLASS = "http://endhealth.info/im#Query_SearchAllowableSubclass",
-    GET_VALUES_FROM_PROPERTY_RANGE = "http://endhealth.info/im#Query_GetValuesFromPropertyRange",
-    GET_SUBSETS = "http://endhealth.info/im#Query_GetSubsets",
-}
-
-export enum RDF {
-    PREFIX = "rdf",
-    TYPE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
-    PROPERTY = "http://www.w3.org/1999/02/22-rdf-syntax-ns#Property",
-    LIST = "http://www.w3.org/1999/02/22-rdf-syntax-ns#List",
-    PREDICATE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate",
-    SUBJECT = "http://www.w3.org/1999/02/22-rdf-syntax-ns#subject",
-    OBJECT = "http://www.w3.org/1999/02/22-rdf-syntax-ns#object",
-}
-
-export enum RDFS {
-    PREFIX = "rdfs",
-    LABEL = "http://www.w3.org/2000/01/rdf-schema#label",
-    COMMENT = "http://www.w3.org/2000/01/rdf-schema#comment",
-    SUBCLASS_OF = "http://www.w3.org/2000/01/rdf-schema#subClassOf",
-    SUB_PROPERTY_OF = "http://www.w3.org/2000/01/rdf-schema#subPropertyOf",
-    DOMAIN = "http://www.w3.org/2000/01/rdf-schema#domain",
-    RANGE = "http://www.w3.org/2000/01/rdf-schema#range",
-    RESOURCE = "http://www.w3.org/2000/01/rdf-schema#Resource",
-    CLASS = "http://www.w3.org/2000/01/rdf-schema#Class",
-    DATATYPE = "http://www.w3.org/2000/01/rdf-schema#Datatype",
-    IS_DEFINED_BY = "http://www.w3.org/2000/01/rdf-schema#isDefinedBy",
-}
-
-export enum SHACL {
-    PREFIX = "sh",
-    PATH = "http://www.w3.org/ns/shacl#path",
-    MININCLUSIVE = "http://www.w3.org/ns/shacl#minInclusive",
-    MINEXCLUSIVE = "http://www.w3.org/ns/shacl#minExclusive",
-    MAXINCLUSIVE = "http://www.w3.org/ns/shacl#maxInclusive",
-    MAXEXCLUSIVE = "http://www.w3.org/ns/shacl#maxExclusive",
-    PROPERTY = "http://www.w3.org/ns/shacl#property",
-    PROPERTY_GROUP = "http://www.w3.org/ns/shacl#PropertyGroup",
-    MINCOUNT = "http://www.w3.org/ns/shacl#minCount",
-    MAXCOUNT = "http://www.w3.org/ns/shacl#maxCount",
-    VALUE = "http://www.w3.org/ns/shacl#value",
-    PATTERN = "http://www.w3.org/ns/shacl#pattern",
-    INVERSEPATH = "http://www.w3.org/ns/shacl#inversePath",
-    CLASS = "http://www.w3.org/ns/shacl#class",
-    DATATYPE = "http://www.w3.org/ns/shacl#datatype",
-    SPARQL = "http://www.w3.org/ns/shacl#sparql",
-    SELECT = "http://www.w3.org/ns/shacl#select",
-    PARAMETER = "http://www.w3.org/ns/shacl#parameter",
-    IRI = "http://www.w3.org/ns/shacl#IRI",
-    OPTIONAL = "http://www.w3.org/ns/shacl#optional",
-    NODESHAPE = "http://www.w3.org/ns/shacl#NodeShape",
-    TARGETCLASS = "http://www.w3.org/ns/shacl#targetClass",
-    NODE = "http://www.w3.org/ns/shacl#node",
-    ORDER = "http://www.w3.org/ns/shacl#order",
-    OR = "http://www.w3.org/ns/shacl#or",
-    NOT = "http://www.w3.org/ns/shacl#not",
-    NODE_KIND = "http://www.w3.org/ns/shacl#nodeKind",
-    PROPERTYSHAPE = "http://www.w3.org/ns/shacl#PropertyShape",
-    AND = "http://www.w3.org/ns/shacl#and",
-    NODES = "http://www.w3.org/ns/shacl#nodes",
-    TARGET_TYPE = "http://www.w3.org/ns/shacl#targetType",
-    TARGET = "http://www.w3.org/ns/shacl#target",
-    SPARQL_TARGET = "http://www.w3.org/ns/shacl#SPARQLTarget",
-    FUNCTION = "http://www.w3.org/ns/shacl#Function",
-    RETURN_TYPE = "http://www.w3.org/ns/shacl#returnType",
-    GROUP = "http://www.w3.org/ns/shacl#group",
-    NAME = "http://www.w3.org/ns/shacl#name",
-    EXPRESSION = "http://www.w3.org/ns/shacl#expression",
-    HAS_VALUE = "http://www.w3.org/ns/shacl#hasValue",
-}
-
-export enum SNOMED {
-    DOMAIN = "http://snomed.info/",
-    PREFIX = "sn",
-    ATTRIBUTE = "http://snomed.info/sct#246061005",
-    ANY = "http://snomed.info/sct#*",
-}
-
-export enum TransformFunction {
-    CONCATENATE = "http://endhealth.info/im#Concatenate",
-    STRING_JOIN = "http://endhealth.info/im#StringJoin",
-    SNOMED_CODE_CONCEPT_MAP = "http://endhealth.info/im#SchemedCodeConceptMap",
-}
-
-export enum USER {
-    DOMAIN = "http://endhealth.info/",
-    PREFIX = "usr",
-    USER_PRESET = "http://endhealth.info/user#UserPreset",
-    USER_PRIMARY_COLOR = "http://endhealth.info/user#UserPrimaryColor",
-    USER_SURFACE_COLOR = "http://endhealth.info/user#UserSurfaceColor",
-    USER_DARK_MODE = "http://endhealth.info/user#UserDarkMode",
-    USER_FONT_SIZE = "http://endhealth.info/user#UserFontSize",
-    USER_MRU = "http://endhealth.info/user#UserMRU",
-    USER_FAVOURITES = "http://endhealth.info/user#UserFavourites",
-    ORGANISATIONS = "http://endhealth.info/user#Organisations",
-    GRAPHS = "http://endhealth.info/user#Graphs",
-}
-
-export enum VALIDATION {
-    DOMAIN = "http://endhealth.info/im#",
-    IS_DEFINITION = "http://endhealth.info/im#Validation_isDefinition",
-    HAS_PARENT = "http://endhealth.info/im#Validation_hasParent",
-    IS_IRI = "http://endhealth.info/im#Validation_isIri",
-    IS_TERMCODE = "http://endhealth.info/im#Validation_isTermcode",
-    IS_PROPERTY = "http://endhealth.info/im#Validation_isProperty",
-    IS_SCHEME = "http://endhealth.info/im#Validation_isScheme",
-    IS_STATUS = "http://endhealth.info/im#Validation_isStatus",
-    IS_ROLE_GROUP = "http://endhealth.info/im#Validation_isRoleGroup",
-}
-
-export enum WORKFLOW {
-    DOMAIN = "http://endhealth.info/",
-    BUG_REPORT = "http://endhealth.info/workflow#bugReport",
-    DATE_CREATED = "http://endhealth.info/workflow#dateCreated",
-    CREATED_BY = "http://endhealth.info/workflow#createdBy",
-    ASSIGNED_TO = "http://endhealth.info/workflow#assignedTo",
-    STATE = "http://endhealth.info/workflow#state",
-    HOST_URL = "http://endhealth.info/workflow#hostUrl",
-    RELATED_PRODUCT = "http://endhealth.info/workflow#relatedProduct",
-    RELATED_MODULE = "http://endhealth.info/workflow#relatedModule",
-    OPERATING_SYSTEM = "http://endhealth.info/workflow#operatingSystem",
-    OPERATING_SYSTEM_OTHER = "http://endhealth.info/workflow#operatingSystemOther",
-    BROWSER = "http://endhealth.info/workflow#browser",
-    BROWSER_OTHER = "http://endhealth.info/workflow#browserOther",
-    SEVERITY = "http://endhealth.info/workflow#severity",
-    ERROR = "http://endhealth.info/workflow#errorDetails",
-    REPRODUCE_STEPS = "http://endhealth.info/workflow#reproduceSteps",
-    EXPECTED_RESULT = "http://endhealth.info/workflow#expectedResult",
-    ACTUAL_RESULT = "http://endhealth.info/workflow#actualResult",
-    RELATED_VERSION = "http://endhealth.info/workflow#relatedVersion",
-    REQUESTED_ROLE = "http://endhealth.info/workflow#requestedRole",
-    REQUESTED_NAMESPACE = "http://endhealth.info/workflow#requestedNamespace",
-    APPROVAL_TYPE = "http://endhealth.info/workflow#approvalType",
-    HISTORY = "http://endhealth.info/workflow#history",
-    HISTORY_PREDICATE = "http://endhealth.info/workflow#historyPredicate",
-    HISTORY_ORIGINAL_OBJECT = "http://endhealth.info/workflow#historyOriginalObject",
-    HISTORY_NEW_OBJECT = "http://endhealth.info/workflow#historyNewObject",
-    HISTORY_CHANGE_DATE = "http://endhealth.info/workflow#historyChangeDate",
-    MODIFIED_BY = "http://endhealth.info/workflow#modifiedBy",
-}
-
-export enum XSD {
-    PREFIX = "xsd",
-    PATTERN = "http://www.w3.org/2001/XMLSchema#pattern",
-    MIN_INCLUSIVE = "http://www.w3.org/2001/XMLSchema#minInclusive",
-    MIN_EXCLUSIVE = "http://www.w3.org/2001/XMLSchema#minExclusive",
-    MAX_INCLUSIVE = "http://www.w3.org/2001/XMLSchema#maxInclusive",
-    MAX_EXCLUSIVE = "http://www.w3.org/2001/XMLSchema#maxExclusive",
-    INTEGER = "http://www.w3.org/2001/XMLSchema#integer",
-    STRING = "http://www.w3.org/2001/XMLSchema#string",
-    BOOLEAN = "http://www.w3.org/2001/XMLSchema#boolean",
-    LONG = "http://www.w3.org/2001/XMLSchema#long",
-    DOUBLE = "http://www.w3.org/2001/XMLSchema#double",
-    DATE_TIME = "http://www.w3.org/2001/XMLSchema#dateTime",
-    NUMBER = "http://www.w3.org/2001/XMLSchema#number",
-    DECIMAL = "http://www.w3.org/2001/XMLSchema#decimal",
+export enum GRAPH {
+    IM = "http://endhealth.info/im#",
+    PROV = "http://endhealth.info/prov#",
+    USER = "http://endhealth.info/user#",
+    WORKFLOW = "http://endhealth.info/workflow#",
+    CONFIG = "http://endhealth.info/config#",
+    SMARTLIFE = "http://smartlifehealth.info/smh#",
 }
 
 export enum PrimeVuePresetThemes {

@@ -45,7 +45,7 @@
     "unplugin-vue-components": "^31.0.0",
     "vite": "7.1.7",
     "vite-plugin-dts": "^4.5.4",
-    "vitest": "^4.0.18",
+    "vitest": "3.1.2",
     "vue": "^3.5.25",
     "vue-router": "^5.0.3",
     "vue-tsc": "^3.1.5"
@@ -61,6 +61,10 @@
   "types": "dist/index.d.ts",
   "module": "dist/vue-library.js",
   "exports": {
-    ".": "./dist/vue-library.js"
+    ".": {
+      "import": "./dist/vue-library.js",
+      "types": "./dist/index.d.ts",
+      "default": "./dist/vue-library.js"
+    }
   }
 }

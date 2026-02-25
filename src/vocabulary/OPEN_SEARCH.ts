@@ -4,7 +4,7 @@ import {IM} from "@/vocabulary/IM";
 import {RDF} from "@/vocabulary/RDF";
 import {RDFS} from "@/vocabulary/RDFS";
 
-export class OpenSearch {
+export class OPEN_SEARCH {
 
   public static readonly NAME = RDFS.LABEL
   public static readonly DESCRIPTION = RDFS.COMMENT

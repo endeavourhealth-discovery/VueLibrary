@@ -2,7 +2,7 @@
 
 
 
-export class Graph {
+export class GRAPH {
 
   public static readonly IM = "http://endhealth.info/im#"
   public static readonly PROV = "http://endhealth.info/prov#"

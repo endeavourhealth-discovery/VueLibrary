@@ -1,21 +1,21 @@
 import { BNF } from "./BNF";
+import { CODE_TEMPLATE } from "./CODE_TEMPLATE";
 import { COMPONENT } from "./COMPONENT";
 import { CONFIG } from "./CONFIG";
-import { CodeTemplate } from "./CodeTemplate";
 import { EDITOR } from "./EDITOR";
-import { EntityType } from "./EntityType";
+import { ENTITY_TYPE } from "./ENTITY_TYPE";
 import { FHIR } from "./FHIR";
-import { Graph } from "./Graph";
+import { GRAPH } from "./GRAPH"; // included in AutoGen
 import { IM } from "./IM";
+import { IMPORT_TYPE } from "./IMPORT_TYPE";
 import { IMQ } from "./IMQ";
 import { IM_FUNCTION } from "./IM_FUNCTION";
-import { ImportType } from "./ImportType";
 import { MAP } from "./MAP";
-import { Namespace } from "./Namespace";
+import { NAMESPACE } from "./NAMESPACE"; // included in AutoGen
 import { ODS } from "./ODS";
+import { OPEN_SEARCH } from "./OPEN_SEARCH";
 import { ORG } from "./ORG";
 import { OWL } from "./OWL";
-import { OpenSearch } from "./OpenSearch";
 import { PRSB } from "./PRSB";
 import { QR } from "./QR";
 import { QUERY } from "./QUERY";
@@ -23,7 +23,7 @@ import { RDF } from "./RDF";
 import { RDFS } from "./RDFS";
 import { SHACL } from "./SHACL";
 import { SNOMED } from "./SNOMED";
-import { TransformFunction } from "./TransformFunction";
+import { TRANSFORM_FUNCTION } from "./TRANSFORM_FUNCTION";
 import { USER } from "./USER";
 import { VALIDATION } from "./VALIDATION";
 import { WORKFLOW } from "./WORKFLOW";
@@ -31,23 +31,21 @@ import { XSD } from "./XSD";
 
 export {
   BNF,
+  CODE_TEMPLATE,
   COMPONENT,
   CONFIG,
-  CodeTemplate,
   EDITOR,
-  EntityType,
+  ENTITY_TYPE,
   FHIR,
-  Graph,
   IM,
+  IMPORT_TYPE,
   IMQ,
   IM_FUNCTION,
-  ImportType,
   MAP,
-  Namespace,
   ODS,
+  OPEN_SEARCH,
   ORG,
   OWL,
-  OpenSearch,
   PRSB,
   QR,
   QUERY,
@@ -55,7 +53,7 @@ export {
   RDFS,
   SHACL,
   SNOMED,
-  TransformFunction,
+  TRANSFORM_FUNCTION,
   USER,
   VALIDATION,
   WORKFLOW,
