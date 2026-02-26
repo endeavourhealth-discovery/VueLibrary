@@ -109,7 +109,7 @@ import { useDialog } from "primevue/usedialog";
 import { DownloadByQueryOptions, ECLQueryRequest, QueryRequest, SearchResponse, SearchResultSummary, TextSearchStyle } from "@/interfaces/AutoGen";
 import { DownloadSettings, ExtendedSearchResultSummary, FilterOptions, Namespace, SearchOptions } from "@/interfaces";
 import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
-import { buildIMQueryFromFilters } from "@/helpers/buildQuery";
+import { buildIMQueryFromFilters } from "@/helpers/BuildQuery";
 import { MenuItem } from "primevue/menuitem";
 import { DataTablePageEvent, DataTableRowSelectEvent } from "primevue/datatable";
 import { nextTick } from "vue";

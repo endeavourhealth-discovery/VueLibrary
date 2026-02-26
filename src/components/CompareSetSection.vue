@@ -35,7 +35,7 @@
 import OverlaySummary from "@/components/OverlaySummary.vue";
 import { useCopyToClipboard } from "@/composables/useCopyToClipboard";
 import { useOverlay } from "@/composables/useOverlay";
-import { buildIMQueryFromFilters } from "@/helpers/buildQuery";
+import { buildIMQueryFromFilters } from "@/helpers/BuildQuery";
 import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
 import { FilterOptions, SearchOptions } from "@/interfaces";
 import { Concept, QueryRequest, SearchResultSummary } from "@/interfaces/AutoGen";

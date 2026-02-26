@@ -36,7 +36,7 @@
 <script setup lang="ts">
 import { Match, Bool } from "@/interfaces/AutoGen";
 import { Ref, ref, inject } from "vue";
-import { getBooleanLabel } from "@/helpers/buildQuery";
+import { getBooleanLabel } from "@/helpers/BuildQuery";
 import RecursiveMatchDisplay from "@/components/RecursiveMatchDisplay.vue";
 
 interface Props {

@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import { Where } from "@/interfaces/AutoGen";
-import { isBoolWhere, getIsRoleGroup, manageRoleGroup } from "@/helpers/buildQuery";
+import { isBoolWhere, getIsRoleGroup, manageRoleGroup } from "@/helpers/BuildQuery";
 
 const where = defineModel<Where>("where");
 const isRoleGroup = ref(getIsRoleGroup(where.value));

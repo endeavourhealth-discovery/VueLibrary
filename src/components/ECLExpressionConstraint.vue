@@ -171,7 +171,7 @@ import {
   getIsRoleGroup,
   manageRoleGroup,
   updateFocusConcepts
-} from "@/helpers/buildQuery";
+} from "@/helpers/BuildQuery";
 import { v4 } from "uuid";
 import { QUERY } from "@/vocabulary/QUERY";
 import BooleanEditor from "@/components/BooleanEditor.vue";

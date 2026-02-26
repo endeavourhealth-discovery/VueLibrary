@@ -51,7 +51,7 @@ import AutocompleteSearchBar from "@/components/AutocompleteSearchBar.vue";
 import { QueryRequest, SearchResultSummary, Node } from "@/interfaces/AutoGen";
 import { cloneDeep, isEqual } from "lodash-es";
 import { SearchOptions } from "@/interfaces";
-import { buildIMQueryFromFilters, getConstraintOperator, setConstraintOperator } from "@/helpers/buildQuery";
+import { buildIMQueryFromFilters, getConstraintOperator, setConstraintOperator } from "@/helpers/BuildQuery";
 import { constraintOperatorOptions } from "@/helpers/QueryEditorMethods";
 import injectionKeys from "@/injectionKeys/injectionKeys";
 

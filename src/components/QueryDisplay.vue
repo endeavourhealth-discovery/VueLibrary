@@ -80,7 +80,7 @@ import { computed, inject, onMounted, provide, ref, Ref, watch } from "vue";
 import SQLDisplay from "./SQLDisplay.vue";
 import IMLDisplay from "./IMLDisplay.vue";
 import { cloneDeep } from "lodash-es";
-import { getBooleanOperator, getBoolGroup } from "@/helpers/buildQuery";
+import { getBooleanOperator, getBoolGroup } from "@/helpers/BuildQuery";
 import injectionKeys from "@/injectionKeys/injectionKeys";
 
 enum DisplayOptions {

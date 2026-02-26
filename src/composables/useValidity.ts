@@ -1,6 +1,6 @@
 import { deferred } from "@/helpers";
 import { isArrayHasLength, isObjectHasKeys } from "@/helpers/DataTypeCheckers";
-import { isPropertyShape } from "@/helpers";
+import { isPropertyShape } from "@/helpers/TypeGuards";
 import { EntityValidationRequest, FormGenerator, PropertyShape } from "@/interfaces/AutoGen";
 import { IM } from "@/vocabulary/IM";
 import { COMPONENT } from "@/vocabulary/COMPONENT";
