@@ -7,10 +7,20 @@ import { PrimeVueResolver } from "@primevue/auto-import-resolver";
 import { esbuildCommonjs } from "@originjs/vite-plugin-commonjs";
 import dts from "vite-plugin-dts";
 
+const entries: Record<string, string> = {
+  main: path.resolve(__dirname, "src/index.ts"),
+  interfaces: path.resolve(__dirname, "src/interfaces/index.ts"),
+  enums: path.resolve(__dirname, "src/enums/index.ts"),
+  composables: path.resolve(__dirname, "src/composables/index.ts"),
+  helpers: path.resolve(__dirname, "src/helpers/index.ts"),
+  components: path.resolve(__dirname, "src/components/index.ts"),
+  models: path.resolve(__dirname, "src/models/index.ts")
+};
+
 export default defineConfig({
   plugins: [
     vue(),
-    dts({ insertTypesEntry: true, include: ["src"] }),
+    dts({ insertTypesEntry: true, include: ["src"], outputDir: "dist" }),
     tailwindcss(),
     Components({ resolvers: [PrimeVueResolver()], dts: true, directoryAsNamespace: true, collapseSamePrefixes: true })
   ],
@@ -20,15 +30,16 @@ export default defineConfig({
     }
   },
   build: {
-    lib: {
-      entry: path.resolve(__dirname, "src/index.ts"),
-      name: "vue-library",
-      fileName: "vue-library",
-      formats: ["es"]
-    },
     rollupOptions: {
-      external: ["vue", "/primevue\/.+", "vue-router"],
+      preserveEntrySignatures: "strict",
+      input: entries,
+      external: ["vue", /^primevue\//, "vue-router"],
       output: {
+        dir: "dist",
+        format: "es",
+        preserveModules: true,
+        preserveModulesRoot: "src",
+        entryFileNames: "[name]/index.js",
         exports: "named",
         globals: {
           vue: "Vue"
@@ -37,7 +48,7 @@ export default defineConfig({
     },
     target: "esnext",
     outDir: "dist",
-    emptyOutDir: false
+    emptyOutDir: true
   },
   resolve: {
     alias: {

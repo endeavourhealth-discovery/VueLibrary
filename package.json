@@ -67,9 +67,7 @@
       "default": "./dist/vue-library.js"
     },
     "./interfaces": {
-      "types": "./dist/interfaces/index.d.ts",
-      "import": "./dist/interfaces/index.js",
-      "default": "./dist/interfaces/index.js"
+      "types": "./dist/interfaces/index.d.ts"
     },
     "./enums": {
       "types": "./dist/enums/index.d.ts",
