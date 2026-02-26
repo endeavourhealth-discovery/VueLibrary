@@ -27,7 +27,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref, Ref, watch, computed, inject } from "vue";
-import { IM } from "@/vocabulary/IM";
+import { IM } from "@/enums";
 import { TTIriRef } from "@/interfaces/AutoGen";
 import { MenuItem } from "primevue/menuitem";
 import injectionKeys from "@/injectionKeys/injectionKeys";

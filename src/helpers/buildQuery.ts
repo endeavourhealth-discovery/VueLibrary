@@ -1,7 +1,5 @@
-import { Bool, Match, Node, Query, QueryRequest, RuleAction, SearchBinding, Where, Path, NodeShape } from "@/interfaces/AutoGen";
-import { IM } from "@/vocabulary/IM";
-import { RDF } from "@/vocabulary/RDF";
-import { SHACL } from "@/vocabulary/SHACL";
+import { Match, Node, Query, QueryRequest, SearchBinding, Where, Path, NodeShape } from "@/interfaces/AutoGen";
+import { Bool, IM, RDF, RuleAction, SHACL } from "@/enums";
 import { SearchOptions } from "@/interfaces";
 import type { TreeNode } from "primevue/treenode";
 import { isArrayHasLength } from "@/helpers/DataTypeCheckers";

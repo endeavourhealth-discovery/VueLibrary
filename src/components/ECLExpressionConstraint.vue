@@ -157,7 +157,7 @@
 import { inject, onMounted, Ref, ref, computed, watch } from "vue";
 import ConceptSelector from "./ConceptSelector.vue";
 import Button from "primevue/button";
-import { Match, Where, Node, QueryRequest, TTIriRef, Bool } from "@/interfaces/AutoGen";
+import { Match, Where, Node, QueryRequest, TTIriRef } from "@/interfaces/AutoGen";
 import ECLRefinement from "@/components/ECLRefinement.vue";
 import { onDragStart, onDragEnd, onDragOver, onDrop } from "@/helpers/DragContext";
 import {
@@ -173,7 +173,7 @@ import {
   updateFocusConcepts
 } from "@/helpers/BuildQuery";
 import { v4 } from "uuid";
-import { QUERY } from "@/vocabulary/QUERY";
+import { Bool, QUERY } from "@/enums";
 import BooleanEditor from "@/components/BooleanEditor.vue";
 import injectionKeys from "@/injectionKeys/injectionKeys";
 

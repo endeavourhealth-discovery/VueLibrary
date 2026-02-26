@@ -36,8 +36,7 @@
 </template>
 <script setup lang="ts">
 import { inject, onMounted, ref, Ref, watch } from "vue";
-import { RDF } from "@/vocabulary/RDF";
-import { RDFS } from "@/vocabulary/RDFS";
+import { RDF, RDFS } from "@/enums";
 import OverlaySummary from "@/components/OverlaySummary.vue";
 import IMFontAwesomeIcon from "@/components/IMFontAwesomeIcon.vue";
 import { getColourFromType, getFAIconFromType } from "@/helpers/ConceptTypeVisuals";

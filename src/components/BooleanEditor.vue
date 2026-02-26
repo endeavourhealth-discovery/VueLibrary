@@ -56,7 +56,8 @@
 </template>
 <script setup lang="ts">
 import { createNewBoolGroup, getBooleanOptions, getIsRoleGroup, removeSubgroup, getBooleanOperator, getBoolGroup } from "@/helpers/BuildQuery";
-import { Match, Where, Bool } from "@/interfaces/AutoGen";
+import { Match, Where } from "@/interfaces/AutoGen";
+import { Bool } from "@/enums";
 import { computed, inject, ref, Ref } from "vue";
 import RoleGroup from "@/components/RoleGroup.vue";
 import { onDragEnd, onDragOver, onDragStart, onDrop } from "@/helpers/DragContext";

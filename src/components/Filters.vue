@@ -66,7 +66,7 @@ import { computed, ComputedRef, inject, onMounted, ref, Ref, watch } from "vue";
 import { FilterOptions } from "@/interfaces";
 import { TTIriRef } from "@/interfaces/AutoGen";
 import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
-import { NAMESPACE } from "@/vocabulary/NAMESPACE";
+import { NAMESPACE } from "@/enums";
 import injectionKeys from "@/injectionKeys/injectionKeys";
 interface Props {
   selectedFilterOptions?: FilterOptions;

@@ -1,8 +1,6 @@
 import { getFAIconFromType } from "@/helpers/ConceptTypeVisuals";
 import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
-import { IM } from "@/vocabulary/IM";
-import { RDFS } from "@/vocabulary/RDFS";
-import { SHACL } from "@/vocabulary/SHACL";
+import { IM, RDFS, SHACL } from "@/enums";
 import type { TreeNode } from "primevue/treenode";
 import { Ref } from "vue";
 import { MenuItem } from "primevue/menuitem";

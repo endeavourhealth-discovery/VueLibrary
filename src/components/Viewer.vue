@@ -192,10 +192,7 @@ import {
   isRecordModel,
   isValueSet
 } from "@/helpers/ConceptTypeMethods";
-import { IM } from "@/vocabulary/IM";
-import { RDF } from "@/vocabulary/RDF";
-import { RDFS } from "@/vocabulary/RDFS";
-import { SHACL } from "@/vocabulary/SHACL";
+import { IM, RDF, RDFS, SHACL } from "@/enums";
 import { TTEntity } from "@/interfaces/ExtendedAutoGen";
 import injectionKeys from "@/injectionKeys/injectionKeys";
 

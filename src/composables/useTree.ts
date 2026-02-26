@@ -2,7 +2,7 @@ import { getColourFromType, getFAIconFromType } from "@/helpers/ConceptTypeVisua
 import { isObjectHasKeys } from "@/helpers/DataTypeCheckers";
 import { TTIriRef } from "@/interfaces/AutoGen";
 import { ExtendedEntityReferenceNode, TTEntity } from "@/interfaces/ExtendedAutoGen";
-import { IM } from "@/vocabulary/IM";
+import { IM } from "@/enums";
 import type { TreeNode } from "primevue/treenode";
 import { computed, ref, Ref } from "vue";
 import { useToast } from "primevue/usetoast";

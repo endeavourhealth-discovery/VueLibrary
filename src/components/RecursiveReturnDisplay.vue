@@ -33,7 +33,8 @@
 </template>
 
 <script setup lang="ts">
-import { Bool, Return } from "@/interfaces/AutoGen";
+import { Return } from "@/interfaces/AutoGen";
+import { Bool } from "@/enums";
 import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
 import RecursiveWhereDisplay from "@/components/RecursiveWhereDisplay.vue";
 import IMViewerLink from "@/components/IMViewerLink.vue";

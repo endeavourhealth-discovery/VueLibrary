@@ -81,7 +81,8 @@ import { onMounted, Ref, ref, watch, nextTick, computed, onBeforeUnmount, inject
 import DirectorySearchDialog from "@/components/DirectorySearchDialog.vue";
 import OverlaySummary from "@/components/OverlaySummary.vue";
 import { FilterOptions } from "@/interfaces";
-import { QueryRequest, SearchResponse, SearchResultSummary, TextSearchStyle } from "@/interfaces/AutoGen";
+import { QueryRequest, SearchResponse, SearchResultSummary } from "@/interfaces/AutoGen";
+import { TextSearchStyle } from "@/enums";
 import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
 import { useSpeechToText } from "@/composables/useSpeechToText";
 import { cloneDeep, debounce, isEqual } from "lodash-es";

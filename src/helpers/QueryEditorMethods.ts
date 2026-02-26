@@ -1,5 +1,5 @@
-import { Node, Order, RelativeTo, Where, Assignable, Match, Path } from "@/interfaces/AutoGen";
-import { IM } from "@/vocabulary/IM";
+import { Node, RelativeTo, Where, Assignable, Match, Path } from "@/interfaces/AutoGen";
+import { IM, Order } from "@/enums";
 import { Orderable } from "@/interfaces/Orderable";
 
 export const relativityOptions = [

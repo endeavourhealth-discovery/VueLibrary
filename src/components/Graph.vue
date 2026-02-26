@@ -20,7 +20,7 @@ import { inject, onMounted, Ref, ref, watch } from "vue";
 import GraphComponent from "./GraphComponent.vue";
 import { TTGraphData } from "@/interfaces";
 import { translateFromEntityBundle, isObjectHasKeys } from "@/helpers";
-import { IM } from "@/vocabulary/IM";
+import { IM } from "@/enums";
 import { TTBundle } from "@/interfaces/ExtendedAutoGen";
 import injectionKeys from "@/injectionKeys/injectionKeys";
 

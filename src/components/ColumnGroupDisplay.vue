@@ -29,7 +29,8 @@
 </template>
 
 <script setup lang="ts">
-import { Bool, DisplayMode, Match, Query } from "@/interfaces/AutoGen";
+import { Match, Query } from "@/interfaces/AutoGen";
+import { Bool, DisplayMode } from "@/enums";
 import { onMounted, watch, ref, inject } from "vue";
 import RecursiveMatchDisplay from "./RecursiveMatchDisplay.vue";
 import ReturnColumns from "./ReturnColumns.vue";

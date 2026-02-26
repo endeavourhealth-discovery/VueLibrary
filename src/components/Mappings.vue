@@ -126,7 +126,7 @@ import { inject, onMounted, ref, Ref, watch } from "vue";
 import SimpleMaps from "./SimpleMaps.vue";
 import { ChartMapNode, ChartTableNode, Context, MapItem, Namespace, SimpleMap, SimpleMapIri } from "@/interfaces";
 import { isArrayHasLength, isObjectHasKeys, byPriority, byScheme } from "@/helpers";
-import { IM } from "@/vocabulary/IM";
+import { IM } from "@/enums";
 import { ConceptContextMap } from "@/interfaces/AutoGen";
 import { GenericObject } from "@/interfaces/GenericObject";
 import injectionKeys from "@/injectionKeys/injectionKeys";

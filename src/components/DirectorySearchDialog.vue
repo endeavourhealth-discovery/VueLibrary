@@ -108,7 +108,7 @@ import EclSearch from "@/components/EclSearch.vue";
 import IMQuerySearch from "@/components/IMQuerySearch.vue";
 import { cloneDeep } from "lodash-es";
 import { QueryRequest, SearchResultSummary, SearchResponse } from "@/interfaces/AutoGen";
-import { RDFS } from "@/vocabulary/RDFS";
+import { RDFS } from "@/enums";
 import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
 import { FilterOptions } from "@/interfaces";
 import { SplitterResizeEndEvent } from "primevue/splitter";

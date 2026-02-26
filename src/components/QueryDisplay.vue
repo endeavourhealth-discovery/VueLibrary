@@ -75,7 +75,8 @@
 import { isArrayHasLength, isObjectHasKeys } from "@/helpers/DataTypeCheckers";
 import RecursiveMatchDisplay from "@/components/RecursiveMatchDisplay.vue";
 import ColumnGroupDisplay from "@/components/ColumnGroupDisplay.vue";
-import { Argument, ArgumentReference, Bool, DisplayMode, IMLLanguage, Query, QueryRequest, UserRole } from "@/interfaces/AutoGen";
+import { Argument, ArgumentReference, IMLLanguage, Query, QueryRequest } from "@/interfaces/AutoGen";
+import { Bool, DisplayMode } from "@/enums";
 import { computed, inject, onMounted, provide, ref, Ref, watch } from "vue";
 import SQLDisplay from "./SQLDisplay.vue";
 import IMLDisplay from "./IMLDisplay.vue";

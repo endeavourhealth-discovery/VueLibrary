@@ -97,8 +97,7 @@ import SubsetDisplay from "./SubsetDisplay.vue";
 import DownloadByQueryOptionsDialog from "@/components/DownloadByQueryOptionsDialog.vue";
 import Footer from "@/components/Footer.vue";
 import { computed, ComputedRef, inject, markRaw, onMounted, Ref, ref, watch } from "vue";
-import { IM } from "@/vocabulary/IM";
-import { RDFS } from "@/vocabulary/RDFS";
+import { IM, RDFS, UserRole } from "@/enums";
 import ArrayObjectNamesToStringWithLabel from "@/components/ArrayObjectNamesToStringWithLabel.vue";
 import { isObjectHasKeys } from "@/helpers/DataTypeCheckers";
 import { useToast } from "primevue/usetoast";
@@ -110,7 +109,7 @@ import { useDialog } from "primevue/usedialog";
 import { useDownloadFile } from "@/composables/useDownloadFile";
 import { useCopyToClipboard } from "@/composables/useCopyToClipboard";
 import { DownloadSettings } from "@/interfaces";
-import { SetExportRequest, SetOptions, UserRole } from "@/interfaces/AutoGen";
+import { SetExportRequest, SetOptions } from "@/interfaces/AutoGen";
 import { TTEntity } from "@/interfaces/ExtendedAutoGen";
 import injectionKeys from "@/injectionKeys/injectionKeys";
 

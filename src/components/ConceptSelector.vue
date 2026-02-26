@@ -46,7 +46,7 @@
 
 <script setup lang="ts">
 import { Ref, ref, onMounted, watch, computed, inject } from "vue";
-import { IM } from "@/vocabulary/IM";
+import { IM } from "@/enums";
 import AutocompleteSearchBar from "@/components/AutocompleteSearchBar.vue";
 import { QueryRequest, SearchResultSummary, Node } from "@/interfaces/AutoGen";
 import { cloneDeep, isEqual } from "lodash-es";

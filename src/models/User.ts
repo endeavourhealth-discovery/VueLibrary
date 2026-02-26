@@ -1,7 +1,7 @@
 import { boolean, object, string, uuid, array, email, url, enum as zenum, type output, literal } from "zod/v4";
 import { RecentActivityItemSchema } from "./RecentActivityItem";
 import { NamespacePermissionSchema } from "./NamespacePermission";
-import { FontSize, NAMESPACE, PrimeVueColors, PrimeVuePresetThemes } from "@/interfaces/AutoGen";
+import { FontSize, NAMESPACE, PrimeVueColors, PrimeVuePresetThemes } from "@/enums";
 
 export const UserSchema = object({
   id: string(),

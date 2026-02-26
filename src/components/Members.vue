@@ -42,7 +42,7 @@
 <script setup lang="ts">
 import { inject, onMounted, ref, Ref, watch } from "vue";
 import { Node, Query } from "@/interfaces/AutoGen";
-import { IM } from "@/vocabulary/IM";
+import { IM } from "@/enums";
 import IMViewerLink from "@/components/IMViewerLink.vue";
 import { isObjectHasKeys } from "@/helpers/DataTypeCheckers";
 import injectionKeys from "@/injectionKeys/injectionKeys";

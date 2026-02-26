@@ -129,8 +129,8 @@
 <script setup lang="ts">
 import { ref, Ref, onMounted, watch, inject, computed } from "vue";
 import AutocompleteSearchBar from "@/components/AutocompleteSearchBar.vue";
-import { IM } from "@/vocabulary/IM";
-import { Bool, Where, Match, QueryRequest, SearchResultSummary } from "@/interfaces/AutoGen";
+import { Bool, IM } from "@/enums";
+import { Where, Match, QueryRequest, SearchResultSummary } from "@/interfaces/AutoGen";
 import { onDragStart, onDragEnd, onDragOver, onDrop } from "@/helpers/DragContext";
 import {
   getIsRoleGroup,

@@ -90,7 +90,8 @@
 </template>
 
 <script setup lang="ts">
-import { Match, Bool, DisplayMode } from "@/interfaces/AutoGen";
+import { Match } from "@/interfaces/AutoGen";
+import { Bool, DisplayMode } from "@/enums";
 import { Ref, ref, computed, inject } from "vue";
 import RecursiveWhereDisplay from "./RecursiveWhereDisplay.vue";
 import IMViewerLink from "@/components/IMViewerLink.vue";

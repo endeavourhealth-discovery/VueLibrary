@@ -37,7 +37,7 @@
 
 <script setup lang="ts">
 import { inject, onMounted, ref, Ref, watch } from "vue";
-import { IM } from "@/vocabulary/IM";
+import { IM } from "@/enums";
 import Viewer from "@/components/Viewer.vue";
 import ParentHeader from "@/components/ParentHeader.vue";
 import ParentHierarchy from "@/components/ParentHierarchy.vue";

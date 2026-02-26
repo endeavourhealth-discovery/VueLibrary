@@ -34,7 +34,8 @@
 </template>
 
 <script setup lang="ts">
-import { Match, Bool } from "@/interfaces/AutoGen";
+import { Match } from "@/interfaces/AutoGen";
+import { Bool } from "@/enums";
 import { Ref, ref, inject } from "vue";
 import { getBooleanLabel } from "@/helpers/BuildQuery";
 import RecursiveMatchDisplay from "@/components/RecursiveMatchDisplay.vue";

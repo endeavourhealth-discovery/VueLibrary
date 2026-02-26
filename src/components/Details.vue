@@ -47,8 +47,7 @@
 import type { TreeNode } from "primevue/treenode";
 import { inject, onMounted, Ref, ref, watch } from "vue";
 import IMViewerLink from "@/components/IMViewerLink.vue";
-import { IM } from "@/vocabulary/IM";
-import { SHACL } from "@/vocabulary/SHACL";
+import { IM, SHACL } from "@/enums";
 import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
 import { isArray } from "lodash-es";
 import { GenericObject } from "@/interfaces/GenericObject";

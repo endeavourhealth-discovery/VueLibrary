@@ -21,5 +21,4 @@ export * from "./enums";
 export * from "./composables";
 export * from "./helpers";
 export * from "./interfaces";
-export * from "./vocabulary";
 export * from "./models";

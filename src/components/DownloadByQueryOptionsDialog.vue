@@ -95,7 +95,7 @@
 import { DownloadSettings } from "@/interfaces";
 import { TTIriRef } from "@/interfaces/AutoGen";
 import { computed, inject, Ref, ref, watch } from "vue";
-import { NAMESPACE } from "@/vocabulary/NAMESPACE";
+import { NAMESPACE } from "@/enums";
 import injectionKeys from "@/injectionKeys/injectionKeys";
 
 interface DownloadOption {

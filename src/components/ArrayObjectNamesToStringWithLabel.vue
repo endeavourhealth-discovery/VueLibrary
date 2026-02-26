@@ -10,7 +10,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
 import { isArrayHasLength, isObjectHasKeys } from "@/helpers/DataTypeCheckers";
-import { SHACL } from "@/vocabulary/SHACL";
+import { SHACL } from "@/enums";
 
 interface Props {
   label: string;

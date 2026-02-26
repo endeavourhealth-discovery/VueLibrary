@@ -80,7 +80,7 @@ import { FilterOptions } from "@/interfaces";
 import ResultsTable from "@/components/ResultsTable.vue";
 import { cloneDeep } from "lodash-es";
 import { QueryRequest, SearchResponse, SearchResultSummary, TTIriRef } from "@/interfaces/AutoGen";
-import { IM } from "@/vocabulary/IM";
+import { IM } from "@/enums";
 import injectionKeys from "@/injectionKeys/injectionKeys";
 
 interface Props {

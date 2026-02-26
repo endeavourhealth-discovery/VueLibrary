@@ -1,13 +1,9 @@
 import { TTIriRef } from "../interfaces/AutoGen";
 import { TTGraphData, TTProperty } from "../interfaces";
-import { IM } from "../vocabulary/IM";
-import { OWL } from "../vocabulary/OWL";
-import { RDFS } from "../vocabulary/RDFS";
-import { SHACL } from "../vocabulary/SHACL";
 import { isArrayHasLength, isObjectHasKeys } from "./DataTypeCheckers";
 import { TTBundle, TTEntity } from "@/interfaces/ExtendedAutoGen";
 import { GenericObject } from "@/interfaces/GenericObject";
-import { NAMESPACE } from "@/vocabulary/NAMESPACE";
+import { IM, NAMESPACE, OWL, RDFS, SHACL } from "@/enums";
 
 function translateFromEntityBundle(bundle: TTBundle, includedPredicates: string[]): TTGraphData {
   const { entity, predicates } = bundle;
@@ -25,16 +21,16 @@ function translateFromEntityBundle(bundle: TTBundle, includedPredicates: string[
 
 function getPropertyIri(nested: TTProperty): string {
   if (isObjectHasKeys(nested, [SHACL.CLASS])) {
-    return nested[SHACL.CLASS][0].iri;
+    return nested[SHACL.CLASS]![0].iri;
   }
   if (isObjectHasKeys(nested, [SHACL.NODE])) {
-    return nested[SHACL.NODE][0].iri;
+    return nested[SHACL.NODE]![0].iri;
   }
   if (isObjectHasKeys(nested, [OWL.CLASS])) {
     return nested[OWL.CLASS][0].iri;
   }
   if (isObjectHasKeys(nested, [SHACL.DATATYPE])) {
-    return nested[SHACL.DATATYPE][0].iri;
+    return nested[SHACL.DATATYPE]![0].iri;
   }
 
   return "undefined";
@@ -42,11 +38,11 @@ function getPropertyIri(nested: TTProperty): string {
 
 function getPropertyName(nested: TTProperty): string {
   if (isObjectHasKeys(nested, [SHACL.CLASS])) {
-    return nested[SHACL.CLASS][0].name ?? getNameFromIri(nested[SHACL.CLASS][0].iri);
+    return nested[SHACL.CLASS]![0].name ?? getNameFromIri(nested[SHACL.CLASS]![0].iri);
   }
 
   if (isObjectHasKeys(nested, [SHACL.NODE])) {
-    return nested[SHACL.NODE][0].name ?? getNameFromIri(nested[SHACL.NODE][0].iri);
+    return nested[SHACL.NODE]![0].name ?? getNameFromIri(nested[SHACL.NODE]![0].iri);
   }
 
   if (isObjectHasKeys(nested, [OWL.CLASS])) {
@@ -54,7 +50,7 @@ function getPropertyName(nested: TTProperty): string {
   }
 
   if (isObjectHasKeys(nested, [SHACL.DATATYPE])) {
-    return nested[SHACL.DATATYPE][0].name ?? getNameFromIri(nested[SHACL.DATATYPE][0].iri);
+    return nested[SHACL.DATATYPE]![0].name ?? getNameFromIri(nested[SHACL.DATATYPE]![0].iri);
   }
 
   return "undefined";

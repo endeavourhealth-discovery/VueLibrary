@@ -1,8 +1,7 @@
 import { TagSeverity } from "@/enums";
-import { FilterOptions, FiltersAsIris, FontSize, Namespace, PropertyDisplay, QueryResponse, SetDiffObject, SimpleMap, TermCode } from "@/interfaces";
+import { FilterOptions, FiltersAsIris, Namespace, PropertyDisplay, QueryResponse, SetDiffObject, SimpleMap, TermCode } from "@/interfaces";
 import {
   ConceptContextMap,
-  DisplayMode,
   DownloadByQueryOptions,
   ECLQueryRequest,
   IMLLanguage,
@@ -18,6 +17,7 @@ import {
   SetExportRequest,
   TTIriRef
 } from "@/interfaces/AutoGen";
+import { DisplayMode, FontSize } from "@/enums";
 import { ExtendedEntityReferenceNode, TTBundle, TTEntity } from "@/interfaces/ExtendedAutoGen";
 import { NamespacePermission } from "@/models";
 import { StoreGeneric } from "pinia";

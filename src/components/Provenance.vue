@@ -70,10 +70,7 @@
 </template>
 
 <script setup lang="ts">
-import { IM } from "@/vocabulary/IM";
-import { RDF } from "@/vocabulary/RDF";
-import { RDFS } from "@/vocabulary/RDFS";
-import { SHACL } from "@/vocabulary/SHACL";
+import { IM, RDF, RDFS, SHACL } from "@/enums";
 import { inject, onMounted, ref, Ref, watch } from "vue";
 import JSONViewer from "@/components/JSONViewer.vue";
 import { isObjectHasKeys } from "@/helpers/DataTypeCheckers";
@@ -103,7 +100,7 @@ const selectedProvenance = ref();
 const provItem = ref();
 const jsonDisplay = ref();
 
-const labels = ref({
+const labels: Ref<Record<string, string>> = ref({
   iri: "Iri:",
   [RDF.TYPE]: "Type:",
   [RDFS.LABEL]: "Name:",

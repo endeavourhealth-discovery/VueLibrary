@@ -25,7 +25,7 @@ import svgPanZoom from "svg-pan-zoom";
 import { cloneDeep } from "lodash-es";
 import { TTGraphData } from "@/interfaces";
 import { translateFromEntityBundle, toggleNodeByName, hasNodeChildrenByName, addNodes, isArrayHasLength, isObjectHasKeys } from "@/helpers";
-import { IM } from "@/vocabulary/IM";
+import { IM } from "@/enums";
 import ContextMenu from "primevue/contextmenu";
 import { useToast } from "primevue/usetoast";
 import { ToastOptions } from "@/models";

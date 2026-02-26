@@ -30,9 +30,7 @@
 <script setup lang="ts">
 import ActionButtons from "@/components/ActionButtons.vue";
 import IMFontAwesomeIcon from "./IMFontAwesomeIcon.vue";
-import { IM } from "@/vocabulary/IM";
-import { RDF } from "@/vocabulary/RDF";
-import { RDFS } from "@/vocabulary/RDFS";
+import { IM, RDF, RDFS } from "@/enums";
 import { getColourFromType, getFAIconFromType } from "@/helpers/ConceptTypeVisuals";
 import { TTEntity } from "@/interfaces/ExtendedAutoGen";
 

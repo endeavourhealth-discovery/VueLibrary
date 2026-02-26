@@ -64,10 +64,10 @@
 
 <script setup lang="ts">
 import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
-import { Where, Bool, Node } from "@/interfaces/AutoGen";
+import { Where, Node } from "@/interfaces/AutoGen";
+import { Bool } from "@/enums";
 import { computed, Ref, ref, onMounted } from "vue";
 import IMViewerLink from "@/components/IMViewerLink.vue";
-import { IM } from "@/vocabulary/IM";
 import { getTypeIcon, getIconColor } from "@/helpers/ConceptTypeVisuals";
 
 interface Props {

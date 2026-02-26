@@ -39,10 +39,9 @@ import { buildIMQueryFromFilters } from "@/helpers/BuildQuery";
 import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
 import { FilterOptions, SearchOptions } from "@/interfaces";
 import { Concept, QueryRequest, SearchResultSummary } from "@/interfaces/AutoGen";
-import { IM } from "@/vocabulary/IM";
+import { IM, NAMESPACE } from "@/enums";
 import { ComputedRef, Ref, computed, inject, onMounted, ref, watch } from "vue";
 import AutocompleteSearchBar from "@/components/AutocompleteSearchBar.vue";
-import { NAMESPACE } from "@/vocabulary/NAMESPACE";
 import injectionKeys from "@/injectionKeys/injectionKeys";
 
 const props = defineProps<{
