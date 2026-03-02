@@ -2,22 +2,18 @@ import { getFAIconFromType } from "@/helpers/ConceptTypeVisuals";
 import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
 import { IM, RDFS, SHACL } from "@/enums";
 import type { TreeNode } from "primevue/treenode";
-import { Ref } from "vue";
+import { inject, Ref } from "vue";
 import { MenuItem } from "primevue/menuitem";
 import { TTIriRef } from "@/interfaces/AutoGen";
 import Swal from "sweetalert2";
-import { TTEntity } from "@/interfaces/ExtendedAutoGen";
+import injectionKeys from "@/injectionKeys/injectionKeys";
 
-export function useCreateNew(
-  directService: {
-    edit(iri: string, openInNewTab?: boolean): Promise<void>;
-    create(typeIri?: string, propertyIri?: string, valueIri?: string): Promise<void>;
-  },
-  entityService: {
-    getAllowableChildTypes(iri: string): Promise<TTEntity[]>;
-    checkExists(iri: string): Promise<boolean>;
-  }
-) {
+export function useCreateNew() {
+  const directService = inject(injectionKeys.directService);
+  if (!directService) throw new Error("Missing injection: directService");
+  const entityService = inject(injectionKeys.entityService);
+  if (!entityService) throw new Error("Missing injection: entityService");
+
   async function getCreateOptions(newFolderName: Ref<string>, newFolder: Ref<TreeNode | null>, node: TreeNode): Promise<any[]> {
     const selectionWrapperCopy = [
       {
@@ -31,9 +27,9 @@ export function useCreateNew(
         command: {}
       }
     ];
-    selectionWrapperCopy[1].command = () => directService.edit(node.data, false);
+    selectionWrapperCopy[1].command = () => directService!.edit(node.data, false);
 
-    const allowableTypes = await entityService.getAllowableChildTypes(node.data);
+    const allowableTypes = await entityService!.getAllowableChildTypes(node.data);
     if (!isArrayHasLength(allowableTypes)) {
       return selectionWrapperCopy;
     }
@@ -53,7 +49,7 @@ export function useCreateNew(
           newFolder.value = node;
         };
       } else {
-        item.command = () => directService.create(item.data.type, item.data.property, node.data);
+        item.command = () => directService!.create(item.data.type, item.data.property, node.data);
       }
       if (selectionWrapperCopy[0].items) selectionWrapperCopy[0].items.push(item);
     }
@@ -61,7 +57,7 @@ export function useCreateNew(
   }
 
   async function checkExists(iri: string): Promise<boolean> {
-    if (await entityService.checkExists(iri)) {
+    if (await entityService!.checkExists(iri)) {
       await Swal.fire({
         icon: "warning",
         title: "Warning",

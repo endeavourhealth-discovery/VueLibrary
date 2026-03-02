@@ -95,7 +95,7 @@ import Members from "./Members.vue";
 import CompareSetDialog from "./CompareSetDialog.vue";
 import SubsetDisplay from "./SubsetDisplay.vue";
 import DownloadByQueryOptionsDialog from "@/components/DownloadByQueryOptionsDialog.vue";
-import Footer from "@/components/Footer.vue";
+import Footer from "@/components/DialogFooter.vue";
 import { computed, ComputedRef, inject, markRaw, onMounted, Ref, ref, watch } from "vue";
 import { IM, RDFS, UserRole } from "@/enums";
 import ArrayObjectNamesToStringWithLabel from "@/components/ArrayObjectNamesToStringWithLabel.vue";
@@ -110,7 +110,7 @@ import { useDownloadFile } from "@/composables/useDownloadFile";
 import { useCopyToClipboard } from "@/composables/useCopyToClipboard";
 import { DownloadSettings } from "@/interfaces";
 import { SetExportRequest, SetOptions } from "@/interfaces/AutoGen";
-import { TTEntity } from "@/interfaces/ExtendedAutoGen";
+import { ExtendedTTEntity } from "@/interfaces/ExtendedAutoGen";
 import injectionKeys from "@/injectionKeys/injectionKeys";
 
 const props = defineProps<{
@@ -143,7 +143,7 @@ const isLoggedIn = computed(() => userStore.isLoggedIn);
 const downloading = ref(false);
 const isPublishing = ref(false);
 const showOptions = ref(false);
-const entity: Ref<TTEntity> = ref({});
+const entity: Ref<ExtendedTTEntity> = ref({});
 const hasPermissionSetPublish = ref(false);
 
 const { copyObjectToClipboard } = useCopyToClipboard();

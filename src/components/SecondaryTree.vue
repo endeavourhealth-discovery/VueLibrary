@@ -83,7 +83,7 @@ import OverlaySummary from "./OverlaySummary.vue";
 import type { TreeNode } from "primevue/treenode";
 import { useOverlay } from "@/composables/useOverlay";
 import { TTIriRef } from "@/interfaces/AutoGen";
-import { ExtendedEntityReferenceNode, TTEntity } from "@/interfaces/ExtendedAutoGen";
+import { ExtendedEntityReferenceNode, ExtendedTTEntity } from "@/interfaces/ExtendedAutoGen";
 import injectionKeys from "@/injectionKeys/injectionKeys";
 
 interface Props {
@@ -102,16 +102,12 @@ const emit = defineEmits<{
 
 const entityService = inject(injectionKeys.entityService);
 if (!entityService) throw new Error("Missing injection: entityService");
-const directService = inject(injectionKeys.directService);
-if (!directService) throw new Error("Missing injection: directService");
 const userStore = inject(injectionKeys.userStore);
 if (!userStore) throw new Error("Missing injection: userStoer");
 
 const favourites = computed(() => userStore.favourites);
 
 const { root, expandedKeys, selectedKeys, createLoadMoreNode, createTreeNode, onNodeCollapse, customOnClick, onNodeExpand, loadMore } = useTree(
-  directService,
-  entityService,
   favourites.value,
   emit,
   20
@@ -175,7 +171,12 @@ async function getConceptAggregate(iri: string): Promise<void> {
   loading.value = false;
 }
 
-function createTree(concept: TTEntity, parentHierarchy: ExtendedEntityReferenceNode[], children: ExtendedEntityReferenceNode[], parentPosition: number) {
+function createTree(
+  concept: ExtendedTTEntity,
+  parentHierarchy: ExtendedEntityReferenceNode[],
+  children: ExtendedEntityReferenceNode[],
+  parentPosition: number
+) {
   loading.value = true;
   const selectedConcept = createTreeNode(concept[RDFS.LABEL], concept.iri as string, concept[RDF.TYPE], concept.hasChildren, null, undefined);
   children.forEach(child => {

@@ -1,10 +1,10 @@
-import { EntityReferenceNode, TTEntity as GeneratedTTEntity, SearchResultSummary as GeneratedSearchResultSummary } from "./AutoGen";
+import { EntityReferenceNode, TTEntity, SearchResultSummary } from "./AutoGen";
 import { GenericObject } from "./GenericObject";
 
-export interface TTEntity extends GeneratedTTEntity, GenericObject {}
+export interface ExtendedTTEntity extends TTEntity, GenericObject {}
 
 export interface TTBundle {
-  entity: TTEntity;
+  entity: ExtendedTTEntity;
   predicates: { [index: string]: string };
 }
 
@@ -14,4 +14,4 @@ export interface ExtendedEntityReferenceNode extends EntityReferenceNode {
   hasGrandChildren?: boolean;
 }
 
-export interface SearchResultSummary extends GeneratedSearchResultSummary, GenericObject {}
+export interface ExtendedSearchResultSummary extends SearchResultSummary, GenericObject {}

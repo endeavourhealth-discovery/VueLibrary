@@ -1,34 +1,19 @@
 import { getColourFromType, getFAIconFromType } from "@/helpers/ConceptTypeVisuals";
 import { isObjectHasKeys } from "@/helpers/DataTypeCheckers";
 import { TTIriRef } from "@/interfaces/AutoGen";
-import { ExtendedEntityReferenceNode, TTEntity } from "@/interfaces/ExtendedAutoGen";
+import { ExtendedTTEntity } from "@/interfaces/ExtendedAutoGen";
 import { IM } from "@/enums";
 import type { TreeNode } from "primevue/treenode";
-import { computed, ref, Ref } from "vue";
+import { inject, ref, Ref } from "vue";
 import { useToast } from "primevue/usetoast";
-import { FiltersAsIris } from "@/interfaces";
+import injectionKeys from "@/injectionKeys/injectionKeys";
 
-export function useTree(
-  directService: {
-    select: (iri: string) => Promise<void>;
-    view: (iri: string) => Promise<void>;
-  },
-  entityService: {
-    getPagedChildren(
-      iri: string,
-      pageIndex: number,
-      pageSize: number,
-      filters?: FiltersAsIris,
-      controller?: AbortController,
-      typeFilter?: string[]
-    ): Promise<{ totalCount: number; currentPage: number; pageSize: number; result: TTEntity[] }>;
-    getEntityAsEntityReferenceNode(iri: string): Promise<ExtendedEntityReferenceNode>;
-    getPathBetweenNodes(descendant: string, ancestor: string): Promise<TTIriRef[]>;
-  },
-  favourites: string[],
-  emit?: any,
-  customPageSize?: number
-) {
+export function useTree(favourites: string[], emit?: any, customPageSize?: number) {
+  const directService = inject(injectionKeys.directService);
+  if (!directService) throw new Error("Missing injection: directService");
+  const entityService = inject(injectionKeys.entityService);
+  if (!entityService) throw new Error("Missing injection: entityService");
+
   const toast = useToast();
 
   const selectedKeys: Ref<any> = ref({});
@@ -83,12 +68,12 @@ export function useTree(
       if (!node.loading) await loadMore(node);
     } else {
       selectedNode.value = node;
-      await directService.select(node.data);
+      await directService!.select(node.data);
     }
   }
 
   async function onNodeDblClick($event: MouseEvent, node: TreeNode) {
-    if (!(node.data === "loadMore" || node.data === IM.FAVOURITES)) await directService.view(node.key);
+    if (!(node.data === "loadMore" || node.data === IM.FAVOURITES)) await directService!.view(node.key);
   }
 
   async function customOnClick(event: MouseEvent, node: TreeNode, useEmits?: boolean, updateSelectedKeys?: boolean) {
@@ -97,13 +82,13 @@ export function useTree(
       if (checkForControlClick(event)) emit("rowControlClicked", node.data);
       else emit("rowClicked", node.data);
     } else if (checkForControlClick(event)) {
-      await directService.view(node.data);
+      await directService!.view(node.data);
     } else if (updateSelectedKeys) {
       selectedKeys.value = {};
       selectedKeys.value[node.data] = true;
-      await directService.select(node.data);
+      await directService!.select(node.data);
     } else {
-      await directService.select(node.data);
+      await directService!.select(node.data);
     }
   }
 
@@ -114,7 +99,7 @@ export function useTree(
   async function loadMore(node: TreeNode) {
     node.loading = true;
     if (node.nextPage * pageSize.value <= node.totalCount) {
-      const children = await entityService.getPagedChildren(node.parentNode.data, node.nextPage, pageSize.value);
+      const children = await entityService!.getPagedChildren(node.parentNode.data, node.nextPage, pageSize.value);
       node.parentNode.children.pop();
       children.result.forEach(child => {
         if (!nodeHasChild(node.parentNode, child))
@@ -123,7 +108,7 @@ export function useTree(
       node.nextPage = node.nextPage + 1;
       node.parentNode.children.push(createLoadMoreNode(node.parentNode, node.nextPage, node.totalCount));
     } else if (node.nextPage * pageSize.value > node.totalCount) {
-      const children = await entityService.getPagedChildren(node.parentNode.data, node.nextPage, pageSize.value);
+      const children = await entityService!.getPagedChildren(node.parentNode.data, node.nextPage, pageSize.value);
       node.parentNode.children.pop();
       children.result.forEach((child: any) => {
         if (!nodeHasChild(node.parentNode, child))
@@ -154,19 +139,19 @@ export function useTree(
     node.children = [];
     let favChildren = [];
     for (const fav of favourites) {
-      const favChild = await entityService.getEntityAsEntityReferenceNode(fav);
+      const favChild = await entityService!.getEntityAsEntityReferenceNode(fav);
       if (favChild) favChildren.push(createTreeNode(favChild.name, favChild.iri, favChild.type as TTIriRef[], false, node));
     }
     node.children = favChildren;
   }
 
-  function childrenHasNode(newChildren: TTEntity[], node: TreeNode): boolean {
+  function childrenHasNode(newChildren: ExtendedTTEntity[], node: TreeNode): boolean {
     return !!newChildren.find(child => child.iri === node.data);
   }
 
   async function expandNode(node: any, typeFilter?: string[]) {
     const currentChildCount = node.children ? node.children.length : 0;
-    const children = await entityService.getPagedChildren(node.data, 1, pageSize.value, undefined, undefined, typeFilter);
+    const children = await entityService!.getPagedChildren(node.data, 1, pageSize.value, undefined, undefined, typeFilter);
     if (currentChildCount > 0 && children.result.length < currentChildCount) {
       for (const [index, currentChildNode] of node.children.entries()) {
         if (!childrenHasNode(children.result, currentChildNode)) {
@@ -209,7 +194,7 @@ export function useTree(
     }
   }
 
-  function nodeHasChild(node: TreeNode, child: TTEntity) {
+  function nodeHasChild(node: TreeNode, child: ExtendedTTEntity) {
     return !!node.children?.find(nodeChild => child.iri === nodeChild.data);
   }
 
@@ -222,7 +207,7 @@ export function useTree(
 
   async function findPathToNode(iri: string, loading: Ref<boolean>, treeContainerId: string) {
     loading.value = true;
-    const path = await entityService.getPathBetweenNodes(iri, IM.MODULE_IM);
+    const path = await entityService!.getPathBetweenNodes(iri, IM.MODULE_IM);
 
     // Recursively expand
     let n = root.value.find(c => path.find(p => p.iri === c.data));

@@ -37,9 +37,6 @@ export default defineConfig({
       output: {
         dir: "dist",
         format: "es",
-        preserveModules: true,
-        preserveModulesRoot: "src",
-        entryFileNames: "[name]/index.js",
         exports: "named",
         globals: {
           vue: "Vue"

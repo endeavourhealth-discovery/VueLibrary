@@ -21,9 +21,6 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const conceptService = inject(injectionKeys.conceptService);
-if (!conceptService) throw new Error("Missing injection: conceptService");
-
 watch(
   () => props.entityIri,
   newValue => {
@@ -31,7 +28,7 @@ watch(
   }
 );
 
-const { terms, getTerms }: { terms: Ref<SearchTermCode[]>; getTerms: (iri: string) => void } = useTerms(conceptService);
+const { terms, getTerms }: { terms: Ref<SearchTermCode[]>; getTerms: (iri: string) => void } = useTerms();
 
 onMounted(() => {
   getTerms(props.entityIri);

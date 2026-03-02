@@ -1,9 +1,10 @@
-import { TagSeverity } from "@/enums";
+import { PrimeVueColors, PrimeVuePresetThemes, TagSeverity } from "@/enums";
 import { FilterOptions, FiltersAsIris, Namespace, PropertyDisplay, QueryResponse, SetDiffObject, SimpleMap, TermCode } from "@/interfaces";
 import {
   ConceptContextMap,
   DownloadByQueryOptions,
   ECLQueryRequest,
+  EntityValidationRequest,
   IMLLanguage,
   Indicator,
   Match,
@@ -18,7 +19,7 @@ import {
   TTIriRef
 } from "@/interfaces/AutoGen";
 import { DisplayMode, FontSize } from "@/enums";
-import { ExtendedEntityReferenceNode, TTBundle, TTEntity } from "@/interfaces/ExtendedAutoGen";
+import { ExtendedEntityReferenceNode, TTBundle, ExtendedTTEntity } from "@/interfaces/ExtendedAutoGen";
 import { NamespacePermission } from "@/models";
 import { StoreGeneric } from "pinia";
 import { OrganizationChartNode } from "primevue";
@@ -54,7 +55,7 @@ const eclService = Symbol("eclService") as InjectionKey<{
 }>;
 const entityService = Symbol("entityService") as InjectionKey<{
   getEntitySummary(iri: string): Promise<SearchResultSummary>;
-  getPartialEntity(iri: string, predicates: string[]): Promise<TTEntity>;
+  getPartialEntity(iri: string, predicates: string[]): Promise<ExtendedTTEntity>;
   getNamespaces(): Promise<Namespace[]>;
   downloadSearchResults(downloadSettings: DownloadByQueryOptions): Promise<Blob>;
   getPagedChildren(
@@ -64,17 +65,17 @@ const entityService = Symbol("entityService") as InjectionKey<{
     filters?: FiltersAsIris,
     controller?: AbortController,
     typeFilter?: string[]
-  ): Promise<{ totalCount: number; currentPage: number; pageSize: number; result: TTEntity[] }>;
+  ): Promise<{ totalCount: number; currentPage: number; pageSize: number; result: ExtendedTTEntity[] }>;
   getEntityAsEntityReferenceNode(iri: string): Promise<ExtendedEntityReferenceNode>;
   getPathBetweenNodes(descendant: string, ancestor: string): Promise<TTIriRef[]>;
-  getAllowableChildTypes(iri: string): Promise<TTEntity[]>;
+  getAllowableChildTypes(iri: string): Promise<ExtendedTTEntity[]>;
   checkExists(iri: string): Promise<boolean>;
   getEntityChildren(iri: string, filters?: FiltersAsIris, controller?: AbortController): Promise<ExtendedEntityReferenceNode[]>;
   getAsEntityReferenceNodes(iris: string[]): Promise<ExtendedEntityReferenceNode[]>;
   downloadEntity(iri: string): Promise<Blob>;
-  getEntityByPredicateExclusions(iri: string, predicates: string[]): Promise<TTEntity>;
+  getEntityByPredicateExclusions(iri: string, predicates: string[]): Promise<ExtendedTTEntity>;
   getFolderPath(iri: string): Promise<TTIriRef[]>;
-  getPartialEntities(typeIris: string[], predicates: string[]): Promise<TTEntity[]>;
+  getPartialEntities(typeIris: string[], predicates: string[]): Promise<ExtendedTTEntity[]>;
   getEntityGraph(iri: string): Promise<OrganizationChartNode>;
   getBundleByPredicateExclusions(iri: string, predicates: string[], graph?: string): Promise<TTBundle>;
   getPartialAndTotalCount(
@@ -86,12 +87,13 @@ const entityService = Symbol("entityService") as InjectionKey<{
     controller?: AbortController
   ): Promise<Pageable<TTIriRef>>;
   getPartialEntityBundle(iri: string, predicates: string[]): Promise<TTBundle>;
-  getEntityUsages(iri: string, pageIndex: number, pageSize: number): Promise<TTEntity[]>;
+  getEntityUsages(iri: string, pageIndex: number, pageSize: number): Promise<ExtendedTTEntity[]>;
   getUsagesTotalRecords(iri: string): Promise<number>;
-  getProvHistory(iri: string): Promise<TTEntity[]>;
+  getProvHistory(iri: string): Promise<ExtendedTTEntity[]>;
   getEntityParents(iri: string, filters?: FiltersAsIris): Promise<ExtendedEntityReferenceNode[]>;
   getEntityDetailsDisplay(iri: string): Promise<TreeNode[]>;
   loadMoreDetailsDisplay(iri: string, predicate: string, pageIndex: number, pageSize: number): Promise<TreeNode[]>;
+  checkValidation(validationIri: string, data: EntityValidationRequest): Promise<{ valid: boolean; message: string | undefined }>;
 }>;
 const filerService = Symbol("filerService") as InjectionKey<{
   moveFolder(entity: string, oldFolder: string, newFolder: string): Promise<void>;
@@ -156,8 +158,17 @@ const userStore = Symbol("userStore") as InjectionKey<
     favourites: string[];
     isLoggedIn: boolean;
     namespaces: NamespacePermission[];
+    currentPreset: PrimeVuePresetThemes;
+    currentPrimaryColor: PrimeVueColors;
+    currentSurfaceColor: PrimeVueColors;
+    darkMode: boolean;
+    fontSize: FontSize;
     updateFavourites(favourite: string): Promise<void>;
     updateCurrentFontSize(fontSize: FontSize): Promise<void>;
+    updatePreset(preset: PrimeVuePresetThemes): Promise<void>;
+    updatePrimaryColor(color: PrimeVueColors): Promise<void>;
+    updateSurfaceColor(color: PrimeVueColors): Promise<void>;
+    updateDarkMode(bool: boolean): Promise<void>;
   }
 >;
 

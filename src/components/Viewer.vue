@@ -193,11 +193,11 @@ import {
   isValueSet
 } from "@/helpers/ConceptTypeMethods";
 import { IM, RDF, RDFS, SHACL } from "@/enums";
-import { TTEntity } from "@/interfaces/ExtendedAutoGen";
+import { ExtendedTTEntity } from "@/interfaces/ExtendedAutoGen";
 import injectionKeys from "@/injectionKeys/injectionKeys";
 
 interface Props {
-  entity: TTEntity;
+  entity: ExtendedTTEntity;
 }
 
 const props = defineProps<Props>();
@@ -214,7 +214,7 @@ if (!entityService) throw new Error("Missing injection: entityService");
 const loading = ref(true);
 const types: Ref<TTIriRef[]> = ref([]);
 const header = ref("");
-const concept: Ref<TTEntity> = ref({});
+const concept: Ref<ExtendedTTEntity> = ref({});
 
 const entityIri = ref("");
 const activeTab = ref("0");

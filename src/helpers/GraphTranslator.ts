@@ -1,7 +1,7 @@
 import { TTIriRef } from "../interfaces/AutoGen";
 import { TTGraphData, TTProperty } from "../interfaces";
 import { isArrayHasLength, isObjectHasKeys } from "./DataTypeCheckers";
-import { TTBundle, TTEntity } from "@/interfaces/ExtendedAutoGen";
+import { TTBundle, ExtendedTTEntity } from "@/interfaces/ExtendedAutoGen";
 import { GenericObject } from "@/interfaces/GenericObject";
 import { IM, NAMESPACE, OWL, RDFS, SHACL } from "@/enums";
 
@@ -65,7 +65,7 @@ function getNameFromIri(iri: string): string {
   return "undefined";
 }
 
-function addMaps(firstNode: TTGraphData, entity: TTEntity, key: string) {
+function addMaps(firstNode: TTGraphData, entity: ExtendedTTEntity, key: string) {
   const preNode = {
     name: "middle-node-" + key,
     iri: "",
@@ -106,7 +106,7 @@ function addMap(element: any, preNode: TTGraphData) {
   }
 }
 
-function addProperties(firstNode: TTGraphData, entity: TTEntity, key: string) {
+function addProperties(firstNode: TTGraphData, entity: ExtendedTTEntity, key: string) {
   if (isObjectHasKeys(entity[key][0], [SHACL.GROUP])) {
     entity[key].forEach((nested: any) => {
       if (nested[SHACL.GROUP]?.length) {
@@ -132,7 +132,7 @@ function addProperties(firstNode: TTGraphData, entity: TTEntity, key: string) {
   }
 }
 
-function addRoles(firstNode: TTGraphData, entity: TTEntity, key: string, predicates: GenericObject) {
+function addRoles(firstNode: TTGraphData, entity: ExtendedTTEntity, key: string, predicates: GenericObject) {
   entity[key].forEach((nested: any) => {
     const groupID = nested[IM.GROUP_NUMBER];
     const preNode = {
@@ -155,7 +155,7 @@ function addRoles(firstNode: TTGraphData, entity: TTEntity, key: string, predica
   });
 }
 
-function addArray(firstNode: TTGraphData, entity: TTEntity, key: string, predicates: GenericObject) {
+function addArray(firstNode: TTGraphData, entity: ExtendedTTEntity, key: string, predicates: GenericObject) {
   const preNode = {
     name: "middle-node-" + key,
     iri: "",
@@ -198,7 +198,7 @@ function addChild(parent: any, name: string, iri: string, relToParent: string) {
   }
 }
 
-function addNodes(entity: TTEntity, keys: string[], firstNode: TTGraphData, predicates: any): void {
+function addNodes(entity: ExtendedTTEntity, keys: string[], firstNode: TTGraphData, predicates: any): void {
   if (isObjectHasKeys(entity)) {
     keys.forEach(key => {
       if (isArrayHasLength(entity[key])) {

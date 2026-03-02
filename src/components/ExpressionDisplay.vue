@@ -21,11 +21,11 @@ import { isObjectHasKeys } from "@/helpers/DataTypeCheckers";
 import { useCopyToClipboard } from "@/composables/useCopyToClipboard";
 import { inject, onMounted, ref } from "vue";
 import { IM, RDFS } from "@/enums";
-import { TTEntity } from "@/interfaces/ExtendedAutoGen";
+import { ExtendedTTEntity } from "@/interfaces/ExtendedAutoGen";
 import injectionKeys from "@/injectionKeys/injectionKeys";
 
 interface Props {
-  concept: TTEntity;
+  concept: ExtendedTTEntity;
 }
 
 const props = defineProps<Props>();

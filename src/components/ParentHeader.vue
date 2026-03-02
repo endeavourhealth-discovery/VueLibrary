@@ -32,10 +32,10 @@ import ActionButtons from "@/components/ActionButtons.vue";
 import IMFontAwesomeIcon from "./IMFontAwesomeIcon.vue";
 import { IM, RDF, RDFS } from "@/enums";
 import { getColourFromType, getFAIconFromType } from "@/helpers/ConceptTypeVisuals";
-import { TTEntity } from "@/interfaces/ExtendedAutoGen";
+import { ExtendedTTEntity } from "@/interfaces/ExtendedAutoGen";
 
 defineProps<{
-  entity: TTEntity;
+  entity: ExtendedTTEntity;
   showSelect?: boolean;
 }>();
 const emit = defineEmits<{
@@ -45,12 +45,12 @@ const emit = defineEmits<{
   viewHierarchy: [payload: string];
 }>();
 
-function getIcon(entity: TTEntity) {
+function getIcon(entity: ExtendedTTEntity) {
   if (entity.iri === IM.FAVOURITES) return ["fa-solid", "star"];
   return getFAIconFromType(entity[RDF.TYPE]);
 }
 
-function getColour(entity: TTEntity) {
+function getColour(entity: ExtendedTTEntity) {
   return "color: " + getColourFromType(entity[RDF.TYPE]);
 }
 </script>

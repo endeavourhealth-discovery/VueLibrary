@@ -42,7 +42,7 @@ import Viewer from "@/components/Viewer.vue";
 import ParentHeader from "@/components/ParentHeader.vue";
 import ParentHierarchy from "@/components/ParentHierarchy.vue";
 import { SearchResponse } from "@/interfaces/AutoGen";
-import { TTEntity } from "@/interfaces/ExtendedAutoGen";
+import { ExtendedTTEntity } from "@/interfaces/ExtendedAutoGen";
 import injectionKeys from "@/injectionKeys/injectionKeys";
 
 interface Props {
@@ -69,7 +69,7 @@ watch(
   async () => await init()
 );
 
-const entity: Ref<TTEntity> = ref({});
+const entity: Ref<ExtendedTTEntity> = ref({});
 const loading = ref(true);
 
 onMounted(async () => await init());

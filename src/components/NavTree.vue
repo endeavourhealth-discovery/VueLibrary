@@ -93,8 +93,6 @@ const entityService = inject(injectionKeys.entityService);
 if (!entityService) throw new Error("Missing injection: entityService");
 const filerService = inject(injectionKeys.filerService);
 if (!filerService) throw new Error("Missing injection: filerService");
-const directService = inject(injectionKeys.directService);
-if (!directService) throw new Error("Missing injection: directService");
 
 const toast = useToast();
 const confirmDlg = useConfirm();
@@ -104,8 +102,8 @@ const isLoggedIn = computed(() => userStore.isLoggedIn);
 const favourites = computed(() => userStore.favourites);
 
 const { root, selectedKeys, selectedNode, expandedKeys, expandedData, createTreeNode, loadMore, onNodeExpand, onNodeCollapse, findPathToNode, customOnClick } =
-  useTree(directService, entityService, userStore.favourites, emit, props.childLength ? props.childLength : 40);
-const { getCreateOptions, checkExists } = useCreateNew(directService, entityService);
+  useTree(userStore.favourites, emit, props.childLength ? props.childLength : 40);
+const { getCreateOptions, checkExists } = useCreateNew();
 
 const loading = ref(true);
 const overlayLocation: Ref<MouseEvent | undefined> = ref();

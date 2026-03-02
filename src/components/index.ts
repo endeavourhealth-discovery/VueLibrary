@@ -25,11 +25,10 @@ import EclSearch from "./EclSearch.vue";
 import EntityChart from "./EntityChart.vue";
 import ExpressionDisplay from "./ExpressionDisplay.vue";
 import Filters from "./Filters.vue";
-import Footer from "./Footer.vue";
+import DialogFooter from "./DialogFooter.vue";
 import FunctionClauseDisplay from "./FunctionClauseDisplay.vue";
 import Graph from "./Graph.vue";
 import GraphComponent from "./GraphComponent.vue";
-import HelloWorld from "./HelloWorld.vue";
 import IMFontAwesomeIcon from "./IMFontAwesomeIcon.vue";
 import IMLDisplay from "./IMLDisplay.vue";
 import IMQuerySearch from "./IMQuerySearch.vue";
@@ -96,11 +95,10 @@ export {
   EntityChart,
   ExpressionDisplay,
   Filters,
-  Footer,
+  DialogFooter,
   FunctionClauseDisplay,
   Graph,
   GraphComponent,
-  HelloWorld,
   IMFontAwesomeIcon,
   IMLDisplay,
   IMQuerySearch,

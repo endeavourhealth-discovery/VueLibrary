@@ -4,16 +4,14 @@ import { isPropertyShape } from "@/helpers/TypeGuards";
 import { EntityValidationRequest, FormGenerator, PropertyShape } from "@/interfaces/AutoGen";
 import { COMPONENT, IM } from "@/enums";
 import { isArray } from "lodash-es";
-import { Ref, ref } from "vue";
+import { inject, Ref, ref } from "vue";
 import Swal from "sweetalert2";
+import injectionKeys from "@/injectionKeys/injectionKeys";
 
-export function useValidity(
-  entityService: {
-    checkExists(iri: string): Promise<boolean>;
-    checkValidation(validationIri: string, data: EntityValidationRequest): Promise<{ valid: boolean; message: string | undefined }>;
-  },
-  shape?: FormGenerator
-) {
+export function useValidity(shape?: FormGenerator) {
+  const entityService = inject(injectionKeys.entityService);
+  if (!entityService) throw new Error("Missing injection: entityService");
+
   const editorValidity: Ref<{ key: string; valid: boolean; message?: string }[]> = ref([]);
   const validationCheckStatus: Ref<{ key: string; deferred: { promise: any; reject: any; resolve: any } }[]> = ref([]);
 
@@ -42,7 +40,7 @@ export function useValidity(
   }
 
   async function checkExists(iri: string): Promise<boolean> {
-    if (await entityService.checkExists(iri)) {
+    if (await entityService!.checkExists(iri)) {
       await Swal.fire({
         icon: "warning",
         title: "Warning",
@@ -100,7 +98,7 @@ export function useValidity(
     let valid = true;
     let message;
     if (isPropertyShape(componentShape) && isObjectHasKeys(componentShape, ["validation"]) && editorEntity.value) {
-      const customValidationResult = await entityService.checkValidation(componentShape.validation!.iri, editorEntity.value);
+      const customValidationResult = await entityService!.checkValidation(componentShape.validation!.iri, editorEntity.value);
       if (customValidationResult.valid === false) {
         valid = false;
         message = customValidationResult.message;

@@ -20,8 +20,10 @@ import { TreeParent } from "./TreeParent";
 import { TermCode } from "./TermCode";
 import { QueryResponse } from "./QueryResponse";
 import { Orderable } from "./Orderable";
+import { ValidatedEntity } from "./ValidatedEntity";
 
 export type * from "./AutoGen";
+export type * from "./ExtendedAutoGen";
 
 export {
   type GenericObject,
@@ -46,5 +48,6 @@ export {
   type TreeParent,
   type TermCode,
   type QueryResponse,
-  type Orderable
+  type Orderable,
+  type ValidatedEntity
 };
