@@ -31,6 +31,7 @@ import { useToast } from "primevue/usetoast";
 import { ToastOptions } from "@/models";
 import { ToastSeverity } from "@/enums";
 import injectionKeys from "@/injectionKeys/injectionKeys";
+import { useDirectoryStore } from "@/stores";
 
 interface Props {
   data: TTGraphData;
@@ -46,8 +47,8 @@ const emit = defineEmits<{
 
 const entityService = inject(injectionKeys.entityService);
 if (!entityService) throw new Error("Missing injection: entityService");
-const directoryStore = inject(injectionKeys.directoryStore);
-if (!directoryStore) throw new Error("Missing injection: directoryStore");
+
+const directoryStore = useDirectoryStore();
 
 const toast = useToast();
 const graphData = ref();

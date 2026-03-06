@@ -86,6 +86,7 @@ import ResultsTable from "@/components/ResultsTable.vue";
 import { useCopyToClipboard } from "@/composables/useCopyToClipboard";
 import { GenericObject } from "@/interfaces/GenericObject";
 import injectionKeys from "@/injectionKeys/injectionKeys";
+import { useEditorStore, useFilterStore } from "@/stores";
 
 const emit = defineEmits<{
   locateInTree: [payload: string];
@@ -94,10 +95,9 @@ const emit = defineEmits<{
 
 const eclService = inject(injectionKeys.eclService);
 if (!eclService) throw new Error("Missing injection: eclService");
-const editorStore = inject(injectionKeys.editorStore);
-if (!editorStore) throw new Error("Missing injection: editorStore");
-const filterStore = inject(injectionKeys.filterStore);
-if (!filterStore) throw new Error("Missing injection: filterStore");
+
+const editorStore = useEditorStore();
+const filterStore = useFilterStore();
 
 const statusOptions = computed(() => filterStore.filterOptions.status);
 const savedEcl = computed(() => editorStore.eclEditorSavedString);

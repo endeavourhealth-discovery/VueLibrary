@@ -148,6 +148,7 @@ import ECLRefinementValue from "@/components/ECLRefinementValue.vue";
 import { v4 } from "uuid";
 import BooleanEditor from "@/components/BooleanEditor.vue";
 import injectionKeys from "@/injectionKeys/injectionKeys";
+import { useFilterStore } from "@/stores";
 
 interface Props {
   index: number;
@@ -166,8 +167,7 @@ const props = defineProps<Props>();
 
 const emit = defineEmits(["updateBool", "rationalise", "createSubgroup"]);
 
-const filterStore = inject(injectionKeys.filterStore);
-if (!filterStore) throw new Error("Missing injection: filterStore");
+const filterStore = useFilterStore();
 
 const where = defineModel<Where>("where", { default: {} });
 const parent = defineModel<Where | Match>("parent", { required: true });

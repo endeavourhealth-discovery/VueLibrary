@@ -97,6 +97,7 @@ import { TTIriRef } from "@/interfaces/AutoGen";
 import { computed, inject, Ref, ref, watch } from "vue";
 import { NAMESPACE } from "@/enums";
 import injectionKeys from "@/injectionKeys/injectionKeys";
+import { useFilterStore } from "@/stores";
 
 interface DownloadOption {
   key: string;
@@ -141,8 +142,7 @@ const emit = defineEmits<{
   downloadIMV1: [payload: DownloadSettings];
 }>();
 
-const filterStore = inject(injectionKeys.filterStore);
-if (!filterStore) throw new Error("Missing injection: filterStore");
+const filterStore = useFilterStore();
 
 const filterOptions = computed(() => filterStore.filterOptions);
 

@@ -15,6 +15,7 @@ import { isArrayHasLength, isObjectHasKeys } from "@/helpers/DataTypeCheckers";
 import { getLogger } from "@/logger/LogConfig";
 import { TagSeverity } from "@/enums";
 import injectionKeys from "@/injectionKeys/injectionKeys";
+import { useSharedStore } from "@/stores";
 
 const log = getLogger("components.shared.generics.ArrayObjectNameTagWithLabel");
 
@@ -30,8 +31,7 @@ const props = withDefaults(defineProps<Props>(), {
   id: "array-object-name-tag-with-label"
 });
 
-const sharedStore = inject(injectionKeys.sharedStore);
-if (!sharedStore) throw new Error("Missing injection: sharedStore");
+const sharedStore = useSharedStore();
 
 const tagSeverityMatches = computed(() => sharedStore.tagSeverityMatches);
 

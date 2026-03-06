@@ -82,6 +82,7 @@ import { cloneDeep } from "lodash-es";
 import { QueryRequest, SearchResponse, SearchResultSummary, TTIriRef } from "@/interfaces/AutoGen";
 import { IM } from "@/enums";
 import injectionKeys from "@/injectionKeys/injectionKeys";
+import { useFilterStore } from "@/stores";
 
 interface Props {
   searchTerm: string;
@@ -112,7 +113,7 @@ const emit = defineEmits<{
   viewHierarchy: [payload: string];
 }>();
 
-const filterStore = inject(injectionKeys.filterStore);
+const filterStore = useFilterStore();
 if (!filterStore) throw new Error("Missing injection: filterStore");
 
 const storeFilterOptions: ComputedRef<FilterOptions> = computed(() => filterStore.filterOptions);

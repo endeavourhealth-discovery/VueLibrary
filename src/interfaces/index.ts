@@ -21,6 +21,7 @@ import { TermCode } from "./TermCode";
 import { QueryResponse } from "./QueryResponse";
 import { Orderable } from "./Orderable";
 import { ValidatedEntity } from "./ValidatedEntity";
+import { HistoryItem } from "./HistoryItem";
 
 export type * from "./AutoGen";
 export type * from "./ExtendedAutoGen";
@@ -49,5 +50,6 @@ export {
   type TermCode,
   type QueryResponse,
   type Orderable,
-  type ValidatedEntity
+  type ValidatedEntity,
+  type HistoryItem
 };

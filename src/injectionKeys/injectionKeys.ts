@@ -8,11 +8,13 @@ import {
   IMLLanguage,
   Indicator,
   Match,
+  NamespacePermissionJava,
   Node,
   NodeShape,
   Pageable,
   Query,
   QueryRequest,
+  RecentActivityItemDto,
   SearchResponse,
   SearchResultSummary,
   SetExportRequest,
@@ -20,11 +22,17 @@ import {
 } from "@/interfaces/AutoGen";
 import { DisplayMode, FontSize } from "@/enums";
 import { ExtendedEntityReferenceNode, TTBundle, ExtendedTTEntity } from "@/interfaces/ExtendedAutoGen";
-import { NamespacePermission } from "@/models";
+import { NamespacePermission, User } from "@/models";
 import { StoreGeneric } from "pinia";
 import { OrganizationChartNode } from "primevue";
 import { TreeNode } from "primevue/treenode";
 import { ComputedRef, InjectionKey } from "vue";
+import { useUserStore } from "@/stores/userStore";
+import { useSharedStore } from "@/stores/sharedStore";
+import { useLoadingStore } from "@/stores/loadingStore";
+import { useFilterStore } from "@/stores/filterStore";
+import { useEditorStore } from "@/stores/editorStore";
+import { useDirectoryStore } from "@/stores/directoryStore";
 
 const conceptService = Symbol("conceptService") as InjectionKey<{
   getMatchedFrom(iri: string): Promise<SimpleMap[]>;
@@ -94,6 +102,9 @@ const entityService = Symbol("entityService") as InjectionKey<{
   getEntityDetailsDisplay(iri: string): Promise<TreeNode[]>;
   loadMoreDetailsDisplay(iri: string, predicate: string, pageIndex: number, pageSize: number): Promise<TreeNode[]>;
   checkValidation(validationIri: string, data: EntityValidationRequest): Promise<{ valid: boolean; message: string | undefined }>;
+  getFilterOptions(): Promise<FilterOptions>;
+  getFilterDefaultOptions(): Promise<FilterOptions>;
+  getCoreSchemes(): Promise<string[]>;
 }>;
 const filerService = Symbol("filerService") as InjectionKey<{
   moveFolder(entity: string, oldFolder: string, newFolder: string): Promise<void>;
@@ -122,55 +133,17 @@ const setService = Symbol("setService") as InjectionKey<{
   getSetComparison(iriA?: string, iriB?: string): Promise<SetDiffObject>;
   getSubsets(iri: string): Promise<TTIriRef[]>;
 }>;
-const directoryStore = Symbol("directoryStore") as InjectionKey<
-  StoreGeneric & {
-    updateSplitterRightSize(newSplitterRightSize: number): void;
-    updateFindInTreeIri(iri: string): void;
-    updateSidebarControlActivePanel(number: number): void;
-  }
->;
-const editorStore = Symbol("editorStore") as InjectionKey<
-  StoreGeneric & {
-    eclEditorSavedString: string;
-    updateEclEditorSavedString(ecl: string): void;
-  }
->;
-const filterStore = Symbol("filterStore") as InjectionKey<
-  StoreGeneric & {
-    filterOptions: FilterOptions;
-    defaultFilterOptions: FilterOptions;
-    selectedFilterOptions: FilterOptions;
-    coreSchemes: string[];
-  }
->;
-const loadingStore = Symbol("loadingStore") as InjectionKey<
-  StoreGeneric & {
-    directoryLoading: boolean;
-  }
->;
-const sharedStore = Symbol("sharedStore") as InjectionKey<
-  StoreGeneric & {
-    tagSeverityMatches: { iri: string; severity: TagSeverity }[];
-  }
->;
-const userStore = Symbol("userStore") as InjectionKey<
-  StoreGeneric & {
-    favourites: string[];
-    isLoggedIn: boolean;
-    namespaces: NamespacePermission[];
-    currentPreset: PrimeVuePresetThemes;
-    currentPrimaryColor: PrimeVueColors;
-    currentSurfaceColor: PrimeVueColors;
-    darkMode: boolean;
-    fontSize: FontSize;
-    updateFavourites(favourite: string): Promise<void>;
-    updateCurrentFontSize(fontSize: FontSize): Promise<void>;
-    updatePreset(preset: PrimeVuePresetThemes): Promise<void>;
-    updatePrimaryColor(color: PrimeVueColors): Promise<void>;
-    updateSurfaceColor(color: PrimeVueColors): Promise<void>;
-    updateDarkMode(bool: boolean): Promise<void>;
-  }
->;
+const userService = Symbol("userService") as InjectionKey<{
+  updateUserRecentActivity(recentActivity: RecentActivityItemDto[]): Promise<User>;
+  updateUserFavourites(favourites: string[]): Promise<User>;
+  updateUserPreset(preset: PrimeVuePresetThemes): Promise<User>;
+  updateUserPrimaryColor(color: PrimeVueColors): Promise<User>;
+  updateUserSurfaceColor(color: PrimeVueColors): Promise<User>;
+  updateUserDarkMode(bool: boolean): Promise<User>;
+  updateUserFontSize(fontSize: string): Promise<User>;
+  updateUserOrganisations(organisations: string[]): Promise<User>;
+  updateUserNamespaces(namespaces: NamespacePermissionJava[]): Promise<User>;
+}>;
 
 export default {
   conceptService,
@@ -181,10 +154,5 @@ export default {
   filerService,
   queryService,
   setService,
-  directoryStore,
-  editorStore,
-  filterStore,
-  loadingStore,
-  sharedStore,
-  userStore
+  userService
 };

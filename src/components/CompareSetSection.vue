@@ -43,6 +43,7 @@ import { IM, NAMESPACE } from "@/enums";
 import { ComputedRef, Ref, computed, inject, onMounted, ref, watch } from "vue";
 import AutocompleteSearchBar from "@/components/AutocompleteSearchBar.vue";
 import injectionKeys from "@/injectionKeys/injectionKeys";
+import { useFilterStore } from "@/stores";
 
 const props = defineProps<{
   header: string;
@@ -61,8 +62,8 @@ const directService = inject(injectionKeys.directService);
 if (!directService) throw new Error("Missing injection: directService");
 const entityService = inject(injectionKeys.entityService);
 if (!entityService) throw new Error("Missing injection: entityService");
-const filterStore = inject(injectionKeys.filterStore);
-if (!filterStore) throw new Error("Missing injection: filterStore");
+
+const filterStore = useFilterStore();
 
 const { OS, showOverlay, hideOverlay } = useOverlay();
 const filterOptions: ComputedRef<FilterOptions> = computed(() => filterStore.filterOptions);

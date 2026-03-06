@@ -54,6 +54,7 @@ import { SearchOptions } from "@/interfaces";
 import { buildIMQueryFromFilters, getConstraintOperator, setConstraintOperator } from "@/helpers/BuildQuery";
 import { constraintOperatorOptions } from "@/helpers/QueryEditorMethods";
 import injectionKeys from "@/injectionKeys/injectionKeys";
+import { useFilterStore } from "@/stores";
 
 interface Props {
   parent?: any;
@@ -63,8 +64,7 @@ defineProps<Props>();
 
 const emit = defineEmits(["activateInput", "updateMatch"]);
 
-const filterStore = inject(injectionKeys.filterStore);
-if (!filterStore) throw new Error("Missing injection: filterStore");
+const filterStore = useFilterStore();
 
 const node = defineModel<Node>("node", { required: true });
 watch(

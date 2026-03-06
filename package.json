@@ -6,7 +6,8 @@
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview",
-    "prepare": "pnpm build"
+    "prepare": "pnpm build",
+    "test:unit": "tsc -p tsconfig.tests.json && vitest"
   },
   "dependencies": {
     "@primeuix/themes": "1.0.3",
@@ -16,21 +17,18 @@
     "google-palette": "1.1.1",
     "lodash-es": "4.17.21",
     "mermaid": "11.11.0",
-    "pinia": "3.0.2",
-    "primevue": "4.3.3",
     "prismjs": "1.30.0",
     "sass": "1.87.0",
     "svg-pan-zoom": "3.6.2",
     "sweetalert2": "11.19.1",
     "typescript-logging-log4ts-style": "2.2.0",
     "uuid": "11.1.0",
-    "vue": "3.5.13",
     "vue-json-pretty": "2.4.0",
-    "vue-router": "4.5.0",
     "zod": "4.3.6"
   },
   "devDependencies": {
     "@originjs/vite-plugin-commonjs": "1.0.3",
+    "@pinia/testing": "1.0.1",
     "@primevue/auto-import-resolver": "4.3.3",
     "@tailwindcss/vite": "4.1.17",
     "@types/d3": "7.4.3",
@@ -38,6 +36,7 @@
     "@types/node": "22.14.1",
     "@types/prismjs": "1.26.5",
     "@vitejs/plugin-vue": "5.2.3",
+    "@vue/test-utils": "2.4.6",
     "@vue/tsconfig": "0.8.1",
     "prettier": "3.5.3",
     "prettier-plugin-tailwindcss": "0.6.11",
@@ -45,12 +44,13 @@
     "tailwindcss-primeui": "0.5.1",
     "typescript": "5.8.3",
     "unplugin-vue-components": "28.5.0",
-    "vite": "7.1.7",
+    "vite": "6.4.1",
     "vite-plugin-dts": "4.5.3",
     "vitest": "3.1.2",
     "vue-tsc": "3.1.5"
   },
   "peerDependencies": {
+    "pinia": "3.0.2",
     "primevue": "4.3.3",
     "vue": "3.5.13",
     "vue-router": "4.5.0"
@@ -59,40 +59,45 @@
     "dist"
   ],
   "types": "dist/index.d.ts",
-  "module": "dist/vue-library.js",
+  "module": "dist/index.js",
   "exports": {
     ".": {
-      "import": "./dist/vue-library.js",
+      "import": "./dist/index.js",
       "types": "./dist/index.d.ts",
-      "default": "./dist/vue-library.js"
+      "default": "./dist/index.js"
     },
     "./interfaces": {
       "types": "./dist/interfaces/index.d.ts"
     },
     "./enums": {
       "types": "./dist/enums/index.d.ts",
-      "import": "./dist/enums/index.js",
-      "default": "./dist/enums/index.js"
+      "import": "./dist/enums.js",
+      "default": "./dist/enums.js"
     },
     "./composables": {
       "types": "./dist/composables/index.d.ts",
-      "import": "./dist/composables/index.js",
-      "default": "./dist/composables/index.js"
+      "import": "./dist/composables.js",
+      "default": "./dist/composables.js"
     },
     "./helpers": {
       "types": "./dist/helpers/index.d.ts",
-      "import": "./dist/helpers/index.js",
-      "default": "./dist/helpers/index.js"
+      "import": "./dist/helpers.js",
+      "default": "./dist/helpers.js"
     },
     "./components": {
       "types": "./dist/components/index.d.ts",
-      "import": "./dist/components/index.js",
-      "default": "./dist/components/index.js"
+      "import": "./dist/components.js",
+      "default": "./dist/components.js"
     },
     "./models": {
       "types": "./dist/models/index.d.ts",
-      "import": "./dist/models/index.js",
-      "default": "./dist/models/index.js"
+      "import": "./dist/models.js",
+      "default": "./dist/models.js"
+    },
+    "./stores": {
+      "types": "./dist/stores/index.d.ts",
+      "import": "./dist/stores.js",
+      "default": "./dist/stores.js"
     }
   }
 }

@@ -52,6 +52,7 @@ import { useOverlay } from "@/composables/useOverlay";
 import { getColourFromType } from "@/helpers/ConceptTypeVisuals";
 import { DataTableRowSelectEvent } from "primevue/datatable";
 import injectionKeys from "@/injectionKeys/injectionKeys";
+import { useDirectoryStore, useUserStore } from "@/stores";
 interface UIDataModel extends TTIriRef {
   type?: TTIriRef[];
   icon?: string[];
@@ -66,10 +67,9 @@ const emit = defineEmits<{
 
 const dataModelService = inject(injectionKeys.dataModelService);
 if (!dataModelService) throw new Error("Missing injection: dataModelService");
-const directoryStore = inject(injectionKeys.directoryStore);
-if (!directoryStore) throw new Error("Missing injection: directoryStore");
-const userStore = inject(injectionKeys.userStore);
-if (!userStore) throw new Error("Missing injection: userStore");
+
+const directoryStore = useDirectoryStore();
+const userStore = useUserStore();
 
 const favourites = computed(() => userStore.favourites);
 const { OS, showOverlay, hideOverlay } = useOverlay();

@@ -47,6 +47,7 @@ import { Indicator } from "@/interfaces/AutoGen";
 import { computed, inject, onMounted, ref, Ref, watch } from "vue";
 import IMViewerLink from "@/components/IMViewerLink.vue";
 import injectionKeys from "@/injectionKeys/injectionKeys";
+import { useUserStore } from "@/stores";
 
 interface Props {
   entityIri?: string;
@@ -59,8 +60,8 @@ const emit = defineEmits<{
 
 const queryService = inject(injectionKeys.queryService);
 if (!queryService) throw new Error("Missing injection: queryService");
-const userStore = inject(injectionKeys.userStore);
-if (!userStore) throw new Error("Missing injection: userStore");
+
+const userStore = useUserStore();
 
 const isLoggedIn = computed(() => userStore.isLoggedIn);
 const indicator: Ref<Indicator | undefined> = ref();

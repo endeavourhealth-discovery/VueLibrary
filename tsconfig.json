@@ -17,7 +17,7 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
-    "rootDirs": ["."],
+    "rootDir": "./src",
     "baseUrl": ".",
     "types": ["vite/client", "vitest/globals", "@vueuse/core", "@vueuse/integrations"],
     "paths": {
@@ -26,6 +26,6 @@
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "outDir": "./dist/types"
   },
-  "include": ["./src/**/*.vue", "./src/**/*.ts", "./src/**/*.js", "./tests/**/*.ts", "./tests/**/*.js"],
+  "include": ["./src/**/*.vue", "./src/**/*.ts", "./src/**/*.js"],
   "exclude": ["node_modules"]
 }

@@ -1,16 +1,18 @@
 import { FontSize } from "@/enums";
 import injectionKeys from "@/injectionKeys/injectionKeys";
+import { useUserStore } from "@/stores";
 import { inject } from "vue";
 
 export function useChangeFontSize() {
-  const userStore = inject(injectionKeys.userStore);
-  if (!userStore) throw new Error("Missing injection: userStore");
+  const userService = inject(injectionKeys.userService);
+  if (!userService) throw new Error("Missing injection: userService");
+  const userStore = useUserStore();
 
   async function changeFontSize(newFontSize: FontSize) {
     const currentFontSize = document.documentElement.style.fontSize || "14px";
     if (newFontSize !== currentFontSize) {
       document.documentElement.style.fontSize = newFontSize;
-      await userStore!.updateCurrentFontSize(newFontSize);
+      await userStore!.updateCurrentFontSize(newFontSize, userService!);
     }
   }
 

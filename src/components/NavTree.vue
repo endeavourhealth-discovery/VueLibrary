@@ -62,6 +62,7 @@ import { useOverlay } from "@/composables/useOverlay";
 import { cloneDeep } from "lodash-es";
 import { MenuItem } from "primevue/menuitem";
 import injectionKeys from "@/injectionKeys/injectionKeys";
+import { useUserStore } from "@/stores";
 
 interface Props {
   allowDragAndDrop?: boolean;
@@ -87,7 +88,7 @@ const emit = defineEmits<{
   foundInTree: [];
 }>();
 
-const userStore = inject(injectionKeys.userStore);
+const userStore = useUserStore();
 if (!userStore) throw new Error("Missing injection: userStore");
 const entityService = inject(injectionKeys.entityService);
 if (!entityService) throw new Error("Missing injection: entityService");

@@ -94,6 +94,10 @@ import { useConfirm } from "primevue/useconfirm";
 import { useDownloadFile } from "@/composables/useDownloadFile";
 import LoadingDialog from "./LoadingDialog.vue";
 import injectionKeys from "@/injectionKeys/injectionKeys";
+import { useUserStore } from "@/stores";
+
+const userService = inject(injectionKeys.userService);
+if (!userService) throw new Error("Missing injection: userService");
 
 const confirmDlg = useConfirm();
 const favourites = computed(() => userStore!.favourites);
@@ -119,8 +123,8 @@ const emit = defineEmits<{
   viewHierarchy: [payload: string];
 }>();
 
-const userStore = inject(injectionKeys.userStore);
-if (!userStore) throw new Error("Missing injection: userStore");
+const userStore = useUserStore();
+
 const directService = inject(injectionKeys.directService);
 if (!directService) throw new Error("Missing injection: directService");
 const entityService = inject(injectionKeys.entityService);
@@ -166,7 +170,7 @@ function isFavourite(iri: string) {
 async function updateFavourites(event: MouseEvent, iri: string) {
   event.stopPropagation();
   loadingFavourites.value = true;
-  await userStore!.updateFavourites(iri);
+  await userStore!.updateFavourites(iri, userService!);
   loadingFavourites.value = false;
 }
 

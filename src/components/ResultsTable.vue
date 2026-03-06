@@ -116,6 +116,7 @@ import { DataTablePageEvent, DataTableRowSelectEvent } from "primevue/datatable"
 import { nextTick } from "vue";
 import DataTable from "primevue/datatable";
 import injectionKeys from "@/injectionKeys/injectionKeys";
+import { useFilterStore, useUserStore } from "@/stores";
 
 interface Props {
   searchTerm?: string;
@@ -145,10 +146,11 @@ const directService = inject(injectionKeys.directService);
 if (!directService) throw new Error("Missing injection: directService");
 const eclService = inject(injectionKeys.eclService);
 if (!eclService) throw new Error("Missing injection: eclService");
-const filterStore = inject(injectionKeys.filterStore);
-if (!filterStore) throw new Error("Missing injection: filterStore");
-const userStore = inject(injectionKeys.userStore);
-if (!userStore) throw new Error("Missing injection: userStore");
+const userService = inject(injectionKeys.userService);
+if (!userService) throw new Error("Missing injection: userService");
+
+const filterStore = useFilterStore();
+const userStore = useUserStore();
 
 const modelLoading = defineModel<boolean | undefined>("loading");
 
@@ -285,7 +287,7 @@ async function search(pageNumber: number, pageSize: number, searchStyle: TextSea
 
 async function updateFavourites(row?: { data: ExtendedSearchResultSummary }) {
   if (row) selected.value = row.data;
-  await userStore!.updateFavourites(selected.value.iri);
+  await userStore!.updateFavourites(selected.value.iri, userService!);
 }
 function getNameDisplay(data: ExtendedSearchResultSummary): string {
   const name = data.bestMatch ? data.bestMatch : data.name;

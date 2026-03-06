@@ -71,6 +71,7 @@ import { getColourFromType, getFAIconFromType } from "@/helpers/ConceptTypeVisua
 import { MenuItem } from "primevue/menuitem";
 import { ExtendedEntityReferenceNode } from "@/interfaces/ExtendedAutoGen";
 import injectionKeys from "@/injectionKeys/injectionKeys";
+import { useDirectoryStore, useUserStore } from "@/stores";
 
 const props = defineProps<{
   entityIri: string;
@@ -84,10 +85,11 @@ const entityService = inject(injectionKeys.entityService);
 if (!entityService) throw new Error("Missing injection: entityService");
 const directService = inject(injectionKeys.directService);
 if (!directService) throw new Error("Missing injection: directService");
-const directoryStore = inject(injectionKeys.directoryStore);
-if (!directoryStore) throw new Error("Missing injection: directoryStore");
-const userStore = inject(injectionKeys.userStore);
-if (!userStore) throw new Error("Missing injection: userStore");
+const userService = inject(injectionKeys.userService);
+if (!userService) throw new Error("Missing injection: userService");
+
+const directoryStore = useDirectoryStore();
+const userStore = useUserStore();
 
 const favourites = computed(() => userStore.favourites);
 const isLoggedIn = computed(() => userStore.isLoggedIn);
@@ -192,7 +194,7 @@ function onRowContextMenu(event: MouseEvent, data: { data: ExtendedEntityReferen
 }
 
 async function updateFavourites(iri: string) {
-  await userStore!.updateFavourites(iri);
+  await userStore.updateFavourites(iri, userService!);
 }
 
 function onRowSelect(event: { data: ExtendedEntityReferenceNode }) {

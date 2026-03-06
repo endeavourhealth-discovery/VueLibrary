@@ -113,6 +113,7 @@ import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
 import { FilterOptions } from "@/interfaces";
 import { SplitterResizeEndEvent } from "primevue/splitter";
 import injectionKeys from "@/injectionKeys/injectionKeys";
+import { useDirectoryStore, useLoadingStore } from "@/stores";
 
 interface Props {
   imQuery?: QueryRequest;
@@ -134,10 +135,9 @@ const emit = defineEmits<{
   cancel: [];
 }>();
 
-const directoryStore = inject(injectionKeys.directoryStore);
-if (!directoryStore) throw new Error("Missing injection: directoryStore");
-const loadingStore = inject(injectionKeys.loadingStore);
-if (!loadingStore) throw new Error("Missing injection: loadingStore");
+const directoryStore = useDirectoryStore();
+const loadingStore = useLoadingStore();
+
 const entityService = inject(injectionKeys.entityService);
 if (!entityService) throw new Error("Missing injection: entityService");
 const queryService = inject(injectionKeys.queryService);

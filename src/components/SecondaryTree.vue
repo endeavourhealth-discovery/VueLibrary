@@ -85,6 +85,7 @@ import { useOverlay } from "@/composables/useOverlay";
 import { TTIriRef } from "@/interfaces/AutoGen";
 import { ExtendedEntityReferenceNode, ExtendedTTEntity } from "@/interfaces/ExtendedAutoGen";
 import injectionKeys from "@/injectionKeys/injectionKeys";
+import { useUserStore } from "@/stores";
 
 interface Props {
   entityIri: string;
@@ -102,8 +103,8 @@ const emit = defineEmits<{
 
 const entityService = inject(injectionKeys.entityService);
 if (!entityService) throw new Error("Missing injection: entityService");
-const userStore = inject(injectionKeys.userStore);
-if (!userStore) throw new Error("Missing injection: userStoer");
+
+const userStore = useUserStore();
 
 const favourites = computed(() => userStore.favourites);
 

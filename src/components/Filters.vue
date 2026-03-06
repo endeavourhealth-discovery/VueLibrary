@@ -68,6 +68,7 @@ import { TTIriRef } from "@/interfaces/AutoGen";
 import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
 import { NAMESPACE } from "@/enums";
 import injectionKeys from "@/injectionKeys/injectionKeys";
+import { useFilterStore } from "@/stores";
 interface Props {
   selectedFilterOptions?: FilterOptions;
 }
@@ -77,8 +78,7 @@ const emit = defineEmits<{
   selectedFiltersUpdated: [payload: FilterOptions];
 }>();
 
-const filterStore = inject(injectionKeys.filterStore);
-if (!filterStore) throw new Error("Missing injection: filterStore");
+const filterStore = useFilterStore();
 
 const storeDefaultFilterOptions: ComputedRef<FilterOptions> = computed(() => filterStore.defaultFilterOptions);
 const storeFilterOptions: ComputedRef<FilterOptions> = computed(() => filterStore.filterOptions);

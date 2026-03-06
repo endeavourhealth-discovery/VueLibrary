@@ -112,6 +112,7 @@ import { DownloadSettings } from "@/interfaces";
 import { SetExportRequest, SetOptions } from "@/interfaces/AutoGen";
 import { ExtendedTTEntity } from "@/interfaces/ExtendedAutoGen";
 import injectionKeys from "@/injectionKeys/injectionKeys";
+import { useUserStore } from "@/stores";
 
 const props = defineProps<{
   entityIri: string;
@@ -119,8 +120,8 @@ const props = defineProps<{
 
 const emit = defineEmits<{ navigateTo: [payload: string] }>();
 
-const userStore = inject(injectionKeys.userStore);
-if (!userStore) throw new Error("Missing injection: userStore");
+const userStore = useUserStore();
+
 const entityService = inject(injectionKeys.entityService);
 if (!entityService) throw new Error("Missing injection: entityService");
 const setService = inject(injectionKeys.setService);
