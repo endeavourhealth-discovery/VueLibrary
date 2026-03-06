@@ -1,8 +1,8 @@
-import { deferred } from "@/helpers";
+import { deferred } from "@/helpers/Deferred";
 import { isArrayHasLength, isObjectHasKeys } from "@/helpers/DataTypeCheckers";
 import { isPropertyShape } from "@/helpers/TypeGuards";
-import { EntityValidationRequest, FormGenerator, PropertyShape } from "@/interfaces/AutoGen";
-import { COMPONENT, IM } from "@/enums";
+import { FormGenerator, PropertyShape } from "@/interfaces/AutoGen";
+import { IM, COMPONENT } from "@/enums";
 import { isArray } from "lodash-es";
 import { inject, Ref, ref } from "vue";
 import Swal from "sweetalert2";
@@ -40,7 +40,7 @@ export function useValidity(shape?: FormGenerator) {
   }
 
   async function checkExists(iri: string): Promise<boolean> {
-    if (await entityService!.checkExists(iri)) {
+    if (await entityService!.entityExists(iri)) {
       await Swal.fire({
         icon: "warning",
         title: "Warning",

@@ -57,7 +57,7 @@ export function useCreateNew() {
   }
 
   async function checkExists(iri: string): Promise<boolean> {
-    if (await entityService!.checkExists(iri)) {
+    if (await entityService!.entityExists(iri)) {
       await Swal.fire({
         icon: "warning",
         title: "Warning",

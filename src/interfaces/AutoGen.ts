@@ -1,8 +1,8 @@
-import { IMLContext, ListMode, TargetUpdateMode, Aggregate, Bool, Comparison, DatabaseOption, DisplayMode, ECLType, Entail, IMQType, Operator, Order, OrderableDate, OrderableNumber, QueryType, RuleAction, TextSearchStyle, ValidationLevel, VarType, QueryExecutorStatus, Browser, OperatingSystem, Severity, Status, TaskModule, ApprovalType, UserRole, TaskState, TaskType, BNF, CODE_TEMPLATE, COMPONENT, CONFIG, CodeTemplate, EDITOR, ENTITY_TYPE, EntityType, FHIR, GRAPH, IM, IMPORT_TYPE, IMQ, IM_FUNCTION, ImportType, MAP, NAMESPACE, ODS, OPENSEARCH, OPEN_SEARCH, ORG, OWL, PRSB, QR, QUERY, RDF, RDFS, SHACL, SNOMED, TRANSFORM_FUNCTION, TransformFunction, USER, VALIDATION, WORKFLOW, XSD, PrimeVuePresetThemes, PrimeVueColors, FontSize } from '../enums/AutoGen';
+import { IMLContext, ListMode, TargetUpdateMode, Aggregate, Bool, DatabaseOption, DisplayMode, ECLType, Entail, IMQType, Operator, Order, OrderableDate, OrderableNumber, QueryType, RuleAction, TextSearchStyle, ValidationLevel, VarType, QueryExecutorStatus, Browser, OperatingSystem, Severity, Status, TaskModule, ApprovalType, UserRole, TaskState, TaskType, BNF, CODE_TEMPLATE, COMPONENT, CONFIG, CodeTemplate, EDITOR, ENTITY_TYPE, EntityType, FHIR, GRAPH, IM, IMPORT_TYPE, IMQ, IM_FUNCTION, ImportType, MAP, NAMESPACE, ODS, OPENSEARCH, OPEN_SEARCH, ORG, OWL, PRSB, QR, QUERY, RDF, RDFS, SHACL, SNOMED, TRANSFORM_FUNCTION, TransformFunction, USER, VALIDATION, WORKFLOW, XSD, PrimeVuePresetThemes, PrimeVueColors, FontSize } from '../enums/AutoGen';
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-03-04 15:55:27.
+// Generated using typescript-generator version 3.2.1263 on 2026-03-06 13:06:34.
 
 export interface ConceptContextMap {
     id?: string;
@@ -276,6 +276,8 @@ export interface PropertyShape {
     orderable?: boolean;
     hasValueSet?: TTIriRef;
     definingProperty?: boolean;
+    isValidEntity?: TTIriRef;
+    isValidArguments?: Argument[];
 }
 
 export interface SetContent {
@@ -319,19 +321,24 @@ export interface ArgumentReference {
 }
 
 export interface Assignable {
-    description?: string;
     value?: string;
-    function?: FunctionClause;
     invalid?: boolean;
-    units?: TTIriRef;
+    description?: string;
+    compare?: Compare;
     operator?: Operator;
-    qualifier?: TTIriRef;
+    valueTerm?: string;
     valueLabel?: string;
 }
 
 export interface Case {
     when?: When[];
     else?: string;
+}
+
+export interface Compare {
+    left?: ValueSource;
+    right?: ValueSource;
+    units?: TTIriRef;
 }
 
 export interface ContextMap {
@@ -370,10 +377,10 @@ export interface Element extends IriLD, Entailment {
 }
 
 export interface Entailment {
-    descendantsOrSelfOf?: boolean;
     ancestorsOf?: boolean;
     descendantsOf?: boolean;
     memberOf?: boolean;
+    descendantsOrSelfOf?: boolean;
 }
 
 export interface FunctionClause extends IriLD {
@@ -432,6 +439,7 @@ export interface Match extends IriLD, HasPaths {
     asDescription?: string;
     union?: Match[];
     relationMessage?: string;
+    errorMessage?: string;
 }
 
 export interface Node extends Element {
@@ -453,9 +461,11 @@ export interface Node extends Element {
     isResultSet?: boolean;
 }
 
-export interface OrderDirection extends RelativeTo {
+export interface OrderDirection extends IriLD {
     direction?: Order;
     function?: FunctionClause;
+    nodeRef?: string;
+    variable?: string;
 }
 
 export interface OrderLimit {
@@ -521,16 +531,6 @@ export interface Range {
     to: Value;
 }
 
-export interface RelativeTo extends IriLD {
-    qualifier?: TTIriRef;
-    valueVariable?: string;
-    propertyRef?: string;
-    targetLabel?: string;
-    parameterName?: string;
-    nodeRef?: string;
-    parameter?: string;
-}
-
 export interface RequeueQueryRequest {
     queueId?: string;
     queryRequest?: QueryRequest;
@@ -563,7 +563,15 @@ export interface Update extends TTIriRef {
 
 export interface Value extends Assignable {
     valueParameter?: string;
+    units?: TTIriRef;
     isInvalid?: boolean;
+}
+
+export interface ValueSource {
+    parameter?: string;
+    name?: string;
+    path?: Path;
+    nodeRef?: string;
 }
 
 export interface When {
@@ -578,7 +586,6 @@ export interface Where extends Element, Assignable {
     range?: Range;
     isNull?: boolean;
     is?: Node[];
-    relativeTo?: RelativeTo;
     anyRoleGroup?: boolean;
     parameter?: string;
     childOrSelfOf?: boolean;
@@ -595,6 +602,7 @@ export interface Where extends Element, Assignable {
     and?: Where[];
     propertyRef?: string;
     shortLabel?: string;
+    qualifier?: TTIriRef;
     propertyList?: Node[];
     propertyVariable?: string;
     node?: string;
@@ -602,6 +610,7 @@ export interface Where extends Element, Assignable {
     exists?: boolean;
     linked?: boolean;
     notNull?: boolean;
+    units?: TTIriRef;
     isInvalid?: boolean;
     isCohort?: boolean;
     isResultSet?: boolean;
@@ -920,15 +929,15 @@ export interface TTDocument extends TTNode {
 export interface TTEntity extends TTNode, Serializable {
     context?: TTContext;
     crud?: TTIriRef;
-    type?: TTArray;
-    status?: TTIriRef;
-    description?: string;
     name?: string;
+    type?: TTArray;
     scheme?: TTIriRef;
     version?: number;
+    status?: TTIriRef;
+    description?: string;
     code?: string;
-    types?: TTIriRef[];
     prefixes?: TTPrefix[];
+    types?: TTIriRef[];
 }
 
 export interface BugReport extends Task {
@@ -1143,7 +1152,6 @@ export interface OrgRelationship {
 export interface OrgRelTarget {
     OrgId?: OrgId;
 }
-
 
 
 

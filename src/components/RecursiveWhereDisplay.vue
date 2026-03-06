@@ -6,18 +6,30 @@
       </span>
       <span v-if="where.qualifier">{{ where.qualifier.name }} of </span>
       <span v-if="whereName" class="field">{{ whereName }}</span>
-      <span v-if="where.valueLabel || where.description">
-        <span v-if="where.description" class="field">{{ where.description }}</span>
-        <span v-if="where.valueLabel && where.is">
-          <span class="field">{{ getIsOperator(where.is) }}</span>
-          <span @click="isExpanded = !isExpanded" class="hover-label flex-auto justify-start p-0"> {{ where.valueLabel }}</span>
-        </span>
-        <span v-else-if="where.valueLabel" class="field">{{ where.valueLabel }}</span>
+      <span v-if="where.valueLabel && where.is">
+        <span class="field">{{ getIsOperator(where.is, eclQuery) }}</span>
+        <span @click="isExpanded = !isExpanded" class="hover-label flex-auto justify-start p-0"> {{ where.valueLabel }}</span>
       </span>
-      <template v-if="where.relativeTo">
-        <span v-if="where.relativeTo.name" class="field">{{ where.relativeTo.name }} of</span>
-        <span v-if="where.relativeTo.parameterName" class="field">{{ where.relativeTo.parameterName }}</span>
-      </template>
+      <span v-if="valueSentence">
+        <span v-for="(part, i) in valueSentence" :key="i">
+          <template v-if="part.type === 'text'">
+            {{ part.value }}
+          </template>
+          <template v-else-if="part.type === 'field'">
+            {{ part.value }}
+          </template>
+          <template v-else-if="part.type === 'parameter'">
+            {{ part.value }}
+          </template>
+
+          <template v-else-if="part.type === 'nodeRef'">
+            <span class="node-ref">
+              {{ part.value }}
+            </span>
+          </template>
+        </span>
+      </span>
+
       <span v-if="isExpanded && isArrayHasLength(where.is)">
         <span>, defined as</span>
         <div>
@@ -64,10 +76,11 @@
 
 <script setup lang="ts">
 import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
-import { Where, Node } from "@/interfaces/AutoGen";
+import { Where } from "@/interfaces/AutoGen";
+import { computed, Ref, ref } from "vue";
+import { IMFontAwesomeIcon, IMViewerLink } from "@/components";
+import { getRelativeTo, buildValueSentence, getIsOperator } from "@/helpers/QueryEditorMethods";
 import { Bool } from "@/enums";
-import { computed, Ref, ref, onMounted } from "vue";
-import IMViewerLink from "@/components/IMViewerLink.vue";
 import { getTypeIcon, getIconColor } from "@/helpers/ConceptTypeVisuals";
 
 interface Props {
@@ -91,19 +104,18 @@ const emit = defineEmits<{
 
 const whereName: Ref<string | undefined> = ref(props.where.name);
 const isExpanded = ref(props.expandedSet);
-
+const relativeTo = computed(() => {
+  return getRelativeTo(props.where);
+});
 const boolGroup = computed(() => {
   return {
     ...(props.where.and ? { and: props.where.and } : {}),
     ...(props.where.or ? { or: props.where.or } : {})
   };
 });
-
-function getIsOperator(nodes: Node[]) {
-  if (props.eclQuery) return "=";
-  if (nodes.length === 1) return "is";
-  else return "in";
-}
+const valueSentence = computed(() => {
+  return buildValueSentence(props.where);
+});
 
 function getOperator(operator: Bool | undefined, index: number): string {
   if (operator === "or") {

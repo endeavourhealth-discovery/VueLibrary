@@ -49,9 +49,6 @@
       <div v-else-if="[DisplayOptions.MySQL, DisplayOptions.PostreSQL].includes(selectedDisplayOption)" class="query-display-content flex flex-col gap-4">
         <SQLDisplay :sql="sql" />
       </div>
-      <div v-else-if="selectedDisplayOption == DisplayOptions.IML" class="query-display-content flex flex-col gap-4">
-        <IMLDisplay v-if="iml" :iml="iml" />
-      </div>
       <div v-if="query && query.columnGroup">
         <span>Output columns </span>
         <Button text :icon="!showColumns ? 'fa-solid fa-chevron-right' : 'fa-solid fa-chevron-down'" @click="showColumns = !showColumns"></Button>
@@ -72,25 +69,23 @@
 </template>
 
 <script setup lang="ts">
-import { isArrayHasLength, isObjectHasKeys } from "@/helpers/DataTypeCheckers";
-import RecursiveMatchDisplay from "@/components/RecursiveMatchDisplay.vue";
-import ColumnGroupDisplay from "@/components/ColumnGroupDisplay.vue";
-import { Argument, ArgumentReference, IMLLanguage, Query, QueryRequest } from "@/interfaces/AutoGen";
+import { getBooleanOperator, getBoolGroup, isObjectHasKeys } from "@/helpers";
+import { ColumnGroupDisplay, RecursiveMatchDisplay, SQLDisplay } from "@/components";
+import { Argument, ArgumentReference, IMLLanguage, Query, QueryRequest } from "@/interfaces";
 import { Bool, DisplayMode } from "@/enums";
 import { computed, inject, onMounted, provide, ref, Ref, watch } from "vue";
-import SQLDisplay from "./SQLDisplay.vue";
-import IMLDisplay from "./IMLDisplay.vue";
 import { cloneDeep } from "lodash-es";
-import { getBooleanOperator, getBoolGroup } from "@/helpers/BuildQuery";
 import injectionKeys from "@/injectionKeys/injectionKeys";
 
 enum DisplayOptions {
   RuleView = "Rule view",
   LogicalView = "Logical view",
   MySQL = "MySQL",
-  PostreSQL = "PostgreSQL",
-  IML = "IMLanguage"
+  PostreSQL = "PostgreSQL"
 }
+
+const queryService = inject(injectionKeys.queryService);
+if (!queryService) throw new Error("Missing injection: queryService");
 
 interface Props {
   entityIri?: string;
@@ -104,9 +99,6 @@ const props = defineProps<Props>();
 const emit = defineEmits<{
   navigateTo: [payload: string];
 }>();
-
-const queryService = inject(injectionKeys.queryService);
-if (!queryService) throw new Error("Missing injection: queryService");
 
 const showColumns = ref(false);
 
@@ -169,13 +161,10 @@ watch(selectedDisplayOption, async (newValue, oldValue) => {
       displayMode.value = DisplayMode.LOGICAL;
       break;
     case DisplayOptions.MySQL:
-      if (props.entityIri) sql.value = await queryService!.generateQuerySQL(props.entityIri, "MYSQL");
+      if (props.entityIri) sql.value = await queryService.generateQuerySQL(props.entityIri, "MYSQL");
       break;
     case DisplayOptions.PostreSQL:
-      if (props.entityIri) sql.value = await queryService!.generateQuerySQL(props.entityIri, "POSTGRESQL");
-      break;
-    case DisplayOptions.IML:
-      if (props.entityIri) iml.value = await queryService!.generateQueryIML(props.entityIri);
+      if (props.entityIri) sql.value = await queryService.generateQuerySQL(props.entityIri, "POSTGRESQL");
       break;
     default:
       break;
@@ -203,7 +192,7 @@ async function init() {
 }
 
 function setDisplayOptions() {
-  displayOptions.value = [DisplayOptions.RuleView, DisplayOptions.LogicalView, DisplayOptions.MySQL, DisplayOptions.PostreSQL, DisplayOptions.IML];
+  displayOptions.value = [DisplayOptions.RuleView, DisplayOptions.LogicalView, DisplayOptions.MySQL, DisplayOptions.PostreSQL];
 }
 
 async function getQueryDisplay(displayMode: DisplayMode) {

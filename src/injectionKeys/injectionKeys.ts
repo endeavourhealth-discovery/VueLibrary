@@ -77,7 +77,7 @@ const entityService = Symbol("entityService") as InjectionKey<{
   getEntityAsEntityReferenceNode(iri: string): Promise<ExtendedEntityReferenceNode>;
   getPathBetweenNodes(descendant: string, ancestor: string): Promise<TTIriRef[]>;
   getAllowableChildTypes(iri: string): Promise<ExtendedTTEntity[]>;
-  checkExists(iri: string): Promise<boolean>;
+  entityExists(iri: string): Promise<boolean>;
   getEntityChildren(iri: string, filters?: FiltersAsIris, controller?: AbortController): Promise<ExtendedEntityReferenceNode[]>;
   getAsEntityReferenceNodes(iris: string[]): Promise<ExtendedEntityReferenceNode[]>;
   downloadEntity(iri: string): Promise<Blob>;

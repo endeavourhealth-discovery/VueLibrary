@@ -36,14 +36,6 @@ export enum Bool {
     step = "step",
 }
 
-export enum Comparison {
-    eq = "eq",
-    gte = "gte",
-    gt = "gt",
-    lte = "lte",
-    lt = "lt",
-}
-
 export enum DatabaseOption {
     MYSQL = "MYSQL",
     POSTGRESQL = "POSTGRESQL",
@@ -593,14 +585,19 @@ export enum IM {
     INTERVAL_UNIT = "http://endhealth.info/im#intervalUnit",
     PARAMETER = "http://endhealth.info/im#parameter",
     NUMERIC_DIFFERENCE = "http://endhealth.info/im#NumericDifference",
-    FISCAL_YEAR = "http://endhealth.info/im#fiscalYear",
+    FISCAL_YEAR = "http://endhealth.info/im#FiscalYear",
+    QUARTER = "http://endhealth.info/im#Quarter",
+    WEEK = "http://endhealth.info/im#Week",
+    WEEK_NUMBER = "http://endhealth.info/im#WeekNumber",
+    YEAR = "http://endhealth.info/im#Year",
     YEARS = "http://endhealth.info/im#Years",
-    MONTH = "http://endhealth.info/im#month",
+    MONTH = "http://endhealth.info/im#Month",
     MONTHS = "http://endhealth.info/im#Months",
+    DAY = "http://endhealth.info/im#Day",
     DAYS = "http://endhealth.info/im#Days",
     HOURS = "http://endhealth.info/im#Hours",
-    MINUTES = "http://endhealth.info/im#Minutes",
-    SECONDS = "http://endhealth.info/im#Seconds",
+    MINUTES = "http://endhealth.info/im#Minute",
+    SECONDS = "http://endhealth.info/im#Second",
     DATATYPE_QUALIFIER = "http://endhealth.info/im#datatypeQualifier",
     TYPE_FILTER_OPTIONS = "http://endhealth.info/im#TypeFilterOptions",
     SORT_FIELD_FILTER_OPTIONS = "http://endhealth.info/im#SortFieldFilterOptions",
@@ -851,6 +848,7 @@ export enum QUERY {
     ALLOWABLE_PROPERTIES = "http://endhealth.info/im#Query_AllowableProperties",
     ALLOWABLE_PROPERTY_ANCESTORS = "http://endhealth.info/im#Query_AllowablePropertyAncestors",
     IS_VALID_PROPERTY = "http://endhealth.info/im#Query_IsValidProperty",
+    IS_VALID_TYPE = "http://endhealth.info/im#Query_IsValidType",
     ENTITY_FILTER = "http://endhealth.info/im#Query_EntityFilter",
     SEARCH_ENTITIES = "http://endhealth.info/im#Query_SearchEntities",
     SEARCH_FOLDERS = "http://endhealth.info/im#Query_SearchFolders",
@@ -858,6 +856,7 @@ export enum QUERY {
     SEARCH_MAIN_TYPES = "http://endhealth.info/im#Query_SearchmainTypes",
     DM_PROPERTY = "http://endhealth.info/im#Query_DataModelPropertyByShape",
     SEARCH_ALLOWABLE_SUBCLASS = "http://endhealth.info/im#Query_SearchAllowableSubclass",
+    SEARCH_ALLOWABLE_CHILD_OF = "http://endhealth.info/im#Query_SearchAllowableChildOf",
     GET_VALUES_FROM_PROPERTY_RANGE = "http://endhealth.info/im#Query_GetValuesFromPropertyRange",
     GET_SUBSETS = "http://endhealth.info/im#Query_GetSubsets",
 }

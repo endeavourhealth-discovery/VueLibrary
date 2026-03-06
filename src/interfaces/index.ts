@@ -22,6 +22,7 @@ import { QueryResponse } from "./QueryResponse";
 import { Orderable } from "./Orderable";
 import { ValidatedEntity } from "./ValidatedEntity";
 import { HistoryItem } from "./HistoryItem";
+import { RelativeTo } from "./RelativeTo";
 
 export type * from "./AutoGen";
 export type * from "./ExtendedAutoGen";
@@ -51,5 +52,6 @@ export {
   type QueryResponse,
   type Orderable,
   type ValidatedEntity,
-  type HistoryItem
+  type HistoryItem,
+  type RelativeTo
 };
