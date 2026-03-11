@@ -1,4 +1,4 @@
-import { PrimeVueColors, PrimeVuePresetThemes, TagSeverity } from "@/enums";
+import { PrimeVueColors, PrimeVuePresetThemes } from "@/enums";
 import { FilterOptions, FiltersAsIris, Namespace, PropertyDisplay, QueryResponse, SetDiffObject, SimpleMap, TermCode } from "@/interfaces";
 import {
   ConceptContextMap,
@@ -20,19 +20,12 @@ import {
   SetExportRequest,
   TTIriRef
 } from "@/interfaces/AutoGen";
-import { DisplayMode, FontSize } from "@/enums";
+import { DisplayMode } from "@/enums";
 import { ExtendedEntityReferenceNode, TTBundle, ExtendedTTEntity } from "@/interfaces/ExtendedAutoGen";
-import { NamespacePermission, User } from "@/models";
-import { StoreGeneric } from "pinia";
+import { User } from "@/models";
 import { OrganizationChartNode } from "primevue";
 import { TreeNode } from "primevue/treenode";
-import { ComputedRef, InjectionKey } from "vue";
-import { useUserStore } from "@/stores/userStore";
-import { useSharedStore } from "@/stores/sharedStore";
-import { useLoadingStore } from "@/stores/loadingStore";
-import { useFilterStore } from "@/stores/filterStore";
-import { useEditorStore } from "@/stores/editorStore";
-import { useDirectoryStore } from "@/stores/directoryStore";
+import { InjectionKey } from "vue";
 
 const conceptService = Symbol("conceptService") as InjectionKey<{
   getMatchedFrom(iri: string): Promise<SimpleMap[]>;
