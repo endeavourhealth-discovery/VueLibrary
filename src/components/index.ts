@@ -66,6 +66,7 @@ import TextHTMLWithLabel from "./TextHTMLWithLabel.vue";
 import TextWithLabel from "./TextWithLabel.vue";
 import UsedIn from "./UsedIn.vue";
 import Viewer from "./Viewer.vue";
+import ValueSentenceDisplay from "./ValueSentenceDisplay.vue";
 
 export {
   ActionButtons,
@@ -135,5 +136,6 @@ export {
   TextHTMLWithLabel,
   TextWithLabel,
   UsedIn,
-  Viewer
+  Viewer,
+  ValueSentenceDisplay
 };

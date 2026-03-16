@@ -4,6 +4,6 @@ export interface RelativeTo {
   nodeRef?: string;
   parameter?: string;
   qualifier?: TTIriRef;
-  path?: Path;
+  iri?: string;
   name?: string;
 }

@@ -64,14 +64,18 @@
           />
         </div>
       </div>
+      <div v-if="query && query.return">
+        <span>Returns:</span>
+        <ReturnColumns :select="query.return" class="pl-8" :parentQuery="query!" />
+      </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
 import { getBooleanOperator, getBoolGroup, isObjectHasKeys } from "@/helpers";
-import { ColumnGroupDisplay, RecursiveMatchDisplay, SQLDisplay } from "@/components";
-import { Argument, ArgumentReference, IMLLanguage, Query, QueryRequest } from "@/interfaces";
+import { ColumnGroupDisplay, RecursiveMatchDisplay, ReturnColumns, SQLDisplay } from "@/components";
+import type { Argument, ArgumentReference, IMLLanguage, Query, QueryRequest } from "@/interfaces/AutoGen";
 import { Bool, DisplayMode } from "@/enums";
 import { computed, inject, onMounted, provide, ref, Ref, watch } from "vue";
 import { cloneDeep } from "lodash-es";
@@ -83,9 +87,6 @@ enum DisplayOptions {
   MySQL = "MySQL",
   PostreSQL = "PostgreSQL"
 }
-
-const queryService = inject(injectionKeys.queryService);
-if (!queryService) throw new Error("Missing injection: queryService");
 
 interface Props {
   entityIri?: string;
@@ -99,6 +100,9 @@ const props = defineProps<Props>();
 const emit = defineEmits<{
   navigateTo: [payload: string];
 }>();
+
+const queryService = inject(injectionKeys.queryService);
+if (!queryService) throw new Error("Missing injection: queryService");
 
 const showColumns = ref(false);
 

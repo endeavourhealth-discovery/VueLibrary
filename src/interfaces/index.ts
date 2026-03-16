@@ -1,57 +1,57 @@
-import { GenericObject } from "./GenericObject";
-import { FilterOptions } from "./FilterOptions";
-import { FiltersAsIris } from "./FiltersAsIris";
-import { DownloadSettings } from "./DownloadSettings";
-import { ExtendedSearchResultSummary } from "./ExtendedSearchResultSummary";
-import { Namespace } from "./Namespace";
-import { SearchOptions } from "./SearchOptions";
-import { SetDiffObject } from "./SetDiffObject";
-import { TTGraphData } from "./TTGraphData";
-import { TTProperty, UIProperty } from "./TTProperty";
 import { ChartMapNode } from "./ChartMapNode";
 import { ChartTableNode } from "./ChartTableNode";
+import { ConceptAggregate } from "./ConceptAggregate";
 import { Context } from "./Context";
+import { DownloadSettings } from "./DownloadSettings";
+import { ExtendedSearchResultSummary } from "./ExtendedSearchResultSummary";
+import { FilterOptions } from "./FilterOptions";
+import { FiltersAsIris } from "./FiltersAsIris";
+import { GenericObject } from "./GenericObject";
+import { HistoryItem } from "./HistoryItem";
 import { MapItem } from "./MapItem";
+import { Namespace } from "./Namespace";
+import { Orderable } from "./Orderable";
+import { PropertyDisplay } from "./PropertyDisplay";
+import { QueryResponse } from "./QueryResponse";
+import { RelativeTo } from "./RelativeTo";
+import { SearchOptions } from "./SearchOptions";
+import { SetDiffObject } from "./SetDiffObject";
 import { SimpleMap } from "./SimpleMap";
 import { SimpleMapIri } from "./SimpleMapIri";
-import { PropertyDisplay } from "./PropertyDisplay";
-import { ConceptAggregate } from "./ConceptAggregate";
-import { TreeParent } from "./TreeParent";
 import { TermCode } from "./TermCode";
-import { QueryResponse } from "./QueryResponse";
-import { Orderable } from "./Orderable";
+import { TreeParent } from "./TreeParent";
+import { TTGraphData } from "./TTGraphData";
+import { TTProperty, UIProperty } from "./TTProperty";
 import { ValidatedEntity } from "./ValidatedEntity";
-import { HistoryItem } from "./HistoryItem";
-import { RelativeTo } from "./RelativeTo";
 
 export type * from "./AutoGen";
 export type * from "./ExtendedAutoGen";
 
 export {
-  type GenericObject,
-  type FilterOptions,
-  type FiltersAsIris,
+  type ChartMapNode,
+  type ChartTableNode,
+  type ConceptAggregate,
+  type Context,
   type DownloadSettings,
   type ExtendedSearchResultSummary,
+  type FilterOptions,
+  type FiltersAsIris,
+  type GenericObject,
+  type HistoryItem,
+  type MapItem,
   type Namespace,
+  type Orderable,
+  type PropertyDisplay,
+  type QueryResponse,
+  type RelativeTo,
   type SearchOptions,
   type SetDiffObject,
+  type SimpleMap,
+  type SimpleMapIri,
+  type TermCode,
+  type TreeParent,
   type TTGraphData,
   type TTProperty,
   type UIProperty,
-  type ChartMapNode,
-  type ChartTableNode,
-  type Context,
-  type MapItem,
-  type SimpleMap,
-  type SimpleMapIri,
-  type PropertyDisplay,
-  type ConceptAggregate,
-  type TreeParent,
-  type TermCode,
-  type QueryResponse,
-  type Orderable,
-  type ValidatedEntity,
-  type HistoryItem,
-  type RelativeTo
+  type ValidatedEntity
 };

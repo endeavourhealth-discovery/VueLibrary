@@ -2,7 +2,7 @@ import { IMLContext, ListMode, TargetUpdateMode, Aggregate, Bool, DatabaseOption
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-03-06 13:06:34.
+// Generated using typescript-generator version 3.2.1263 on 2026-03-16 09:22:43.
 
 export interface ConceptContextMap {
     id?: string;
@@ -277,6 +277,7 @@ export interface PropertyShape {
     hasValueSet?: TTIriRef;
     definingProperty?: boolean;
     isValidEntity?: TTIriRef;
+    highCardinality?: boolean;
     isValidArguments?: Argument[];
 }
 
@@ -324,10 +325,10 @@ export interface Assignable {
     value?: string;
     invalid?: boolean;
     description?: string;
-    compare?: Compare;
     operator?: Operator;
     valueTerm?: string;
     valueLabel?: string;
+    compare?: Compare;
 }
 
 export interface Case {
@@ -377,9 +378,9 @@ export interface Element extends IriLD, Entailment {
 }
 
 export interface Entailment {
-    ancestorsOf?: boolean;
-    descendantsOf?: boolean;
     memberOf?: boolean;
+    descendantsOf?: boolean;
+    ancestorsOf?: boolean;
     descendantsOrSelfOf?: boolean;
 }
 
@@ -409,7 +410,7 @@ export interface IriLD {
     uuid?: string;
 }
 
-export interface Match extends IriLD, HasPaths {
+export interface Match extends IriLD, HasPaths, Returnable {
     notExists?: boolean;
     ifTrue?: RuleAction;
     ifFalse?: RuleAction;
@@ -419,7 +420,6 @@ export interface Match extends IriLD, HasPaths {
     and?: Match[];
     or?: Match[];
     where?: Where;
-    return?: Return[];
     graph?: Node;
     optional?: boolean;
     aggregate?: FunctionClause;
@@ -438,7 +438,7 @@ export interface Match extends IriLD, HasPaths {
     orderBy?: OrderLimit;
     asDescription?: string;
     union?: Match[];
-    relationMessage?: string;
+    linkedTarget?: boolean;
     errorMessage?: string;
 }
 
@@ -536,7 +536,7 @@ export interface RequeueQueryRequest {
     queryRequest?: QueryRequest;
 }
 
-export interface Return {
+export interface Return extends Returnable {
     iri?: string;
     name?: string;
     function?: FunctionClause;
@@ -549,8 +549,11 @@ export interface Return {
     dataType?: TTIriRef;
     description?: string;
     case?: Case;
-    return?: Return[];
     value?: string;
+}
+
+export interface Returnable {
+    return?: Return[];
 }
 
 /**
@@ -569,8 +572,8 @@ export interface Value extends Assignable {
 
 export interface ValueSource {
     parameter?: string;
+    iri?: string;
     name?: string;
-    path?: Path;
     nodeRef?: string;
 }
 
@@ -918,6 +921,12 @@ export interface SetOptions {
     includeSubsets?: boolean;
 }
 
+export interface SubQueryDependency {
+    iri?: string;
+    label?: string;
+    depth?: number;
+}
+
 export interface TTDocument extends TTNode {
     context?: TTContext;
     entities?: TTEntity[];
@@ -929,15 +938,15 @@ export interface TTDocument extends TTNode {
 export interface TTEntity extends TTNode, Serializable {
     context?: TTContext;
     crud?: TTIriRef;
-    name?: string;
     type?: TTArray;
+    name?: string;
     scheme?: TTIriRef;
     version?: number;
     status?: TTIriRef;
     description?: string;
-    code?: string;
-    prefixes?: TTPrefix[];
     types?: TTIriRef[];
+    prefixes?: TTPrefix[];
+    code?: string;
 }
 
 export interface BugReport extends Task {
@@ -1022,8 +1031,8 @@ export interface TTArray extends Serializable {
 }
 
 export interface TTContext extends Serializable {
-    nameSpaces?: TTPrefix[];
     prefixes?: TTPrefix[];
+    nameSpaces?: TTPrefix[];
 }
 
 export interface Throwable extends Serializable {

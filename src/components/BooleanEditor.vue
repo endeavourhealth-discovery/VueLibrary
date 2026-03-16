@@ -19,7 +19,7 @@
         <Select
           :class="'operator-selector'"
           :modelValue="operator"
-          :options="getBooleanOptions(clauseType, index, false, true, parentOperator as Bool)"
+          :options="getBooleanOptions(clauseType, index, false, true)"
           option-label="label"
           option-value="value"
           @update:modelValue="val => updateOperator(val as string)"
@@ -55,12 +55,22 @@
   </div>
 </template>
 <script setup lang="ts">
-import { createNewBoolGroup, getBooleanOptions, getIsRoleGroup, removeSubgroup, getBooleanOperator, getBoolGroup } from "@/helpers/BuildQuery";
-import { Match, Where } from "@/interfaces/AutoGen";
+import {
+  createNewBoolGroup,
+  getBooleanOptions,
+  getIsRoleGroup,
+  removeSubgroup,
+  getBooleanOperator,
+  getBoolGroup,
+  onDragEnd,
+  onDragOver,
+  onDragStart,
+  onDrop
+} from "@/helpers";
+import type { Match, Where } from "@/interfaces/AutoGen";
+import { computed, inject, onMounted, ref, Ref, watch } from "vue";
 import { Bool } from "@/enums";
-import { computed, inject, ref, Ref } from "vue";
-import RoleGroup from "@/components/RoleGroup.vue";
-import { onDragEnd, onDragOver, onDragStart, onDrop } from "@/helpers/DragContext";
+import { RoleGroup } from "@/components";
 import Button from "primevue/button";
 
 interface Props {
