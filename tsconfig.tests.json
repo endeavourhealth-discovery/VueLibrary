@@ -7,5 +7,5 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["tests/**/*"]
+  "include": ["tests", "src/typings"]
 }

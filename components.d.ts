@@ -116,6 +116,7 @@ declare module 'vue' {
     ToggleSwitch: typeof import('primevue/toggleswitch')['default']
     Tree: typeof import('primevue/tree')['default']
     UsedIn: typeof import('./src/components/UsedIn.vue')['default']
+    ValueSentenceDisplay: typeof import('./src/components/ValueSentenceDisplay.vue')['default']
     Viewer: typeof import('./src/components/Viewer.vue')['default']
   }
   export interface ComponentCustomProperties {

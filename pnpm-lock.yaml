@@ -99,6 +99,9 @@ importers:
       '@vue/tsconfig':
         specifier: 0.8.1
         version: 0.8.1(typescript@5.8.3)(vue@3.5.13(typescript@5.8.3))
+      happy-dom:
+        specifier: ^20.8.4
+        version: 20.8.4
       prettier:
         specifier: 3.5.3
         version: 3.5.3
@@ -125,7 +128,7 @@ importers:
         version: 4.5.3(@types/node@22.14.1)(rollup@4.57.1)(typescript@5.8.3)(vite@6.4.1(@types/node@22.14.1)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.87.0)(yaml@2.8.2))
       vitest:
         specifier: 3.1.2
-        version: 3.1.2(@types/node@22.14.1)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.87.0)(yaml@2.8.2)
+        version: 3.1.2(@types/node@22.14.1)(happy-dom@20.8.4)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.87.0)(yaml@2.8.2)
       vue-tsc:
         specifier: 3.1.5
         version: 3.1.5(typescript@5.8.3)
@@ -884,6 +887,12 @@ packages:
 
   '@types/web-bluetooth@0.0.21':
     resolution: {integrity: sha512-oIQLCGWtcFZy2JW77j9k8nHzAOpqMHLQejDA48XXMWH6tjCQHz5RCFz1bzsmROyL6PUm+LLnUiI4BCn221inxA==}
+
+  '@types/whatwg-mimetype@3.0.2':
+    resolution: {integrity: sha512-c2AKvDT8ToxLIOUlN51gTiHXflsfIFisS4pO7pDPoKouJCESkhZnEy623gwP9laCy5lnLDAw1vAzu2vM2YLOrA==}
+
+  '@types/ws@8.18.1':
+    resolution: {integrity: sha512-ThVF6DCVhA8kUGy+aazFQ4kXQ7E1Ty7A3ypFOe0IcJV8O/M511G99AW24irKrW56Wt44yG9+ij8FaqoBGkuBXg==}
 
   '@vitejs/plugin-vue@5.2.3':
     resolution: {integrity: sha512-IYSLEQj4LgZZuoVpdSUCw3dIynTWQgPlaRP6iAvMle4My0HdYwr5g5wQAfwOeHQBmYwEkqF70nRpSilr6PoUDg==}
@@ -1649,6 +1658,10 @@ packages:
 
   hachure-fill@0.5.2:
     resolution: {integrity: sha512-3GKBOn+m2LX9iq+JC1064cSFprJY4jL1jCXTcpnfER5HYE2l/4EfWSGzkPa/ZDBmYI0ZOEj5VHV/eKnPGkHuOg==}
+
+  happy-dom@20.8.4:
+    resolution: {integrity: sha512-GKhjq4OQCYB4VLFBzv8mmccUadwlAusOZOI7hC1D9xDIT5HhzkJK17c4el2f6R6C715P9xB4uiMxeKUa2nHMwQ==}
+    engines: {node: '>=20.0.0'}
 
   has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
@@ -2420,6 +2433,10 @@ packages:
   webpack-virtual-modules@0.6.2:
     resolution: {integrity: sha512-66/V2i5hQanC51vBQKPH4aI8NMAcBW59FVBs+rC7eGHupMyfn34q7rZIE+ETlJ+XTevqfUhVVBgSUNSW2flEUQ==}
 
+  whatwg-mimetype@3.0.0:
+    resolution: {integrity: sha512-nt+N2dzIutVRxARx1nghPKGv1xHikU7HKdfafKkLNLindmPU/ch3U31NOCGGA/dmPcmb1VlofO0vnKAcsm0o/Q==}
+    engines: {node: '>=12'}
+
   which@2.0.2:
     resolution: {integrity: sha512-BLI3Tl1TW3Pvl70l3yq3Y64i+awpwXqsGBYWkkqMtnbXgrMD+yj7rhW0kuEDxzJaYXGjEW5ogapKNMEKNMjibA==}
     engines: {node: '>= 8'}
@@ -2437,6 +2454,18 @@ packages:
   wrap-ansi@8.1.0:
     resolution: {integrity: sha512-si7QWI6zUMq56bESFvagtmzMdGOtoxfR+Sez11Mobfc7tm+VkUckk9bW2UeffTGVUbOksxmSw0AA2gs8g71NCQ==}
     engines: {node: '>=12'}
+
+  ws@8.19.0:
+    resolution: {integrity: sha512-blAT2mjOEIi0ZzruJfIhb3nps74PRWTCz1IjglWEEpQl5XS/UNama6u2/rjFkDDouqr4L67ry+1aGIALViWjDg==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: '>=5.0.2'
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
 
   yallist@4.0.0:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
@@ -3087,6 +3116,12 @@ snapshots:
     optional: true
 
   '@types/web-bluetooth@0.0.21': {}
+
+  '@types/whatwg-mimetype@3.0.2': {}
+
+  '@types/ws@8.18.1':
+    dependencies:
+      '@types/node': 22.14.1
 
   '@vitejs/plugin-vue@5.2.3(vite@6.4.1(@types/node@22.14.1)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.87.0)(yaml@2.8.2))(vue@3.5.13(typescript@5.8.3))':
     dependencies:
@@ -3857,6 +3892,18 @@ snapshots:
 
   hachure-fill@0.5.2: {}
 
+  happy-dom@20.8.4:
+    dependencies:
+      '@types/node': 22.14.1
+      '@types/whatwg-mimetype': 3.0.2
+      '@types/ws': 8.18.1
+      entities: 7.0.1
+      whatwg-mimetype: 3.0.0
+      ws: 8.19.0
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+
   has-flag@4.0.0: {}
 
   hasown@2.0.2:
@@ -4439,7 +4486,7 @@ snapshots:
       sass: 1.87.0
       yaml: 2.8.2
 
-  vitest@3.1.2(@types/node@22.14.1)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.87.0)(yaml@2.8.2):
+  vitest@3.1.2(@types/node@22.14.1)(happy-dom@20.8.4)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.87.0)(yaml@2.8.2):
     dependencies:
       '@vitest/expect': 3.1.2
       '@vitest/mocker': 3.1.2(vite@6.4.1(@types/node@22.14.1)(jiti@2.6.1)(lightningcss@1.30.2)(sass@1.87.0)(yaml@2.8.2))
@@ -4464,6 +4511,7 @@ snapshots:
       why-is-node-running: 2.3.0
     optionalDependencies:
       '@types/node': 22.14.1
+      happy-dom: 20.8.4
     transitivePeerDependencies:
       - jiti
       - less
@@ -4526,6 +4574,8 @@ snapshots:
 
   webpack-virtual-modules@0.6.2: {}
 
+  whatwg-mimetype@3.0.0: {}
+
   which@2.0.2:
     dependencies:
       isexe: 2.0.0
@@ -4546,6 +4596,8 @@ snapshots:
       ansi-styles: 6.2.3
       string-width: 5.1.2
       strip-ansi: 7.2.0
+
+  ws@8.19.0: {}
 
   yallist@4.0.0: {}
 

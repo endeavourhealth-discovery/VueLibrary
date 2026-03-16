@@ -26,6 +26,6 @@
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "outDir": "./dist/types"
   },
-  "include": ["./src/**/*.vue", "./src/**/*.ts", "./src/**/*.js"],
+  "include": ["./src/**/*.vue", "./src/**/*.ts", "./src/**/*.js", "src/typings"],
   "exclude": ["node_modules"]
 }

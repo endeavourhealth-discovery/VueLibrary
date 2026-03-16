@@ -61,6 +61,6 @@ export default defineConfig({
       provider: "v8",
       reporter: ["text", "lcov"]
     },
-    setupFiles: "./tests/setupTests.js"
+    setupFiles: "./tests/unit/setupTests.js"
   }
 });
