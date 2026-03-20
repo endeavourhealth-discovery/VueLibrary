@@ -99,6 +99,11 @@
   </Dialog>
 </template>
 <script setup lang="ts">
+import Dialog from "primevue/dialog";
+import Button from "primevue/button";
+import ProgressSpinner from "primevue/progressspinner";
+import Splitter from "primevue/splitter";
+import SplitterPanel from "primevue/splitterpanel";
 import { ref, onMounted, watch, Ref, computed, inject, ComputedRef } from "vue";
 import SearchBar from "@/components/SearchBar.vue";
 import SearchResults from "@/components/SearchResults.vue";

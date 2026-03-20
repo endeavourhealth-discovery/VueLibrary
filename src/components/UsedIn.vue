@@ -35,6 +35,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import DataTable from "primevue/datatable";
+import Column from "primevue/column";
 import { inject, onMounted, ref, Ref, watch } from "vue";
 import { RDF, RDFS } from "@/enums";
 import OverlaySummary from "@/components/OverlaySummary.vue";

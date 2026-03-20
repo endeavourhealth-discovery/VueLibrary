@@ -9,9 +9,6 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     Accordion: typeof import('primevue/accordion')['default']
-    AccordionContent: typeof import('primevue/accordioncontent')['default']
-    AccordionHeader: typeof import('primevue/accordionheader')['default']
-    AccordionPanel: typeof import('primevue/accordionpanel')['default']
     ActionButtons: typeof import('./src/components/ActionButtons.vue')['default']
     ArrayObjectNamesToStringWithLabel: typeof import('./src/components/ArrayObjectNamesToStringWithLabel.vue')['default']
     ArrayObjectNameTagWithLabel: typeof import('./src/components/ArrayObjectNameTagWithLabel.vue')['default']
@@ -76,7 +73,6 @@ declare module 'vue' {
     Panel: typeof import('primevue/panel')['default']
     ParentHeader: typeof import('./src/components/ParentHeader.vue')['default']
     ParentHierarchy: typeof import('./src/components/ParentHierarchy.vue')['default']
-    Popover: typeof import('primevue/popover')['default']
     ProgressSpinner: typeof import('primevue/progressspinner')['default']
     Properties: typeof import('./src/components/Properties.vue')['default']
     Provenance: typeof import('./src/components/Provenance.vue')['default']
@@ -93,7 +89,6 @@ declare module 'vue' {
     SearchBar: typeof import('./src/components/SearchBar.vue')['default']
     SearchResults: typeof import('./src/components/SearchResults.vue')['default']
     SecondaryTree: typeof import('./src/components/SecondaryTree.vue')['default']
-    Select: typeof import('primevue/select')['default']
     SelectButton: typeof import('primevue/selectbutton')['default']
     SetDefinition: typeof import('./src/components/SetDefinition.vue')['default']
     SimpleMaps: typeof import('./src/components/SimpleMaps.vue')['default']
@@ -102,24 +97,16 @@ declare module 'vue' {
     SplitterPanel: typeof import('primevue/splitterpanel')['default']
     SQLDisplay: typeof import('./src/components/SQLDisplay.vue')['default']
     SubsetDisplay: typeof import('./src/components/SubsetDisplay.vue')['default']
-    Tab: typeof import('primevue/tab')['default']
-    TabList: typeof import('primevue/tablist')['default']
     TabPanel: typeof import('primevue/tabpanel')['default']
-    TabPanels: typeof import('primevue/tabpanels')['default']
-    Tabs: typeof import('primevue/tabs')['default']
     Tag: typeof import('primevue/tag')['default']
     TermCodeTable: typeof import('./src/components/TermCodeTable.vue')['default']
     Textarea: typeof import('primevue/textarea')['default']
     TextHTMLWithLabel: typeof import('./src/components/TextHTMLWithLabel.vue')['default']
     TextWithLabel: typeof import('./src/components/TextWithLabel.vue')['default']
     ToggleButton: typeof import('primevue/togglebutton')['default']
-    ToggleSwitch: typeof import('primevue/toggleswitch')['default']
     Tree: typeof import('primevue/tree')['default']
     UsedIn: typeof import('./src/components/UsedIn.vue')['default']
     ValueSentenceDisplay: typeof import('./src/components/ValueSentenceDisplay.vue')['default']
     Viewer: typeof import('./src/components/Viewer.vue')['default']
-  }
-  export interface ComponentCustomProperties {
-    Tooltip: typeof import('primevue/tooltip')['default']
   }
 }

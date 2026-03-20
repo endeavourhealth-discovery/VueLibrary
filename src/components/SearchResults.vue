@@ -75,6 +75,8 @@
 </template>
 
 <script setup lang="ts">
+import MultiSelect from "primevue/multiselect";
+import RadioButton from "primevue/radiobutton";
 import { computed, ComputedRef, inject, onMounted, ref, Ref, watch } from "vue";
 import { FilterOptions } from "@/interfaces";
 import ResultsTable from "@/components/ResultsTable.vue";

@@ -2,8 +2,6 @@ import { defineConfig } from "vitest/config";
 import vue from "@vitejs/plugin-vue";
 import * as path from "path";
 import tailwindcss from "@tailwindcss/vite";
-import Components from "unplugin-vue-components/vite";
-import { PrimeVueResolver } from "@primevue/auto-import-resolver";
 import { esbuildCommonjs } from "@originjs/vite-plugin-commonjs";
 import dts from "vite-plugin-dts";
 
@@ -19,12 +17,7 @@ const entries: Record<string, string> = {
 };
 
 export default defineConfig({
-  plugins: [
-    vue(),
-    dts({ insertTypesEntry: true, include: ["src"], outputDir: "dist" }),
-    tailwindcss(),
-    Components({ resolvers: [PrimeVueResolver()], dts: true, directoryAsNamespace: true, collapseSamePrefixes: true })
-  ],
+  plugins: [vue(), dts({ insertTypesEntry: true, include: ["src"] }), tailwindcss()],
   optimizeDeps: {
     esbuildOptions: {
       plugins: [esbuildCommonjs(["google-palette"])]
@@ -34,7 +27,7 @@ export default defineConfig({
     rollupOptions: {
       preserveEntrySignatures: "strict",
       input: entries,
-      external: ["vue", /^primevue\//, "vue-router", "pinia"],
+      external: ["vue", "primevue", /primevue\/.+/, "primeicons", "primeflex", "vue-router", "pinia"],
       output: {
         dir: "dist",
         format: "es",

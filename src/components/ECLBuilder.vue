@@ -67,6 +67,12 @@
 </template>
 
 <script setup lang="ts">
+import Dialog from "primevue/dialog";
+import Button from "primevue/button";
+import ProgressSpinner from "primevue/progressspinner";
+import Checkbox from "primevue/checkbox";
+import Panel from "primevue/panel";
+import Popover from "primevue/popover";
 import { Ref, ref, watch, onMounted, provide, readonly, inject } from "vue";
 import { cloneDeep } from "lodash-es";
 import { isObjectHasKeys } from "@/helpers/DataTypeCheckers";

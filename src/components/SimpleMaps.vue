@@ -50,6 +50,8 @@
   </div>
 </template>
 <script lang="ts" setup>
+import DataTable from "primevue/datatable";
+import Column from "primevue/column";
 import { computed, onMounted, onUnmounted, ref } from "vue";
 import { SimpleMap } from "@/interfaces";
 

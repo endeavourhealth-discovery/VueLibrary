@@ -62,6 +62,9 @@
 </template>
 
 <script setup lang="ts">
+import MultiSelect from "primevue/multiselect";
+import Button from "primevue/button";
+import FloatLabel from "primevue/floatlabel";
 import { computed, ComputedRef, inject, onMounted, ref, Ref, watch } from "vue";
 import { FilterOptions } from "@/interfaces";
 import { TTIriRef } from "@/interfaces/AutoGen";

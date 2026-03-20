@@ -88,6 +88,7 @@
 
 <script setup lang="ts">
 import { computed, inject, onMounted, ref } from "vue";
+import Button from "primevue/button";
 import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
 import { useDialog } from "primevue/usedialog";
 import { useConfirm } from "primevue/useconfirm";

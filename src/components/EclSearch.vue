@@ -78,6 +78,11 @@
 </template>
 
 <script setup lang="ts">
+import Button from "primevue/button";
+import Textarea from "primevue/textarea";
+import Checkbox from "primevue/checkbox";
+import MultiSelect from "primevue/multiselect";
+import FloatLabel from "primevue/floatlabel";
 import { Ref, ref, watch, computed, onMounted, inject } from "vue";
 import ECLBuilder from "@/components/ECLBuilder.vue";
 import { TTIriRef, SearchResultSummary, ECLQueryRequest } from "@/interfaces/AutoGen";

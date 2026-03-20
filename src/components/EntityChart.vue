@@ -59,6 +59,8 @@
 </template>
 
 <script setup lang="ts">
+import OrganizationChart from "primevue/organizationchart";
+import ProgressSpinner from "primevue/progressspinner";
 import { inject, onMounted, Ref, ref, watch } from "vue";
 import { OrganizationChartNode } from "primevue/organizationchart";
 import injectionKeys from "@/injectionKeys/injectionKeys";

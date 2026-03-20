@@ -57,6 +57,9 @@
 </template>
 
 <script setup lang="ts">
+import DataTable from "primevue/datatable";
+import Column from "primevue/column";
+import ContextMenu from "primevue/contextmenu";
 import { computed, inject, onMounted, Ref, ref, watch } from "vue";
 import IMFontAwesomeIcon from "@/components/IMFontAwesomeIcon.vue";
 import { cloneDeep } from "lodash-es";

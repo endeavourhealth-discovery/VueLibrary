@@ -19,6 +19,8 @@
 </template>
 
 <script lang="ts" setup>
+import Button from "primevue/button";
+import ContextMenu from "primevue/contextmenu";
 import { computed, inject, onMounted, onUnmounted, ref, Ref, watch } from "vue";
 import * as d3 from "d3";
 import svgPanZoom from "svg-pan-zoom";
@@ -26,7 +28,6 @@ import { cloneDeep } from "lodash-es";
 import { TTGraphData } from "@/interfaces";
 import { translateFromEntityBundle, toggleNodeByName, hasNodeChildrenByName, addNodes, isArrayHasLength, isObjectHasKeys } from "@/helpers";
 import { IM } from "@/enums";
-import ContextMenu from "primevue/contextmenu";
 import { useToast } from "primevue/usetoast";
 import { ToastOptions } from "@/models";
 import { ToastSeverity } from "@/enums";

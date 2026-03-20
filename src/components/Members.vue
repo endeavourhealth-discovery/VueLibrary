@@ -40,6 +40,10 @@
 </template>
 
 <script setup lang="ts">
+import ProgressSpinner from "primevue/progressspinner";
+import DataTable from "primevue/datatable";
+import Column from "primevue/column";
+import Button from "primevue/button";
 import { inject, onMounted, ref, Ref, watch } from "vue";
 import { Node, Query } from "@/interfaces/AutoGen";
 import { IM } from "@/enums";

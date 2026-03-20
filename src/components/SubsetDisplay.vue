@@ -22,6 +22,8 @@
 </template>
 
 <script setup lang="ts">
+import DataTable from "primevue/datatable";
+import Column from "primevue/column";
 import { inject, onMounted, Ref, ref } from "vue";
 import IMViewerLink from "@/components/IMViewerLink.vue";
 import { TTIriRef } from "@/interfaces/AutoGen";

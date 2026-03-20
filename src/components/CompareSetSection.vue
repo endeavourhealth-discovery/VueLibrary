@@ -32,6 +32,9 @@
 </template>
 
 <script setup lang="ts">
+import ProgressSpinner from "primevue/progressspinner";
+import Listbox from "primevue/listbox";
+import ContextMenu from "primevue/contextmenu";
 import OverlaySummary from "@/components/OverlaySummary.vue";
 import { useCopyToClipboard } from "@/composables/useCopyToClipboard";
 import { useOverlay } from "@/composables/useOverlay";

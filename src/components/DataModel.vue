@@ -46,6 +46,8 @@
 </template>
 
 <script lang="ts" setup>
+import Tree from "primevue/tree";
+import ProgressSpinner from "primevue/progressspinner";
 import { inject, onMounted, Ref, ref, watch } from "vue";
 import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
 import type { TreeNode } from "primevue/treenode";

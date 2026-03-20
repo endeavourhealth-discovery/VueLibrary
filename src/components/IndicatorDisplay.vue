@@ -42,6 +42,7 @@
 </template>
 
 <script setup lang="ts">
+import ProgressSpinner from "primevue/progressspinner";
 import { isObjectHasKeys } from "@/helpers/DataTypeCheckers";
 import { Indicator } from "@/interfaces/AutoGen";
 import { computed, inject, onMounted, ref, Ref, watch } from "vue";

@@ -45,6 +45,10 @@
 </template>
 
 <script setup lang="ts">
+import Select from "primevue/select";
+import Button from "primevue/button";
+import ProgressSpinner from "primevue/progressspinner";
+import Tooltip from "primevue/tooltip";
 import { Ref, ref, onMounted, watch, computed, inject } from "vue";
 import { IM } from "@/enums";
 import AutocompleteSearchBar from "@/components/AutocompleteSearchBar.vue";

@@ -2,13 +2,13 @@
   <div class="loading-container" v-if="loading">
     <ProgressSpinner />
   </div>
-  <pre class="mermaid"
-    >{{ builderString }}
-</pre
-  >
+  <pre class="mermaid">
+    {{ builderString }}
+  </pre>
 </template>
 
 <script setup lang="ts">
+import ProgressSpinner from "primevue/progressspinner";
 import { inject, nextTick, onMounted, Ref, ref } from "vue";
 import mermaid from "mermaid";
 import { PropertyDisplay } from "@/interfaces";

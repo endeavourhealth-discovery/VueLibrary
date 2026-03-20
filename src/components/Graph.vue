@@ -16,6 +16,8 @@
 </template>
 
 <script setup lang="ts">
+import MultiSelect from "primevue/multiselect";
+import ProgressSpinner from "primevue/progressspinner";
 import { inject, onMounted, Ref, ref, watch } from "vue";
 import GraphComponent from "./GraphComponent.vue";
 import { TTGraphData } from "@/interfaces";

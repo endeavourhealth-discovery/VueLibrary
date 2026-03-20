@@ -44,6 +44,8 @@
 </template>
 
 <script setup lang="ts">
+import Tree from "primevue/tree";
+import Button from "primevue/button";
 import type { TreeNode } from "primevue/treenode";
 import { inject, onMounted, Ref, ref, watch } from "vue";
 import IMViewerLink from "@/components/IMViewerLink.vue";

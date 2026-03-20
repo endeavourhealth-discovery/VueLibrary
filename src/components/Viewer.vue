@@ -153,6 +153,12 @@
 </template>
 
 <script lang="ts" setup>
+import Tabs from "primevue/tabs";
+import Tab from "primevue/tab";
+import TabList from "primevue/tablist";
+import TabPanel from "primevue/tabpanel";
+import TabPanels from "primevue/tabpanels";
+import ProgressSpinner from "primevue/progressspinner";
 import { computed, inject, nextTick, onMounted, reactive, Ref, ref, watch } from "vue";
 import DataModel from "./DataModel.vue";
 import SetDefinition from "./SetDefinition.vue";

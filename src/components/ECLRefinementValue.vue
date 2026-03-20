@@ -59,9 +59,11 @@
 </template>
 
 <script setup lang="ts">
+import Select from "primevue/select";
+import Button from "primevue/button";
+import ProgressSpinner from "primevue/progressspinner";
 import { getConstraintOperator, setConstraintOperator } from "@/helpers/BuildQuery";
 import { constraintOperatorOptions } from "@/helpers/QueryEditorMethods";
-import Button from "primevue/button";
 import AutocompleteSearchBar from "@/components/AutocompleteSearchBar.vue";
 import { computed, inject, onMounted, ref, Ref, watch } from "vue";
 import { QueryRequest, SearchResultSummary, Where, Node, TTIriRef } from "@/interfaces/AutoGen";

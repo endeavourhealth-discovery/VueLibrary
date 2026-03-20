@@ -127,6 +127,10 @@
 </template>
 
 <script setup lang="ts">
+import Button from "primevue/button";
+import Checkbox from "primevue/checkbox";
+import Select from "primevue/select";
+import ProgressSpinner from "primevue/progressspinner";
 import { ref, Ref, onMounted, watch, inject, computed } from "vue";
 import AutocompleteSearchBar from "@/components/AutocompleteSearchBar.vue";
 import { Bool, IM } from "@/enums";
@@ -143,7 +147,6 @@ import {
   getConstraintOperator
 } from "@/helpers/BuildQuery";
 import { constraintOperatorOptions } from "@/helpers/QueryEditorMethods";
-import Button from "primevue/button";
 import ECLRefinementValue from "@/components/ECLRefinementValue.vue";
 import { v4 } from "uuid";
 import BooleanEditor from "@/components/BooleanEditor.vue";

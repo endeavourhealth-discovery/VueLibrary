@@ -6,6 +6,7 @@
 </template>
 
 <script setup lang="ts">
+import ProgressSpinner from "primevue/progressspinner";
 import { inject, onMounted, ref } from "vue";
 import VueJsonPretty from "vue-json-pretty";
 import "vue-json-pretty/lib/styles.css";

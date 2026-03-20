@@ -78,6 +78,14 @@
 
 <script setup lang="ts">
 import { onMounted, Ref, ref, watch, nextTick, computed, onBeforeUnmount, inject } from "vue";
+import IconField from "primevue/iconfield";
+import InputIcon from "primevue/inputicon";
+import InputText from "primevue/inputtext";
+import Button from "primevue/button";
+import Popover from "primevue/popover";
+import ProgressSpinner from "primevue/progressspinner";
+import Listbox from "primevue/listbox";
+import Tooltip from "primevue/tooltip";
 import DirectorySearchDialog from "@/components/DirectorySearchDialog.vue";
 import OverlaySummary from "@/components/OverlaySummary.vue";
 import { FilterOptions } from "@/interfaces";

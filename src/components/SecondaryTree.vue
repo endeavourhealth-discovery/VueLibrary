@@ -73,6 +73,8 @@
 </template>
 
 <script setup lang="ts">
+import Button from "primevue/button";
+import Tree from "primevue/tree";
 import { onMounted, ref, Ref, watch, nextTick, onBeforeUnmount, inject, computed } from "vue";
 import IMFontAwesomeIcon from "./IMFontAwesomeIcon.vue";
 import { isArrayHasLength, isObjectHasKeys } from "@/helpers/DataTypeCheckers";

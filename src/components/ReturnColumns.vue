@@ -8,6 +8,7 @@
 </template>
 
 <script setup lang="ts">
+import Button from "primevue/button";
 import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
 import { Return, Query } from "@/interfaces/AutoGen";
 import { onMounted, Ref, ref } from "vue";

@@ -29,6 +29,8 @@
 </template>
 
 <script setup lang="ts">
+import Button from "primevue/button";
+import ProgressSpinner from "primevue/progressspinner";
 import { Match, Query } from "@/interfaces/AutoGen";
 import { Bool, DisplayMode } from "@/enums";
 import { onMounted, watch, ref, inject } from "vue";

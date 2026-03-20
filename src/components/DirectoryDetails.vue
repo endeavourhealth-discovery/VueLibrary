@@ -36,6 +36,8 @@
 </template>
 
 <script setup lang="ts">
+import Button from "primevue/button";
+import ProgressSpinner from "primevue/progressspinner";
 import { inject, onMounted, ref, Ref, watch } from "vue";
 import { IM } from "@/enums";
 import Viewer from "@/components/Viewer.vue";

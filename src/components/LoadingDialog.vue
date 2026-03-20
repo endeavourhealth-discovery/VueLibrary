@@ -7,6 +7,7 @@
 </template>
 
 <script setup lang="ts">
+import ProgressSpinner from "primevue/progressspinner";
 import { inject, onMounted, ref } from "vue";
 
 const dialogRef: any = inject("dialogRef");

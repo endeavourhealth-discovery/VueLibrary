@@ -46,6 +46,12 @@
 </template>
 
 <script lang="ts" setup>
+import Tree from "primevue/tree";
+import ContextMenu from "primevue/contextmenu";
+import ProgressSpinner from "primevue/progressspinner";
+import Dialog from "primevue/dialog";
+import Button from "primevue/button";
+import InputText from "primevue/inputtext";
 import { computed, inject, onBeforeUnmount, onMounted, ref, Ref, watch } from "vue";
 import IMFontAwesomeIcon from "@/components/IMFontAwesomeIcon.vue";
 import OverlaySummary from "./OverlaySummary.vue";

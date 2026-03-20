@@ -73,6 +73,9 @@
 </template>
 
 <script setup lang="ts">
+import ProgressSpinner from "primevue/progressspinner";
+import SelectButton from "primevue/selectbutton";
+import Button from "primevue/button";
 import { getBooleanOperator, getBoolGroup, isObjectHasKeys } from "@/helpers";
 import { ColumnGroupDisplay, RecursiveMatchDisplay, ReturnColumns, SQLDisplay } from "@/components";
 import type { Argument, ArgumentReference, IMLLanguage, Query, QueryRequest } from "@/interfaces/AutoGen";

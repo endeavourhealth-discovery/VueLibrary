@@ -93,6 +93,11 @@
 </template>
 
 <script setup lang="ts">
+import DataTable from "primevue/datatable";
+import Column from "primevue/column";
+import Button from "primevue/button";
+import ContextMenu from "primevue/contextmenu";
+import Tooltip from "primevue/tooltip";
 import { computed, ComputedRef, inject, onMounted, ref, Ref, watch } from "vue";
 import OverlaySummary from "@/components/OverlaySummary.vue";
 import ActionButtons from "@/components/ActionButtons.vue";
@@ -114,7 +119,6 @@ import { buildIMQueryFromFilters } from "@/helpers/BuildQuery";
 import { MenuItem } from "primevue/menuitem";
 import { DataTablePageEvent, DataTableRowSelectEvent } from "primevue/datatable";
 import { nextTick } from "vue";
-import DataTable from "primevue/datatable";
 import injectionKeys from "@/injectionKeys/injectionKeys";
 import { useFilterStore, useUserStore } from "@/stores";
 

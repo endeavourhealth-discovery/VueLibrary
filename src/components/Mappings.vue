@@ -122,6 +122,12 @@
 </template>
 
 <script lang="ts" setup>
+import ProgressSpinner from "primevue/progressspinner";
+import OrganizationChart from "primevue/organizationchart";
+import Popover from "primevue/popover";
+import DataTable from "primevue/datatable";
+import Column from "primevue/column";
+import Button from "primevue/button";
 import { inject, onMounted, ref, Ref, watch } from "vue";
 import SimpleMaps from "./SimpleMaps.vue";
 import { ChartMapNode, ChartTableNode, Context, MapItem, Namespace, SimpleMap, SimpleMapIri } from "@/interfaces";

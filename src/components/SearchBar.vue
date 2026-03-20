@@ -47,6 +47,11 @@
 </template>
 
 <script setup lang="ts">
+import InputText from "primevue/inputtext";
+import InputGroup from "primevue/inputgroup";
+import SplitButton from "primevue/splitbutton";
+import Button from "primevue/button";
+import Popover from "primevue/popover";
 import Filters from "@/components/Filters.vue";
 import { ref, watch, onMounted } from "vue";
 import { FilterOptions } from "@/interfaces";

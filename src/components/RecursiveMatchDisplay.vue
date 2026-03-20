@@ -89,6 +89,7 @@
 </template>
 
 <script setup lang="ts">
+import Button from "primevue/button";
 import { Match } from "@/interfaces/AutoGen";
 import { Bool, DisplayMode } from "@/enums";
 import { Ref, ref, computed, inject } from "vue";

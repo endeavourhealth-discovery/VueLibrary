@@ -31,13 +31,13 @@
 </template>
 
 <script setup lang="ts">
+import Button from "primevue/button";
+import Textarea from "primevue/textarea";
 import { Ref, ref } from "vue";
 import { QueryRequest, SearchResultSummary } from "@/interfaces/AutoGen";
 import { useToast } from "primevue/usetoast";
 import { ToastOptions } from "@/models";
 import { ToastSeverity } from "@/enums";
-import Button from "primevue/button";
-import Textarea from "primevue/textarea";
 import { useCopyToClipboard } from "@/composables/useCopyToClipboard";
 import ResultsTable from "@/components/ResultsTable.vue";
 

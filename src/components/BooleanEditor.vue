@@ -55,6 +55,9 @@
   </div>
 </template>
 <script setup lang="ts">
+import Button from "primevue/button";
+import Select from "primevue/select";
+import Tooltip from "primevue/tooltip";
 import {
   createNewBoolGroup,
   getBooleanOptions,
@@ -71,7 +74,6 @@ import type { Match, Where } from "@/interfaces/AutoGen";
 import { computed, inject, onMounted, ref, Ref, watch } from "vue";
 import { Bool } from "@/enums";
 import { RoleGroup } from "@/components";
-import Button from "primevue/button";
 
 interface Props {
   index: number;

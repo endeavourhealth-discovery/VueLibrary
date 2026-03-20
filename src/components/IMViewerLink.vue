@@ -23,6 +23,8 @@
 </template>
 
 <script lang="ts" setup>
+import Button from "primevue/button";
+import ContextMenu from "primevue/contextmenu";
 import { ref, watch, onUnmounted, inject } from "vue";
 import OverlaySummary from "./OverlaySummary.vue";
 import { useOverlay } from "@/composables/useOverlay";

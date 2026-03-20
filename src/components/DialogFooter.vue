@@ -4,6 +4,7 @@
 
 <script setup>
 import { inject } from "vue";
+import Button from "primevue/button";
 
 const dialogRef = inject("dialogRef");
 

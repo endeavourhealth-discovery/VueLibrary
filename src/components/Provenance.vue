@@ -70,6 +70,10 @@
 </template>
 
 <script setup lang="ts">
+import DataTable from "primevue/datatable";
+import Column from "primevue/column";
+import Dialog from "primevue/dialog";
+import Panel from "primevue/panel";
 import { IM, RDF, RDFS, SHACL } from "@/enums";
 import { inject, onMounted, ref, Ref, watch } from "vue";
 import JSONViewer from "@/components/JSONViewer.vue";

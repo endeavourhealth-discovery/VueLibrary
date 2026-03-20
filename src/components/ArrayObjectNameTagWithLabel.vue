@@ -10,6 +10,7 @@
 
 <script setup lang="ts">
 import { computed, inject } from "vue";
+import Tag from "primevue/tag";
 import { TTIriRef } from "@/interfaces/AutoGen";
 import { isArrayHasLength, isObjectHasKeys } from "@/helpers/DataTypeCheckers";
 import { getLogger } from "@/logger/LogConfig";

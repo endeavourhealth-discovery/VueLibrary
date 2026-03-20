@@ -91,6 +91,11 @@
 </template>
 
 <script lang="ts" setup>
+import Button from "primevue/button";
+import Accordion from "primevue/accordion";
+import AccordionPanel from "primevue/accordionpanel";
+import AccordionHeader from "primevue/accordionheader";
+import AccordionContent from "primevue/accordioncontent";
 import Members from "./Members.vue";
 import CompareSetDialog from "./CompareSetDialog.vue";
 import SubsetDisplay from "./SubsetDisplay.vue";
