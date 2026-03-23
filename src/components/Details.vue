@@ -48,12 +48,12 @@ import Tree from "primevue/tree";
 import Button from "primevue/button";
 import type { TreeNode } from "primevue/treenode";
 import { inject, onMounted, Ref, ref, watch } from "vue";
-import IMViewerLink from "@/components/IMViewerLink.vue";
-import { IM, SHACL } from "@/enums";
-import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
+import IMViewerLink from "../components/IMViewerLink.vue";
+import { IM, SHACL } from "../enums";
+import { isArrayHasLength } from "../helpers/DataTypeCheckers";
 import { isArray } from "lodash-es";
-import { GenericObject } from "@/interfaces/GenericObject";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+import { GenericObject } from "../interfaces/GenericObject";
+import injectionKeys from "../injectionKeys/injectionKeys";
 
 const props = defineProps<{
   entityIri: string;

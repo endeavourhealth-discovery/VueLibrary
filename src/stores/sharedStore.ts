@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-import { IM, TagSeverity } from "@/enums";
-import { localStorageWithExpiry } from "@/helpers/LocalStorageWithExpiry";
+import { IM, TagSeverity } from "../enums";
+import { localStorageWithExpiry } from "../helpers/LocalStorageWithExpiry";
 import { ref } from "vue";
 
 export const useSharedStore = defineStore("shared", () => {

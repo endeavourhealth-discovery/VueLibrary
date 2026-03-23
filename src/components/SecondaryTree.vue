@@ -77,17 +77,17 @@ import Button from "primevue/button";
 import Tree from "primevue/tree";
 import { onMounted, ref, Ref, watch, nextTick, onBeforeUnmount, inject, computed } from "vue";
 import IMFontAwesomeIcon from "./IMFontAwesomeIcon.vue";
-import { isArrayHasLength, isObjectHasKeys } from "@/helpers/DataTypeCheckers";
-import { ConceptAggregate, TreeParent } from "@/interfaces";
-import { RDF, RDFS } from "@/enums";
-import { useTree } from "@/composables/useTree";
+import { isArrayHasLength, isObjectHasKeys } from "../helpers/DataTypeCheckers";
+import { ConceptAggregate, TreeParent } from "../interfaces";
+import { RDF, RDFS } from "../enums";
+import { useTree } from "../composables/useTree";
 import OverlaySummary from "./OverlaySummary.vue";
 import type { TreeNode } from "primevue/treenode";
-import { useOverlay } from "@/composables/useOverlay";
-import { TTIriRef } from "@/interfaces/AutoGen";
-import { ExtendedEntityReferenceNode, ExtendedTTEntity } from "@/interfaces/ExtendedAutoGen";
-import injectionKeys from "@/injectionKeys/injectionKeys";
-import { useUserStore } from "@/stores";
+import { useOverlay } from "../composables/useOverlay";
+import { TTIriRef } from "../interfaces/AutoGen";
+import { ExtendedEntityReferenceNode, ExtendedTTEntity } from "../interfaces/ExtendedAutoGen";
+import injectionKeys from "../injectionKeys/injectionKeys";
+import { useUserStore } from "../stores";
 
 interface Props {
   entityIri: string;

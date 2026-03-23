@@ -43,12 +43,12 @@
 
 <script setup lang="ts">
 import ProgressSpinner from "primevue/progressspinner";
-import { isObjectHasKeys } from "@/helpers/DataTypeCheckers";
-import { Indicator } from "@/interfaces/AutoGen";
+import { isObjectHasKeys } from "../helpers/DataTypeCheckers";
+import { Indicator } from "../interfaces/AutoGen";
 import { computed, inject, onMounted, ref, Ref, watch } from "vue";
-import IMViewerLink from "@/components/IMViewerLink.vue";
-import injectionKeys from "@/injectionKeys/injectionKeys";
-import { useUserStore } from "@/stores";
+import IMViewerLink from "../components/IMViewerLink.vue";
+import injectionKeys from "../injectionKeys/injectionKeys";
+import { useUserStore } from "../stores";
 
 interface Props {
   entityIri?: string;

@@ -31,12 +31,12 @@
 <script setup lang="ts">
 import Button from "primevue/button";
 import ProgressSpinner from "primevue/progressspinner";
-import { Match, Query } from "@/interfaces/AutoGen";
-import { Bool, DisplayMode } from "@/enums";
+import { Match, Query } from "../interfaces/AutoGen";
+import { Bool, DisplayMode } from "../enums";
 import { onMounted, watch, ref, inject } from "vue";
 import RecursiveMatchDisplay from "./RecursiveMatchDisplay.vue";
 import ReturnColumns from "./ReturnColumns.vue";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+import injectionKeys from "../injectionKeys/injectionKeys";
 
 interface Props {
   matchExpanded: boolean;

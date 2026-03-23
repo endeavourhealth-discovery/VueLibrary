@@ -34,12 +34,12 @@
 import Button from "primevue/button";
 import Textarea from "primevue/textarea";
 import { Ref, ref } from "vue";
-import { QueryRequest, SearchResultSummary } from "@/interfaces/AutoGen";
+import { QueryRequest, SearchResultSummary } from "../interfaces/AutoGen";
 import { useToast } from "primevue/usetoast";
-import { ToastOptions } from "@/models";
-import { ToastSeverity } from "@/enums";
-import { useCopyToClipboard } from "@/composables/useCopyToClipboard";
-import ResultsTable from "@/components/ResultsTable.vue";
+import { ToastOptions } from "../models";
+import { ToastSeverity } from "../enums";
+import { useCopyToClipboard } from "../composables/useCopyToClipboard";
+import ResultsTable from "../components/ResultsTable.vue";
 
 const emit = defineEmits<{
   locateInTree: [payload: string];

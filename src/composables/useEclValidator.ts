@@ -1,4 +1,4 @@
-import LoadingDialog from "@/components/LoadingDialog.vue";
+import LoadingDialog from "../components/LoadingDialog.vue";
 import Swal from "sweetalert2";
 
 export function useEclValidator() {

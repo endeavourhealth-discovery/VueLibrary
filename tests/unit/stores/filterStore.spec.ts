@@ -1,8 +1,8 @@
 import { beforeEach, describe, vi, expect } from "vitest";
 import { createTestingPinia } from "@pinia/testing";
-import { useFilterStore } from "@/stores";
-import { FilterOptions } from "@/interfaces";
-import { IM, RDF, RDFS } from "@/enums";
+import { useFilterStore } from "../../../src/stores";
+import { FilterOptions } from "../../../src/interfaces";
+import { IM, RDF, RDFS } from "../../../src/enums";
 
 describe("state", () => {
   beforeEach(() => {

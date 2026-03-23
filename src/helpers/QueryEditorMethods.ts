@@ -1,5 +1,5 @@
-import { Node, Where, Match, Orderable, Path, RelativeTo, TTIriRef, Compare } from "@/interfaces";
-import { Order, Operator, RangeOrValue, Relativity } from "@/enums";
+import { Node, Where, Match, Orderable, Path, RelativeTo, TTIriRef, Compare } from "../interfaces";
+import { Order, Operator, RangeOrValue, Relativity } from "../enums";
 
 export const compareOptions = [
   { label: "Compare to another value", value: Relativity.Compare },

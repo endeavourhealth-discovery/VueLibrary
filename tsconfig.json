@@ -20,9 +20,6 @@
     "rootDir": "./src",
     "baseUrl": ".",
     "types": ["vite/client", "vitest/globals", "@vueuse/core", "@vueuse/integrations"],
-    "paths": {
-      "@/*": ["src/*"]
-    },
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "outDir": "./dist/types"
   },

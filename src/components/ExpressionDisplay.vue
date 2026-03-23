@@ -18,12 +18,12 @@
 
 <script setup lang="ts">
 import ProgressSpinner from "primevue/progressspinner";
-import { isObjectHasKeys } from "@/helpers/DataTypeCheckers";
-import { useCopyToClipboard } from "@/composables/useCopyToClipboard";
+import { isObjectHasKeys } from "../helpers/DataTypeCheckers";
+import { useCopyToClipboard } from "../composables/useCopyToClipboard";
 import { inject, onMounted, ref } from "vue";
-import { IM, RDFS } from "@/enums";
-import { ExtendedTTEntity } from "@/interfaces/ExtendedAutoGen";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+import { IM, RDFS } from "../enums";
+import { ExtendedTTEntity } from "../interfaces/ExtendedAutoGen";
+import injectionKeys from "../injectionKeys/injectionKeys";
 
 interface Props {
   concept: ExtendedTTEntity;

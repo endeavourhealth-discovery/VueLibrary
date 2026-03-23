@@ -18,8 +18,8 @@
 <script setup lang="ts">
 import ProgressSpinner from "primevue/progressspinner";
 import { inject, onMounted, ref } from "vue";
-import { useCopyToClipboard } from "@/composables/useCopyToClipboard";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+import { useCopyToClipboard } from "../composables/useCopyToClipboard";
+import injectionKeys from "../injectionKeys/injectionKeys";
 
 interface Props {
   definition: string;

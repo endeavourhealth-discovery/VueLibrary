@@ -28,11 +28,11 @@
 </template>
 
 <script setup lang="ts">
-import ActionButtons from "@/components/ActionButtons.vue";
+import ActionButtons from "../components/ActionButtons.vue";
 import IMFontAwesomeIcon from "./IMFontAwesomeIcon.vue";
-import { IM, RDF, RDFS } from "@/enums";
-import { getColourFromType, getFAIconFromType } from "@/helpers/ConceptTypeVisuals";
-import { ExtendedTTEntity } from "@/interfaces/ExtendedAutoGen";
+import { IM, RDF, RDFS } from "../enums";
+import { getColourFromType, getFAIconFromType } from "../helpers/ConceptTypeVisuals";
+import { ExtendedTTEntity } from "../interfaces/ExtendedAutoGen";
 
 defineProps<{
   entity: ExtendedTTEntity;

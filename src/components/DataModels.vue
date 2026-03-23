@@ -44,17 +44,17 @@
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import { computed, inject, onMounted, Ref, ref, watch } from "vue";
-import IMFontAwesomeIcon from "@/components/IMFontAwesomeIcon.vue";
+import IMFontAwesomeIcon from "../components/IMFontAwesomeIcon.vue";
 import { cloneDeep } from "lodash-es";
-import { TTIriRef } from "@/interfaces/AutoGen";
-import { IM, SHACL } from "@/enums";
-import OverlaySummary from "@/components/OverlaySummary.vue";
-import ActionButtons from "@/components/ActionButtons.vue";
-import { useOverlay } from "@/composables/useOverlay";
-import { getColourFromType } from "@/helpers/ConceptTypeVisuals";
+import { TTIriRef } from "../interfaces/AutoGen";
+import { IM, SHACL } from "../enums";
+import OverlaySummary from "../components/OverlaySummary.vue";
+import ActionButtons from "../components/ActionButtons.vue";
+import { useOverlay } from "../composables/useOverlay";
+import { getColourFromType } from "../helpers/ConceptTypeVisuals";
 import { DataTableRowSelectEvent } from "primevue/datatable";
-import injectionKeys from "@/injectionKeys/injectionKeys";
-import { useDirectoryStore, useUserStore } from "@/stores";
+import injectionKeys from "../injectionKeys/injectionKeys";
+import { useDirectoryStore, useUserStore } from "../stores";
 interface UIDataModel extends TTIriRef {
   type?: TTIriRef[];
   icon?: string[];

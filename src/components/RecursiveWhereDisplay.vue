@@ -53,13 +53,13 @@
 </template>
 
 <script setup lang="ts">
-import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
-import { Where } from "@/interfaces/AutoGen";
-import { Bool } from "@/enums";
+import { isArrayHasLength } from "../helpers/DataTypeCheckers";
+import { Where } from "../interfaces/AutoGen";
+import { Bool } from "../enums";
 import { computed, Ref, ref } from "vue";
-import { IMViewerLink, ValueSentenceDisplay } from "@/components";
-import { getRelativeTo, buildValueSentence, getIsOperator } from "@/helpers/QueryEditorMethods";
-import { getTypeIcon, getIconColor } from "@/helpers/ConceptTypeVisuals";
+import { IMViewerLink, ValueSentenceDisplay } from "../components";
+import { getRelativeTo, buildValueSentence, getIsOperator } from "../helpers/QueryEditorMethods";
+import { getTypeIcon, getIconColor } from "../helpers/ConceptTypeVisuals";
 
 interface Props {
   where: Where;

@@ -1,7 +1,7 @@
 import { inject, ref, Ref } from "vue";
-import { SearchTermCode } from "@/interfaces/AutoGen";
-import { TermCode } from "@/interfaces";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+import { SearchTermCode } from "../interfaces/AutoGen";
+import { TermCode } from "../interfaces";
+import injectionKeys from "../injectionKeys/injectionKeys";
 
 export function useTerms() {
   const conceptService = inject(injectionKeys.conceptService);

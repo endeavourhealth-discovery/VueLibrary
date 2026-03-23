@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
-import { useUserStore } from "@/stores/userStore";
-import { RDFS } from "@/enums";
-import { isObjectHasKeys, localStorageWithExpiry } from "@/helpers";
-import { ExtendedTTEntity } from "@/interfaces";
+import { useUserStore } from "../stores/userStore";
+import { RDFS } from "../enums";
+import { isObjectHasKeys, localStorageWithExpiry } from "../helpers";
+import { ExtendedTTEntity } from "../interfaces";
 import { ref } from "vue";
 
 export const useEditorStore = defineStore("editor", () => {

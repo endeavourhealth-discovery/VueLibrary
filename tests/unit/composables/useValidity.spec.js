@@ -1,12 +1,12 @@
-import { useValidity } from "@/composables";
+import { useValidity } from "../../../src/composables";
 import testData from "./useValidity.testData";
 import { mountComposable } from "../TestMethods";
 import { flushPromises } from "@vue/test-utils";
-import { IM } from "@/enums";
+import { IM } from "../../../src/enums";
 import { ref } from "vue";
 import { cloneDeep } from "lodash-es";
 import { describe, vi, it, expect, beforeEach } from "vitest";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+import injectionKeys from "../../../src/injectionKeys/injectionKeys";
 
 const entityService = {
   checkValidation: vi.fn()

@@ -4,7 +4,7 @@
 // Everything else
 
 import { TTIriRef } from "../interfaces/AutoGen";
-import { IM, OWL, RDF, SHACL } from "@/enums";
+import { IM, OWL, RDF, SHACL } from "../enums";
 
 export function isOfTypes(conceptTypeElements: TTIriRef[], ...types: string[]): boolean {
   if (!conceptTypeElements?.length) {

@@ -53,7 +53,7 @@
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import { computed, onMounted, onUnmounted, ref } from "vue";
-import { SimpleMap } from "@/interfaces";
+import { SimpleMap } from "../interfaces";
 
 interface Props {
   data: SimpleMap[];

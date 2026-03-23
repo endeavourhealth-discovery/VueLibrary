@@ -39,13 +39,13 @@
 import Button from "primevue/button";
 import ProgressSpinner from "primevue/progressspinner";
 import { inject, onMounted, ref, Ref, watch } from "vue";
-import { IM } from "@/enums";
-import Viewer from "@/components/Viewer.vue";
-import ParentHeader from "@/components/ParentHeader.vue";
-import ParentHierarchy from "@/components/ParentHierarchy.vue";
-import { SearchResponse } from "@/interfaces/AutoGen";
-import { ExtendedTTEntity } from "@/interfaces/ExtendedAutoGen";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+import { IM } from "../enums";
+import Viewer from "../components/Viewer.vue";
+import ParentHeader from "../components/ParentHeader.vue";
+import ParentHierarchy from "../components/ParentHierarchy.vue";
+import { SearchResponse } from "../interfaces/AutoGen";
+import { ExtendedTTEntity } from "../interfaces/ExtendedAutoGen";
+import injectionKeys from "../injectionKeys/injectionKeys";
 
 interface Props {
   selectedIri: string;

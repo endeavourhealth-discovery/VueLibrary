@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-import { FilterOptions, Namespace } from "@/interfaces";
-import { isObjectHasKeys } from "@/helpers";
+import { FilterOptions, Namespace } from "../interfaces";
+import { isObjectHasKeys } from "../helpers";
 import { ref } from "vue";
 
 export const useFilterStore = defineStore("filter", () => {

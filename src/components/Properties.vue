@@ -93,10 +93,10 @@ import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import Button from "primevue/button";
 import { inject, onMounted, Ref, ref, watch } from "vue";
-import { PropertyDisplay } from "@/interfaces";
-import { isArrayHasLength, isObjectHasKeys } from "@/helpers/DataTypeCheckers";
+import { PropertyDisplay } from "../interfaces";
+import { isArrayHasLength, isObjectHasKeys } from "../helpers/DataTypeCheckers";
 import type { DataTableExpandedRows } from "primevue/datatable";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+import injectionKeys from "../injectionKeys/injectionKeys";
 
 const props = defineProps<{
   entityIri: string;

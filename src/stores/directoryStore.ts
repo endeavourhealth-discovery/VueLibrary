@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
 
-import { IM, RDFS } from "@/enums";
-import { ExtendedTTEntity, SearchResponse } from "@/interfaces";
-import { isObjectHasKeys } from "@/helpers";
+import { IM, RDFS } from "../enums";
+import { ExtendedTTEntity, SearchResponse } from "../interfaces";
+import { isObjectHasKeys } from "../helpers";
 import { ref } from "vue";
 
 export const useDirectoryStore = defineStore("directory", () => {

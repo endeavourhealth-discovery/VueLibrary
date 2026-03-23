@@ -1,4 +1,4 @@
-import { ExtendedTTEntity } from "@/interfaces/ExtendedAutoGen";
+import { ExtendedTTEntity } from "../interfaces/ExtendedAutoGen";
 
 export interface ValidatedEntity extends ExtendedTTEntity {
   validationCode?: string;

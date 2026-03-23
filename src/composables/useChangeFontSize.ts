@@ -1,6 +1,6 @@
-import { FontSize } from "@/enums";
-import injectionKeys from "@/injectionKeys/injectionKeys";
-import { useUserStore } from "@/stores";
+import { FontSize } from "../enums";
+import injectionKeys from "../injectionKeys/injectionKeys";
+import { useUserStore } from "../stores";
 import { inject } from "vue";
 
 export function useChangeFontSize() {

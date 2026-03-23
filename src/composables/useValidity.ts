@@ -1,12 +1,12 @@
-import { deferred } from "@/helpers/Deferred";
-import { isArrayHasLength, isObjectHasKeys } from "@/helpers/DataTypeCheckers";
-import { isPropertyShape } from "@/helpers/TypeGuards";
-import { FormGenerator, PropertyShape } from "@/interfaces/AutoGen";
-import { IM, COMPONENT } from "@/enums";
+import { deferred } from "../helpers/Deferred";
+import { isArrayHasLength, isObjectHasKeys } from "../helpers/DataTypeCheckers";
+import { isPropertyShape } from "../helpers/TypeGuards";
+import { FormGenerator, PropertyShape } from "../interfaces/AutoGen";
+import { IM, COMPONENT } from "../enums";
 import { isArray } from "lodash-es";
 import { inject, Ref, ref } from "vue";
 import Swal from "sweetalert2";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+import injectionKeys from "../injectionKeys/injectionKeys";
 
 export function useValidity(shape?: FormGenerator) {
   const entityService = inject(injectionKeys.entityService);

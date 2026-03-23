@@ -1,4 +1,4 @@
-import { RDF, IM, XSD, RDFS, EDITOR, COMPONENT, VALIDATION, IM_FUNCTION, QUERY } from "@/enums";
+import { RDF, IM, XSD, RDFS, EDITOR, COMPONENT, VALIDATION, IM_FUNCTION, QUERY } from "../../../src/enums";
 import { expect } from "vitest";
 
 export default {

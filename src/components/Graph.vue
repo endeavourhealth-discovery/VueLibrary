@@ -20,11 +20,11 @@ import MultiSelect from "primevue/multiselect";
 import ProgressSpinner from "primevue/progressspinner";
 import { inject, onMounted, Ref, ref, watch } from "vue";
 import GraphComponent from "./GraphComponent.vue";
-import { TTGraphData } from "@/interfaces";
-import { translateFromEntityBundle, isObjectHasKeys } from "@/helpers";
-import { IM } from "@/enums";
-import { TTBundle } from "@/interfaces/ExtendedAutoGen";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+import { TTGraphData } from "../interfaces";
+import { translateFromEntityBundle, isObjectHasKeys } from "../helpers";
+import { IM } from "../enums";
+import { TTBundle } from "../interfaces/ExtendedAutoGen";
+import injectionKeys from "../injectionKeys/injectionKeys";
 
 const props = defineProps<{
   entityIri: string;

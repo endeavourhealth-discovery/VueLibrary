@@ -35,8 +35,8 @@ import Dialog from "primevue/dialog";
 import Button from "primevue/button";
 import { inject, Ref, ref, watch } from "vue";
 import CompareSetSection from "./CompareSetSection.vue";
-import { Concept, SearchResultSummary } from "@/interfaces/AutoGen";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+import { Concept, SearchResultSummary } from "../interfaces/AutoGen";
+import injectionKeys from "../injectionKeys/injectionKeys";
 
 defineProps<{
   setIriA: string;

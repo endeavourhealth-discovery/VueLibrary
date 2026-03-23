@@ -84,14 +84,14 @@ import Checkbox from "primevue/checkbox";
 import MultiSelect from "primevue/multiselect";
 import FloatLabel from "primevue/floatlabel";
 import { Ref, ref, watch, computed, onMounted, inject } from "vue";
-import ECLBuilder from "@/components/ECLBuilder.vue";
-import { TTIriRef, SearchResultSummary, ECLQueryRequest } from "@/interfaces/AutoGen";
-import { byName } from "@/helpers/Sorters";
-import ResultsTable from "@/components/ResultsTable.vue";
-import { useCopyToClipboard } from "@/composables/useCopyToClipboard";
-import { GenericObject } from "@/interfaces/GenericObject";
-import injectionKeys from "@/injectionKeys/injectionKeys";
-import { useEditorStore, useFilterStore } from "@/stores";
+import ECLBuilder from "../components/ECLBuilder.vue";
+import { TTIriRef, SearchResultSummary, ECLQueryRequest } from "../interfaces/AutoGen";
+import { byName } from "../helpers/Sorters";
+import ResultsTable from "../components/ResultsTable.vue";
+import { useCopyToClipboard } from "../composables/useCopyToClipboard";
+import { GenericObject } from "../interfaces/GenericObject";
+import injectionKeys from "../injectionKeys/injectionKeys";
+import { useEditorStore, useFilterStore } from "../stores";
 
 const emit = defineEmits<{
   locateInTree: [payload: string];

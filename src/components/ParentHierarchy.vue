@@ -30,10 +30,10 @@ import Breadcrumb from "primevue/breadcrumb";
 import Menu from "primevue/menu";
 import Button from "primevue/button";
 import { onMounted, ref, Ref, watch, computed, inject } from "vue";
-import { IM } from "@/enums";
-import { TTIriRef } from "@/interfaces/AutoGen";
+import { IM } from "../enums";
+import { TTIriRef } from "../interfaces/AutoGen";
 import type { MenuItem } from "primevue/menuitem";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+import injectionKeys from "../injectionKeys/injectionKeys";
 
 const props = defineProps<{
   entityIri: string;

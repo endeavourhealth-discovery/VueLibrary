@@ -42,11 +42,6 @@ export default defineConfig({
     outDir: "dist",
     emptyOutDir: true
   },
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./src")
-    }
-  },
   test: {
     globals: true,
     environment: "happy-dom",

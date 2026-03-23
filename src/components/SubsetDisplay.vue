@@ -25,9 +25,9 @@
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import { inject, onMounted, Ref, ref } from "vue";
-import IMViewerLink from "@/components/IMViewerLink.vue";
-import { TTIriRef } from "@/interfaces/AutoGen";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+import IMViewerLink from "../components/IMViewerLink.vue";
+import { TTIriRef } from "../interfaces/AutoGen";
+import injectionKeys from "../injectionKeys/injectionKeys";
 
 const props = defineProps<{
   entityIri: string;

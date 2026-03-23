@@ -159,9 +159,9 @@ import Select from "primevue/select";
 import Checkbox from "primevue/checkbox";
 import { inject, onMounted, Ref, ref, computed, watch } from "vue";
 import ConceptSelector from "./ConceptSelector.vue";
-import { Match, Where, Node, QueryRequest, TTIriRef } from "@/interfaces/AutoGen";
-import ECLRefinement from "@/components/ECLRefinement.vue";
-import { onDragStart, onDragEnd, onDragOver, onDrop } from "@/helpers/DragContext";
+import { Match, Where, Node, QueryRequest, TTIriRef } from "../interfaces/AutoGen";
+import ECLRefinement from "../components/ECLRefinement.vue";
+import { onDragStart, onDragEnd, onDragOver, onDrop } from "../helpers/DragContext";
 import {
   addConceptToGroup,
   addRefinementToGroup,
@@ -173,11 +173,11 @@ import {
   getIsRoleGroup,
   manageRoleGroup,
   updateFocusConcepts
-} from "@/helpers/BuildQuery";
+} from "../helpers/BuildQuery";
 import { v4 } from "uuid";
-import { Bool, QUERY } from "@/enums";
-import BooleanEditor from "@/components/BooleanEditor.vue";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+import { Bool, QUERY } from "../enums";
+import BooleanEditor from "../components/BooleanEditor.vue";
+import injectionKeys from "../injectionKeys/injectionKeys";
 
 interface Props {
   index: number;

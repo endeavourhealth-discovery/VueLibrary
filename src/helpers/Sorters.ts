@@ -1,4 +1,4 @@
-import { GenericObject } from "@/interfaces/GenericObject";
+import { GenericObject } from "../interfaces/GenericObject";
 import { isObjectHasKeys } from "./DataTypeCheckers";
 
 export function stringAscending(a: string, b: string): number {

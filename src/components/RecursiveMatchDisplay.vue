@@ -90,13 +90,13 @@
 
 <script setup lang="ts">
 import Button from "primevue/button";
-import { Match } from "@/interfaces/AutoGen";
-import { Bool, DisplayMode } from "@/enums";
+import { Match } from "../interfaces/AutoGen";
+import { Bool, DisplayMode } from "../enums";
 import { Ref, ref, computed, inject } from "vue";
 import RecursiveWhereDisplay from "./RecursiveWhereDisplay.vue";
-import { BooleanMatchDisplay, IMViewerLink } from "@/components";
-import { getBooleanOperator, getDisplayOperator, getBoolGroup, getResults } from "@/helpers";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+import { BooleanMatchDisplay, IMViewerLink } from "../components";
+import { getBooleanOperator, getDisplayOperator, getBoolGroup, getResults } from "../helpers";
+import injectionKeys from "../injectionKeys/injectionKeys";
 
 interface Props {
   isVariable?: boolean;

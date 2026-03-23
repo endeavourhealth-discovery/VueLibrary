@@ -25,14 +25,14 @@ import { computed, inject, onMounted, onUnmounted, ref, Ref, watch } from "vue";
 import * as d3 from "d3";
 import svgPanZoom from "svg-pan-zoom";
 import { cloneDeep } from "lodash-es";
-import { TTGraphData } from "@/interfaces";
-import { translateFromEntityBundle, toggleNodeByName, hasNodeChildrenByName, addNodes, isArrayHasLength, isObjectHasKeys } from "@/helpers";
-import { IM } from "@/enums";
+import { TTGraphData } from "../interfaces";
+import { translateFromEntityBundle, toggleNodeByName, hasNodeChildrenByName, addNodes, isArrayHasLength, isObjectHasKeys } from "../helpers";
+import { IM } from "../enums";
 import { useToast } from "primevue/usetoast";
-import { ToastOptions } from "@/models";
-import { ToastSeverity } from "@/enums";
-import injectionKeys from "@/injectionKeys/injectionKeys";
-import { useDirectoryStore } from "@/stores";
+import { ToastOptions } from "../models";
+import { ToastSeverity } from "../enums";
+import injectionKeys from "../injectionKeys/injectionKeys";
+import { useDirectoryStore } from "../stores";
 
 interface Props {
   data: TTGraphData;

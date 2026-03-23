@@ -66,12 +66,12 @@ import MultiSelect from "primevue/multiselect";
 import Button from "primevue/button";
 import FloatLabel from "primevue/floatlabel";
 import { computed, ComputedRef, inject, onMounted, ref, Ref, watch } from "vue";
-import { FilterOptions } from "@/interfaces";
-import { TTIriRef } from "@/interfaces/AutoGen";
-import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
-import { NAMESPACE } from "@/enums";
-import injectionKeys from "@/injectionKeys/injectionKeys";
-import { useFilterStore } from "@/stores";
+import { FilterOptions } from "../interfaces";
+import { TTIriRef } from "../interfaces/AutoGen";
+import { isArrayHasLength } from "../helpers/DataTypeCheckers";
+import { NAMESPACE } from "../enums";
+import injectionKeys from "../injectionKeys/injectionKeys";
+import { useFilterStore } from "../stores";
 interface Props {
   selectedFilterOptions?: FilterOptions;
 }

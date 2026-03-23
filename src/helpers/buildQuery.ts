@@ -1,8 +1,8 @@
-import { Match, Node, Query, QueryRequest, SearchBinding, Where, Path, NodeShape, Return } from "@/interfaces/AutoGen";
-import { Bool, RuleAction, IM, RDF, SHACL } from "@/enums";
-import { Orderable, SearchOptions } from "@/interfaces";
+import { Match, Node, Query, QueryRequest, SearchBinding, Where, Path, NodeShape, Return } from "../interfaces/AutoGen";
+import { Bool, RuleAction, IM, RDF, SHACL } from "../enums";
+import { Orderable, SearchOptions } from "../interfaces";
 import type { TreeNode } from "primevue/treenode";
-import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
+import { isArrayHasLength } from "../helpers/DataTypeCheckers";
 import Swal from "sweetalert2";
 import { cloneDeep } from "lodash-es";
 import { v4 } from "uuid";

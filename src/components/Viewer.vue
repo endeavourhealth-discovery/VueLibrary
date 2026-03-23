@@ -171,21 +171,21 @@ import EclDefinition from "./EclDefinition.vue";
 import Properties from "./Properties.vue";
 import JSONViewer from "./JSONViewer.vue";
 import Provenance from "./Provenance.vue";
-import SecondaryTree from "@/components/SecondaryTree.vue";
-import TermCodeTable from "@/components/TermCodeTable.vue";
+import SecondaryTree from "../components/SecondaryTree.vue";
+import TermCodeTable from "../components/TermCodeTable.vue";
 import Details from "./Details.vue";
 import DataModels from "./DataModels.vue";
 import QueryDisplay from "./QueryDisplay.vue";
-import ExpressionDisplay from "@/components/ExpressionDisplay.vue";
-import TextWithLabel from "@/components/TextWithLabel.vue";
-import TextHTMLWithLabel from "@/components/TextHTMLWithLabel.vue";
-import ArrayObjectNameTagWithLabel from "@/components/ArrayObjectNameTagWithLabel.vue";
-import ArrayObjectNamesToStringWithLabel from "@/components/ArrayObjectNamesToStringWithLabel.vue";
-import ModelChart from "@/components/ModelChart.vue";
-import IndicatorDisplay from "@/components/IndicatorDisplay.vue";
+import ExpressionDisplay from "../components/ExpressionDisplay.vue";
+import TextWithLabel from "../components/TextWithLabel.vue";
+import TextHTMLWithLabel from "../components/TextHTMLWithLabel.vue";
+import ArrayObjectNameTagWithLabel from "../components/ArrayObjectNameTagWithLabel.vue";
+import ArrayObjectNamesToStringWithLabel from "../components/ArrayObjectNamesToStringWithLabel.vue";
+import ModelChart from "../components/ModelChart.vue";
+import IndicatorDisplay from "../components/IndicatorDisplay.vue";
 
-import { TTIriRef } from "@/interfaces/AutoGen";
-import { isObjectHasKeys } from "@/helpers/DataTypeCheckers";
+import { TTIriRef } from "../interfaces/AutoGen";
+import { isObjectHasKeys } from "../helpers/DataTypeCheckers";
 import {
   isConcept,
   isFeature,
@@ -197,10 +197,10 @@ import {
   isQuery,
   isRecordModel,
   isValueSet
-} from "@/helpers/ConceptTypeMethods";
-import { IM, RDF, RDFS, SHACL } from "@/enums";
-import { ExtendedTTEntity } from "@/interfaces/ExtendedAutoGen";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+} from "../helpers/ConceptTypeMethods";
+import { IM, RDF, RDFS, SHACL } from "../enums";
+import { ExtendedTTEntity } from "../interfaces/ExtendedAutoGen";
+import injectionKeys from "../injectionKeys/injectionKeys";
 
 interface Props {
   entity: ExtendedTTEntity;

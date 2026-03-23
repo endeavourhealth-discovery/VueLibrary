@@ -5,7 +5,7 @@
 </template>
 
 <script setup lang="ts">
-import { Match } from "@/interfaces/AutoGen";
+import { Match } from "../interfaces/AutoGen";
 interface Props {
   match: Match;
   depth: number;

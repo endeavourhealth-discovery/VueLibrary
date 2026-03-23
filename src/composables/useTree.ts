@@ -1,12 +1,12 @@
-import { getColourFromType, getFAIconFromType } from "@/helpers/ConceptTypeVisuals";
-import { isObjectHasKeys } from "@/helpers/DataTypeCheckers";
-import { TTIriRef } from "@/interfaces/AutoGen";
-import { ExtendedTTEntity } from "@/interfaces/ExtendedAutoGen";
-import { IM } from "@/enums";
+import { getColourFromType, getFAIconFromType } from "../helpers/ConceptTypeVisuals";
+import { isObjectHasKeys } from "../helpers/DataTypeCheckers";
+import { TTIriRef } from "../interfaces/AutoGen";
+import { ExtendedTTEntity } from "../interfaces/ExtendedAutoGen";
+import { IM } from "../enums";
 import type { TreeNode } from "primevue/treenode";
 import { inject, ref, Ref } from "vue";
 import { useToast } from "primevue/usetoast";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+import injectionKeys from "../injectionKeys/injectionKeys";
 
 export function useTree(favourites: string[], emit?: any, customPageSize?: number) {
   const directService = inject(injectionKeys.directService);

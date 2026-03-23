@@ -38,13 +38,13 @@
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import { inject, onMounted, ref, Ref, watch } from "vue";
-import { RDF, RDFS } from "@/enums";
-import OverlaySummary from "@/components/OverlaySummary.vue";
-import IMFontAwesomeIcon from "@/components/IMFontAwesomeIcon.vue";
-import { getColourFromType, getFAIconFromType } from "@/helpers/ConceptTypeVisuals";
-import { useOverlay } from "@/composables/useOverlay";
+import { RDF, RDFS } from "../enums";
+import OverlaySummary from "../components/OverlaySummary.vue";
+import IMFontAwesomeIcon from "../components/IMFontAwesomeIcon.vue";
+import { getColourFromType, getFAIconFromType } from "../helpers/ConceptTypeVisuals";
+import { useOverlay } from "../composables/useOverlay";
 import { DataTableRowSelectEvent } from "primevue/datatable";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+import injectionKeys from "../injectionKeys/injectionKeys";
 
 interface Usage {
   iri: string;

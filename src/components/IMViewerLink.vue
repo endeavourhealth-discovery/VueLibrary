@@ -27,9 +27,9 @@ import Button from "primevue/button";
 import ContextMenu from "primevue/contextmenu";
 import { ref, watch, onUnmounted, inject } from "vue";
 import OverlaySummary from "./OverlaySummary.vue";
-import { useOverlay } from "@/composables/useOverlay";
+import { useOverlay } from "../composables/useOverlay";
 import { cloneDeep } from "lodash-es";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+import injectionKeys from "../injectionKeys/injectionKeys";
 
 interface Props {
   iri: string;

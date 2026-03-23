@@ -49,15 +49,15 @@
 import Tree from "primevue/tree";
 import ProgressSpinner from "primevue/progressspinner";
 import { inject, onMounted, Ref, ref, watch } from "vue";
-import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
+import { isArrayHasLength } from "../helpers/DataTypeCheckers";
 import type { TreeNode } from "primevue/treenode";
-import IMViewerLink from "@/components/IMViewerLink.vue";
-import { IM, RDF, RDFS } from "@/enums";
-import { PropertyShape, TTIriRef, PropertyRange } from "@/interfaces/AutoGen";
-import { getColourFromType, getFAIconFromType } from "@/helpers/ConceptTypeVisuals";
-import IMFontAwesomeIcon from "@/components/IMFontAwesomeIcon.vue";
-import { GenericObject } from "@/interfaces/GenericObject";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+import IMViewerLink from "../components/IMViewerLink.vue";
+import { IM, RDF, RDFS } from "../enums";
+import { PropertyShape, TTIriRef, PropertyRange } from "../interfaces/AutoGen";
+import { getColourFromType, getFAIconFromType } from "../helpers/ConceptTypeVisuals";
+import IMFontAwesomeIcon from "../components/IMFontAwesomeIcon.vue";
+import { GenericObject } from "../interfaces/GenericObject";
+import injectionKeys from "../injectionKeys/injectionKeys";
 
 const props = defineProps<{
   entityIri: string;

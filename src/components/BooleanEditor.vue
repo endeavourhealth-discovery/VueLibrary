@@ -69,11 +69,11 @@ import {
   onDragOver,
   onDragStart,
   onDrop
-} from "@/helpers";
-import type { Match, Where } from "@/interfaces/AutoGen";
+} from "../helpers";
+import type { Match, Where } from "../interfaces/AutoGen";
 import { computed, inject, onMounted, ref, Ref, watch } from "vue";
-import { Bool } from "@/enums";
-import { RoleGroup } from "@/components";
+import { Bool } from "../enums";
+import { RoleGroup } from "../components";
 
 interface Props {
   index: number;

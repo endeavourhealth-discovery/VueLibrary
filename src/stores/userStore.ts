@@ -1,11 +1,11 @@
 import { defineStore } from "pinia";
-import { isObjectHasKeys } from "@/helpers";
-import { HistoryItem } from "@/interfaces";
-import { PrimeVuePresetThemes, PrimeVueColors, FontSize, UserRole } from "@/enums";
-import { localStorageWithExpiry } from "@/helpers";
+import { isObjectHasKeys } from "../helpers";
+import { HistoryItem } from "../interfaces";
+import { PrimeVuePresetThemes, PrimeVueColors, FontSize, UserRole } from "../enums";
+import { localStorageWithExpiry } from "../helpers";
 import { computed, ref } from "vue";
-import { NamespacePermissionJava, RecentActivityItemDto } from "@/interfaces";
-import { RecentActivityItem, User } from "@/models";
+import { NamespacePermissionJava, RecentActivityItemDto } from "../interfaces";
+import { RecentActivityItem, User } from "../models";
 
 export const useUserStore = defineStore("user", () => {
   const cookiesEssentialAccepted = ref<boolean>(localStorageWithExpiry.getItem("cookiesEssentialAccepted") === true ? true : false);

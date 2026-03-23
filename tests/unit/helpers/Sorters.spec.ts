@@ -1,4 +1,4 @@
-import { byScheme, byPriority, byLabel, byName, byPosition, byOrder } from "@/helpers";
+import { byScheme, byPriority, byLabel, byName, byPosition, byOrder } from "../../../src/helpers/Sorters";
 import { describe, it, expect } from "vitest";
 
 describe("Sorters", () => {

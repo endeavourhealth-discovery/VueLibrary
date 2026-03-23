@@ -76,13 +76,13 @@
 import ProgressSpinner from "primevue/progressspinner";
 import SelectButton from "primevue/selectbutton";
 import Button from "primevue/button";
-import { getBooleanOperator, getBoolGroup, isObjectHasKeys } from "@/helpers";
-import { ColumnGroupDisplay, RecursiveMatchDisplay, ReturnColumns, SQLDisplay } from "@/components";
-import type { Argument, ArgumentReference, IMLLanguage, Query, QueryRequest } from "@/interfaces/AutoGen";
-import { Bool, DisplayMode } from "@/enums";
+import { getBooleanOperator, getBoolGroup, isObjectHasKeys } from "../helpers";
+import { ColumnGroupDisplay, RecursiveMatchDisplay, ReturnColumns, SQLDisplay } from "../components";
+import type { Argument, ArgumentReference, IMLLanguage, Query, QueryRequest } from "../interfaces/AutoGen";
+import { Bool, DisplayMode } from "../enums";
 import { computed, inject, onMounted, provide, ref, Ref, watch } from "vue";
 import { cloneDeep } from "lodash-es";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+import injectionKeys from "../injectionKeys/injectionKeys";
 
 enum DisplayOptions {
   RuleView = "Rule view",

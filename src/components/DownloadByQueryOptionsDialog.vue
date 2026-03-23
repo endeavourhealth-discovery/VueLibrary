@@ -99,12 +99,12 @@ import Checkbox from "primevue/checkbox";
 import ToggleButton from "primevue/togglebutton";
 import MultiSelect from "primevue/multiselect";
 import FloatLabel from "primevue/floatlabel";
-import { DownloadSettings } from "@/interfaces";
-import { TTIriRef } from "@/interfaces/AutoGen";
+import { DownloadSettings } from "../interfaces";
+import { TTIriRef } from "../interfaces/AutoGen";
 import { computed, inject, Ref, ref, watch } from "vue";
-import { NAMESPACE } from "@/enums";
-import injectionKeys from "@/injectionKeys/injectionKeys";
-import { useFilterStore } from "@/stores";
+import { NAMESPACE } from "../enums";
+import injectionKeys from "../injectionKeys/injectionKeys";
+import { useFilterStore } from "../stores";
 
 interface DownloadOption {
   key: string;

@@ -62,16 +62,16 @@
 import Select from "primevue/select";
 import Button from "primevue/button";
 import ProgressSpinner from "primevue/progressspinner";
-import { getConstraintOperator, setConstraintOperator } from "@/helpers/BuildQuery";
-import { constraintOperatorOptions } from "@/helpers/QueryEditorMethods";
-import AutocompleteSearchBar from "@/components/AutocompleteSearchBar.vue";
+import { getConstraintOperator, setConstraintOperator } from "../helpers/BuildQuery";
+import { constraintOperatorOptions } from "../helpers/QueryEditorMethods";
+import AutocompleteSearchBar from "../components/AutocompleteSearchBar.vue";
 import { computed, inject, onMounted, ref, Ref, watch } from "vue";
-import { QueryRequest, SearchResultSummary, Where, Node, TTIriRef } from "@/interfaces/AutoGen";
-import { IM, QUERY, SNOMED } from "@/enums";
+import { QueryRequest, SearchResultSummary, Where, Node, TTIriRef } from "../interfaces/AutoGen";
+import { IM, QUERY, SNOMED } from "../enums";
 import { isEqual } from "lodash-es";
-import { ToastSeverity } from "@/enums";
+import { ToastSeverity } from "../enums";
 import { useToast } from "primevue/usetoast";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+import injectionKeys from "../injectionKeys/injectionKeys";
 interface Props {
   index: number;
 }

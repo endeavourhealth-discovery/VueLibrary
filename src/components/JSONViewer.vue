@@ -10,10 +10,10 @@ import ProgressSpinner from "primevue/progressspinner";
 import { inject, onMounted, ref } from "vue";
 import VueJsonPretty from "vue-json-pretty";
 import "vue-json-pretty/lib/styles.css";
-import { isObjectHasKeys } from "@/helpers/DataTypeCheckers";
-import { IM } from "@/enums";
-import { useCopyToClipboard } from "@/composables/useCopyToClipboard";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+import { isObjectHasKeys } from "../helpers/DataTypeCheckers";
+import { IM } from "../enums";
+import { useCopyToClipboard } from "../composables/useCopyToClipboard";
+import injectionKeys from "../injectionKeys/injectionKeys";
 
 const props = defineProps<{
   entityIri: string;

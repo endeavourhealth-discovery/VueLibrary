@@ -35,18 +35,18 @@
 import ProgressSpinner from "primevue/progressspinner";
 import Listbox from "primevue/listbox";
 import ContextMenu from "primevue/contextmenu";
-import OverlaySummary from "@/components/OverlaySummary.vue";
-import { useCopyToClipboard } from "@/composables/useCopyToClipboard";
-import { useOverlay } from "@/composables/useOverlay";
-import { buildIMQueryFromFilters } from "@/helpers/BuildQuery";
-import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
-import { FilterOptions, SearchOptions } from "@/interfaces";
-import { Concept, QueryRequest, SearchResultSummary } from "@/interfaces/AutoGen";
-import { IM, NAMESPACE } from "@/enums";
+import OverlaySummary from "../components/OverlaySummary.vue";
+import { useCopyToClipboard } from "../composables/useCopyToClipboard";
+import { useOverlay } from "../composables/useOverlay";
+import { buildIMQueryFromFilters } from "../helpers/BuildQuery";
+import { isArrayHasLength } from "../helpers/DataTypeCheckers";
+import { FilterOptions, SearchOptions } from "../interfaces";
+import { Concept, QueryRequest, SearchResultSummary } from "../interfaces/AutoGen";
+import { IM, NAMESPACE } from "../enums";
 import { ComputedRef, Ref, computed, inject, onMounted, ref, watch } from "vue";
-import AutocompleteSearchBar from "@/components/AutocompleteSearchBar.vue";
-import injectionKeys from "@/injectionKeys/injectionKeys";
-import { useFilterStore } from "@/stores";
+import AutocompleteSearchBar from "../components/AutocompleteSearchBar.vue";
+import injectionKeys from "../injectionKeys/injectionKeys";
+import { useFilterStore } from "../stores";
 
 const props = defineProps<{
   header: string;

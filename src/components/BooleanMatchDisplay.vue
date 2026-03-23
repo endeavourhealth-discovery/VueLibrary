@@ -33,10 +33,10 @@
 </template>
 
 <script setup lang="ts">
-import { Match } from "@/interfaces/AutoGen";
-import { Bool } from "@/enums";
-import { getBooleanLabel } from "@/helpers";
-import { RecursiveMatchDisplay } from "@/components";
+import { Match } from "../interfaces/AutoGen";
+import { Bool } from "../enums";
+import { getBooleanLabel } from "../helpers";
+import { RecursiveMatchDisplay } from "../components";
 
 interface Props {
   match: Match;

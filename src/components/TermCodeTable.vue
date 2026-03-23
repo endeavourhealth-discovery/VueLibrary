@@ -12,9 +12,9 @@
 <script setup lang="ts">
 import DataTable from "primevue/datatable";
 import Column from "primevue/column";
-import { useTerms } from "@/composables/useTerms";
-import injectionKeys from "@/injectionKeys/injectionKeys";
-import { SearchTermCode } from "@/interfaces/AutoGen";
+import { useTerms } from "../composables/useTerms";
+import injectionKeys from "../injectionKeys/injectionKeys";
+import { SearchTermCode } from "../interfaces/AutoGen";
 import { inject, onMounted, Ref, watch } from "vue";
 
 interface Props {

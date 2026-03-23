@@ -45,11 +45,11 @@ import DataTable from "primevue/datatable";
 import Column from "primevue/column";
 import Button from "primevue/button";
 import { inject, onMounted, ref, Ref, watch } from "vue";
-import { Node, Query } from "@/interfaces/AutoGen";
-import { IM } from "@/enums";
-import IMViewerLink from "@/components/IMViewerLink.vue";
-import { isObjectHasKeys } from "@/helpers/DataTypeCheckers";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+import { Node, Query } from "../interfaces/AutoGen";
+import { IM } from "../enums";
+import IMViewerLink from "../components/IMViewerLink.vue";
+import { isObjectHasKeys } from "../helpers/DataTypeCheckers";
+import injectionKeys from "../injectionKeys/injectionKeys";
 
 const props = defineProps<{
   entityIri?: string;

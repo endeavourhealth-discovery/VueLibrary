@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, vi } from "vitest";
 import { createTestingPinia } from "@pinia/testing";
-import { SearchResponse } from "@/interfaces";
-import { useDirectoryStore } from "@/stores";
+import { SearchResponse } from "../../../src/interfaces";
+import { useDirectoryStore } from "../../../src/stores";
 import { it } from "vitest";
 import { afterAll } from "vitest";
 

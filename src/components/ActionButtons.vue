@@ -89,13 +89,13 @@
 <script setup lang="ts">
 import { computed, inject, onMounted, ref } from "vue";
 import Button from "primevue/button";
-import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
+import { isArrayHasLength } from "../helpers/DataTypeCheckers";
 import { useDialog } from "primevue/usedialog";
 import { useConfirm } from "primevue/useconfirm";
-import { useDownloadFile } from "@/composables/useDownloadFile";
+import { useDownloadFile } from "../composables/useDownloadFile";
 import LoadingDialog from "./LoadingDialog.vue";
-import injectionKeys from "@/injectionKeys/injectionKeys";
-import { useUserStore } from "@/stores";
+import injectionKeys from "../injectionKeys/injectionKeys";
+import { useUserStore } from "../stores";
 
 const userService = inject(injectionKeys.userService);
 if (!userService) throw new Error("Missing injection: userService");

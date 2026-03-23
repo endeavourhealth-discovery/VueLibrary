@@ -1,6 +1,6 @@
-import { isArrayHasLength, isObjectHasKeys } from "@/helpers";
-import { IM, RDFS, SHACL } from "@/enums";
-import { TTBundle, TTIriRef } from "@/interfaces";
+import { isArrayHasLength, isObjectHasKeys } from "../helpers";
+import { IM, RDFS, SHACL } from "../enums";
+import { TTBundle, TTIriRef } from "../interfaces";
 
 export function buildDetails(definition: TTBundle): any[] {
   const treeNode = { children: [] as any[] };

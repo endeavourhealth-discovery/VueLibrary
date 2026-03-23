@@ -11,8 +11,8 @@
 import ProgressSpinner from "primevue/progressspinner";
 import { inject, nextTick, onMounted, Ref, ref } from "vue";
 import mermaid from "mermaid";
-import { PropertyDisplay } from "@/interfaces";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+import { PropertyDisplay } from "../interfaces";
+import injectionKeys from "../injectionKeys/injectionKeys";
 
 const props = defineProps<{
   entityIri: string;

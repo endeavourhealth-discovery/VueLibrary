@@ -1,9 +1,9 @@
 import { TTIriRef } from "../interfaces/AutoGen";
 import { TTGraphData, TTProperty } from "../interfaces";
 import { isArrayHasLength, isObjectHasKeys } from "./DataTypeCheckers";
-import { TTBundle, ExtendedTTEntity } from "@/interfaces/ExtendedAutoGen";
-import { GenericObject } from "@/interfaces/GenericObject";
-import { IM, NAMESPACE, OWL, RDFS, SHACL } from "@/enums";
+import { TTBundle, ExtendedTTEntity } from "../interfaces/ExtendedAutoGen";
+import { GenericObject } from "../interfaces/GenericObject";
+import { IM, NAMESPACE, OWL, RDFS, SHACL } from "../enums";
 
 function translateFromEntityBundle(bundle: TTBundle, includedPredicates: string[]): TTGraphData {
   const { entity, predicates } = bundle;

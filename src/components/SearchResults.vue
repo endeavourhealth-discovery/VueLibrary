@@ -78,13 +78,13 @@
 import MultiSelect from "primevue/multiselect";
 import RadioButton from "primevue/radiobutton";
 import { computed, ComputedRef, inject, onMounted, ref, Ref, watch } from "vue";
-import { FilterOptions } from "@/interfaces";
-import ResultsTable from "@/components/ResultsTable.vue";
+import { FilterOptions } from "../interfaces";
+import ResultsTable from "../components/ResultsTable.vue";
 import { cloneDeep } from "lodash-es";
-import { QueryRequest, SearchResponse, SearchResultSummary, TTIriRef } from "@/interfaces/AutoGen";
-import { IM } from "@/enums";
-import injectionKeys from "@/injectionKeys/injectionKeys";
-import { useFilterStore } from "@/stores";
+import { QueryRequest, SearchResponse, SearchResultSummary, TTIriRef } from "../interfaces/AutoGen";
+import { IM } from "../enums";
+import injectionKeys from "../injectionKeys/injectionKeys";
+import { useFilterStore } from "../stores";
 
 interface Props {
   searchTerm: string;

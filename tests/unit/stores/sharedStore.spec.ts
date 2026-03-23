@@ -1,6 +1,6 @@
 import { beforeEach, describe, vi, expect } from "vitest";
 import { createTestingPinia } from "@pinia/testing";
-import { useSharedStore, useUserStore } from "@/stores";
+import { useSharedStore, useUserStore } from "../../../src/stores";
 
 describe("state", () => {
   beforeEach(() => {

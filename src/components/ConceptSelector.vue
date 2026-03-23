@@ -50,15 +50,15 @@ import Button from "primevue/button";
 import ProgressSpinner from "primevue/progressspinner";
 import Tooltip from "primevue/tooltip";
 import { Ref, ref, onMounted, watch, computed, inject } from "vue";
-import { IM } from "@/enums";
-import AutocompleteSearchBar from "@/components/AutocompleteSearchBar.vue";
-import { QueryRequest, SearchResultSummary, Node } from "@/interfaces/AutoGen";
+import { IM } from "../enums";
+import AutocompleteSearchBar from "../components/AutocompleteSearchBar.vue";
+import { QueryRequest, SearchResultSummary, Node } from "../interfaces/AutoGen";
 import { cloneDeep, isEqual } from "lodash-es";
-import { SearchOptions } from "@/interfaces";
-import { buildIMQueryFromFilters, getConstraintOperator, setConstraintOperator } from "@/helpers/BuildQuery";
-import { constraintOperatorOptions } from "@/helpers/QueryEditorMethods";
-import injectionKeys from "@/injectionKeys/injectionKeys";
-import { useFilterStore } from "@/stores";
+import { SearchOptions } from "../interfaces";
+import { buildIMQueryFromFilters, getConstraintOperator, setConstraintOperator } from "../helpers/BuildQuery";
+import { constraintOperatorOptions } from "../helpers/QueryEditorMethods";
+import injectionKeys from "../injectionKeys/injectionKeys";
+import { useFilterStore } from "../stores";
 
 interface Props {
   parent?: any;

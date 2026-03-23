@@ -33,12 +33,12 @@
 </template>
 
 <script setup lang="ts">
-import { Return } from "@/interfaces/AutoGen";
-import { Bool } from "@/enums";
-import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
-import RecursiveWhereDisplay from "@/components/RecursiveWhereDisplay.vue";
-import IMViewerLink from "@/components/IMViewerLink.vue";
-import FunctionClauseDisplay from "@/components/FunctionClauseDisplay.vue";
+import { Return } from "../interfaces/AutoGen";
+import { Bool } from "../enums";
+import { isArrayHasLength } from "../helpers/DataTypeCheckers";
+import RecursiveWhereDisplay from "../components/RecursiveWhereDisplay.vue";
+import IMViewerLink from "../components/IMViewerLink.vue";
+import FunctionClauseDisplay from "../components/FunctionClauseDisplay.vue";
 
 defineProps<{
   select: Return[];

@@ -1,12 +1,12 @@
-import { getFAIconFromType } from "@/helpers/ConceptTypeVisuals";
-import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
-import { IM, RDFS, SHACL } from "@/enums";
+import { getFAIconFromType } from "../helpers/ConceptTypeVisuals";
+import { isArrayHasLength } from "../helpers/DataTypeCheckers";
+import { IM, RDFS, SHACL } from "../enums";
 import type { TreeNode } from "primevue/treenode";
 import { inject, Ref } from "vue";
 import { MenuItem } from "primevue/menuitem";
-import { TTIriRef } from "@/interfaces/AutoGen";
+import { TTIriRef } from "../interfaces/AutoGen";
 import Swal from "sweetalert2";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+import injectionKeys from "../injectionKeys/injectionKeys";
 
 export function useCreateNew() {
   const directService = inject(injectionKeys.directService);

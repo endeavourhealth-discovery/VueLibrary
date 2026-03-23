@@ -1,17 +1,16 @@
 <template>
-  <pre v-if="sql" class="sql-container line-numbers language-sql">
+  <pre v-if="sql" ref="preRef" class="sql-container line-numbers language-sql">
       <code class="language-sql" >{{ sql }}</code>
     </pre>
 </template>
 
 <script setup lang="ts">
-import { onMounted, watch } from "vue";
+import { nextTick, onMounted, ref, watch } from "vue";
 import Prism from "prismjs";
-import "prismjs/components/prism-sql.js";
 import "prismjs/plugins/line-numbers/prism-line-numbers";
+import "prismjs";
 
-// Prism.manual = true;
-
+const preRef = ref<HTMLPreElement | null>(null);
 Prism.plugins.NormalizeWhitespace.setDefaults({
   "remove-trailing": false,
   "remove-indent": true,
@@ -27,16 +26,27 @@ const props = defineProps<Props>();
 
 watch(
   () => props.sql,
-  () => {
-    requestAnimationFrame(() => {
-      Prism.highlightAll();
-    });
+  async () => {
+    await lazyLoadLanguage("sql");
+    await nextTick();
+
+    const codeEl = preRef.value?.querySelector("code");
+    if (codeEl) {
+      Prism.highlightElement(codeEl);
+    }
   },
   { immediate: true }
 );
+
+async function lazyLoadLanguage(language: string) {
+  if (!Prism.languages[language]) {
+    await import(`prismjs/components/prism-${language}.js`);
+  }
+}
 </script>
 
 <style scoped>
+@import "prismjs/themes/prism.css";
 @import "prismjs/plugins/line-numbers/prism-line-numbers.css";
 .sql-container {
   background-color: #f5f5f5;

@@ -1,5 +1,5 @@
-import { PrimeVueColors, PrimeVuePresetThemes } from "@/enums";
-import { FilterOptions, FiltersAsIris, Namespace, PropertyDisplay, QueryResponse, SetDiffObject, SimpleMap, TermCode } from "@/interfaces";
+import { PrimeVueColors, PrimeVuePresetThemes } from "../enums";
+import { FilterOptions, FiltersAsIris, Namespace, PropertyDisplay, QueryResponse, SetDiffObject, SimpleMap, TermCode } from "../interfaces";
 import {
   ConceptContextMap,
   DownloadByQueryOptions,
@@ -19,10 +19,10 @@ import {
   SearchResultSummary,
   SetExportRequest,
   TTIriRef
-} from "@/interfaces/AutoGen";
-import { DisplayMode } from "@/enums";
-import { ExtendedEntityReferenceNode, TTBundle, ExtendedTTEntity } from "@/interfaces/ExtendedAutoGen";
-import { User } from "@/models";
+} from "../interfaces/AutoGen";
+import { DisplayMode } from "../enums";
+import { ExtendedEntityReferenceNode, TTBundle, ExtendedTTEntity } from "../interfaces/ExtendedAutoGen";
+import { User } from "../models";
 import { OrganizationChartNode } from "primevue";
 import { TreeNode } from "primevue/treenode";
 import { InjectionKey } from "vue";
