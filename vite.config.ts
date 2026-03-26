@@ -14,20 +14,12 @@ export default defineConfig({
   build: {
     lib: {
       entry: path.resolve(__dirname, "src/index.ts"),
-      name: "VueLibrary",
       formats: ["es"],
-      fileName: "index.js"
+      fileName: () => "index.js"
     },
     rollupOptions: {
-      preserveEntrySignatures: "strict",
-      input: [path.resolve(__dirname, "src/index.ts")],
-      external: ["vue", "@primeuix/themes", "primevue", /primevue\/.+/, "primeicons", "vue-router", "pinia"],
+      external: ["vue", "@primeuix/themes", /primevue\/.+/, "primeicons", "vue-router", "pinia"],
       output: {
-        dir: "dist",
-        format: "es",
-        exports: "named",
-        entryFileNames: "[name].js",
-        preserveModules: true,
         globals: {
           vue: "Vue"
         }

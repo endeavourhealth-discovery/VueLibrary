@@ -56,16 +56,15 @@
     "dist"
   ],
   "types": "dist/index.d.ts",
-  "module": "dist/index.js",
   "exports": {
     ".": {
-      "import": "./dist/src/index.js",
+      "import": "./dist/index.js",
       "types": "./dist/index.d.ts",
-      "default": "./dist/src/index.js"
+      "default": "./dist/index.js"
     },
     "./styles": {
-      "import": "./dist/index.js.css",
-      "default": "./dist/index.js.css"
+      "import": "./dist/vue-library.css",
+      "default": "./dist/vue-library.css"
     }
   }
 }
