@@ -5,7 +5,7 @@ import { esbuildCommonjs } from "@originjs/vite-plugin-commonjs";
 import dts from "vite-plugin-dts";
 
 export default defineConfig({
-  plugins: [vue(), dts({ insertTypesEntry: true, include: ["src"] })],
+  plugins: [vue(), dts({ insertTypesEntry: true, outputDir: "dist/types" })],
   optimizeDeps: {
     esbuildOptions: {
       plugins: [esbuildCommonjs(["google-palette"])]
@@ -22,7 +22,8 @@ export default defineConfig({
       output: {
         globals: {
           vue: "Vue"
-        }
+        },
+        manualChunks: () => "index.js"
       }
     },
     target: "esnext",

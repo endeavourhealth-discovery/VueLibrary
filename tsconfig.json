@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "declaration": true,
-    "emitDeclarationOnly": false,
+    "emitDeclarationOnly": true,
     "declarationMap": true,
     "isolatedModules": true,
     "target": "esnext",
@@ -27,5 +27,5 @@
     "outDir": "./dist/types"
   },
   "include": ["./src/**/*.vue", "./src/**/*.ts", "./src/**/*.js", "src/typings"],
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "docs"]
 }
