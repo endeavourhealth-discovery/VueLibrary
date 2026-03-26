@@ -109,8 +109,9 @@ defineEmits<{
 
 const dataModelService = inject(injectionKeys.dataModelService);
 if (!dataModelService) throw new Error("Missing injection: dataModelService");
-const directService = inject(injectionKeys.directService);
-if (!directService) throw new Error("Missing injection: directService");
+const useDirectService = inject(injectionKeys.useDirectService);
+if (!useDirectService) throw new Error("Missing injection: useDirectService");
+const directService = useDirectService();
 
 const loading = ref(false);
 const properties: Ref<PropertyDisplay[]> = ref([]);

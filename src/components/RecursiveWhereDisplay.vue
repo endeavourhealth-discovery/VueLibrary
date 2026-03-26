@@ -57,7 +57,8 @@ import { isArrayHasLength } from "@/helpers/DataTypeCheckers";
 import { Where } from "@/interfaces/AutoGen";
 import { Bool } from "@/enums";
 import { computed, Ref, ref } from "vue";
-import { IMViewerLink, ValueSentenceDisplay } from "@/components";
+import IMViewerLink from "@/components/IMViewerLink.vue";
+import ValueSentenceDisplay from "./ValueSentenceDisplay.vue";
 import { getRelativeTo, buildValueSentence, getIsOperator } from "@/helpers/QueryEditorMethods";
 import { getTypeIcon, getIconColor } from "@/helpers/ConceptTypeVisuals";
 

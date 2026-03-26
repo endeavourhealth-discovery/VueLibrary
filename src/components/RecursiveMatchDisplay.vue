@@ -94,7 +94,8 @@ import { Match } from "@/interfaces/AutoGen";
 import { Bool, DisplayMode } from "@/enums";
 import { Ref, ref, computed, inject } from "vue";
 import RecursiveWhereDisplay from "./RecursiveWhereDisplay.vue";
-import { BooleanMatchDisplay, IMViewerLink } from "@/components";
+import BooleanMatchDisplay from "@/components/BooleanMatchDisplay.vue";
+import IMViewerLink from "./IMViewerLink.vue";
 import { getBooleanOperator, getDisplayOperator, getBoolGroup, getResults } from "@/helpers";
 import injectionKeys from "@/injectionKeys/injectionKeys";
 

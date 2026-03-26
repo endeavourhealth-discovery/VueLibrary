@@ -1,38 +1,33 @@
 import { defineConfig } from "vitest/config";
 import vue from "@vitejs/plugin-vue";
 import * as path from "path";
-import tailwindcss from "@tailwindcss/vite";
 import { esbuildCommonjs } from "@originjs/vite-plugin-commonjs";
 import dts from "vite-plugin-dts";
 
-const entries: Record<string, string> = {
-  index: path.resolve(__dirname, "src/index.ts"),
-  interfaces: path.resolve(__dirname, "src/interfaces/index.ts"),
-  enums: path.resolve(__dirname, "src/enums/index.ts"),
-  composables: path.resolve(__dirname, "src/composables/index.ts"),
-  helpers: path.resolve(__dirname, "src/helpers/index.ts"),
-  components: path.resolve(__dirname, "src/components/index.ts"),
-  models: path.resolve(__dirname, "src/models/index.ts"),
-  stores: path.resolve(__dirname, "src/stores/index.ts")
-};
-
 export default defineConfig({
-  plugins: [vue(), dts({ insertTypesEntry: true, include: ["src"] }), tailwindcss()],
+  plugins: [vue(), dts({ insertTypesEntry: true, include: ["src"] })],
   optimizeDeps: {
     esbuildOptions: {
       plugins: [esbuildCommonjs(["google-palette"])]
     }
   },
   build: {
+    lib: {
+      entry: path.resolve(__dirname, "src/index.ts"),
+      name: "VueLibrary",
+      formats: ["es"],
+      fileName: "index.js"
+    },
     rollupOptions: {
       preserveEntrySignatures: "strict",
-      input: entries,
-      external: ["vue", "primevue", /primevue\/.+/, "primeicons", "primeflex", "vue-router", "pinia"],
+      input: [path.resolve(__dirname, "src/index.ts")],
+      external: ["vue", "@primeuix/themes", "primevue", /primevue\/.+/, "primeicons", "vue-router", "pinia"],
       output: {
         dir: "dist",
         format: "es",
         exports: "named",
         entryFileNames: "[name].js",
+        preserveModules: true,
         globals: {
           vue: "Vue"
         }
@@ -40,7 +35,8 @@ export default defineConfig({
     },
     target: "esnext",
     outDir: "dist",
-    emptyOutDir: true
+    emptyOutDir: true,
+    cssCodeSplit: false
   },
   resolve: {
     alias: {

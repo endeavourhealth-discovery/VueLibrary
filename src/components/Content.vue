@@ -86,8 +86,9 @@ const emit = defineEmits<{
 
 const entityService = inject(injectionKeys.entityService);
 if (!entityService) throw new Error("Missing injection: entityService");
-const directService = inject(injectionKeys.directService);
-if (!directService) throw new Error("Missing injection: directService");
+const useDirectService = inject(injectionKeys.useDirectService);
+if (!useDirectService) throw new Error("Missing injection: useDirectService");
+const directService = useDirectService();
 const userService = inject(injectionKeys.userService);
 if (!userService) throw new Error("Missing injection: userService");
 

@@ -36,7 +36,7 @@
 import { Match } from "@/interfaces/AutoGen";
 import { Bool } from "@/enums";
 import { getBooleanLabel } from "@/helpers";
-import { RecursiveMatchDisplay } from "@/components";
+import RecursiveMatchDisplay from "@/components/RecursiveMatchDisplay.vue";
 
 interface Props {
   match: Match;

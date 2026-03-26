@@ -1,12 +1,8 @@
 import { App, Plugin } from "vue";
 import * as Components from "./components";
 
-export interface vueLibraryInterface {
-  install: Plugin;
-}
-
-const vueLibrary: vueLibraryInterface = {
-  install(app: App, options: any): void {
+const vueLibrary: Plugin = {
+  install(app: App) {
     for (const key in Components) {
       // @ts-expect-error
       app.component(key, Components[key]);
@@ -14,9 +10,9 @@ const vueLibrary: vueLibraryInterface = {
   }
 };
 
-export default vueLibrary;
+export { vueLibrary };
 
-export { Components };
+export * from "./components";
 export * from "./enums";
 export * from "./composables";
 export * from "./helpers";

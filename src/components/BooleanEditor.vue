@@ -73,7 +73,7 @@ import {
 import type { Match, Where } from "@/interfaces/AutoGen";
 import { computed, inject, onMounted, ref, Ref, watch } from "vue";
 import { Bool } from "@/enums";
-import { RoleGroup } from "@/components";
+import RoleGroup from "@/components/RoleGroup.vue";
 
 interface Props {
   index: number;
