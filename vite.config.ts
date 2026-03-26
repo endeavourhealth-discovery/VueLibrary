@@ -18,7 +18,7 @@ export default defineConfig({
       fileName: () => "index.js"
     },
     rollupOptions: {
-      external: ["vue", "@primeuix/themes", /primevue\/.+/, "primeicons", "vue-router", "pinia"],
+      external: ["vue", /primevue\/.+/, "vue-router", "pinia"],
       output: {
         globals: {
           vue: "Vue"
