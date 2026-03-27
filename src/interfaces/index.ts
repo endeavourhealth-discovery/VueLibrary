@@ -3,7 +3,6 @@ import { ChartTableNode } from "./ChartTableNode";
 import { ConceptAggregate } from "./ConceptAggregate";
 import { Context } from "./Context";
 import { DownloadSettings } from "./DownloadSettings";
-import { ExtendedSearchResultSummary } from "./ExtendedSearchResultSummary";
 import { FilterOptions } from "./FilterOptions";
 import { FiltersAsIris } from "./FiltersAsIris";
 import { GenericObject } from "./GenericObject";
@@ -23,6 +22,7 @@ import { TreeParent } from "./TreeParent";
 import { TTGraphData } from "./TTGraphData";
 import { TTProperty, UIProperty } from "./TTProperty";
 import { ValidatedEntity } from "./ValidatedEntity";
+import { MailOptions } from "./MailOptions";
 
 export type * from "./AutoGen";
 export type * from "./ExtendedAutoGen";
@@ -33,7 +33,6 @@ export {
   type ConceptAggregate,
   type Context,
   type DownloadSettings,
-  type ExtendedSearchResultSummary,
   type FilterOptions,
   type FiltersAsIris,
   type GenericObject,
@@ -53,5 +52,6 @@ export {
   type TTGraphData,
   type TTProperty,
   type UIProperty,
-  type ValidatedEntity
+  type ValidatedEntity,
+  type MailOptions
 };

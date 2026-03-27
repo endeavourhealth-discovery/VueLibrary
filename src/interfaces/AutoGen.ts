@@ -2,7 +2,7 @@ import { IMLContext, ListMode, TargetUpdateMode, Aggregate, Bool, DatabaseOption
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-03-23 09:56:13.
+// Generated using typescript-generator version 3.2.1263 on 2026-03-27 09:39:25.
 
 export interface ConceptContextMap {
     id?: string;
@@ -279,6 +279,7 @@ export interface PropertyShape {
     isValidEntity?: TTIriRef;
     highCardinality?: boolean;
     isValidArguments?: Argument[];
+    inversePath?: TTIriRef;
 }
 
 export interface SetContent {
@@ -289,6 +290,24 @@ export interface SetContent {
     setDefinition?: string;
     subsets?: string[];
     concepts?: Concept[];
+}
+
+export interface UIProperty {
+    iri?: string;
+    name?: string;
+    propertyType?: string;
+    valueType?: string;
+    valueTypeName?: string;
+    maxCount?: number;
+    number?: number;
+    intervalUnitIri?: string;
+    intervalUnitOptions?: TTIriRef[];
+    unitIri?: string;
+    unitOptions?: TTIriRef[];
+    operatorIri?: string;
+    operatorOptions?: string[];
+    qualifierOptions?: TTIriRef[];
+    setMemberCount?: number;
 }
 
 export interface ValueTemplate extends Entity {
@@ -325,10 +344,10 @@ export interface Assignable {
     value?: string;
     invalid?: boolean;
     description?: string;
-    valueTerm?: string;
-    valueLabel?: string;
-    compare?: Compare;
     operator?: Operator;
+    valueLabel?: string;
+    valueTerm?: string;
+    compare?: Compare;
 }
 
 export interface Case {
@@ -420,6 +439,7 @@ export interface Match extends IriLD, HasPaths, Returnable {
     and?: Match[];
     or?: Match[];
     where?: Where;
+    then?: Where;
     graph?: Node;
     optional?: boolean;
     aggregate?: FunctionClause;
@@ -431,15 +451,14 @@ export interface Match extends IriLD, HasPaths, Returnable {
     inverse?: boolean;
     activeOnly?: boolean;
     rule?: Match[];
-    step?: Match[];
     libraryItem?: string;
     invalid?: boolean;
     groupBy?: GroupBy[];
     orderBy?: OrderLimit;
     asDescription?: string;
-    union?: Match[];
-    linkedTarget?: boolean;
     errorMessage?: string;
+    draft?: boolean;
+    keepClauses?: Match[];
 }
 
 export interface Node extends Element {
@@ -457,8 +476,8 @@ export interface Node extends Element {
     code?: string;
     inverse?: boolean;
     node?: string;
-    isResultSet?: boolean;
     isCohort?: boolean;
+    isResultSet?: boolean;
 }
 
 export interface OrderDirection extends IriLD {
@@ -487,8 +506,8 @@ export interface Path extends Element, HasPaths {
     pathVariable?: string;
     typeOf?: Node;
     qualifier?: TTIriRef;
-    isResultSet?: boolean;
     isCohort?: boolean;
+    isResultSet?: boolean;
 }
 
 export interface PathDocument {
@@ -570,11 +589,19 @@ export interface Value extends Assignable {
     isInvalid?: boolean;
 }
 
+export interface ValuePath extends IriLD {
+    nodeRef?: string;
+    typeOf?: Node;
+    path?: ValuePath;
+}
+
 export interface ValueSource {
     parameter?: string;
     iri?: string;
     name?: string;
     nodeRef?: string;
+    path?: ValuePath;
+    propertyRef?: string;
 }
 
 export interface When {
@@ -615,8 +642,8 @@ export interface Where extends Element, Assignable {
     notNull?: boolean;
     units?: TTIriRef;
     isInvalid?: boolean;
-    isResultSet?: boolean;
     isCohort?: boolean;
+    isResultSet?: boolean;
 }
 
 export interface DBEntry {
@@ -938,14 +965,14 @@ export interface TTDocument extends TTNode {
 export interface TTEntity extends TTNode, Serializable {
     context?: TTContext;
     crud?: TTIriRef;
-    status?: TTIriRef;
-    name?: string;
     type?: TTArray;
+    name?: string;
     scheme?: TTIriRef;
     version?: number;
+    status?: TTIriRef;
     description?: string;
-    types?: TTIriRef[];
     code?: string;
+    types?: TTIriRef[];
     prefixes?: TTPrefix[];
 }
 
@@ -1031,8 +1058,8 @@ export interface TTArray extends Serializable {
 }
 
 export interface TTContext extends Serializable {
-    prefixes?: TTPrefix[];
     nameSpaces?: TTPrefix[];
+    prefixes?: TTPrefix[];
 }
 
 export interface Throwable extends Serializable {
