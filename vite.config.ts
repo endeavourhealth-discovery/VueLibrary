@@ -25,7 +25,7 @@ export default defineConfig({
     rollupOptions: {
       preserveEntrySignatures: "strict",
       input: entries,
-      external: ["vue", "vue-router", "pinia"],
+      external: ["vue", "vue-router", "pinia","@primeuix/themes","primevue",/primevue\/.+/],
       output: {
         dir: "dist",
         format: "es",
