@@ -1,7 +1,7 @@
 import { createTestingPinia } from "@pinia/testing";
 import { useUserStore } from "../../../src/stores";
 import { flushPromises } from "@vue/test-utils";
-import { afterAll, it, expect, beforeEach, describe } from "vitest";
+import { afterAll, it, expect, beforeEach, describe, vi } from "vitest";
 import { User } from "../../../src/models";
 import { uniqueId } from "lodash-es";
 import { FontSize, PrimeVueColors, PrimeVuePresetThemes } from "../../../src/enums";
