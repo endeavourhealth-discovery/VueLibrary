@@ -15,7 +15,6 @@
     "google-palette": "1.1.1",
     "lodash-es": "4.17.21",
     "mermaid": "11.11.0",
-    "prismjs": "1.30.0",
     "sass": "1.87.0",
     "svg-pan-zoom": "3.6.2",
     "sweetalert2": "11.19.1",
@@ -29,7 +28,6 @@
     "@types/d3": "7.4.3",
     "@types/lodash-es": "4.17.12",
     "@types/node": "22.14.1",
-    "@types/prismjs": "1.26.5",
     "@vitejs/plugin-vue": "5.2.3",
     "@vue/test-utils": "2.4.6",
     "@vue/tsconfig": "0.8.1",
@@ -42,9 +40,9 @@
     "vue-tsc": "3.1.5"
   },
   "peerDependencies": {
+    "@primeuix/themes": "1.0.3",
     "pinia": "3.0.2",
     "primevue": "4.3.3",
-    "@primeuix/themes":"1.0.3",
     "typescript-logging-log4ts-style": "2.2.0",
     "vue": "3.5.13",
     "vue-router": "4.5.0"
