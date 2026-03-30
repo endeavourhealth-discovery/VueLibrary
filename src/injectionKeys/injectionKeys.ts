@@ -38,7 +38,7 @@ const dataModelService = Symbol("dataModelService") as InjectionKey<{
   getPropertiesDisplay(iri: string): Promise<PropertyDisplay[]>;
   getDataModelsFromProperty(propIri: string): Promise<TTIriRef[]>;
 }>;
-const directService = Symbol("directService") as InjectionKey<{
+const useDirectService = Symbol("useDirectService") as InjectionKey<() =>{
   select(iri: string): Promise<void>;
   view(iri: string): Promise<void>;
   edit(iri: string, openInNewTab?: boolean): Promise<void>;
@@ -141,7 +141,7 @@ const userService = Symbol("userService") as InjectionKey<{
 export default {
   conceptService,
   dataModelService,
-  directService,
+  useDirectService,
   eclService,
   entityService,
   filerService,
