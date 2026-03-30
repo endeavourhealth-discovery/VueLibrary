@@ -12,7 +12,6 @@ import { Namespace } from "./Namespace";
 import { Orderable } from "./Orderable";
 import { PropertyDisplay } from "./PropertyDisplay";
 import { QueryResponse } from "./QueryResponse";
-import { RelativeTo } from "./RelativeTo";
 import { SearchOptions } from "./SearchOptions";
 import { SetDiffObject } from "./SetDiffObject";
 import { SimpleMap } from "./SimpleMap";
@@ -42,7 +41,6 @@ export {
   type Orderable,
   type PropertyDisplay,
   type QueryResponse,
-  type RelativeTo,
   type SearchOptions,
   type SetDiffObject,
   type SimpleMap,
