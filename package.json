@@ -81,6 +81,11 @@
       "import": "./dist/models.js",
       "default": "./dist/models.js"
     },
+    "./components":{
+      "types":"./dist/components/index.d.ts",
+      "import":"./dist/components.js",
+      "default":"./dist/components.js"
+    },
     "./stores": {
       "types": "./dist/stores/index.d.ts",
       "import": "./dist/stores.js",
