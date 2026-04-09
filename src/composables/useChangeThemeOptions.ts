@@ -1,13 +1,13 @@
-import { PrimeVueColors, PrimeVuePresetThemes } from "@/enums";
+import { PrimeVueColors, PrimeVuePresetThemes } from "../enums";
 import { usePreset, updatePrimaryPalette, updateSurfacePalette, palette } from "@primeuix/themes";
 import Aura from "@primeuix/themes/aura";
 import Lara from "@primeuix/themes/lara";
 import Nora from "@primeuix/themes/nora";
 import Material from "@primeuix/themes/material";
 import { PaletteDesignToken } from "@primeuix/themes/types";
-import { useUserStore } from "@/stores";
+import { useUserStore } from "../stores";
 import { inject } from "vue";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+import injectionKeys from "../injectionKeys/injectionKeys";
 
 export function useChangeThemeOptions() {
   const userService = inject(injectionKeys.userService);

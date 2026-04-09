@@ -49,9 +49,9 @@
 <script setup lang="ts">
 import Popover from "primevue/popover";
 import ProgressSpinner from "primevue/progressspinner";
-import { getNamesAsStringFromTypes } from "@/helpers/ConceptTypeMethods";
-import injectionKeys from "@/injectionKeys/injectionKeys";
-import { TTIriRef, SearchResultSummary } from "@/interfaces/AutoGen";
+import { getNamesAsStringFromTypes } from "../helpers/ConceptTypeMethods";
+import injectionKeys from "../injectionKeys/injectionKeys";
+import { TTIriRef, SearchResultSummary } from "../interfaces/AutoGen";
 import { inject, ref, Ref } from "vue";
 
 const entityService = inject(injectionKeys.entityService);

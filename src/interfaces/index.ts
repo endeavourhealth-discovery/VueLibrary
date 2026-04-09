@@ -3,7 +3,6 @@ import { ChartTableNode } from "./ChartTableNode";
 import { ConceptAggregate } from "./ConceptAggregate";
 import { Context } from "./Context";
 import { DownloadSettings } from "./DownloadSettings";
-import { ExtendedSearchResultSummary } from "./ExtendedSearchResultSummary";
 import { FilterOptions } from "./FilterOptions";
 import { FiltersAsIris } from "./FiltersAsIris";
 import { GenericObject } from "./GenericObject";
@@ -13,7 +12,6 @@ import { Namespace } from "./Namespace";
 import { Orderable } from "./Orderable";
 import { PropertyDisplay } from "./PropertyDisplay";
 import { QueryResponse } from "./QueryResponse";
-import { RelativeTo } from "./RelativeTo";
 import { SearchOptions } from "./SearchOptions";
 import { SetDiffObject } from "./SetDiffObject";
 import { SimpleMap } from "./SimpleMap";
@@ -23,6 +21,7 @@ import { TreeParent } from "./TreeParent";
 import { TTGraphData } from "./TTGraphData";
 import { TTProperty, UIProperty } from "./TTProperty";
 import { ValidatedEntity } from "./ValidatedEntity";
+import { MailOptions } from "./MailOptions";
 
 export type * from "./AutoGen";
 export type * from "./ExtendedAutoGen";
@@ -33,7 +32,6 @@ export {
   type ConceptAggregate,
   type Context,
   type DownloadSettings,
-  type ExtendedSearchResultSummary,
   type FilterOptions,
   type FiltersAsIris,
   type GenericObject,
@@ -43,7 +41,6 @@ export {
   type Orderable,
   type PropertyDisplay,
   type QueryResponse,
-  type RelativeTo,
   type SearchOptions,
   type SetDiffObject,
   type SimpleMap,
@@ -53,5 +50,6 @@ export {
   type TTGraphData,
   type TTProperty,
   type UIProperty,
-  type ValidatedEntity
+  type ValidatedEntity,
+  type MailOptions
 };

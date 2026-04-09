@@ -32,8 +32,6 @@ export enum Bool {
     and = "and",
     or = "or",
     rule = "rule",
-    union = "union",
-    step = "step",
 }
 
 export enum DatabaseOption {
@@ -190,6 +188,7 @@ export enum UserRole {
     AUTHORISER = "AUTHORISER",
     APPROVER = "APPROVER",
     EXECUTOR = "EXECUTOR",
+    UPRN = "UPRN",
 }
 
 export enum TaskState {
@@ -352,7 +351,6 @@ export enum IM {
     IS = "http://endhealth.info/im#is",
     RETURN_TYPE = "http://endhealth.info/im#returnType",
     UPDATE_PROCEDURE = "http://endhealth.info/im#updateProcedure",
-    INVERSE_PATH = "http://endhealth.info/im#inversePath",
     CONCEPT = "http://endhealth.info/im#Concept",
     CODEABLE = "http://endhealth.info/im#Codeable",
     CONCEPT_PROPERTY = "http://endhealth.info/im#concept",
@@ -552,6 +550,7 @@ export enum IM {
     VALUE_IRI_LIST = "http://endhealth.info/im#valueIriList",
     VALUE_DATA_LIST = "http://endhealth.info/im#valueDataList",
     IM_1_ID = "http://endhealth.info/im#im1Id",
+    IM_1_DBID = "http://endhealth.info/im#im1DbId",
     PROV_ACTIVITY_TYPE = "http://endhealth.info/im#provenanceActivityType",
     FOLDER_VALUESETS = "http://endhealth.info/im#ValueSets",
     FOLDER_SETS = "http://endhealth.info/im#Sets",
@@ -614,6 +613,7 @@ export enum IMPORT_TYPE {
     SKIP_SEARCH = "search",
     FHIR = "fhir",
     SMARTLIFE = "smartlifequery",
+    SMARTLIFEINDICATOR = "smartlifeindicators",
     QOF = "qof",
     CORE = "core",
     SINGLE_FILE = "singlefile",
@@ -664,6 +664,7 @@ export enum ImportType {
     SKIP_SEARCH = "search",
     FHIR = "fhir",
     SMARTLIFE = "smartlifequery",
+    SMARTLIFEINDICATOR = "smartlifeindicators",
     QOF = "qof",
     CORE = "core",
     SINGLE_FILE = "singlefile",

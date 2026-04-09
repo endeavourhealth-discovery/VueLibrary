@@ -14,4 +14,9 @@ export interface ExtendedEntityReferenceNode extends EntityReferenceNode {
   hasGrandChildren?: boolean;
 }
 
-export interface ExtendedSearchResultSummary extends SearchResultSummary, GenericObject {}
+export interface ExtendedSearchResultSummary extends SearchResultSummary {
+  icon: string[];
+  color: string;
+  typeNames: string;
+  favourite: boolean;
+}

@@ -9,20 +9,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject } from "vue";
-import Tag from "primevue/tag";
-import { TTIriRef } from "@/interfaces/AutoGen";
-import { isArrayHasLength, isObjectHasKeys } from "@/helpers/DataTypeCheckers";
-import { getLogger } from "@/logger/LogConfig";
-import { TagSeverity } from "@/enums";
-import injectionKeys from "@/injectionKeys/injectionKeys";
-import { useSharedStore } from "@/stores";
-
-const log = getLogger("components.shared.generics.ArrayObjectNameTagWithLabel");
+import { computed } from "vue";
+import type { TTIriRef } from "vue-library/interfaces";
+import { isArrayHasLength, isObjectHasKeys } from "vue-library/helpers";
+import { TagSeverity } from "vue-library/enums";
 
 interface Props {
   label: string;
   data: TTIriRef[];
+  tagSeverityMatches:{iri:string,severity:TagSeverity}[]
   size?: string;
   id?: string;
 }
@@ -31,10 +26,6 @@ const props = withDefaults(defineProps<Props>(), {
   size: "100%",
   id: "array-object-name-tag-with-label"
 });
-
-const sharedStore = useSharedStore();
-
-const tagSeverityMatches = computed(() => sharedStore.tagSeverityMatches);
 
 const isArrayObject = computed(() => {
   if (props.data && isArrayHasLength(props.data) && isObjectHasKeys(props.data[0], ["iri"])) {
@@ -46,11 +37,10 @@ const isArrayObject = computed(() => {
 
 function getSeverity(item: TTIriRef): TagSeverity {
   let result = TagSeverity.INFO;
-  if (!tagSeverityMatches.value) throw new Error("Missing vuex sharedStore property 'tagSeverityMatches'");
   if (item && isObjectHasKeys(item, ["name"])) {
-    const found = tagSeverityMatches.value.find((severity: { iri: string; severity: string }) => severity.iri === item.iri);
+    const found = props.tagSeverityMatches.find((severity: { iri: string; severity: string }) => severity.iri === item.iri);
     if (found) result = found.severity;
-    else log.warn("TagWithLabel missing case for severity");
+    else console.warn("TagWithLabel missing case for severity");
   }
   return result;
 }

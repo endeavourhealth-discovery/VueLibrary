@@ -1,4 +1,4 @@
-import { localStorageWithExpiry } from "@/helpers/LocalStorageWithExpiry";
+import { localStorageWithExpiry } from "../../../src/helpers/LocalStorageWithExpiry";
 import { describe, expect, vi, afterEach, it } from "vitest";
 
 describe("localStorageWithExpiry", () => {

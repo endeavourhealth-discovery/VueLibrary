@@ -1,5 +1,5 @@
-import { ToastSeverity } from "@/enums";
-import { ToastOptions } from "@/models";
+import { ToastSeverity } from "../enums";
+import { ToastOptions } from "../models";
 import { useToast } from "primevue/usetoast";
 import { Ref } from "vue";
 

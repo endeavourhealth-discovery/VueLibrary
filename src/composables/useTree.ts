@@ -1,16 +1,17 @@
-import { getColourFromType, getFAIconFromType } from "@/helpers/ConceptTypeVisuals";
-import { isObjectHasKeys } from "@/helpers/DataTypeCheckers";
-import { TTIriRef } from "@/interfaces/AutoGen";
-import { ExtendedTTEntity } from "@/interfaces/ExtendedAutoGen";
-import { IM } from "@/enums";
+import { getColourFromType, getFAIconFromType } from "../helpers/ConceptTypeVisuals";
+import { isObjectHasKeys } from "../helpers/DataTypeCheckers";
+import { TTIriRef } from "../interfaces/AutoGen";
+import { ExtendedTTEntity } from "../interfaces/ExtendedAutoGen";
+import { IM } from "../enums";
 import type { TreeNode } from "primevue/treenode";
 import { inject, ref, Ref } from "vue";
 import { useToast } from "primevue/usetoast";
-import injectionKeys from "@/injectionKeys/injectionKeys";
+import injectionKeys from "../injectionKeys/injectionKeys";
 
-export function useTree(favourites: string[], emit?: any, customPageSize?: number) {
-  const directService = inject(injectionKeys.directService);
-  if (!directService) throw new Error("Missing injection: directService");
+export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: number) {
+  const useDirectService = inject(injectionKeys.useDirectService);
+  if (!useDirectService) throw new Error("Missing injection: directService");
+  const directService = useDirectService()
   const entityService = inject(injectionKeys.entityService);
   if (!entityService) throw new Error("Missing injection: entityService");
 
@@ -126,7 +127,7 @@ export function useTree(favourites: string[], emit?: any, customPageSize?: numbe
       node.loading = true;
       if (!isObjectHasKeys(expandedKeys.value, [node.key])) expandedKeys.value[node.key] = true;
       if (!expandedData.value.find(x => x.key === node.key)) expandedData.value.push(node);
-      if (node.data === IM.FAVOURITES && node.children.length <= favourites.length) {
+      if (node.data === IM.FAVOURITES && node.children.length <= favourites.value.length) {
         await expandFavouriteNode(node);
       } else {
         await expandNode(node, typeFilter);
@@ -138,7 +139,7 @@ export function useTree(favourites: string[], emit?: any, customPageSize?: numbe
   async function expandFavouriteNode(node: any) {
     node.children = [];
     let favChildren = [];
-    for (const fav of favourites) {
+    for (const fav of favourites.value) {
       const favChild = await entityService!.getEntityAsEntityReferenceNode(fav);
       if (favChild) favChildren.push(createTreeNode(favChild.name, favChild.iri, favChild.type as TTIriRef[], false, node));
     }

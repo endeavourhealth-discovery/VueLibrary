@@ -2,7 +2,7 @@ import { IMLContext, ListMode, TargetUpdateMode, Aggregate, Bool, DatabaseOption
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-03-20 10:00:39.
+// Generated using typescript-generator version 3.2.1263 on 2026-04-09 11:21:14.
 
 export interface ConceptContextMap {
     id?: string;
@@ -204,6 +204,8 @@ export interface ModelDocument {
 export interface NodeShape extends TTIriRef {
     property?: PropertyShape[];
     subType?: TTIriRef[];
+    definingProperty?: TTIriRef;
+    inverseProperty?: TTIriRef;
 }
 
 export interface Page {
@@ -279,6 +281,8 @@ export interface PropertyShape {
     isValidEntity?: TTIriRef;
     highCardinality?: boolean;
     isValidArguments?: Argument[];
+    inversePath?: TTIriRef;
+    generic?: boolean;
 }
 
 export interface SetContent {
@@ -289,6 +293,24 @@ export interface SetContent {
     setDefinition?: string;
     subsets?: string[];
     concepts?: Concept[];
+}
+
+export interface UIProperty {
+    iri?: string;
+    name?: string;
+    propertyType?: string;
+    valueType?: string;
+    valueTypeName?: string;
+    maxCount?: number;
+    number?: number;
+    intervalUnitIri?: string;
+    intervalUnitOptions?: TTIriRef[];
+    unitIri?: string;
+    unitOptions?: TTIriRef[];
+    operatorIri?: string;
+    operatorOptions?: string[];
+    qualifierOptions?: TTIriRef[];
+    setMemberCount?: number;
 }
 
 export interface ValueTemplate extends Entity {
@@ -322,13 +344,13 @@ export interface ArgumentReference {
 }
 
 export interface Assignable {
+    compare?: Compare;
     value?: string;
     invalid?: boolean;
-    description?: string;
     operator?: Operator;
+    description?: string;
     valueLabel?: string;
     valueTerm?: string;
-    compare?: Compare;
 }
 
 export interface Case {
@@ -379,9 +401,9 @@ export interface Element extends IriLD, Entailment {
 
 export interface Entailment {
     memberOf?: boolean;
-    descendantsOf?: boolean;
     descendantsOrSelfOf?: boolean;
     ancestorsOf?: boolean;
+    descendantsOf?: boolean;
 }
 
 export interface FunctionClause extends IriLD {
@@ -420,6 +442,7 @@ export interface Match extends IriLD, HasPaths, Returnable {
     and?: Match[];
     or?: Match[];
     where?: Where;
+    then?: Where;
     graph?: Node;
     optional?: boolean;
     aggregate?: FunctionClause;
@@ -431,15 +454,14 @@ export interface Match extends IriLD, HasPaths, Returnable {
     inverse?: boolean;
     activeOnly?: boolean;
     rule?: Match[];
-    step?: Match[];
     libraryItem?: string;
     invalid?: boolean;
     groupBy?: GroupBy[];
     orderBy?: OrderLimit;
     asDescription?: string;
-    union?: Match[];
-    linkedTarget?: boolean;
     errorMessage?: string;
+    draft?: boolean;
+    keepClauses?: Match[];
 }
 
 export interface Node extends Element {
@@ -457,8 +479,8 @@ export interface Node extends Element {
     code?: string;
     inverse?: boolean;
     node?: string;
-    isCohort?: boolean;
     isResultSet?: boolean;
+    isCohort?: boolean;
 }
 
 export interface OrderDirection extends IriLD {
@@ -487,8 +509,8 @@ export interface Path extends Element, HasPaths {
     pathVariable?: string;
     typeOf?: Node;
     qualifier?: TTIriRef;
-    isCohort?: boolean;
     isResultSet?: boolean;
+    isCohort?: boolean;
 }
 
 export interface PathDocument {
@@ -570,11 +592,19 @@ export interface Value extends Assignable {
     isInvalid?: boolean;
 }
 
+export interface ValuePath extends IriLD {
+    nodeRef?: string;
+    typeOf?: Node;
+    path?: ValuePath;
+}
+
 export interface ValueSource {
     parameter?: string;
     iri?: string;
     name?: string;
     nodeRef?: string;
+    path?: ValuePath;
+    propertyRef?: string;
 }
 
 export interface When {
@@ -615,8 +645,8 @@ export interface Where extends Element, Assignable {
     notNull?: boolean;
     units?: TTIriRef;
     isInvalid?: boolean;
-    isCohort?: boolean;
     isResultSet?: boolean;
+    isCohort?: boolean;
 }
 
 export interface DBEntry {
@@ -938,14 +968,14 @@ export interface TTDocument extends TTNode {
 export interface TTEntity extends TTNode, Serializable {
     context?: TTContext;
     crud?: TTIriRef;
-    scheme?: TTIriRef;
     type?: TTArray;
     name?: string;
+    scheme?: TTIriRef;
     version?: number;
     status?: TTIriRef;
     description?: string;
-    types?: TTIriRef[];
     code?: string;
+    types?: TTIriRef[];
     prefixes?: TTPrefix[];
 }
 

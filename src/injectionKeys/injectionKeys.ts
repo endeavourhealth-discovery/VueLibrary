@@ -1,5 +1,5 @@
-import { PrimeVueColors, PrimeVuePresetThemes } from "@/enums";
-import { FilterOptions, FiltersAsIris, Namespace, PropertyDisplay, QueryResponse, SetDiffObject, SimpleMap, TermCode } from "@/interfaces";
+import { PrimeVueColors, PrimeVuePresetThemes } from "../enums";
+import { FilterOptions, FiltersAsIris, Namespace, PropertyDisplay, QueryResponse, SetDiffObject, SimpleMap, TermCode } from "../interfaces";
 import {
   ConceptContextMap,
   DownloadByQueryOptions,
@@ -19,10 +19,10 @@ import {
   SearchResultSummary,
   SetExportRequest,
   TTIriRef
-} from "@/interfaces/AutoGen";
-import { DisplayMode } from "@/enums";
-import { ExtendedEntityReferenceNode, TTBundle, ExtendedTTEntity } from "@/interfaces/ExtendedAutoGen";
-import { User } from "@/models";
+} from "../interfaces/AutoGen";
+import { DisplayMode } from "../enums";
+import { ExtendedEntityReferenceNode, TTBundle, ExtendedTTEntity } from "../interfaces/ExtendedAutoGen";
+import { User } from "../models";
 import { OrganizationChartNode } from "primevue";
 import { TreeNode } from "primevue/treenode";
 import { InjectionKey } from "vue";
@@ -38,7 +38,7 @@ const dataModelService = Symbol("dataModelService") as InjectionKey<{
   getPropertiesDisplay(iri: string): Promise<PropertyDisplay[]>;
   getDataModelsFromProperty(propIri: string): Promise<TTIriRef[]>;
 }>;
-const directService = Symbol("directService") as InjectionKey<{
+const useDirectService = Symbol("useDirectService") as InjectionKey<() =>{
   select(iri: string): Promise<void>;
   view(iri: string): Promise<void>;
   edit(iri: string, openInNewTab?: boolean): Promise<void>;
@@ -141,7 +141,7 @@ const userService = Symbol("userService") as InjectionKey<{
 export default {
   conceptService,
   dataModelService,
-  directService,
+  useDirectService,
   eclService,
   entityService,
   filerService,

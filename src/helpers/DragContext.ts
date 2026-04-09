@@ -1,4 +1,4 @@
-import { Match, Where } from "@/interfaces/AutoGen";
+import { Match, Where } from "../interfaces/AutoGen";
 
 type DraggedItem = {
   clause: Match | Where;

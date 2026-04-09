@@ -1,5 +1,5 @@
-import { isOfTypes, isValueSet, isProperty } from "@/helpers/ConceptTypeMethods";
-import { IM } from "@/enums";
+import { isOfTypes, isValueSet, isProperty } from "../../../src/helpers/ConceptTypeMethods";
+import { IM } from "../../../src/enums";
 import { describe, it, expect } from "vitest";
 
 describe("ConceptTypeMethods", () => {
