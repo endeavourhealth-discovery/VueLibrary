@@ -42,9 +42,11 @@ export default defineConfig({
     emptyOutDir: true
   },
   test: {
+    dir:"./tests",
     globals: true,
     environment: "happy-dom",
     coverage: {
+      include:["./tests/**/*.{js,ts}"],
       provider: "v8",
       reporter: ["text", "lcov"]
     },

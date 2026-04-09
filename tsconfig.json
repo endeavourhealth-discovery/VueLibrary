@@ -18,7 +18,9 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "rootDir": "./src",
-    "baseUrl": ".",
+    "paths":{
+      "@/*":["./src/*"]
+    },
     "types": ["vite/client", "vitest/globals", "@vueuse/core", "@vueuse/integrations"],
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "outDir": "./dist/types"
