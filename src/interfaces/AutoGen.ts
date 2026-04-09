@@ -2,7 +2,7 @@ import { IMLContext, ListMode, TargetUpdateMode, Aggregate, Bool, DatabaseOption
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-03-27 09:39:25.
+// Generated using typescript-generator version 3.2.1263 on 2026-04-09 11:21:14.
 
 export interface ConceptContextMap {
     id?: string;
@@ -204,6 +204,8 @@ export interface ModelDocument {
 export interface NodeShape extends TTIriRef {
     property?: PropertyShape[];
     subType?: TTIriRef[];
+    definingProperty?: TTIriRef;
+    inverseProperty?: TTIriRef;
 }
 
 export interface Page {
@@ -280,6 +282,7 @@ export interface PropertyShape {
     highCardinality?: boolean;
     isValidArguments?: Argument[];
     inversePath?: TTIriRef;
+    generic?: boolean;
 }
 
 export interface SetContent {
@@ -341,13 +344,13 @@ export interface ArgumentReference {
 }
 
 export interface Assignable {
+    compare?: Compare;
     value?: string;
     invalid?: boolean;
-    description?: string;
     operator?: Operator;
+    description?: string;
     valueLabel?: string;
     valueTerm?: string;
-    compare?: Compare;
 }
 
 export interface Case {
@@ -398,9 +401,9 @@ export interface Element extends IriLD, Entailment {
 
 export interface Entailment {
     memberOf?: boolean;
-    descendantsOf?: boolean;
-    ancestorsOf?: boolean;
     descendantsOrSelfOf?: boolean;
+    ancestorsOf?: boolean;
+    descendantsOf?: boolean;
 }
 
 export interface FunctionClause extends IriLD {
@@ -476,8 +479,8 @@ export interface Node extends Element {
     code?: string;
     inverse?: boolean;
     node?: string;
-    isCohort?: boolean;
     isResultSet?: boolean;
+    isCohort?: boolean;
 }
 
 export interface OrderDirection extends IriLD {
@@ -506,8 +509,8 @@ export interface Path extends Element, HasPaths {
     pathVariable?: string;
     typeOf?: Node;
     qualifier?: TTIriRef;
-    isCohort?: boolean;
     isResultSet?: boolean;
+    isCohort?: boolean;
 }
 
 export interface PathDocument {
@@ -642,8 +645,8 @@ export interface Where extends Element, Assignable {
     notNull?: boolean;
     units?: TTIriRef;
     isInvalid?: boolean;
-    isCohort?: boolean;
     isResultSet?: boolean;
+    isCohort?: boolean;
 }
 
 export interface DBEntry {
@@ -1058,8 +1061,8 @@ export interface TTArray extends Serializable {
 }
 
 export interface TTContext extends Serializable {
-    nameSpaces?: TTPrefix[];
     prefixes?: TTPrefix[];
+    nameSpaces?: TTPrefix[];
 }
 
 export interface Throwable extends Serializable {

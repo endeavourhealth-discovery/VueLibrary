@@ -188,6 +188,7 @@ export enum UserRole {
     AUTHORISER = "AUTHORISER",
     APPROVER = "APPROVER",
     EXECUTOR = "EXECUTOR",
+    UPRN = "UPRN",
 }
 
 export enum TaskState {
