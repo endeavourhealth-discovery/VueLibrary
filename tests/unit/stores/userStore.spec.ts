@@ -1,10 +1,11 @@
 import { createTestingPinia } from "@pinia/testing";
-import { useUserStore } from "../../../src/stores";
 import { flushPromises } from "@vue/test-utils";
-import { afterAll, it, expect, beforeEach, describe, vi } from "vitest";
-import { User } from "../../../src/models";
 import { uniqueId } from "lodash-es";
+import { afterAll, beforeEach, describe, expect, it, vi } from "vitest";
+
 import { FontSize, PrimeVueColors, PrimeVuePresetThemes } from "../../../src/enums";
+import { User } from "../../../src/models";
+import { useUserStore } from "../../../src/stores";
 
 describe("state", () => {
   beforeEach(() => {

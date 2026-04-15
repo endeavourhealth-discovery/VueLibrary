@@ -1,7 +1,8 @@
-import { getColourFromType, getFAIconFromType } from "../../../src/helpers/ConceptTypeVisuals";
-import palette from "google-palette";
 import { createTestingPinia } from "@pinia/testing";
-import { describe, it, expect } from "vitest";
+import palette from "google-palette";
+import { describe, expect, it } from "vitest";
+
+import { getColourFromType, getFAIconFromType } from "../../../src/helpers/ConceptTypeVisuals";
 
 createTestingPinia();
 

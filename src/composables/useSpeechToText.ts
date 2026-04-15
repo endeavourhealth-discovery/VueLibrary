@@ -1,4 +1,4 @@
-import { ref, Ref, onMounted } from "vue";
+import { Ref, onMounted, ref } from "vue";
 
 export function useSpeechToText(searchText: Ref<string>, searchPlaceholder: Ref<string>) {
   const listening = ref(false);

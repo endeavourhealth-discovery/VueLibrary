@@ -1,4 +1,4 @@
-import { beforeAll, afterAll, afterEach } from "vitest";
+import { afterAll, afterEach, beforeAll } from "vitest";
 
 window.happyDOM.setURL("http://localhost");
 

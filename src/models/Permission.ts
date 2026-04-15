@@ -1,7 +1,8 @@
-import { array, optional, date, object, enum as zenum, type output, string } from "zod/v4";
+import { array, date, object, optional, type output, string, enum as zenum } from "zod/v4";
+
+import { UserRole } from "../enums";
 import Resource from "../enums/Resource";
 import { NamespacePermissionSchema } from "./NamespacePermission";
-import { UserRole } from "../enums";
 
 export const PermissionSchema = object({
   resource: zenum(Resource),

@@ -1,7 +1,7 @@
 import Resource from "./Resource";
-import { ToastSeverity } from "./ToastSeverity";
 import { TagSeverity } from "./TagSeverity";
+import { ToastSeverity } from "./ToastSeverity";
 
 export * from "./AutoGen";
 
-export { Resource, ToastSeverity, TagSeverity};
+export { Resource, ToastSeverity, TagSeverity };

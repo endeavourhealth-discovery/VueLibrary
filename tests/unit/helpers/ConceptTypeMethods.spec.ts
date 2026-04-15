@@ -1,6 +1,7 @@
-import { isOfTypes, isValueSet, isProperty } from "../../../src/helpers/ConceptTypeMethods";
+import { describe, expect, it } from "vitest";
+
 import { IM } from "../../../src/enums";
-import { describe, it, expect } from "vitest";
+import { isOfTypes, isProperty, isValueSet } from "../../../src/helpers/ConceptTypeMethods";
 
 describe("ConceptTypeMethods", () => {
   const testConceptType = [{ iri: "http://endhealth.info/im#Concept", name: "Concept" }];

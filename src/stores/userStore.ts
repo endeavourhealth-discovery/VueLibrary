@@ -1,9 +1,11 @@
-import { defineStore } from "pinia";
-import { isObjectHasKeys } from "../helpers";
-import { HistoryItem } from "../interfaces";
-import { PrimeVuePresetThemes, PrimeVueColors, FontSize, UserRole } from "../enums";
-import { localStorageWithExpiry } from "../helpers";
 import { computed, ref } from "vue";
+
+import { defineStore } from "pinia";
+
+import { FontSize, PrimeVueColors, PrimeVuePresetThemes, UserRole } from "../enums";
+import { isObjectHasKeys } from "../helpers";
+import { localStorageWithExpiry } from "../helpers";
+import { HistoryItem } from "../interfaces";
 import { NamespacePermissionJava, RecentActivityItemDto } from "../interfaces";
 import { RecentActivityItem, User } from "../models";
 

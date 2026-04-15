@@ -10,14 +10,15 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import type { TTIriRef } from "vue-library/interfaces";
-import { isArrayHasLength, isObjectHasKeys } from "vue-library/helpers";
+
 import { TagSeverity } from "vue-library/enums";
+import { isArrayHasLength, isObjectHasKeys } from "vue-library/helpers";
+import type { TTIriRef } from "vue-library/interfaces";
 
 interface Props {
   label: string;
   data: TTIriRef[];
-  tagSeverityMatches:{iri:string,severity:TagSeverity}[]
+  tagSeverityMatches: { iri: string; severity: TagSeverity }[];
   size?: string;
   id?: string;
 }

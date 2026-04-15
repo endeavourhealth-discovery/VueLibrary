@@ -2,11 +2,11 @@
 // Set, Query Set, Value Set
 // Class, Record Type
 // Everything else
-
-import { Node, TTIriRef } from "../interfaces/AutoGen";
 import palette from "google-palette";
-import { isFeature, isFolder, isFunction, isProperty, isQuery, isRecordModel, isTask, isValueSet, isIndicator } from "../helpers/ConceptTypeMethods";
+
 import { IM } from "../enums";
+import { isFeature, isFolder, isFunction, isIndicator, isProperty, isQuery, isRecordModel, isTask, isValueSet } from "../helpers/ConceptTypeMethods";
+import { Node, TTIriRef } from "../interfaces/AutoGen";
 
 export function getFAIconFromType(conceptTypes: TTIriRef[]): string[] {
   if (isRecordModel(conceptTypes)) return ["fa-duotone", "fa-diagram-project"];
