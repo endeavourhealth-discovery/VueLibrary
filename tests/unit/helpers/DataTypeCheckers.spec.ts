@@ -1,5 +1,6 @@
-import { isArrayHasLength, isObjectHasKeys, isObject } from "../../../src/helpers/DataTypeCheckers";
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
+
+import { isArrayHasLength, isObject, isObjectHasKeys } from "../../../src/helpers/DataTypeCheckers";
 
 describe("DataTypeCheckers.ts ___", () => {
   describe("isArrayHasLength", () => {

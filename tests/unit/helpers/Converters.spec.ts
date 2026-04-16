@@ -1,5 +1,6 @@
-import { enumToArray, iriToUrl, urlToIri } from "../../../src/helpers/Converters";
 import { describe, expect, it } from "vitest";
+
+import { enumToArray, iriToUrl, urlToIri } from "../../../src/helpers/Converters";
 
 describe("Converters", () => {
   describe("iriToUrl", () => {

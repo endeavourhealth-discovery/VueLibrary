@@ -1,17 +1,19 @@
+import { Ref, inject, ref } from "vue";
+
+import type { TreeNode } from "primevue/treenode";
+import { useToast } from "primevue/usetoast";
+
+import { IM } from "../enums";
 import { getColourFromType, getFAIconFromType } from "../helpers/ConceptTypeVisuals";
 import { isObjectHasKeys } from "../helpers/DataTypeCheckers";
+import injectionKeys from "../injectionKeys/injectionKeys";
 import { TTIriRef } from "../interfaces/AutoGen";
 import { ExtendedTTEntity } from "../interfaces/ExtendedAutoGen";
-import { IM } from "../enums";
-import type { TreeNode } from "primevue/treenode";
-import { inject, ref, Ref } from "vue";
-import { useToast } from "primevue/usetoast";
-import injectionKeys from "../injectionKeys/injectionKeys";
 
 export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: number) {
   const useDirectService = inject(injectionKeys.useDirectService);
   if (!useDirectService) throw new Error("Missing injection: directService");
-  const directService = useDirectService()
+  const directService = useDirectService();
   const entityService = inject(injectionKeys.entityService);
   if (!entityService) throw new Error("Missing injection: entityService");
 

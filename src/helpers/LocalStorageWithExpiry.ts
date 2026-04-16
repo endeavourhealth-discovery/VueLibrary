@@ -1,5 +1,5 @@
-import { GenericObject } from "../interfaces";
 import { isObjectHasKeys } from "../helpers";
+import { GenericObject } from "../interfaces";
 
 export const localStorageWithExpiry = {
   getItem(key: string) {

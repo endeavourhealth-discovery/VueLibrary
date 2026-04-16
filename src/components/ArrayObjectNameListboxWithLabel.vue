@@ -39,13 +39,15 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, onMounted, ref, Ref } from "vue";
+import { Ref, computed, inject, onMounted, ref } from "vue";
+
 import { isArrayHasLength, isObjectHasKeys } from "vue-library/helpers";
+
 import injectionKeys from "../injectionKeys/injectionKeys";
 
 interface Props {
   label: string;
-  startExpanded?:string[]
+  startExpanded?: string[];
   data?: unknown[];
   size?: string;
   id?: string;
@@ -58,8 +60,8 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const useDirectService = inject(injectionKeys.useDirectService);
-if (!useDirectService) throw new Error("Missing injection: useDirectService")
-const directService = useDirectService()
+if (!useDirectService) throw new Error("Missing injection: useDirectService");
+const directService = useDirectService();
 
 const selected: Ref = ref({});
 const buttonExpanded = ref(false);
