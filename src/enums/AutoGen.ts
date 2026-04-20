@@ -317,6 +317,7 @@ export enum GRAPH {
 export enum IM {
   DOMAIN = "http://endhealth.info/",
   PREFIX = "im",
+  ROOT_NAMESPACE = "http://endhealth.info/im#Namespace",
   DISPLAY_LABEL = "http://endhealth.info/im#displayLabel",
   HAS_SUBTYPES = "http://endhealth.info/im#hasSubtypes",
   HAS_VALUESET = "http://endhealth.info/im#hasValueSet",

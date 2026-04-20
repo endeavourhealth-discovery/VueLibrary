@@ -9,9 +9,9 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
-import { TagSeverity } from "vue-library/enums";
-import { isObjectHasKeys } from "vue-library/helpers";
-import type { TTIriRef } from "vue-library/interfaces";
+import { TagSeverity } from "../enums";
+import { isObjectHasKeys } from "../helpers";
+import type { TTIriRef } from "../interfaces";
 
 interface Props {
   label: string;

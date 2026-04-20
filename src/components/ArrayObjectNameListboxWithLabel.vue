@@ -41,8 +41,7 @@
 <script setup lang="ts">
 import { Ref, computed, inject, onMounted, ref } from "vue";
 
-import { isArrayHasLength, isObjectHasKeys } from "vue-library/helpers";
-
+import { isArrayHasLength, isObjectHasKeys } from "../helpers";
 import injectionKeys from "../injectionKeys/injectionKeys";
 
 interface Props {
