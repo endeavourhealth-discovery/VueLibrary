@@ -9,7 +9,7 @@
     "test:unit": "tsc -p tsconfig.tests.json && vitest",
     "format": "prettier --write \"{src,tests}/**/*.{js,ts,vue,json,css,scss,md}\"",
     "format:check": "prettier --list-different \"{src,tests}/**/*.{js,ts,vue,json,css,scss,md}\"",
-    "prepare": "husky"
+    "prepare": "pnpm build && node -e \"try{require('husky').install()}catch(e){}\""
   },
   "dependencies": {
     "@vueuse/core": "14.2.1",
