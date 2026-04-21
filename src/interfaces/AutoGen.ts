@@ -70,7 +70,7 @@ import {
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-04-20 11:03:12.
+// Generated using typescript-generator version 3.2.1263 on 2026-04-21 09:39:59.
 
 export interface ConceptContextMap {
   id?: string;
@@ -414,10 +414,10 @@ export interface ArgumentReference {
 export interface Assignable {
   value?: string;
   invalid?: boolean;
-  operator?: Operator;
   description?: string;
-  valueTerm?: string;
+  operator?: Operator;
   valueLabel?: string;
+  valueTerm?: string;
   compare?: Compare;
 }
 
@@ -468,8 +468,8 @@ export interface Element extends IriLD, Entailment {}
 
 export interface Entailment {
   descendantsOrSelfOf?: boolean;
-  descendantsOf?: boolean;
   ancestorsOf?: boolean;
+  descendantsOf?: boolean;
   memberOf?: boolean;
 }
 
@@ -486,6 +486,13 @@ export interface GroupBy extends IriLD {
 export interface HasPaths {
   path?: Path[];
   node?: string;
+}
+
+export interface Having {
+  aggregate?: Aggregate;
+  range?: Range;
+  operator?: Operator;
+  value?: string;
 }
 
 export interface Instance extends IriLD {
@@ -512,7 +519,6 @@ export interface Match extends IriLD, HasPaths, Returnable {
   then?: Where;
   graph?: Node;
   optional?: boolean;
-  aggregate?: FunctionClause;
   parameter?: string;
   function?: FunctionClause;
   entailment?: Entail;
@@ -521,6 +527,7 @@ export interface Match extends IriLD, HasPaths, Returnable {
   inverse?: boolean;
   activeOnly?: boolean;
   rule?: Match[];
+  all?: Match[];
   libraryItem?: string;
   invalid?: boolean;
   groupBy?: GroupBy[];
@@ -529,6 +536,8 @@ export interface Match extends IriLD, HasPaths, Returnable {
   errorMessage?: string;
   draft?: boolean;
   keepClauses?: Match[];
+  score?: string;
+  having?: Having;
 }
 
 export interface Node extends Element {
@@ -546,8 +555,8 @@ export interface Node extends Element {
   code?: string;
   inverse?: boolean;
   node?: string;
-  isResultSet?: boolean;
   isCohort?: boolean;
+  isResultSet?: boolean;
 }
 
 export interface OrderDirection extends IriLD {
@@ -576,8 +585,8 @@ export interface Path extends Element, HasPaths {
   pathVariable?: string;
   typeOf?: Node;
   qualifier?: TTIriRef;
-  isResultSet?: boolean;
   isCohort?: boolean;
+  isResultSet?: boolean;
 }
 
 export interface PathDocument {
@@ -712,8 +721,8 @@ export interface Where extends Element, Assignable {
   notNull?: boolean;
   units?: TTIriRef;
   isInvalid?: boolean;
-  isResultSet?: boolean;
   isCohort?: boolean;
+  isResultSet?: boolean;
 }
 
 export interface DBEntry {
@@ -1036,13 +1045,13 @@ export interface TTEntity extends TTNode, Serializable {
   context?: TTContext;
   crud?: TTIriRef;
   type?: TTArray;
-  status?: TTIriRef;
   name?: string;
   scheme?: TTIriRef;
   version?: number;
+  status?: TTIriRef;
   description?: string;
-  code?: string;
   types?: TTIriRef[];
+  code?: string;
   prefixes?: TTPrefix[];
 }
 
@@ -1125,8 +1134,8 @@ export interface TTArray extends Serializable {
 }
 
 export interface TTContext extends Serializable {
-  prefixes?: TTPrefix[];
   nameSpaces?: TTPrefix[];
+  prefixes?: TTPrefix[];
 }
 
 export interface Throwable extends Serializable {

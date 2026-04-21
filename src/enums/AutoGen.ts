@@ -30,7 +30,8 @@ export enum Aggregate {
 export enum Bool {
   and = "and",
   or = "or",
-  rule = "rule"
+  rule = "rule",
+  all = "all"
 }
 
 export enum DatabaseOption {
