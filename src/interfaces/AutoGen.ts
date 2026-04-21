@@ -2,7 +2,7 @@ import { IMLContext, ListMode, TargetUpdateMode, Aggregate, Bool, DatabaseOption
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-04-09 11:21:14.
+// Generated using typescript-generator version 3.2.1263 on 2026-04-21 11:25:30.
 
 export interface ConceptContextMap {
     id?: string;
@@ -344,13 +344,13 @@ export interface ArgumentReference {
 }
 
 export interface Assignable {
-    compare?: Compare;
     value?: string;
     invalid?: boolean;
-    operator?: Operator;
     description?: string;
-    valueLabel?: string;
+    compare?: Compare;
     valueTerm?: string;
+    valueLabel?: string;
+    operator?: Operator;
 }
 
 export interface Case {
@@ -400,8 +400,8 @@ export interface Element extends IriLD, Entailment {
 }
 
 export interface Entailment {
-    memberOf?: boolean;
     descendantsOrSelfOf?: boolean;
+    memberOf?: boolean;
     ancestorsOf?: boolean;
     descendantsOf?: boolean;
 }
@@ -419,6 +419,13 @@ export interface GroupBy extends IriLD {
 export interface HasPaths {
     path?: Path[];
     node?: string;
+}
+
+export interface Having {
+    aggregate?: Aggregate;
+    range?: Range;
+    operator?: Operator;
+    value?: string;
 }
 
 export interface Instance extends IriLD {
@@ -445,7 +452,6 @@ export interface Match extends IriLD, HasPaths, Returnable {
     then?: Where;
     graph?: Node;
     optional?: boolean;
-    aggregate?: FunctionClause;
     parameter?: string;
     function?: FunctionClause;
     entailment?: Entail;
@@ -454,6 +460,7 @@ export interface Match extends IriLD, HasPaths, Returnable {
     inverse?: boolean;
     activeOnly?: boolean;
     rule?: Match[];
+    all?: Match[];
     libraryItem?: string;
     invalid?: boolean;
     groupBy?: GroupBy[];
@@ -462,6 +469,8 @@ export interface Match extends IriLD, HasPaths, Returnable {
     errorMessage?: string;
     draft?: boolean;
     keepClauses?: Match[];
+    score?: string;
+    having?: Having;
 }
 
 export interface Node extends Element {
@@ -628,6 +637,7 @@ export interface Where extends Element, Assignable {
     inverse?: boolean;
     typeOf?: Node;
     subjectVariable?: string;
+    subjectParameter?: string;
     not?: boolean;
     roleGroup?: boolean;
     isNotNull?: boolean;
@@ -968,14 +978,14 @@ export interface TTDocument extends TTNode {
 export interface TTEntity extends TTNode, Serializable {
     context?: TTContext;
     crud?: TTIriRef;
-    type?: TTArray;
+    status?: TTIriRef;
     name?: string;
+    type?: TTArray;
     scheme?: TTIriRef;
     version?: number;
-    status?: TTIriRef;
     description?: string;
-    code?: string;
     types?: TTIriRef[];
+    code?: string;
     prefixes?: TTPrefix[];
 }
 
