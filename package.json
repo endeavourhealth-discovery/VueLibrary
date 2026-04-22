@@ -60,7 +60,9 @@
       "default": "./dist/index.js"
     },
     "./interfaces": {
-      "types": "./dist/interfaces/index.d.ts"
+      "types": "./dist/interfaces/index.d.ts",
+      "import": "./dist/interfaces.js",
+      "default": "./dist/interfaces.js"
     },
     "./enums": {
       "types": "./dist/enums/index.d.ts",
