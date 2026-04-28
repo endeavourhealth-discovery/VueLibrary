@@ -2,7 +2,7 @@ import { IMLContext, ListMode, TargetUpdateMode, Aggregate, Bool, DatabaseOption
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-04-28 15:00:19.
+// Generated using typescript-generator version 3.2.1263 on 2026-04-28 16:11:18.
 
 export interface ConceptContextMap {
     id?: string;
@@ -348,8 +348,8 @@ export interface Assignable {
     invalid?: boolean;
     description?: string;
     operator?: Operator;
-    compare?: Compare;
     valueLabel?: string;
+    compare?: Compare;
     valueTerm?: string;
 }
 
@@ -401,9 +401,9 @@ export interface Element extends IriLD, Entailment {
 
 export interface Entailment {
     memberOf?: boolean;
-    ancestorsOf?: boolean;
     descendantsOf?: boolean;
     descendantsOrSelfOf?: boolean;
+    ancestorsOf?: boolean;
 }
 
 export interface FunctionClause extends IriLD {
@@ -470,7 +470,6 @@ export interface Match extends IriLD, HasPaths, Returnable {
     keepClauses?: Match[];
     score?: string;
     having?: Having;
-    testProperty?: string;
 }
 
 export interface Node extends Element {
@@ -978,15 +977,15 @@ export interface TTDocument extends TTNode {
 export interface TTEntity extends TTNode, Serializable {
     context?: TTContext;
     crud?: TTIriRef;
-    type?: TTArray;
     name?: string;
+    type?: TTArray;
     scheme?: TTIriRef;
     version?: number;
-    status?: TTIriRef;
     description?: string;
-    code?: string;
     types?: TTIriRef[];
+    code?: string;
     prefixes?: TTPrefix[];
+    status?: TTIriRef;
 }
 
 export interface BugReport extends Task {
