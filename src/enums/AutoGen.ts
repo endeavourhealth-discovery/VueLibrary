@@ -32,7 +32,6 @@ export enum Bool {
     and = "and",
     or = "or",
     rule = "rule",
-    all = "all",
 }
 
 export enum DatabaseOption {
@@ -64,6 +63,7 @@ export enum Entail {
 export enum IMQType {
     COHORT = "COHORT",
     DATASET = "DATASET",
+    INDICATOR = "INDICATOR",
 }
 
 export enum Operator {

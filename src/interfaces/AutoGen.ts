@@ -2,7 +2,7 @@ import { IMLContext, ListMode, TargetUpdateMode, Aggregate, Bool, DatabaseOption
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-04-21 11:25:30.
+// Generated using typescript-generator version 3.2.1263 on 2026-04-28 15:00:19.
 
 export interface ConceptContextMap {
     id?: string;
@@ -347,10 +347,10 @@ export interface Assignable {
     value?: string;
     invalid?: boolean;
     description?: string;
-    compare?: Compare;
-    valueTerm?: string;
-    valueLabel?: string;
     operator?: Operator;
+    compare?: Compare;
+    valueLabel?: string;
+    valueTerm?: string;
 }
 
 export interface Case {
@@ -400,10 +400,10 @@ export interface Element extends IriLD, Entailment {
 }
 
 export interface Entailment {
-    descendantsOrSelfOf?: boolean;
     memberOf?: boolean;
     ancestorsOf?: boolean;
     descendantsOf?: boolean;
+    descendantsOrSelfOf?: boolean;
 }
 
 export interface FunctionClause extends IriLD {
@@ -460,7 +460,6 @@ export interface Match extends IriLD, HasPaths, Returnable {
     inverse?: boolean;
     activeOnly?: boolean;
     rule?: Match[];
-    all?: Match[];
     libraryItem?: string;
     invalid?: boolean;
     groupBy?: GroupBy[];
@@ -471,6 +470,7 @@ export interface Match extends IriLD, HasPaths, Returnable {
     keepClauses?: Match[];
     score?: string;
     having?: Having;
+    testProperty?: string;
 }
 
 export interface Node extends Element {
@@ -978,14 +978,14 @@ export interface TTDocument extends TTNode {
 export interface TTEntity extends TTNode, Serializable {
     context?: TTContext;
     crud?: TTIriRef;
-    status?: TTIriRef;
-    name?: string;
     type?: TTArray;
+    name?: string;
     scheme?: TTIriRef;
     version?: number;
+    status?: TTIriRef;
     description?: string;
-    types?: TTIriRef[];
     code?: string;
+    types?: TTIriRef[];
     prefixes?: TTPrefix[];
 }
 
