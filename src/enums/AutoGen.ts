@@ -1,5 +1,10 @@
 /* Auto-extracted enums */
 
+export enum REPO {
+  IM_DIRECTORY = "IMDirectory",
+  IM_QUERY_RUNNER = "IMQueryRunner"
+}
+
 export enum IMLContext {
   prefix = "prefix",
   match = "match",
@@ -30,8 +35,7 @@ export enum Aggregate {
 export enum Bool {
   and = "and",
   or = "or",
-  rule = "rule",
-  all = "all"
+  rule = "rule"
 }
 
 export enum DatabaseOption {
@@ -62,7 +66,8 @@ export enum Entail {
 
 export enum IMQType {
   COHORT = "COHORT",
-  DATASET = "DATASET"
+  DATASET = "DATASET",
+  INDICATOR = "INDICATOR"
 }
 
 export enum Operator {
@@ -263,6 +268,8 @@ export enum CONFIG {
   COMMENT = "http://www.w3.org/2000/01/rdf-schema#comment",
   IMDIRECTORY_LATEST_RELEASE = "http://endhealth.info/config#IMDirectoryLatestRelease",
   IMDIRECTORY_ALL_RELEASES = "http://endhealth.info/config#IMDirectoryAllReleases",
+  IMQUERY_RUNNER_LATEST_RELEASE = "http://endhealth.info/config#IMQueryRunnerLatestRelease",
+  IMQUERY_RUNNER_ALL_RELEASES = "http://endhealth.info/config#IMQueryRunnerAllReleases",
   MONITORING = "http://endhealth.info/config#monitoring"
 }
 
