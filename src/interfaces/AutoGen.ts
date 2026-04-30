@@ -1,8 +1,8 @@
-import { IMLContext, ListMode, TargetUpdateMode, Aggregate, Bool, DatabaseOption, DisplayMode, ECLType, Entail, IMQType, Operator, Order, OrderableDate, OrderableNumber, QueryType, RuleAction, TextSearchStyle, ValidationLevel, VarType, QueryExecutorStatus, Browser, OperatingSystem, Severity, Status, TaskModule, ApprovalType, UserRole, TaskState, TaskType, BNF, CODE_TEMPLATE, COMPONENT, CONFIG, CodeTemplate, EDITOR, ENTITY_TYPE, EntityType, FHIR, GRAPH, IM, IMPORT_TYPE, IMQ, IM_FUNCTION, ImportType, MAP, NAMESPACE, ODS, OPENSEARCH, OPEN_SEARCH, ORG, OWL, PRSB, QR, QUERY, RDF, RDFS, SHACL, SNOMED, TRANSFORM_FUNCTION, TransformFunction, USER, VALIDATION, WORKFLOW, XSD, PrimeVuePresetThemes, PrimeVueColors, FontSize } from '../enums/AutoGen';
+import { REPO, IMLContext, ListMode, TargetUpdateMode, Aggregate, Bool, DatabaseOption, DisplayMode, ECLType, Entail, IMQType, Operator, Order, OrderableDate, OrderableNumber, QueryType, RuleAction, TextSearchStyle, ValidationLevel, VarType, QueryExecutorStatus, Browser, OperatingSystem, Severity, Status, TaskModule, ApprovalType, UserRole, TaskState, TaskType, BNF, CODE_TEMPLATE, COMPONENT, CONFIG, CodeTemplate, EDITOR, ENTITY_TYPE, EntityType, FHIR, GRAPH, IM, IMPORT_TYPE, IMQ, IM_FUNCTION, ImportType, MAP, NAMESPACE, ODS, OPENSEARCH, OPEN_SEARCH, ORG, OWL, PRSB, QR, QUERY, RDF, RDFS, SHACL, SNOMED, TRANSFORM_FUNCTION, TransformFunction, USER, VALIDATION, WORKFLOW, XSD, PrimeVuePresetThemes, PrimeVueColors, FontSize } from '../enums/AutoGen';
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-04-28 16:11:18.
+// Generated using typescript-generator version 3.2.1263 on 2026-04-30 08:15:11.
 
 export interface ConceptContextMap {
     id?: string;
@@ -73,29 +73,6 @@ export interface CodeGenDto {
     datatypeMap?: { [index: string]: string };
     template?: string;
     complexTypes?: boolean;
-}
-
-export interface GithubAuthorDTO {
-    login?: string;
-}
-
-export interface GithubDTO {
-    tag_name?: string;
-    name?: string;
-    body?: string;
-    created_at?: string;
-    published_at?: string;
-    author?: GithubAuthorDTO;
-}
-
-export interface GithubRelease {
-    version?: string;
-    title?: string;
-    createdDate?: string;
-    publishedDate?: string;
-    releaseNotes?: string[];
-    author?: string;
-    url?: string;
 }
 
 export interface ArrayButtons {
@@ -348,8 +325,8 @@ export interface Assignable {
     invalid?: boolean;
     description?: string;
     operator?: Operator;
-    valueLabel?: string;
     compare?: Compare;
+    valueLabel?: string;
     valueTerm?: string;
 }
 
@@ -1200,6 +1177,7 @@ export interface OrgRelationship {
 export interface OrgRelTarget {
     OrgId?: OrgId;
 }
+
 
 
 
