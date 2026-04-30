@@ -6,6 +6,7 @@ import type { DownloadSettings } from "./DownloadSettings";
 import type { FilterOptions } from "./FilterOptions";
 import type { FiltersAsIris } from "./FiltersAsIris";
 import type { GenericObject } from "./GenericObject";
+import type { GithubRelease } from "./GithubRelease";
 import type { HistoryItem } from "./HistoryItem";
 import type { MailOptions } from "./MailOptions";
 import type { MapItem } from "./MapItem";
@@ -35,6 +36,7 @@ export {
   type FilterOptions,
   type FiltersAsIris,
   type GenericObject,
+  type GithubRelease,
   type HistoryItem,
   type MapItem,
   type Namespace,

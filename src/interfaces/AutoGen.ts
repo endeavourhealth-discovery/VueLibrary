@@ -47,6 +47,7 @@ import {
   QueryType,
   RDF,
   RDFS,
+  REPO,
   RuleAction,
   SHACL,
   SNOMED,
@@ -70,7 +71,7 @@ import {
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-04-21 09:39:59.
+// Generated using typescript-generator version 3.2.1263 on 2026-04-29 14:15:18.
 
 export interface ConceptContextMap {
   id?: string;
@@ -141,29 +142,6 @@ export interface CodeGenDto {
   datatypeMap?: { [index: string]: string };
   template?: string;
   complexTypes?: boolean;
-}
-
-export interface GithubAuthorDTO {
-  login?: string;
-}
-
-export interface GithubDTO {
-  tag_name?: string;
-  name?: string;
-  body?: string;
-  created_at?: string;
-  published_at?: string;
-  author?: GithubAuthorDTO;
-}
-
-export interface GithubRelease {
-  version?: string;
-  title?: string;
-  createdDate?: string;
-  publishedDate?: string;
-  releaseNotes?: string[];
-  author?: string;
-  url?: string;
 }
 
 export interface ArrayButtons {
@@ -467,10 +445,10 @@ export interface ECLStatus {
 export interface Element extends IriLD, Entailment {}
 
 export interface Entailment {
-  descendantsOrSelfOf?: boolean;
-  ancestorsOf?: boolean;
-  descendantsOf?: boolean;
   memberOf?: boolean;
+  descendantsOf?: boolean;
+  ancestorsOf?: boolean;
+  descendantsOrSelfOf?: boolean;
 }
 
 export interface FunctionClause extends IriLD {
@@ -486,13 +464,6 @@ export interface GroupBy extends IriLD {
 export interface HasPaths {
   path?: Path[];
   node?: string;
-}
-
-export interface Having {
-  aggregate?: Aggregate;
-  range?: Range;
-  operator?: Operator;
-  value?: string;
 }
 
 export interface Instance extends IriLD {
@@ -519,6 +490,7 @@ export interface Match extends IriLD, HasPaths, Returnable {
   then?: Where;
   graph?: Node;
   optional?: boolean;
+  aggregate?: FunctionClause;
   parameter?: string;
   function?: FunctionClause;
   entailment?: Entail;
@@ -527,7 +499,6 @@ export interface Match extends IriLD, HasPaths, Returnable {
   inverse?: boolean;
   activeOnly?: boolean;
   rule?: Match[];
-  all?: Match[];
   libraryItem?: string;
   invalid?: boolean;
   groupBy?: GroupBy[];
@@ -536,8 +507,6 @@ export interface Match extends IriLD, HasPaths, Returnable {
   errorMessage?: string;
   draft?: boolean;
   keepClauses?: Match[];
-  score?: string;
-  having?: Having;
 }
 
 export interface Node extends Element {
@@ -1048,11 +1017,11 @@ export interface TTEntity extends TTNode, Serializable {
   name?: string;
   scheme?: TTIriRef;
   version?: number;
+  prefixes?: TTPrefix[];
   status?: TTIriRef;
   description?: string;
   types?: TTIriRef[];
   code?: string;
-  prefixes?: TTPrefix[];
 }
 
 export interface BugReport extends Task {
@@ -1134,8 +1103,8 @@ export interface TTArray extends Serializable {
 }
 
 export interface TTContext extends Serializable {
-  nameSpaces?: TTPrefix[];
   prefixes?: TTPrefix[];
+  nameSpaces?: TTPrefix[];
 }
 
 export interface Throwable extends Serializable {
