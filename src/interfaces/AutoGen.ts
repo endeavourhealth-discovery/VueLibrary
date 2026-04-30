@@ -47,7 +47,6 @@ import {
   QueryType,
   RDF,
   RDFS,
-  REPO,
   RuleAction,
   SHACL,
   SNOMED,
@@ -71,7 +70,7 @@ import {
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-04-30 09:15:07.
+// Generated using typescript-generator version 3.2.1263 on 2026-04-21 09:39:59.
 
 export interface ConceptContextMap {
   id?: string;
@@ -142,6 +141,29 @@ export interface CodeGenDto {
   datatypeMap?: { [index: string]: string };
   template?: string;
   complexTypes?: boolean;
+}
+
+export interface GithubAuthorDTO {
+  login?: string;
+}
+
+export interface GithubDTO {
+  tag_name?: string;
+  name?: string;
+  body?: string;
+  created_at?: string;
+  published_at?: string;
+  author?: GithubAuthorDTO;
+}
+
+export interface GithubRelease {
+  version?: string;
+  title?: string;
+  createdDate?: string;
+  publishedDate?: string;
+  releaseNotes?: string[];
+  author?: string;
+  url?: string;
 }
 
 export interface ArrayButtons {
@@ -392,8 +414,8 @@ export interface ArgumentReference {
 export interface Assignable {
   value?: string;
   invalid?: boolean;
-  operator?: Operator;
   description?: string;
+  operator?: Operator;
   valueLabel?: string;
   valueTerm?: string;
   compare?: Compare;
@@ -445,10 +467,10 @@ export interface ECLStatus {
 export interface Element extends IriLD, Entailment {}
 
 export interface Entailment {
-  descendantsOf?: boolean;
-  ancestorsOf?: boolean;
-  memberOf?: boolean;
   descendantsOrSelfOf?: boolean;
+  ancestorsOf?: boolean;
+  descendantsOf?: boolean;
+  memberOf?: boolean;
 }
 
 export interface FunctionClause extends IriLD {
@@ -505,6 +527,7 @@ export interface Match extends IriLD, HasPaths, Returnable {
   inverse?: boolean;
   activeOnly?: boolean;
   rule?: Match[];
+  all?: Match[];
   libraryItem?: string;
   invalid?: boolean;
   groupBy?: GroupBy[];
@@ -1027,9 +1050,9 @@ export interface TTEntity extends TTNode, Serializable {
   version?: number;
   status?: TTIriRef;
   description?: string;
+  types?: TTIriRef[];
   code?: string;
   prefixes?: TTPrefix[];
-  types?: TTIriRef[];
 }
 
 export interface BugReport extends Task {
