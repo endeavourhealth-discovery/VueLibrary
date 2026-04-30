@@ -47,7 +47,6 @@ import {
   QueryType,
   RDF,
   RDFS,
-  REPO,
   RuleAction,
   SHACL,
   SNOMED,
@@ -71,7 +70,7 @@ import {
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-04-29 14:15:18.
+// Generated using typescript-generator version 3.2.1263 on 2026-04-23 11:44:54.
 
 export interface ConceptContextMap {
   id?: string;
@@ -142,6 +141,29 @@ export interface CodeGenDto {
   datatypeMap?: { [index: string]: string };
   template?: string;
   complexTypes?: boolean;
+}
+
+export interface GithubAuthorDTO {
+  login?: string;
+}
+
+export interface GithubDTO {
+  tag_name?: string;
+  name?: string;
+  body?: string;
+  created_at?: string;
+  published_at?: string;
+  author?: GithubAuthorDTO;
+}
+
+export interface GithubRelease {
+  version?: string;
+  title?: string;
+  createdDate?: string;
+  publishedDate?: string;
+  releaseNotes?: string[];
+  author?: string;
+  url?: string;
 }
 
 export interface ArrayButtons {
@@ -393,9 +415,9 @@ export interface Assignable {
   value?: string;
   invalid?: boolean;
   description?: string;
-  operator?: Operator;
   valueLabel?: string;
   valueTerm?: string;
+  operator?: Operator;
   compare?: Compare;
 }
 
@@ -447,8 +469,8 @@ export interface Element extends IriLD, Entailment {}
 export interface Entailment {
   memberOf?: boolean;
   descendantsOf?: boolean;
-  ancestorsOf?: boolean;
   descendantsOrSelfOf?: boolean;
+  ancestorsOf?: boolean;
 }
 
 export interface FunctionClause extends IriLD {
@@ -464,6 +486,13 @@ export interface GroupBy extends IriLD {
 export interface HasPaths {
   path?: Path[];
   node?: string;
+}
+
+export interface Having {
+  aggregate?: Aggregate;
+  range?: Range;
+  operator?: Operator;
+  value?: string;
 }
 
 export interface Instance extends IriLD {
@@ -490,7 +519,6 @@ export interface Match extends IriLD, HasPaths, Returnable {
   then?: Where;
   graph?: Node;
   optional?: boolean;
-  aggregate?: FunctionClause;
   parameter?: string;
   function?: FunctionClause;
   entailment?: Entail;
@@ -507,6 +535,8 @@ export interface Match extends IriLD, HasPaths, Returnable {
   errorMessage?: string;
   draft?: boolean;
   keepClauses?: Match[];
+  score?: string;
+  having?: Having;
 }
 
 export interface Node extends Element {
@@ -524,8 +554,8 @@ export interface Node extends Element {
   code?: string;
   inverse?: boolean;
   node?: string;
-  isCohort?: boolean;
   isResultSet?: boolean;
+  isCohort?: boolean;
 }
 
 export interface OrderDirection extends IriLD {
@@ -554,8 +584,8 @@ export interface Path extends Element, HasPaths {
   pathVariable?: string;
   typeOf?: Node;
   qualifier?: TTIriRef;
-  isCohort?: boolean;
   isResultSet?: boolean;
+  isCohort?: boolean;
 }
 
 export interface PathDocument {
@@ -690,8 +720,8 @@ export interface Where extends Element, Assignable {
   notNull?: boolean;
   units?: TTIriRef;
   isInvalid?: boolean;
-  isCohort?: boolean;
   isResultSet?: boolean;
+  isCohort?: boolean;
 }
 
 export interface DBEntry {
