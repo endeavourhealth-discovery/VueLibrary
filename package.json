@@ -1,6 +1,6 @@
 {
-  "name": "vue-library",
-  "version": "0.0.0",
+  "name": "@endeavour/vue-library",
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -97,5 +97,8 @@
   },
   "lint-staged": {
     "{src,tests}/**/*.{js,ts,vue,json,css,scss,md}": "prettier --write"
+  },
+  "publishConfig": {
+    "registry": "https://artifactory.endhealth.co.uk/repository/npm/"
   }
 }
