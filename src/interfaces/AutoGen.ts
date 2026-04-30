@@ -47,6 +47,7 @@ import {
   QueryType,
   RDF,
   RDFS,
+  REPO,
   RuleAction,
   SHACL,
   SNOMED,
@@ -70,7 +71,7 @@ import {
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-04-23 11:44:54.
+// Generated using typescript-generator version 3.2.1263 on 2026-04-30 09:15:07.
 
 export interface ConceptContextMap {
   id?: string;
@@ -141,29 +142,6 @@ export interface CodeGenDto {
   datatypeMap?: { [index: string]: string };
   template?: string;
   complexTypes?: boolean;
-}
-
-export interface GithubAuthorDTO {
-  login?: string;
-}
-
-export interface GithubDTO {
-  tag_name?: string;
-  name?: string;
-  body?: string;
-  created_at?: string;
-  published_at?: string;
-  author?: GithubAuthorDTO;
-}
-
-export interface GithubRelease {
-  version?: string;
-  title?: string;
-  createdDate?: string;
-  publishedDate?: string;
-  releaseNotes?: string[];
-  author?: string;
-  url?: string;
 }
 
 export interface ArrayButtons {
@@ -414,10 +392,10 @@ export interface ArgumentReference {
 export interface Assignable {
   value?: string;
   invalid?: boolean;
+  operator?: Operator;
   description?: string;
   valueLabel?: string;
   valueTerm?: string;
-  operator?: Operator;
   compare?: Compare;
 }
 
@@ -467,10 +445,10 @@ export interface ECLStatus {
 export interface Element extends IriLD, Entailment {}
 
 export interface Entailment {
-  memberOf?: boolean;
   descendantsOf?: boolean;
-  descendantsOrSelfOf?: boolean;
   ancestorsOf?: boolean;
+  memberOf?: boolean;
+  descendantsOrSelfOf?: boolean;
 }
 
 export interface FunctionClause extends IriLD {
@@ -554,8 +532,8 @@ export interface Node extends Element {
   code?: string;
   inverse?: boolean;
   node?: string;
-  isResultSet?: boolean;
   isCohort?: boolean;
+  isResultSet?: boolean;
 }
 
 export interface OrderDirection extends IriLD {
@@ -584,8 +562,8 @@ export interface Path extends Element, HasPaths {
   pathVariable?: string;
   typeOf?: Node;
   qualifier?: TTIriRef;
-  isResultSet?: boolean;
   isCohort?: boolean;
+  isResultSet?: boolean;
 }
 
 export interface PathDocument {
@@ -720,8 +698,8 @@ export interface Where extends Element, Assignable {
   notNull?: boolean;
   units?: TTIriRef;
   isInvalid?: boolean;
-  isResultSet?: boolean;
   isCohort?: boolean;
+  isResultSet?: boolean;
 }
 
 export interface DBEntry {
@@ -1047,11 +1025,11 @@ export interface TTEntity extends TTNode, Serializable {
   name?: string;
   scheme?: TTIriRef;
   version?: number;
-  prefixes?: TTPrefix[];
   status?: TTIriRef;
   description?: string;
-  types?: TTIriRef[];
   code?: string;
+  prefixes?: TTPrefix[];
+  types?: TTIriRef[];
 }
 
 export interface BugReport extends Task {
@@ -1133,8 +1111,8 @@ export interface TTArray extends Serializable {
 }
 
 export interface TTContext extends Serializable {
-  prefixes?: TTPrefix[];
   nameSpaces?: TTPrefix[];
+  prefixes?: TTPrefix[];
 }
 
 export interface Throwable extends Serializable {
