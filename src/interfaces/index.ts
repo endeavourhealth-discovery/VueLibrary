@@ -22,6 +22,7 @@ import { TTGraphData } from "./TTGraphData";
 import { TTProperty, UIProperty } from "./TTProperty";
 import { ValidatedEntity } from "./ValidatedEntity";
 import { MailOptions } from "./MailOptions";
+import { GithubRelease } from "./GithubRelease";
 
 export type * from "./AutoGen";
 export type * from "./ExtendedAutoGen";
@@ -35,6 +36,7 @@ export {
   type FilterOptions,
   type FiltersAsIris,
   type GenericObject,
+  type GithubRelease,
   type HistoryItem,
   type MapItem,
   type Namespace,
