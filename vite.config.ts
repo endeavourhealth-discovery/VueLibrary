@@ -10,6 +10,7 @@ const entries: Record<string, string> = {
   enums: path.resolve(__dirname, "src/enums/index.ts"),
   composables: path.resolve(__dirname, "src/composables/index.ts"),
   components: path.resolve(__dirname, "src/components/index.ts"),
+  constants: path.resolve(__dirname, "src/constants/index.ts"),
   helpers: path.resolve(__dirname, "src/helpers/index.ts"),
   models: path.resolve(__dirname, "src/models/index.ts"),
   stores: path.resolve(__dirname, "src/stores/index.ts")

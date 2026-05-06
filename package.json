@@ -74,6 +74,11 @@
       "import": "./dist/composables.js",
       "default": "./dist/composables.js"
     },
+    "./constants": {
+      "types": "./dist/constants/index.d.ts",
+      "import": "./dist/constants.js",
+      "default": "./dist/constants.js"
+    },
     "./helpers": {
       "types": "./dist/helpers/index.d.ts",
       "import": "./dist/helpers.js",
