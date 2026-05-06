@@ -2,7 +2,7 @@ import { type NamespacePermission, NamespacePermissionSchema } from "./Namespace
 import { type Permission, PermissionSchema } from "./Permission";
 import { type RecentActivityItem, RecentActivityItemSchema } from "./RecentActivityItem";
 import ToastOptions from "./ToastOptions";
-import { type User, UserSchema, hasNamespace, hasRole } from "./User";
+import { type User, UserSchema, hasNamespace, hasRole, hasRoles } from "./User";
 
 export {
   type NamespacePermission,
@@ -14,6 +14,7 @@ export {
   UserSchema,
   hasNamespace,
   hasRole,
+  hasRoles,
   type RecentActivityItem,
   RecentActivityItemSchema
 };
