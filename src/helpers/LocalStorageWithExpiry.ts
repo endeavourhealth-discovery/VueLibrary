@@ -1,8 +1,11 @@
 import { isObjectHasKeys } from "../helpers";
 import { GenericObject } from "../interfaces";
 
+const isClient = typeof window !== undefined;
+
 export const localStorageWithExpiry = {
   getItem(key: string) {
+    if (!isClient) return null;
     const lsItem = window.localStorage.getItem(key);
     if (lsItem) {
       try {
@@ -24,6 +27,7 @@ export const localStorageWithExpiry = {
   },
   setItem(key: string, data: any, maxAge: number = 30 * 24 * 60 * 60 * 1000) {
     // default maxAge 30 days
+    if (!isClient) return;
     const result: { data: GenericObject; expireTime: number } = {
       data: data,
       expireTime: Date.now() + maxAge
@@ -31,9 +35,11 @@ export const localStorageWithExpiry = {
     window.localStorage.setItem(key, JSON.stringify(result));
   },
   removeItem(key: string) {
+    if (!isClient) return;
     window.localStorage.removeItem(key);
   },
   clear() {
+    if (!isClient) return;
     window.localStorage.clear();
   }
 };
