@@ -71,7 +71,7 @@ import {
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-04-30 08:51:16.
+// Generated using typescript-generator version 3.2.1263 on 2026-04-30 15:20:52.
 
 export interface ConceptContextMap {
   id?: string;
@@ -394,9 +394,9 @@ export interface Assignable {
   invalid?: boolean;
   description?: string;
   operator?: Operator;
+  valueTerm?: string;
   valueLabel?: string;
   compare?: Compare;
-  valueTerm?: string;
 }
 
 export interface Case {
@@ -445,10 +445,10 @@ export interface ECLStatus {
 export interface Element extends IriLD, Entailment {}
 
 export interface Entailment {
-  memberOf?: boolean;
-  descendantsOf?: boolean;
   descendantsOrSelfOf?: boolean;
+  memberOf?: boolean;
   ancestorsOf?: boolean;
+  descendantsOf?: boolean;
 }
 
 export interface FunctionClause extends IriLD {
@@ -1021,15 +1021,15 @@ export interface TTDocument extends TTNode {
 export interface TTEntity extends TTNode, Serializable {
   context?: TTContext;
   crud?: TTIriRef;
-  name?: string;
   type?: TTArray;
+  name?: string;
   scheme?: TTIriRef;
   version?: number;
   description?: string;
-  types?: TTIriRef[];
-  code?: string;
-  prefixes?: TTPrefix[];
   status?: TTIriRef;
+  code?: string;
+  types?: TTIriRef[];
+  prefixes?: TTPrefix[];
 }
 
 export interface BugReport extends Task {
