@@ -41,14 +41,14 @@ export const useUserStore = defineStore("user", () => {
   }
 
   function clearOptionalCookies() {
-    localStorage.removeItem("directoryMainSplitterVertical");
-    localStorage.removeItem("directoryMainSplitterHorizontal");
-    localStorage.removeItem("viewerMainSplitterVertical");
-    localStorage.removeItem("viewerMainSplitterHorizontal");
-    localStorage.removeItem("eclEditorSavedString");
-    localStorage.removeItem("editorSavedEntity");
-    localStorage.removeItem("creatorSavedEntity");
-    localStorage.removeItem("editorSelectedIri");
+    localStorageWithExpiry.removeItem("directoryMainSplitterVertical");
+    localStorageWithExpiry.removeItem("directoryMainSplitterHorizontal");
+    localStorageWithExpiry.removeItem("viewerMainSplitterVertical");
+    localStorageWithExpiry.removeItem("viewerMainSplitterHorizontal");
+    localStorageWithExpiry.removeItem("eclEditorSavedString");
+    localStorageWithExpiry.removeItem("editorSavedEntity");
+    localStorageWithExpiry.removeItem("creatorSavedEntity");
+    localStorageWithExpiry.removeItem("editorSelectedIri");
   }
 
   function updateCookiesEssentialAccepted(bool: boolean) {
@@ -92,11 +92,11 @@ export const useUserStore = defineStore("user", () => {
   }
 
   function clearAllFromLocalStorage(): void {
-    localStorage.removeItem("preset");
-    localStorage.removeItem("darkMode");
-    localStorage.removeItem("primaryColor");
-    localStorage.removeItem("surfaceColor");
-    localStorage.removeItem("fontSize");
+    localStorageWithExpiry.removeItem("preset");
+    localStorageWithExpiry.removeItem("darkMode");
+    localStorageWithExpiry.removeItem("primaryColor");
+    localStorageWithExpiry.removeItem("surfaceColor");
+    localStorageWithExpiry.removeItem("fontSize");
   }
 
   async function updateRecentLocalActivity(
