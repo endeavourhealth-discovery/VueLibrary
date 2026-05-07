@@ -1,3 +1,3 @@
-import { PrimeVuePresetThemes } from "@/enums";
+import { PrimeVuePresetThemes } from "../enums";
 
 export const presets: PrimeVuePresetThemes[] = Object.values(PrimeVuePresetThemes);
