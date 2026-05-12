@@ -2,7 +2,7 @@ import { array, date, object, optional, type output, preprocess, string } from "
 
 export const RecentActivityItemSchema = object({
   iri: string(),
-  dateTime: preprocess(val => (typeof val === "number" ? new Date(val) : val), date()),
+  dateTime: preprocess(val => (typeof val === "number" || typeof val === "string" ? new Date(val) : val), date()),
   action: string().prefault("")
 });
 
