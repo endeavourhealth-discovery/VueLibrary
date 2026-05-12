@@ -43,7 +43,6 @@ import {
   PrimeVuePresetThemes,
   QR,
   QUERY,
-  QueryExecutorStatus,
   QueryType,
   RDF,
   RDFS,
@@ -71,7 +70,7 @@ import {
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-04-30 15:20:52.
+// Generated using typescript-generator version 3.2.1263 on 2026-05-11 16:57:17.
 
 export interface ConceptContextMap {
   id?: string;
@@ -390,13 +389,14 @@ export interface ArgumentReference {
 }
 
 export interface Assignable {
+  operator?: Operator;
+  units?: TTIriRef;
+  compare?: Compare;
+  valueLabel?: string;
+  valueTerm?: string;
   value?: string;
   invalid?: boolean;
   description?: string;
-  operator?: Operator;
-  valueTerm?: string;
-  valueLabel?: string;
-  compare?: Compare;
 }
 
 export interface Case {
@@ -445,10 +445,10 @@ export interface ECLStatus {
 export interface Element extends IriLD, Entailment {}
 
 export interface Entailment {
-  descendantsOrSelfOf?: boolean;
   memberOf?: boolean;
   ancestorsOf?: boolean;
   descendantsOf?: boolean;
+  descendantsOrSelfOf?: boolean;
 }
 
 export interface FunctionClause extends IriLD {
@@ -467,10 +467,14 @@ export interface HasPaths {
 }
 
 export interface Having {
-  aggregate?: Aggregate;
+  function?: Aggregate;
+  identifier?: string;
   range?: Range;
   operator?: Operator;
   value?: string;
+  and?: Having[];
+  or?: Having[];
+  not?: boolean;
 }
 
 export interface Instance extends IriLD {
@@ -512,8 +516,6 @@ export interface Match extends IriLD, HasPaths, Returnable {
   asDescription?: string;
   errorMessage?: string;
   draft?: boolean;
-  keepClauses?: Match[];
-  score?: string;
   having?: Having;
 }
 
@@ -532,8 +534,8 @@ export interface Node extends Element {
   code?: string;
   inverse?: boolean;
   node?: string;
-  isResultSet?: boolean;
   isCohort?: boolean;
+  isResultSet?: boolean;
 }
 
 export interface OrderDirection extends IriLD {
@@ -562,8 +564,8 @@ export interface Path extends Element, HasPaths {
   pathVariable?: string;
   typeOf?: Node;
   qualifier?: TTIriRef;
-  isResultSet?: boolean;
   isCohort?: boolean;
+  isResultSet?: boolean;
 }
 
 export interface PathDocument {
@@ -619,7 +621,7 @@ export interface Return extends Returnable {
   propertyRef?: string;
   pathRef?: string;
   inverse?: boolean;
-  unit?: string;
+  units?: TTIriRef;
   dataType?: TTIriRef;
   description?: string;
   case?: Case;
@@ -640,14 +642,7 @@ export interface Update extends TTIriRef {
 
 export interface Value extends Assignable {
   valueParameter?: string;
-  units?: TTIriRef;
   isInvalid?: boolean;
-}
-
-export interface ValuePath extends IriLD {
-  nodeRef?: string;
-  typeOf?: Node;
-  path?: ValuePath;
 }
 
 export interface ValueSource {
@@ -655,7 +650,6 @@ export interface ValueSource {
   iri?: string;
   name?: string;
   nodeRef?: string;
-  path?: ValuePath;
   propertyRef?: string;
 }
 
@@ -696,27 +690,9 @@ export interface Where extends Element, Assignable {
   exists?: boolean;
   linked?: boolean;
   notNull?: boolean;
-  units?: TTIriRef;
   isInvalid?: boolean;
-  isResultSet?: boolean;
   isCohort?: boolean;
-}
-
-export interface DBEntry {
-  id?: string;
-  queryIri?: string;
-  queryName?: string;
-  queryRequest?: QueryRequest;
-  userId?: string;
-  userName?: string;
-  queuedAt?: Date;
-  startedAt?: Date;
-  pid?: number;
-  finishedAt?: Date;
-  killedAt?: Date;
-  status?: QueryExecutorStatus;
-  queryResult?: string;
-  error?: string;
+  isResultSet?: boolean;
 }
 
 export interface CognitoGroupRequest {
@@ -1021,15 +997,15 @@ export interface TTDocument extends TTNode {
 export interface TTEntity extends TTNode, Serializable {
   context?: TTContext;
   crud?: TTIriRef;
-  type?: TTArray;
-  name?: string;
-  scheme?: TTIriRef;
-  version?: number;
-  description?: string;
-  status?: TTIriRef;
-  code?: string;
   types?: TTIriRef[];
+  version?: number;
+  code?: string;
+  scheme?: TTIriRef;
   prefixes?: TTPrefix[];
+  type?: TTArray;
+  status?: TTIriRef;
+  name?: string;
+  description?: string;
 }
 
 export interface BugReport extends Task {
