@@ -9,7 +9,7 @@
       beat && 'fa-beat',
       fade && 'fa-fade',
       beatFade && 'fa-beat-fade',
-      bounce ?? 'fa-bounce',
+      bounce && 'fa-bounce',
       shake && 'fa-shake',
       spin && 'fa-spin',
       spinReverse && 'fa-spin-reverse',
