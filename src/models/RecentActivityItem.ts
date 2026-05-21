@@ -1,15 +1,9 @@
-import { array, date, object, optional, type output, preprocess, string } from "zod/v4";
+import { z } from "zod";
 
-export const RecentActivityItemSchema = object({
-  iri: string(),
-  dateTime: preprocess(val => {
-    if (typeof val === "number" || typeof val === "string") {
-      const d = new Date(val);
-      return isNaN(d.getTime()) ? val : d;
-    }
-    return val;
-  }, date()),
-  action: string().prefault("")
+export const RecentActivityItemSchema = z.object({
+  iri: z.string(),
+  dateTime: z.coerce.date(),
+  action: z.string().prefault("")
 });
 
-export type RecentActivityItem = output<typeof RecentActivityItemSchema>;
+export type RecentActivityItem = z.output<typeof RecentActivityItemSchema>;

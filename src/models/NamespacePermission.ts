@@ -1,11 +1,11 @@
-import { array, boolean, date, object, optional, type output, string, enum as zenum } from "zod/v4";
+import { z } from "zod";
 
 import { NAMESPACE } from "../enums";
 
-export const NamespacePermissionSchema = object({
-  iri: zenum(NAMESPACE),
-  read: boolean(),
-  write: boolean()
+export const NamespacePermissionSchema = z.object({
+  iri: z.enum(NAMESPACE),
+  read: z.boolean(),
+  write: z.boolean()
 });
 
-export type NamespacePermission = output<typeof NamespacePermissionSchema>;
+export type NamespacePermission = z.output<typeof NamespacePermissionSchema>;
