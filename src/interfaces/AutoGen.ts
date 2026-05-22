@@ -2,7 +2,7 @@ import { REPO, IMLContext, ListMode, TargetUpdateMode, Aggregate, Bool, Database
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-05-21 13:13:39.
+// Generated using typescript-generator version 3.2.1263 on 2026-05-22 08:35:57.
 
 export interface ConceptContextMap {
     id?: string;
@@ -183,6 +183,8 @@ export interface NodeShape extends TTIriRef {
     subType?: TTIriRef[];
     definingProperty?: TTIriRef;
     inverseProperty?: TTIriRef;
+    folder?: NodeShape[];
+    type?: NodeShape[];
 }
 
 export interface Page {
@@ -321,14 +323,14 @@ export interface ArgumentReference {
 }
 
 export interface Assignable {
-    value?: string;
-    invalid?: boolean;
     units?: TTIriRef;
-    description?: string;
-    operator?: Operator;
     compare?: Compare;
     valueLabel?: string;
     valueTerm?: string;
+    value?: string;
+    invalid?: boolean;
+    description?: string;
+    operator?: Operator;
 }
 
 export interface Case {
@@ -1025,8 +1027,8 @@ export interface TTArray extends Serializable {
 }
 
 export interface TTContext extends Serializable {
-    prefixes?: TTPrefix[];
     nameSpaces?: TTPrefix[];
+    prefixes?: TTPrefix[];
 }
 
 export interface Throwable extends Serializable {
