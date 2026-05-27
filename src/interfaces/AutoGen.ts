@@ -2,7 +2,7 @@ import { REPO, IMLContext, ListMode, TargetUpdateMode, Aggregate, Bool, Database
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-05-27 13:11:31.
+// Generated using typescript-generator version 3.2.1263 on 2026-05-27 14:08:07.
 
 export interface ConceptContextMap {
     id?: string;
@@ -323,14 +323,14 @@ export interface ArgumentReference {
 }
 
 export interface Assignable {
-    value?: string;
-    invalid?: boolean;
     units?: TTIriRef;
-    description?: string;
-    operator?: Operator;
-    valueTerm?: string;
     valueLabel?: string;
     compare?: Compare;
+    valueTerm?: string;
+    description?: string;
+    operator?: Operator;
+    value?: string;
+    invalid?: boolean;
 }
 
 export interface Case {
@@ -382,8 +382,8 @@ export interface Element extends IriLD, Entailment {
 export interface Entailment {
     memberOf?: boolean;
     descendantsOf?: boolean;
-    ancestorsOf?: boolean;
     descendantsOrSelfOf?: boolean;
+    ancestorsOf?: boolean;
 }
 
 export interface FunctionClause extends IriLD {
@@ -934,15 +934,15 @@ export interface TTDocument extends TTNode {
 export interface TTEntity extends TTNode, Serializable {
     context?: TTContext;
     crud?: TTIriRef;
-    type?: TTArray;
-    name?: string;
-    scheme?: TTIriRef;
-    version?: number;
-    status?: TTIriRef;
     description?: string;
-    prefixes?: TTPrefix[];
+    version?: number;
     types?: TTIriRef[];
     code?: string;
+    prefixes?: TTPrefix[];
+    scheme?: TTIriRef;
+    name?: string;
+    type?: TTArray;
+    status?: TTIriRef;
 }
 
 export interface BugReport extends Task {
@@ -1027,8 +1027,8 @@ export interface TTArray extends Serializable {
 }
 
 export interface TTContext extends Serializable {
-    prefixes?: TTPrefix[];
     nameSpaces?: TTPrefix[];
+    prefixes?: TTPrefix[];
 }
 
 export interface Throwable extends Serializable {
