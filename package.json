@@ -10,9 +10,11 @@
     "test:unit": "tsc -p tsconfig.tests.json && vitest",
     "format": "prettier --write \"{src,tests}/**/*.{js,ts,vue,json,css,scss,md}\"",
     "format:check": "prettier --list-different \"{src,tests}/**/*.{js,ts,vue,json,css,scss,md}\"",
-    "prepare": "pnpm build && node -e \"try{require('husky').install()}catch(e){}\""
+    "prepare": "pnpm build && node -e \"try{require('husky').install()}catch(e){}\"",
+    "preinstall": "pnpm add endeavourhealth-discovery/InterfaceManager"
   },
   "dependencies": {
+    "@endeavour/interface-manager": "github:endeavourhealth-discovery/InterfaceManager",
     "@vueuse/core": "14.2.1",
     "@vueuse/integrations": "14.2.1",
     "google-palette": "1.1.1",
