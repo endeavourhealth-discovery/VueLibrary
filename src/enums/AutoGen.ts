@@ -356,6 +356,7 @@ export enum IM {
     RETURN_TYPE = "http://endhealth.info/im#returnType",
     UPDATE_PROCEDURE = "http://endhealth.info/im#updateProcedure",
     CONCEPT = "http://endhealth.info/im#Concept",
+    SEMANTIC_MAP = "http://endhealth.info/im#SemanticMap",
     CODEABLE = "http://endhealth.info/im#Codeable",
     CONCEPT_PROPERTY = "http://endhealth.info/im#concept",
     CONCEPT_SET = "http://endhealth.info/im#ConceptSet",
