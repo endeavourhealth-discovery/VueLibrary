@@ -2,7 +2,7 @@ import { REPO, IMLContext, ListMode, TargetUpdateMode, Aggregate, Bool, Database
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-05-31 11:58:44.
+// Generated using typescript-generator version 3.2.1263 on 2026-05-31 12:14:20.
 
 export interface ConceptContextMap {
     id?: string;
@@ -571,7 +571,7 @@ export interface Returnable {
 
 export interface Then {
     where?: Where;
-    return?: Return[];
+    return?: Return;
 }
 
 /**
