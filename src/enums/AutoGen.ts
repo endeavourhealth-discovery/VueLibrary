@@ -290,6 +290,7 @@ export enum EDITOR {
     COHORT_QUERY_SHAPE = "http://endhealth.info/im#Editor_CohortQueryShape",
     PROPERTY_SHAPE = "http://endhealth.info/im#Editor_PropertyShape",
     INDICATOR_SHAPE = "http://endhealth.info/im#Editor_IndicatorShape",
+    SEMANTIC_MAP_SHAPE = "http://endhealth.info/im#Editor_SemanticMapShape",
 }
 
 export enum ENTITY_TYPE {

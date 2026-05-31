@@ -2,7 +2,7 @@ import { REPO, IMLContext, ListMode, TargetUpdateMode, Aggregate, Bool, Database
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-05-28 16:39:09.
+// Generated using typescript-generator version 3.2.1263 on 2026-05-31 11:58:44.
 
 export interface ConceptContextMap {
     id?: string;
@@ -323,19 +323,19 @@ export interface ArgumentReference {
 }
 
 export interface Assignable {
-    valueTerm?: string;
-    compare?: Compare;
-    valueLabel?: string;
-    units?: TTIriRef;
     value?: string;
     invalid?: boolean;
+    units?: TTIriRef;
     description?: string;
     operator?: Operator;
+    compare?: Compare;
+    valueLabel?: string;
+    valueTerm?: string;
 }
 
 export interface Case {
     when?: When[];
-    else?: string;
+    else?: Then;
 }
 
 export interface Compare {
@@ -380,10 +380,10 @@ export interface Element extends IriLD, Entailment {
 }
 
 export interface Entailment {
-    memberOf?: boolean;
-    ancestorsOf?: boolean;
     descendantsOrSelfOf?: boolean;
+    memberOf?: boolean;
     descendantsOf?: boolean;
+    ancestorsOf?: boolean;
 }
 
 export interface FunctionClause extends IriLD {
@@ -561,11 +561,16 @@ export interface Return extends Returnable {
     units?: TTIriRef;
     dataType?: TTIriRef;
     description?: string;
-    case?: Case;
     value?: string;
+    case?: Case;
 }
 
 export interface Returnable {
+    return?: Return[];
+}
+
+export interface Then {
+    where?: Where;
     return?: Return[];
 }
 
@@ -592,7 +597,7 @@ export interface ValueSource {
 
 export interface When {
     where?: Where;
-    then?: string;
+    then?: Then;
     exists?: boolean;
     case?: Case;
 }
@@ -934,15 +939,15 @@ export interface TTDocument extends TTNode {
 export interface TTEntity extends TTNode, Serializable {
     context?: TTContext;
     crud?: TTIriRef;
-    name?: string;
     type?: TTArray;
+    status?: TTIriRef;
+    name?: string;
     scheme?: TTIriRef;
     version?: number;
     description?: string;
     types?: TTIriRef[];
     code?: string;
     prefixes?: TTPrefix[];
-    status?: TTIriRef;
 }
 
 export interface BugReport extends Task {
