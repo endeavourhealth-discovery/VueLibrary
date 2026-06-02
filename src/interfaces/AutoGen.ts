@@ -2,7 +2,7 @@ import { REPO, IMLContext, ListMode, TargetUpdateMode, Aggregate, Bool, Database
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-06-02 15:52:15.
+// Generated using typescript-generator version 3.2.1263 on 2026-06-02 16:11:52.
 
 export interface ConceptContextMap {
     id?: string;
@@ -183,6 +183,8 @@ export interface NodeShape extends TTIriRef {
     subType?: TTIriRef[];
     definingProperty?: TTIriRef;
     inverseProperty?: TTIriRef;
+    folder?: NodeShape[];
+    type?: NodeShape[];
 }
 
 export interface Page {
@@ -322,18 +324,19 @@ export interface ArgumentReference {
 
 export interface Assignable {
     compare?: Compare;
-    valueLabel?: string;
     units?: TTIriRef;
+    valueLabel?: string;
     valueTerm?: string;
-    description?: string;
-    operator?: Operator;
     value?: string;
     invalid?: boolean;
+    description?: string;
+    operator?: Operator;
 }
 
 export interface Case {
+    nodeRef?: string;
     when?: When[];
-    else?: string;
+    else?: Expression;
 }
 
 export interface Compare {
@@ -378,10 +381,17 @@ export interface Element extends IriLD, Entailment {
 }
 
 export interface Entailment {
-    descendantsOf?: boolean;
     memberOf?: boolean;
-    ancestorsOf?: boolean;
+    descendantsOf?: boolean;
     descendantsOrSelfOf?: boolean;
+    ancestorsOf?: boolean;
+}
+
+export interface Expression {
+    value?: string;
+    nodeRef?: string;
+    iri?: string;
+    propertyRef?: string;
 }
 
 export interface FunctionClause extends IriLD {
@@ -400,10 +410,14 @@ export interface HasPaths {
 }
 
 export interface Having {
-    aggregate?: Aggregate;
+    function?: Aggregate;
+    identifier?: string;
     range?: Range;
     operator?: Operator;
     value?: string;
+    and?: Having[];
+    or?: Having[];
+    not?: boolean;
 }
 
 export interface Instance extends IriLD {
@@ -423,11 +437,11 @@ export interface Match extends IriLD, HasPaths, Returnable {
     ifFalse?: RuleAction;
     nodeRef?: string;
     typeOf?: Node;
-    is?: Node[];
+    is?: Node;
     and?: Match[];
     or?: Match[];
     where?: Where;
-    then?: Where;
+    then?: Match;
     graph?: Node;
     optional?: boolean;
     parameter?: string;
@@ -438,6 +452,7 @@ export interface Match extends IriLD, HasPaths, Returnable {
     inverse?: boolean;
     activeOnly?: boolean;
     rule?: Match[];
+    any?: Match[];
     libraryItem?: string;
     invalid?: boolean;
     groupBy?: GroupBy[];
@@ -445,8 +460,6 @@ export interface Match extends IriLD, HasPaths, Returnable {
     asDescription?: string;
     errorMessage?: string;
     draft?: boolean;
-    keepClauses?: Match[];
-    score?: string;
     having?: Having;
 }
 
@@ -465,8 +478,8 @@ export interface Node extends Element {
     code?: string;
     inverse?: boolean;
     node?: string;
-    isCohort?: boolean;
     isResultSet?: boolean;
+    isCohort?: boolean;
 }
 
 export interface OrderDirection extends IriLD {
@@ -495,8 +508,8 @@ export interface Path extends Element, HasPaths {
     pathVariable?: string;
     typeOf?: Node;
     qualifier?: TTIriRef;
-    isCohort?: boolean;
     isResultSet?: boolean;
+    isCohort?: boolean;
 }
 
 export interface PathDocument {
@@ -553,11 +566,11 @@ export interface Return extends Returnable {
     propertyRef?: string;
     pathRef?: string;
     inverse?: boolean;
-    unit?: string;
+    units?: TTIriRef;
     dataType?: TTIriRef;
     description?: string;
-    case?: Case;
     value?: string;
+    case?: Case;
 }
 
 export interface Returnable {
@@ -585,11 +598,8 @@ export interface ValueSource {
     propertyRef?: string;
 }
 
-export interface When {
-    where?: Where;
-    then?: string;
-    exists?: boolean;
-    case?: Case;
+export interface When extends Where {
+    then?: Expression;
 }
 
 export interface Where extends Element, Assignable {
@@ -623,8 +633,8 @@ export interface Where extends Element, Assignable {
     linked?: boolean;
     notNull?: boolean;
     isInvalid?: boolean;
-    isCohort?: boolean;
     isResultSet?: boolean;
+    isCohort?: boolean;
 }
 
 export interface CognitoGroupRequest {
@@ -929,14 +939,14 @@ export interface TTDocument extends TTNode {
 export interface TTEntity extends TTNode, Serializable {
     context?: TTContext;
     crud?: TTIriRef;
-    description?: string;
+    name?: string;
+    type?: TTArray;
+    scheme?: TTIriRef;
     version?: number;
+    description?: string;
     types?: TTIriRef[];
     code?: string;
     prefixes?: TTPrefix[];
-    scheme?: TTIriRef;
-    name?: string;
-    type?: TTArray;
     status?: TTIriRef;
 }
 
