@@ -290,6 +290,7 @@ export enum EDITOR {
     COHORT_QUERY_SHAPE = "http://endhealth.info/im#Editor_CohortQueryShape",
     PROPERTY_SHAPE = "http://endhealth.info/im#Editor_PropertyShape",
     INDICATOR_SHAPE = "http://endhealth.info/im#Editor_IndicatorShape",
+    SEMANTIC_MAP_SHAPE = "http://endhealth.info/im#Editor_SemanticMapShape",
 }
 
 export enum ENTITY_TYPE {
@@ -355,6 +356,7 @@ export enum IM {
     RETURN_TYPE = "http://endhealth.info/im#returnType",
     UPDATE_PROCEDURE = "http://endhealth.info/im#updateProcedure",
     CONCEPT = "http://endhealth.info/im#Concept",
+    SEMANTIC_MAP = "http://endhealth.info/im#SemanticMap",
     CODEABLE = "http://endhealth.info/im#Codeable",
     CONCEPT_PROPERTY = "http://endhealth.info/im#concept",
     CONCEPT_SET = "http://endhealth.info/im#ConceptSet",
@@ -417,7 +419,14 @@ export enum IM {
     MAPPED_TO = "http://endhealth.info/im#mappedTo",
     HAS_NUMERIC = "http://endhealth.info/im#hasNumericValue",
     SOURCE_TEXT = "http://endhealth.info/im#sourceText",
+    SOURCE_ENTITY = "http://endhealth.info/im#sourceEntity",
+    SOURCE_TYPE = "http://endhealth.info/im#sourceType",
+    SOURCE_PROPERTY = "http://endhealth.info/im#sourceProperty",
+    RANGE_FROM = "http://endhealth.info/im#rangeFrom",
+    RANGE_TO = "http://endhealth.info/im#rangeTo",
     TARGET_TEXT = "http://endhealth.info/im#targetText",
+    TARGET_VALUE = "http://endhealth.info/im#targetValue",
+    MAP_ENTRY = "http://endhealth.info/im#mapEntry",
     HAS_TERM_CODE = "http://endhealth.info/im#hasTermCode",
     ALTERNATIVE_CODE = "http://endhealth.info/im#alternativeCode",
     DESCRIPTION_ID = "http://endhealth.info/im#descriptionId",

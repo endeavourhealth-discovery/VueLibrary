@@ -2,7 +2,7 @@ import { REPO, IMLContext, ListMode, TargetUpdateMode, Aggregate, Bool, Database
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-06-02 07:28:14.
+// Generated using typescript-generator version 3.2.1263 on 2026-06-02 10:36:11.
 
 export interface ConceptContextMap {
     id?: string;
@@ -323,19 +323,20 @@ export interface ArgumentReference {
 }
 
 export interface Assignable {
-    units?: TTIriRef;
-    valueTerm?: string;
     compare?: Compare;
     valueLabel?: string;
-    value?: string;
-    invalid?: boolean;
+    valueTerm?: string;
+    units?: TTIriRef;
     description?: string;
     operator?: Operator;
+    value?: string;
+    invalid?: boolean;
 }
 
 export interface Case {
+    nodeRef?: string;
     when?: When[];
-    else?: string;
+    else?: Expression;
 }
 
 export interface Compare {
@@ -380,10 +381,17 @@ export interface Element extends IriLD, Entailment {
 }
 
 export interface Entailment {
-    descendantsOf?: boolean;
-    descendantsOrSelfOf?: boolean;
     ancestorsOf?: boolean;
+    descendantsOrSelfOf?: boolean;
     memberOf?: boolean;
+    descendantsOf?: boolean;
+}
+
+export interface Expression {
+    value?: string;
+    nodeRef?: string;
+    iri?: string;
+    propertyRef?: string;
 }
 
 export interface FunctionClause extends IriLD {
@@ -433,7 +441,7 @@ export interface Match extends IriLD, HasPaths, Returnable {
     and?: Match[];
     or?: Match[];
     where?: Where;
-    then?: Where;
+    then?: Match;
     graph?: Node;
     optional?: boolean;
     parameter?: string;
@@ -561,8 +569,8 @@ export interface Return extends Returnable {
     units?: TTIriRef;
     dataType?: TTIriRef;
     description?: string;
-    case?: Case;
     value?: string;
+    case?: Case;
 }
 
 export interface Returnable {
@@ -590,11 +598,8 @@ export interface ValueSource {
     propertyRef?: string;
 }
 
-export interface When {
-    where?: Where;
-    then?: string;
-    exists?: boolean;
-    case?: Case;
+export interface When extends Where {
+    then?: Expression;
 }
 
 export interface Where extends Element, Assignable {
@@ -934,14 +939,14 @@ export interface TTDocument extends TTNode {
 export interface TTEntity extends TTNode, Serializable {
     context?: TTContext;
     crud?: TTIriRef;
-    name?: string;
-    type?: TTArray;
-    scheme?: TTIriRef;
-    version?: number;
     description?: string;
+    version?: number;
     types?: TTIriRef[];
     code?: string;
     prefixes?: TTPrefix[];
+    scheme?: TTIriRef;
+    name?: string;
+    type?: TTArray;
     status?: TTIriRef;
 }
 
