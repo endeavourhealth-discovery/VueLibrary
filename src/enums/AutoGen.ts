@@ -246,6 +246,7 @@ export enum COMPONENT {
     VERTICAL_LAYOUT = "http://endhealth.info/im#Component_VerticalLayout",
     DROPDOWN_TEXT_INPUT_CONCATENATOR = "http://endhealth.info/im#Component_dropdownTextInputConcatenator",
     ROLE_GROUP_BUILDER = "http://endhealth.info/im#Component_roleGroupBuilder",
+    MAP_ENTRY_BUILDER = "http://endhealth.info/im#Component_mapEntryBuilder",
     TERM_CODE_EDITOR = "http://endhealth.info/im#Component_termCodeEditor",
     TEXT_DROPDOWN = "http://endhealth.info/im#Component_textDropdown",
     ENTITY_DISPLAY = "http://endhealth.info/im#Component_entityDisplay",
