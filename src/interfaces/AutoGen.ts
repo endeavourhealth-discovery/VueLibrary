@@ -2,7 +2,7 @@ import { REPO, IMLContext, ListMode, TargetUpdateMode, Aggregate, Bool, Database
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-06-02 10:36:11.
+// Generated using typescript-generator version 3.2.1263 on 2026-06-02 15:52:15.
 
 export interface ConceptContextMap {
     id?: string;
@@ -183,8 +183,6 @@ export interface NodeShape extends TTIriRef {
     subType?: TTIriRef[];
     definingProperty?: TTIriRef;
     inverseProperty?: TTIriRef;
-    folder?: NodeShape[];
-    type?: NodeShape[];
 }
 
 export interface Page {
@@ -325,8 +323,8 @@ export interface ArgumentReference {
 export interface Assignable {
     compare?: Compare;
     valueLabel?: string;
-    valueTerm?: string;
     units?: TTIriRef;
+    valueTerm?: string;
     description?: string;
     operator?: Operator;
     value?: string;
@@ -334,9 +332,8 @@ export interface Assignable {
 }
 
 export interface Case {
-    nodeRef?: string;
     when?: When[];
-    else?: Expression;
+    else?: string;
 }
 
 export interface Compare {
@@ -381,17 +378,10 @@ export interface Element extends IriLD, Entailment {
 }
 
 export interface Entailment {
+    descendantsOf?: boolean;
+    memberOf?: boolean;
     ancestorsOf?: boolean;
     descendantsOrSelfOf?: boolean;
-    memberOf?: boolean;
-    descendantsOf?: boolean;
-}
-
-export interface Expression {
-    value?: string;
-    nodeRef?: string;
-    iri?: string;
-    propertyRef?: string;
 }
 
 export interface FunctionClause extends IriLD {
@@ -410,14 +400,10 @@ export interface HasPaths {
 }
 
 export interface Having {
-    function?: Aggregate;
-    identifier?: string;
+    aggregate?: Aggregate;
     range?: Range;
     operator?: Operator;
     value?: string;
-    and?: Having[];
-    or?: Having[];
-    not?: boolean;
 }
 
 export interface Instance extends IriLD {
@@ -437,11 +423,11 @@ export interface Match extends IriLD, HasPaths, Returnable {
     ifFalse?: RuleAction;
     nodeRef?: string;
     typeOf?: Node;
-    is?: Node;
+    is?: Node[];
     and?: Match[];
     or?: Match[];
     where?: Where;
-    then?: Match;
+    then?: Where;
     graph?: Node;
     optional?: boolean;
     parameter?: string;
@@ -452,7 +438,6 @@ export interface Match extends IriLD, HasPaths, Returnable {
     inverse?: boolean;
     activeOnly?: boolean;
     rule?: Match[];
-    any?: Match[];
     libraryItem?: string;
     invalid?: boolean;
     groupBy?: GroupBy[];
@@ -460,6 +445,8 @@ export interface Match extends IriLD, HasPaths, Returnable {
     asDescription?: string;
     errorMessage?: string;
     draft?: boolean;
+    keepClauses?: Match[];
+    score?: string;
     having?: Having;
 }
 
@@ -478,8 +465,8 @@ export interface Node extends Element {
     code?: string;
     inverse?: boolean;
     node?: string;
-    isResultSet?: boolean;
     isCohort?: boolean;
+    isResultSet?: boolean;
 }
 
 export interface OrderDirection extends IriLD {
@@ -508,8 +495,8 @@ export interface Path extends Element, HasPaths {
     pathVariable?: string;
     typeOf?: Node;
     qualifier?: TTIriRef;
-    isResultSet?: boolean;
     isCohort?: boolean;
+    isResultSet?: boolean;
 }
 
 export interface PathDocument {
@@ -566,11 +553,11 @@ export interface Return extends Returnable {
     propertyRef?: string;
     pathRef?: string;
     inverse?: boolean;
-    units?: TTIriRef;
+    unit?: string;
     dataType?: TTIriRef;
     description?: string;
-    value?: string;
     case?: Case;
+    value?: string;
 }
 
 export interface Returnable {
@@ -598,8 +585,11 @@ export interface ValueSource {
     propertyRef?: string;
 }
 
-export interface When extends Where {
-    then?: Expression;
+export interface When {
+    where?: Where;
+    then?: string;
+    exists?: boolean;
+    case?: Case;
 }
 
 export interface Where extends Element, Assignable {
@@ -633,8 +623,8 @@ export interface Where extends Element, Assignable {
     linked?: boolean;
     notNull?: boolean;
     isInvalid?: boolean;
-    isResultSet?: boolean;
     isCohort?: boolean;
+    isResultSet?: boolean;
 }
 
 export interface CognitoGroupRequest {
