@@ -2,7 +2,7 @@ import { REPO, IMLContext, ListMode, SemanticMapType, TargetUpdateMode, Aggregat
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-06-04 10:24:17.
+// Generated using typescript-generator version 3.2.1263 on 2026-06-04 10:40:14.
 
 export interface ConceptContextMap {
     id?: string;
@@ -159,7 +159,6 @@ export interface Indicator extends TTIriRef {
 }
 
 export interface MapEntry {
-    entryType?: SemanticMapType;
     sourceEntity?: TTIriRef;
     sourceType?: TTIriRef;
     sourceProperty?: TTIriRef;
