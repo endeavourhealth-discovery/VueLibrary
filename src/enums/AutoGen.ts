@@ -19,6 +19,12 @@ export enum ListMode {
     REST = "REST",
 }
 
+export enum MapEntryType {
+    direct = "direct",
+    range = "range",
+    exactValue = "exactValue",
+}
+
 export enum TargetUpdateMode {
     REPLACE = "REPLACE",
     APPEND = "APPEND",

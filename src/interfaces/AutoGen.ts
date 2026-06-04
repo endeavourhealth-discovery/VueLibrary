@@ -1,8 +1,8 @@
-import { REPO, IMLContext, ListMode, TargetUpdateMode, Aggregate, Bool, DatabaseOption, DisplayMode, ECLType, Entail, IMQType, Operator, Order, OrderableDate, OrderableNumber, QueryType, RuleAction, TextSearchStyle, ValidationLevel, VarType, Browser, OperatingSystem, Severity, Status, TaskModule, ApprovalType, UserRole, TaskState, TaskType, BNF, CODE_TEMPLATE, COMPONENT, CONFIG, CodeTemplate, EDITOR, ENTITY_TYPE, EntityType, FHIR, GRAPH, IM, IMPORT_TYPE, IMQ, IM_FUNCTION, ImportType, MAP, NAMESPACE, ODS, OPENSEARCH, OPEN_SEARCH, ORG, OWL, PRSB, QR, QUERY, RDF, RDFS, SHACL, SNOMED, TRANSFORM_FUNCTION, TransformFunction, USER, VALIDATION, WORKFLOW, XSD, PrimeVuePresetThemes, PrimeVueColors, FontSize } from '../enums/AutoGen';
+import { REPO, IMLContext, ListMode, MapEntryType, TargetUpdateMode, Aggregate, Bool, DatabaseOption, DisplayMode, ECLType, Entail, IMQType, Operator, Order, OrderableDate, OrderableNumber, QueryType, RuleAction, TextSearchStyle, ValidationLevel, VarType, Browser, OperatingSystem, Severity, Status, TaskModule, ApprovalType, UserRole, TaskState, TaskType, BNF, CODE_TEMPLATE, COMPONENT, CONFIG, CodeTemplate, EDITOR, ENTITY_TYPE, EntityType, FHIR, GRAPH, IM, IMPORT_TYPE, IMQ, IM_FUNCTION, ImportType, MAP, NAMESPACE, ODS, OPENSEARCH, OPEN_SEARCH, ORG, OWL, PRSB, QR, QUERY, RDF, RDFS, SHACL, SNOMED, TRANSFORM_FUNCTION, TransformFunction, USER, VALIDATION, WORKFLOW, XSD, PrimeVuePresetThemes, PrimeVueColors, FontSize } from '../enums/AutoGen';
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-06-03 05:54:08.
+// Generated using typescript-generator version 3.2.1263 on 2026-06-04 09:51:35.
 
 export interface ConceptContextMap {
     id?: string;
@@ -159,9 +159,10 @@ export interface Indicator extends TTIriRef {
 }
 
 export interface MapEntry {
-    sourceEntity?: string;
-    sourceType?: string;
-    sourceProperty?: string;
+    entryType?: MapEntryType;
+    sourceEntity?: TTIriRef;
+    sourceType?: TTIriRef;
+    sourceProperty?: TTIriRef;
     rangeFrom?: string;
     rangeTo?: string;
     sourceText?: string;
@@ -338,10 +339,10 @@ export interface Assignable {
     value?: string;
     invalid?: boolean;
     units?: TTIriRef;
-    valueLabel?: string;
-    valueTerm?: string;
     operator?: Operator;
     compare?: Compare;
+    valueTerm?: string;
+    valueLabel?: string;
 }
 
 export interface Case {
@@ -392,10 +393,10 @@ export interface Element extends IriLD, Entailment {
 }
 
 export interface Entailment {
+    descendantsOrSelfOf?: boolean;
+    memberOf?: boolean;
     descendantsOf?: boolean;
     ancestorsOf?: boolean;
-    memberOf?: boolean;
-    descendantsOrSelfOf?: boolean;
 }
 
 export interface Expression {
@@ -951,14 +952,14 @@ export interface TTEntity extends TTNode, Serializable {
     context?: TTContext;
     crud?: TTIriRef;
     type?: TTArray;
-    description?: string;
     status?: TTIriRef;
-    types?: TTIriRef[];
+    description?: string;
     name?: string;
     scheme?: TTIriRef;
     version?: number;
-    code?: string;
     prefixes?: TTPrefix[];
+    types?: TTIriRef[];
+    code?: string;
 }
 
 export interface BugReport extends Task {
@@ -1043,8 +1044,8 @@ export interface TTArray extends Serializable {
 }
 
 export interface TTContext extends Serializable {
-    nameSpaces?: TTPrefix[];
     prefixes?: TTPrefix[];
+    nameSpaces?: TTPrefix[];
 }
 
 export interface Throwable extends Serializable {
@@ -1173,6 +1174,7 @@ export interface OrgRelationship {
 export interface OrgRelTarget {
     OrgId?: OrgId;
 }
+
 
 
 
