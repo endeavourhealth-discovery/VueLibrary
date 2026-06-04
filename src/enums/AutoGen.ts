@@ -19,12 +19,6 @@ export enum ListMode {
     REST = "REST",
 }
 
-export enum SemanticMapType {
-    direct = "direct",
-    range = "range",
-    exactValue = "exactValue",
-}
-
 export enum TargetUpdateMode {
     REPLACE = "REPLACE",
     APPEND = "APPEND",
@@ -426,6 +420,7 @@ export enum IM {
     MAPPED_TO = "http://endhealth.info/im#mappedTo",
     HAS_NUMERIC = "http://endhealth.info/im#hasNumericValue",
     SOURCE_TEXT = "http://endhealth.info/im#sourceText",
+    MAP_TYPE = "http://endhealth.info/im#mapType",
     SOURCE_ENTITY = "http://endhealth.info/im#sourceEntity",
     SOURCE_TYPE = "http://endhealth.info/im#sourceType",
     SOURCE_PROPERTY = "http://endhealth.info/im#sourceProperty",

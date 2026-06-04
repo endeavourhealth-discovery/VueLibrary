@@ -1,8 +1,8 @@
-import { REPO, IMLContext, ListMode, SemanticMapType, TargetUpdateMode, Aggregate, Bool, DatabaseOption, DisplayMode, ECLType, Entail, IMQType, Operator, Order, OrderableDate, OrderableNumber, QueryType, RuleAction, TextSearchStyle, ValidationLevel, VarType, Browser, OperatingSystem, Severity, Status, TaskModule, ApprovalType, UserRole, TaskState, TaskType, BNF, CODE_TEMPLATE, COMPONENT, CONFIG, CodeTemplate, EDITOR, ENTITY_TYPE, EntityType, FHIR, GRAPH, IM, IMPORT_TYPE, IMQ, IM_FUNCTION, ImportType, MAP, NAMESPACE, ODS, OPENSEARCH, OPEN_SEARCH, ORG, OWL, PRSB, QR, QUERY, RDF, RDFS, SHACL, SNOMED, TRANSFORM_FUNCTION, TransformFunction, USER, VALIDATION, WORKFLOW, XSD, PrimeVuePresetThemes, PrimeVueColors, FontSize } from '../enums/AutoGen';
+import { REPO, IMLContext, ListMode, TargetUpdateMode, Aggregate, Bool, DatabaseOption, DisplayMode, ECLType, Entail, IMQType, Operator, Order, OrderableDate, OrderableNumber, QueryType, RuleAction, TextSearchStyle, ValidationLevel, VarType, Browser, OperatingSystem, Severity, Status, TaskModule, ApprovalType, UserRole, TaskState, TaskType, BNF, CODE_TEMPLATE, COMPONENT, CONFIG, CodeTemplate, EDITOR, ENTITY_TYPE, EntityType, FHIR, GRAPH, IM, IMPORT_TYPE, IMQ, IM_FUNCTION, ImportType, MAP, NAMESPACE, ODS, OPENSEARCH, OPEN_SEARCH, ORG, OWL, PRSB, QR, QUERY, RDF, RDFS, SHACL, SNOMED, TRANSFORM_FUNCTION, TransformFunction, USER, VALIDATION, WORKFLOW, XSD, PrimeVuePresetThemes, PrimeVueColors, FontSize } from '../enums/AutoGen';
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-06-04 10:40:14.
+// Generated using typescript-generator version 3.2.1263 on 2026-06-04 11:19:27.
 
 export interface ConceptContextMap {
     id?: string;
@@ -158,17 +158,6 @@ export interface Indicator extends TTIriRef {
     denominator?: TTIriRef;
 }
 
-export interface MapEntry {
-    sourceEntity?: TTIriRef;
-    sourceType?: TTIriRef;
-    sourceProperty?: TTIriRef;
-    rangeFrom?: string;
-    rangeTo?: string;
-    sourceText?: string;
-    sourceValue?: string;
-    target?: string;
-}
-
 /**
  * Class representing an IRI
  */
@@ -273,11 +262,6 @@ export interface PropertyShape {
     isValidArguments?: Argument[];
     inversePath?: TTIriRef;
     generic?: boolean;
-}
-
-export interface SemanticMap extends Entity {
-    mapType?: SemanticMapType;
-    mapEntry?: MapEntry[];
 }
 
 export interface SetContent {
@@ -1178,7 +1162,6 @@ export interface OrgRelationship {
 export interface OrgRelTarget {
     OrgId?: OrgId;
 }
-
 
 
 
