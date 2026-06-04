@@ -662,6 +662,7 @@ export enum IM_FUNCTION {
     SNOMED_CONCEPT_GENERATOR = "http://endhealth.info/im#Function_SnomedConceptGenerator",
     LOCAL_NAME_RETRIEVER = "http://endhealth.info/im#Function_LocalNameRetriever",
     GET_ADDITIONAL_ALLOWABLE_TYPES = "http://endhealth.info/im#Function_GetAdditionalAllowableTypes",
+    GET_MAP_TYPES = "http://endhealth.info/im#Function_GetMapTypes",
     GET_LOGIC_OPTIONS = "http://endhealth.info/im#Function_GetLogicOptions",
     GET_SET_EDITOR_IRI_SCHEMES = "http://endhealth.info/im#Function_GetSetEditorIriSchemes",
     IM1_SCHEME_OPTIONS = "http://endhealth.info/im#Function_IM1SchemeOptions",
