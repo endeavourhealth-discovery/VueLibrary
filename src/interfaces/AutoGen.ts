@@ -2,7 +2,7 @@ import { REPO, IMLContext, ListMode, MapEntryType, TargetUpdateMode, Aggregate, 
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-06-04 09:51:35.
+// Generated using typescript-generator version 3.2.1263 on 2026-06-04 10:20:50.
 
 export interface ConceptContextMap {
     id?: string;
@@ -274,6 +274,10 @@ export interface PropertyShape {
     isValidArguments?: Argument[];
     inversePath?: TTIriRef;
     generic?: boolean;
+}
+
+export interface SemanticMap extends Entity {
+    mapEntry?: MapEntry[];
 }
 
 export interface SetContent {
