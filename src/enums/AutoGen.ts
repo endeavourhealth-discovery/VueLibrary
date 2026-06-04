@@ -19,7 +19,7 @@ export enum ListMode {
     REST = "REST",
 }
 
-export enum MapEntryType {
+export enum SemanticMapType {
     direct = "direct",
     range = "range",
     exactValue = "exactValue",

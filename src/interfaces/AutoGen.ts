@@ -1,8 +1,8 @@
-import { REPO, IMLContext, ListMode, MapEntryType, TargetUpdateMode, Aggregate, Bool, DatabaseOption, DisplayMode, ECLType, Entail, IMQType, Operator, Order, OrderableDate, OrderableNumber, QueryType, RuleAction, TextSearchStyle, ValidationLevel, VarType, Browser, OperatingSystem, Severity, Status, TaskModule, ApprovalType, UserRole, TaskState, TaskType, BNF, CODE_TEMPLATE, COMPONENT, CONFIG, CodeTemplate, EDITOR, ENTITY_TYPE, EntityType, FHIR, GRAPH, IM, IMPORT_TYPE, IMQ, IM_FUNCTION, ImportType, MAP, NAMESPACE, ODS, OPENSEARCH, OPEN_SEARCH, ORG, OWL, PRSB, QR, QUERY, RDF, RDFS, SHACL, SNOMED, TRANSFORM_FUNCTION, TransformFunction, USER, VALIDATION, WORKFLOW, XSD, PrimeVuePresetThemes, PrimeVueColors, FontSize } from '../enums/AutoGen';
+import { REPO, IMLContext, ListMode, SemanticMapType, TargetUpdateMode, Aggregate, Bool, DatabaseOption, DisplayMode, ECLType, Entail, IMQType, Operator, Order, OrderableDate, OrderableNumber, QueryType, RuleAction, TextSearchStyle, ValidationLevel, VarType, Browser, OperatingSystem, Severity, Status, TaskModule, ApprovalType, UserRole, TaskState, TaskType, BNF, CODE_TEMPLATE, COMPONENT, CONFIG, CodeTemplate, EDITOR, ENTITY_TYPE, EntityType, FHIR, GRAPH, IM, IMPORT_TYPE, IMQ, IM_FUNCTION, ImportType, MAP, NAMESPACE, ODS, OPENSEARCH, OPEN_SEARCH, ORG, OWL, PRSB, QR, QUERY, RDF, RDFS, SHACL, SNOMED, TRANSFORM_FUNCTION, TransformFunction, USER, VALIDATION, WORKFLOW, XSD, PrimeVuePresetThemes, PrimeVueColors, FontSize } from '../enums/AutoGen';
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-06-04 10:20:50.
+// Generated using typescript-generator version 3.2.1263 on 2026-06-04 10:24:17.
 
 export interface ConceptContextMap {
     id?: string;
@@ -159,7 +159,7 @@ export interface Indicator extends TTIriRef {
 }
 
 export interface MapEntry {
-    entryType?: MapEntryType;
+    entryType?: SemanticMapType;
     sourceEntity?: TTIriRef;
     sourceType?: TTIriRef;
     sourceProperty?: TTIriRef;
@@ -277,6 +277,7 @@ export interface PropertyShape {
 }
 
 export interface SemanticMap extends Entity {
+    mapType?: SemanticMapType;
     mapEntry?: MapEntry[];
 }
 
