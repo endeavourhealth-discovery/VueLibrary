@@ -1,0 +1,25 @@
+package org.endeavourhealth.library.model.requests;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+import java.util.ArrayList;
+import java.util.List;
+
+@Getter
+@NoArgsConstructor
+public class ValidatedEntitiesRequest {
+  private List<String> snomedCodes;
+
+  public ValidatedEntitiesRequest setSnomedCodes(List<String> snomedCodes) {
+    this.snomedCodes = snomedCodes;
+    return this;
+  }
+
+  public void addToSnomedCodes(String code) {
+    if (null == snomedCodes) {
+      snomedCodes = new ArrayList<>();
+    }
+    this.snomedCodes.add(code);
+  }
+}
