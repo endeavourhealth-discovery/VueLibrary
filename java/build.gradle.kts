@@ -93,7 +93,7 @@ tasks.generateTypeScript {
     "org.endeavourhealth.library.model.sql.SubQueryDependency",
     "org.endeavourhealth.library.model.github.REPO"
   )
-  outputFile = "../VueLibrary/src/interfaces/AutoGen.ts"
+  outputFile = "../src/interfaces/AutoGen.ts"
   outputKind = TypeScriptOutputKind.module
   mapEnum = EnumMapping.asEnum
   customTypeNaming = listOf(

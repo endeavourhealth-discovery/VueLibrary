@@ -2,7 +2,7 @@ package org.endeavourhealth.library.json;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import org.endeavourhealth.library.logic.cache.EntityCache;
+//import org.endeavourhealth.library.logic.cache.EntityCache;
 import org.endeavourhealth.library.model.tripletree.*;
 import org.endeavourhealth.library.vocabulary.IM;
 import org.endeavourhealth.library.vocabulary.RDF;
@@ -50,13 +50,13 @@ public class TTNodeSerializer {
 
   private void serializePredicates(TTNode node, JsonGenerator gen) throws IOException {
     List<TTIriRef> orderedPredicates = Stream.of(iri(RDF.TYPE), iri(RDFS.LABEL), iri(RDFS.COMMENT), iri(IM.HAS_STATUS)).toList();
-    if (node.get(iri(RDF.TYPE)) != null) {
-      for (TTValue type : node.get(iri(RDF.TYPE)).getElements()) {
-        List<TTIriRef> orderForType = EntityCache.getPredicateOrder(type.asIriRef().getIri());
-        if (orderForType != null)
-          orderedPredicates = orderForType;
-      }
-    }
+//    if (node.get(iri(RDF.TYPE)) != null) {
+//      for (TTValue type : node.get(iri(RDF.TYPE)).getElements()) {
+//        List<TTIriRef> orderForType = EntityCache.getPredicateOrder(type.asIriRef().getIri());
+//        if (orderForType != null)
+//          orderedPredicates = orderForType;
+//      }
+//    }
     serializeOrdered(node, orderedPredicates, gen);
   }
 
