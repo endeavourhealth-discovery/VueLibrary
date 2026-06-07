@@ -588,6 +588,7 @@ export enum IM {
     PARAMETER_TEMPLATE = "http://endhealth.info/im#parameterTemplate",
     VALUE_TEMPLATE = "http://endhealth.info/im#valueTemplate",
     DEFAULT_VALUE = "http://endhealth.info/im#defaultValue",
+    DEFAULT_TEXT = "http://endhealth.info/im#defaultText",
     LOAD_MORE = "http://endhealth.info/im#loadMore",
     DATA_MODEL_PROPERTY_CONCEPT = "http://endhealth.info/im#concept",
     NUMERIC_VALUE = "http://endhealth.info/im#NumericValue",
