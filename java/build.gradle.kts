@@ -16,7 +16,7 @@ plugins {
   kotlin("plugin.spring") version "2.2.20"
 }
 
-group = "org.endeavourhealth.javalibrary"
+group = "org.endeavourhealth.library"
 version = "1.0-SNAPSHOT"
 description = "Java library"
 
