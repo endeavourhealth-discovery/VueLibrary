@@ -70,7 +70,7 @@ import {
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-06-08 16:59:42.
+// Generated using typescript-generator version 3.2.1263 on 2026-06-08 17:06:00.
 
 export interface ConceptContextMap {
   id?: string;
@@ -394,11 +394,11 @@ export interface Assignable {
   value?: string;
   invalid?: boolean;
   units?: TTIriRef;
-  operator?: Operator;
-  valueLabel?: string;
-  valueTerm?: string;
   description?: string;
   compare?: Compare;
+  valueLabel?: string;
+  valueTerm?: string;
+  operator?: Operator;
 }
 
 export interface Case {
@@ -448,10 +448,10 @@ export interface ECLStatus {
 export interface Element extends IriLD, Entailment {}
 
 export interface Entailment {
-  memberOf?: boolean;
-  ancestorsOf?: boolean;
-  descendantsOf?: boolean;
   descendantsOrSelfOf?: boolean;
+  memberOf?: boolean;
+  descendantsOf?: boolean;
+  ancestorsOf?: boolean;
 }
 
 export interface Expression {
@@ -1004,14 +1004,14 @@ export interface TTDocument extends TTNode {
 export interface TTEntity extends TTNode, Serializable {
   context?: TTContext;
   crud?: TTIriRef;
-  name?: string;
   type?: TTArray;
+  name?: string;
   scheme?: TTIriRef;
   version?: number;
-  code?: string;
-  types?: TTIriRef[];
   status?: TTIriRef;
   description?: string;
+  types?: TTIriRef[];
+  code?: string;
   prefixes?: TTPrefix[];
 }
 
