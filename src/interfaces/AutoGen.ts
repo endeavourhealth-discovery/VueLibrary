@@ -70,7 +70,7 @@ import {
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-06-05 17:00:33.
+// Generated using typescript-generator version 3.2.1263 on 2026-06-08 16:59:42.
 
 export interface ConceptContextMap {
   id?: string;
@@ -394,11 +394,11 @@ export interface Assignable {
   value?: string;
   invalid?: boolean;
   units?: TTIriRef;
-  compare?: Compare;
-  description?: string;
-  valueTerm?: string;
-  valueLabel?: string;
   operator?: Operator;
+  valueLabel?: string;
+  valueTerm?: string;
+  description?: string;
+  compare?: Compare;
 }
 
 export interface Case {
@@ -449,9 +449,9 @@ export interface Element extends IriLD, Entailment {}
 
 export interface Entailment {
   memberOf?: boolean;
-  descendantsOrSelfOf?: boolean;
-  descendantsOf?: boolean;
   ancestorsOf?: boolean;
+  descendantsOf?: boolean;
+  descendantsOrSelfOf?: boolean;
 }
 
 export interface Expression {
@@ -545,8 +545,8 @@ export interface Node extends Element {
   code?: string;
   inverse?: boolean;
   node?: string;
-  isCohort?: boolean;
   isResultSet?: boolean;
+  isCohort?: boolean;
 }
 
 export interface OrderDirection extends IriLD {
@@ -575,8 +575,8 @@ export interface Path extends Element, HasPaths {
   pathVariable?: string;
   typeOf?: Node;
   qualifier?: TTIriRef;
-  isCohort?: boolean;
   isResultSet?: boolean;
+  isCohort?: boolean;
 }
 
 export interface PathDocument {
@@ -699,8 +699,8 @@ export interface Where extends Element, Assignable {
   linked?: boolean;
   notNull?: boolean;
   isInvalid?: boolean;
-  isCohort?: boolean;
   isResultSet?: boolean;
+  isCohort?: boolean;
 }
 
 export interface CognitoGroupRequest {
@@ -1004,15 +1004,15 @@ export interface TTDocument extends TTNode {
 export interface TTEntity extends TTNode, Serializable {
   context?: TTContext;
   crud?: TTIriRef;
-  type?: TTArray;
   name?: string;
+  type?: TTArray;
   scheme?: TTIriRef;
   version?: number;
+  code?: string;
+  types?: TTIriRef[];
   status?: TTIriRef;
   description?: string;
-  code?: string;
   prefixes?: TTPrefix[];
-  types?: TTIriRef[];
 }
 
 export interface BugReport extends Task {
@@ -1094,8 +1094,8 @@ export interface TTArray extends Serializable {
 }
 
 export interface TTContext extends Serializable {
-  prefixes?: TTPrefix[];
   nameSpaces?: TTPrefix[];
+  prefixes?: TTPrefix[];
 }
 
 export interface Throwable extends Serializable {
