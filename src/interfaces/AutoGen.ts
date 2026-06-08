@@ -2,7 +2,7 @@ import { REPO, IMLContext, ListMode, TargetUpdateMode, Aggregate, Bool, Database
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-06-08 14:40:33.
+// Generated using typescript-generator version 3.2.1263 on 2026-06-08 15:54:50.
 
 export interface ConceptContextMap {
     id?: string;
@@ -323,10 +323,10 @@ export interface ArgumentReference {
 }
 
 export interface Assignable {
-    compare?: Compare;
-    valueTerm?: string;
     valueLabel?: string;
+    valueTerm?: string;
     units?: TTIriRef;
+    compare?: Compare;
     value?: string;
     invalid?: boolean;
     description?: string;
@@ -381,10 +381,10 @@ export interface Element extends IriLD, Entailment {
 }
 
 export interface Entailment {
-    descendantsOrSelfOf?: boolean;
     descendantsOf?: boolean;
-    ancestorsOf?: boolean;
+    descendantsOrSelfOf?: boolean;
     memberOf?: boolean;
+    ancestorsOf?: boolean;
 }
 
 export interface Expression {
@@ -478,8 +478,8 @@ export interface Node extends Element {
     code?: string;
     inverse?: boolean;
     node?: string;
-    isResultSet?: boolean;
     isCohort?: boolean;
+    isResultSet?: boolean;
 }
 
 export interface OrderDirection extends IriLD {
@@ -508,8 +508,8 @@ export interface Path extends Element, HasPaths {
     pathVariable?: string;
     typeOf?: Node;
     qualifier?: TTIriRef;
-    isResultSet?: boolean;
     isCohort?: boolean;
+    isResultSet?: boolean;
 }
 
 export interface PathDocument {
@@ -633,8 +633,8 @@ export interface Where extends Element, Assignable {
     linked?: boolean;
     notNull?: boolean;
     isInvalid?: boolean;
-    isResultSet?: boolean;
     isCohort?: boolean;
+    isResultSet?: boolean;
 }
 
 export interface CognitoGroupRequest {
