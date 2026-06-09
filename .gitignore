@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 
 dist-tests
+java/.gradle
+java/build
+java/src/main/resources/application.properties
+java/src/main/resources/casdoor-cert.txt
