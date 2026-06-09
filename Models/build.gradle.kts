@@ -63,6 +63,7 @@ tasks.generateTypeScript {
   jsonLibrary = JsonLibrary.jackson2
   outputFileType = TypeScriptFileType.implementationFile
   optionalProperties = OptionalProperties.useLibraryDefinition
+  noFileComment = true
   classPatterns = listOf(
     "org.endeavourhealth.library.model.DataModelProperty",
     "org.endeavourhealth.library.model.requests.*",
