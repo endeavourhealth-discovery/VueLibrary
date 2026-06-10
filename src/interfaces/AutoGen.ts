@@ -2,7 +2,7 @@ import { REPO, IMLContext, ListMode, TargetUpdateMode, Aggregate, Bool, Database
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-06-09 10:13:22.
+// Generated using typescript-generator version 3.2.1263 on 2026-06-10 10:18:32.
 
 export interface ConceptContextMap {
     id?: string;
@@ -323,14 +323,14 @@ export interface ArgumentReference {
 }
 
 export interface Assignable {
-    units?: TTIriRef;
-    compare?: Compare;
     valueLabel?: string;
+    compare?: Compare;
+    units?: TTIriRef;
     valueTerm?: string;
-    value?: string;
-    invalid?: boolean;
     description?: string;
     operator?: Operator;
+    value?: string;
+    invalid?: boolean;
 }
 
 export interface Case {
@@ -381,10 +381,10 @@ export interface Element extends IriLD, Entailment {
 }
 
 export interface Entailment {
-    memberOf?: boolean;
+    ancestorsOf?: boolean;
     descendantsOf?: boolean;
     descendantsOrSelfOf?: boolean;
-    ancestorsOf?: boolean;
+    memberOf?: boolean;
 }
 
 export interface Expression {
@@ -478,8 +478,8 @@ export interface Node extends Element {
     code?: string;
     inverse?: boolean;
     node?: string;
-    isResultSet?: boolean;
     isCohort?: boolean;
+    isResultSet?: boolean;
 }
 
 export interface OrderDirection extends IriLD {
@@ -508,8 +508,8 @@ export interface Path extends Element, HasPaths {
     pathVariable?: string;
     typeOf?: Node;
     qualifier?: TTIriRef;
-    isResultSet?: boolean;
     isCohort?: boolean;
+    isResultSet?: boolean;
 }
 
 export interface PathDocument {
@@ -633,8 +633,8 @@ export interface Where extends Element, Assignable {
     linked?: boolean;
     notNull?: boolean;
     isInvalid?: boolean;
-    isResultSet?: boolean;
     isCohort?: boolean;
+    isResultSet?: boolean;
 }
 
 export interface CognitoGroupRequest {
@@ -939,14 +939,14 @@ export interface TTDocument extends TTNode {
 export interface TTEntity extends TTNode, Serializable {
     context?: TTContext;
     crud?: TTIriRef;
-    name?: string;
-    type?: TTArray;
-    scheme?: TTIriRef;
-    version?: number;
     description?: string;
+    version?: number;
     types?: TTIriRef[];
     code?: string;
     prefixes?: TTPrefix[];
+    scheme?: TTIriRef;
+    name?: string;
+    type?: TTArray;
     status?: TTIriRef;
 }
 
