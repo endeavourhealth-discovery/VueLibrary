@@ -1,11 +1,11 @@
 {
   "name": "@endeavour/vue-library",
-  "version": "0.17.0",
+  "version": "1.0.0",
   "type": "module",
-  "packageManager": "pnpm@10.5.2",
+  "packageManager": "pnpm@11.5.3",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build",
+    "build": ".\\gradlew build && vue-tsc -b && vite build",
     "preview": "vite preview",
     "test:unit": "tsc -p tsconfig.tests.json && vitest",
     "format": "prettier --write \"{src,tests}/**/*.{js,ts,vue,json,css,scss,md}\"",

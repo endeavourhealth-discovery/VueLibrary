@@ -31,4 +31,4 @@ plugins {
 
 rootProject.name = "VueLibrary"
 
-include(":Models")
+include(":Library")

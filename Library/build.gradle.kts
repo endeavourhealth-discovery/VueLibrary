@@ -17,7 +17,7 @@ plugins {
 }
 
 group = "org.endeavourhealth.library"
-version = "1.0-SNAPSHOT"
+version = "1.22-SNAPSHOT"
 description = "Java library"
 
 
@@ -34,6 +34,7 @@ if (CI == "false") {
   tasks.named<JavaCompile>("compileJava") {
     dependsOn("staticConstGenerator")
   }
+  tasks.build { dependsOn("extractEnumsFromAutoGen") }
 } else {
   tasks.build { finalizedBy("publish") }
 }
@@ -113,12 +114,12 @@ tasks {
 }
 
 typescriptConstEnumToEnum {
-  filePath.set("../src/interfaces/AutoGen.ts")
+  filePath.set("./src/interfaces/AutoGen.ts")
 }
 
 extractEnumsFromAutoGen {
-  inputFile.set("../src/interfaces/AutoGen.ts")
-  outputFile.set("../src/enums/AutoGen.ts")
+  inputFile.set("./src/interfaces/AutoGen.ts")
+  outputFile.set("./src/enums/AutoGen.ts")
 }
 
 dependencies {

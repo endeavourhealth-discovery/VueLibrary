@@ -1,8 +1,6 @@
 package org.endeavourhealth.library.model.requests;
 
 import com.fasterxml.jackson.annotation.*;
-import lombok.Getter;
-import lombok.Setter;
 import org.endeavourhealth.library.model.iml.Page;
 import org.endeavourhealth.library.model.imq.*;
 import org.endeavourhealth.library.model.tripletree.TTContext;
@@ -16,7 +14,6 @@ import java.util.function.Consumer;
 
 @JsonPropertyOrder({"context", "textSearch", "argument", "query", "pathQuery", "update"})
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-@Getter
 public class QueryRequest implements ContextMap {
   private String name;
   private Page page;
@@ -27,16 +24,12 @@ public class QueryRequest implements ContextMap {
   private Query query;
   private PathQuery pathQuery;
   private Update update;
-  @Getter
   private String queryStringDefinition;
   private String askIri;
   private List<Map<Long, String>> timings = new ArrayList<>();
   private Set<TTIriRef> cohort;
-  @Setter
   private boolean includeNames;
-  @Setter
   private TextSearchStyle textSearchStyle;
-  @Getter
   private DatabaseOption language;
 
   public QueryRequest() {
@@ -153,6 +146,10 @@ public class QueryRequest implements ContextMap {
     return this;
   }
 
+  public Page getPage() {
+    return page;
+  }
+
   public QueryRequest page(Consumer<Page> builder) {
     Page page = new Page();
     this.page = page;
@@ -239,6 +236,10 @@ public class QueryRequest implements ContextMap {
   public QueryRequest setQueryStringDefinition(String queryStringDefinition) {
     this.queryStringDefinition = queryStringDefinition;
     return this;
+  }
+
+  public TextSearchStyle getTextSearchStyle() {
+    return textSearchStyle;
   }
 
   public void resolveArgs() {
