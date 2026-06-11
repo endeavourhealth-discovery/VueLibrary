@@ -2,7 +2,7 @@ import { REPO, IMLContext, ListMode, TargetUpdateMode, Aggregate, Bool, Database
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-06-11 09:08:57.
+// Generated using typescript-generator version 3.2.1263 on 2026-06-11 11:00:31.
 
 export interface ConceptContextMap {
     id?: string;
@@ -323,9 +323,9 @@ export interface ArgumentReference {
 }
 
 export interface Assignable {
-    units?: TTIriRef;
     valueLabel?: string;
     compare?: Compare;
+    units?: TTIriRef;
     valueTerm?: string;
     value?: string;
     invalid?: boolean;
@@ -381,10 +381,10 @@ export interface Element extends IriLD, Entailment {
 }
 
 export interface Entailment {
+    memberOf?: boolean;
     descendantsOf?: boolean;
     descendantsOrSelfOf?: boolean;
     ancestorsOf?: boolean;
-    memberOf?: boolean;
 }
 
 export interface Expression {
