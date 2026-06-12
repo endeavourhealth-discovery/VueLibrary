@@ -17,7 +17,7 @@ plugins {
 }
 
 group = "org.endeavourhealth.library"
-version = "1.22-SNAPSHOT"
+version = "1.0.0-SNAPSHOT"
 description = "Java library"
 
 
@@ -26,16 +26,31 @@ repositories {
   mavenCentral()
 }
 
+tasks.named<JavaCompile>("compileJava") {
+  dependsOn("staticConstGenerator")
+}
+
+tasks.generateTypeScript {
+  dependsOn("compileJava")
+}
+
+tasks.extractEnumsFromAutoGen {
+  dependsOn("generateTypeScript")
+}
+
+tasks.publishToMavenLocal {
+  dependsOn("extractEnumsFromAutoGen")
+}
+
+tasks.publish {
+  dependsOn("extractEnumsFromAutoGen")
+}
+
 val ENV = System.getenv("ENV") ?: "dev"
 println("Build environment = [$ENV]")
 
 val CI = System.getenv("CI") ?: "false"
-if (CI == "false") {
-  tasks.named<JavaCompile>("compileJava") {
-    dependsOn("staticConstGenerator")
-  }
-  tasks.build { dependsOn("extractEnumsFromAutoGen") }
-} else {
+if (CI == "true") {
   tasks.build { finalizedBy("publish") }
 }
 
@@ -212,7 +227,6 @@ tasks.jacocoTestReport {
     xml.required.set(true)
   }
 }
-
 
 kotlin {
   jvmToolchain(21)
