@@ -1,14 +1,14 @@
 package org.endeavourhealth.library.model;
 
-import org.endeavourhealth.library.model.tripletree.TTArray;
-import org.endeavourhealth.library.model.tripletree.TTIriRef;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import org.endeavourhealth.library.model.tripletree.TTArray;
+import org.endeavourhealth.library.model.tripletree.TTIriRef;
 
 public class EntityReferenceNode extends TTIriRef implements Serializable {
+
   private List<EntityReferenceNode> parents = new ArrayList<>();
   private List<EntityReferenceNode> children;
   private String moduleId;
@@ -17,12 +17,10 @@ public class EntityReferenceNode extends TTIriRef implements Serializable {
   private TTArray type;
   private int orderNumber;
 
-  public EntityReferenceNode() {
-  }
+  public EntityReferenceNode() {}
 
-  public EntityReferenceNode addType(TTIriRef type){
-    if (this.type == null)
-      this.type = new TTArray();
+  public EntityReferenceNode addType(TTIriRef type) {
+    if (this.type == null) this.type = new TTArray();
     this.type.add(type);
     return this;
   }
@@ -50,8 +48,7 @@ public class EntityReferenceNode extends TTIriRef implements Serializable {
   }
 
   public EntityReferenceNode addParent(EntityReferenceNode parent) {
-    if (this.parents == null)
-      this.parents = new ArrayList<>();
+    if (this.parents == null) this.parents = new ArrayList<>();
 
     this.parents.add(parent);
 
@@ -77,8 +74,7 @@ public class EntityReferenceNode extends TTIriRef implements Serializable {
   }
 
   public EntityReferenceNode addChild(EntityReferenceNode parent) {
-    if (this.children == null)
-      this.children = new ArrayList<>();
+    if (this.children == null) this.children = new ArrayList<>();
 
     this.children.add(parent);
 
@@ -127,11 +123,13 @@ public class EntityReferenceNode extends TTIriRef implements Serializable {
     if (o == null || getClass() != o.getClass()) return false;
     if (!super.equals(o)) return false;
     EntityReferenceNode that = (EntityReferenceNode) o;
-    return hasChildren == that.hasChildren
-      && Objects.equals(parents, that.parents)
-      && Objects.equals(children, that.children)
-      && Objects.equals(moduleId, that.moduleId)
-      && Objects.equals(type, that.type);
+    return (
+      hasChildren == that.hasChildren &&
+      Objects.equals(parents, that.parents) &&
+      Objects.equals(children, that.children) &&
+      Objects.equals(moduleId, that.moduleId) &&
+      Objects.equals(type, that.type)
+    );
   }
 
   @Override

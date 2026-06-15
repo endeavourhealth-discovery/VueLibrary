@@ -1,20 +1,20 @@
 package org.endeavourhealth.library.json;
 
+import static org.endeavourhealth.library.model.tripletree.TTIriRef.iri;
+import static org.endeavourhealth.library.model.tripletree.TTLiteral.literal;
+
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.node.ArrayNode;
+import java.io.IOException;
+import java.util.Iterator;
 import org.endeavourhealth.library.model.tripletree.TTArray;
 import org.endeavourhealth.library.model.tripletree.TTNode;
 
-import java.io.IOException;
-import java.util.Iterator;
-
-import static org.endeavourhealth.library.model.tripletree.TTIriRef.iri;
-import static org.endeavourhealth.library.model.tripletree.TTLiteral.literal;
-
 public class TTArrayDeserializer extends StdDeserializer<TTArray> {
+
   public TTArrayDeserializer() {
     this(null);
   }
@@ -31,23 +31,17 @@ public class TTArrayDeserializer extends StdDeserializer<TTArray> {
   }
 
   private TTArray getNodeAsArray(JsonParser jsonParser, DeserializationContext ctx, ArrayNode array) throws IOException {
-
     TTArray result = new TTArray();
 
     Iterator<JsonNode> elements = array.elements();
     while (elements.hasNext()) {
       JsonNode node = elements.next();
-      if (node.isTextual())
-        result.add(literal(node.asText()));
-      else if (node.isArray())
-        throw new IOException("Cant deserialize array of arrays");
+      if (node.isTextual()) result.add(literal(node.asText()));
+      else if (node.isArray()) throw new IOException("Cant deserialize array of arrays");
       else if (node.isObject()) {
-        if (node.has("iri"))
-          result.add(iri(node.get("iri").textValue()));
-        else
-          result.add(ctx.readValue(node.traverse(jsonParser.getCodec()), TTNode.class));
-      } else
-        result.add(literal(node.asText()));
+        if (node.has("iri")) result.add(iri(node.get("iri").textValue()));
+        else result.add(ctx.readValue(node.traverse(jsonParser.getCodec()), TTNode.class));
+      } else result.add(literal(node.asText()));
     }
 
     return result;

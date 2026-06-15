@@ -1,20 +1,36 @@
 package org.endeavourhealth.library.model.imq;
 
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.JsonNode;
-import lombok.Getter;
-import org.endeavourhealth.library.model.tripletree.TTIriRef;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import lombok.Getter;
+import org.endeavourhealth.library.model.tripletree.TTIriRef;
 
-@JsonPropertyOrder({"prefix", "iri", "name", "description", "query", "activeOnly", "typeOf", "is", "and", "or", "not", "path", "where", "return", "groupBy", "dataSet"})
+@JsonPropertyOrder({
+  "prefix",
+  "iri",
+  "name",
+  "description",
+  "query",
+  "activeOnly",
+  "typeOf",
+  "is",
+  "and",
+  "or",
+  "not",
+  "path",
+  "where",
+  "return",
+  "groupBy",
+  "dataSet"
+})
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class Query extends Match {
+
   private Prefixes prefixes;
   private String description;
   private List<Match> columnGroup;
@@ -22,13 +38,14 @@ public class Query extends Match {
   private String name;
   private String imQuery;
   private JsonNode parentResult;
+
   @Getter
   private TTIriRef persistentIri;
 
   @Getter
   private String bindAs;
-  private IMQType queryType;
 
+  private IMQType queryType;
 
   public Query setErrorMessage(String errorMessage) {
     super.setErrorMessage(errorMessage);
@@ -44,18 +61,15 @@ public class Query extends Match {
     return queryType;
   }
 
-
   public Query setParameter(String parameter) {
     super.setParameter(parameter);
     return this;
   }
 
-
   public Query setBindAs(String bindAs) {
     this.bindAs = bindAs;
     return this;
   }
-
 
   public Query setRule(List<Match> rule) {
     super.setRule(rule);
@@ -88,6 +102,7 @@ public class Query extends Match {
     super.setAny(any);
     return this;
   }
+
   public Query addAny(Match any) {
     super.addAny(any);
     return this;
@@ -127,7 +142,6 @@ public class Query extends Match {
     return this;
   }
 
-
   public Query setPath(List<Path> path) {
     super.setPath(path);
     return this;
@@ -155,12 +169,10 @@ public class Query extends Match {
     return this;
   }
 
-
   public Query setPersistentIri(TTIriRef persistentIri) {
     this.persistentIri = persistentIri;
     return this;
   }
-
 
   public Query function(Consumer<FunctionClause> builder) {
     FunctionClause function = new FunctionClause();
@@ -207,7 +219,6 @@ public class Query extends Match {
     return this;
   }
 
-
   public Query addPrefix(String prefix, String namespace) {
     Prefix newPrefix = new Prefix().setPrefix(prefix).setNamespace(namespace);
     if (this.prefixes == null) {
@@ -217,24 +228,20 @@ public class Query extends Match {
     return this;
   }
 
-
   public Query setTypeOf(String type) {
     super.setTypeOf(type);
     return this;
   }
-
 
   public Query setReturn(List<Return> returns) {
     super.setReturn(returns);
     return this;
   }
 
-
   public Query return_(Consumer<Return> builder) {
     super.return_(builder);
     return this;
   }
-
 
   public String getDescription() {
     return description;
@@ -262,7 +269,6 @@ public class Query extends Match {
     this.name = name;
     return this;
   }
-
 
   public Query setGroupBy(List<GroupBy> groupBy) {
     super.setGroupBy(groupBy);
@@ -295,8 +301,7 @@ public class Query extends Match {
   }
 
   public Query addColumnGroup(Match match) {
-    if (this.columnGroup == null)
-      this.columnGroup = new ArrayList<>();
+    if (this.columnGroup == null) this.columnGroup = new ArrayList<>();
     this.columnGroup.add(match);
     return this;
   }
@@ -308,11 +313,8 @@ public class Query extends Match {
     return this;
   }
 
-
   public Query setActiveOnly(boolean activeOnly) {
     super.setActiveOnly(activeOnly);
     return this;
   }
-
-
 }

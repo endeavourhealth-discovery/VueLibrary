@@ -1,12 +1,12 @@
 package org.endeavourhealth.library.model.iml;
 
+import java.util.HashSet;
+import java.util.Set;
 import org.endeavourhealth.library.model.imq.Query;
 import org.endeavourhealth.library.model.tripletree.TTIriRef;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class ConceptSet extends Entity {
+
   private Query definition;
   private Set<TTIriRef> hasMember;
   private Set<TTIriRef> usedIn;
@@ -31,8 +31,7 @@ public class ConceptSet extends Entity {
   }
 
   public ConceptSet addUsedIn(TTIriRef query) {
-    if (this.usedIn == null)
-      this.usedIn = new HashSet<>();
+    if (this.usedIn == null) this.usedIn = new HashSet<>();
     this.usedIn.add(query);
     return this;
   }
@@ -56,8 +55,7 @@ public class ConceptSet extends Entity {
   }
 
   public ConceptSet addHasMember(TTIriRef member) {
-    if (this.hasMember == null)
-      this.hasMember = new HashSet<>();
+    if (this.hasMember == null) this.hasMember = new HashSet<>();
     this.hasMember.add(member);
     return this;
   }

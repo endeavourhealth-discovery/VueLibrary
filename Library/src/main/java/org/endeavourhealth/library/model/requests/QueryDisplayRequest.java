@@ -9,6 +9,7 @@ import org.endeavourhealth.library.model.tripletree.TTIriRef;
 @NoArgsConstructor
 @Getter
 public class QueryDisplayRequest {
+
   public Query query;
   public DisplayMode displayMode;
   public TTIriRef graph;

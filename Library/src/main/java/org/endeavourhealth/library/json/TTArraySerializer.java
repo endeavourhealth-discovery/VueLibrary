@@ -3,15 +3,15 @@ package org.endeavourhealth.library.json;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import java.io.IOException;
 import org.endeavourhealth.library.model.tripletree.TTArray;
 import org.endeavourhealth.library.model.tripletree.TTValue;
-
-import java.io.IOException;
 
 /**
  * Serializes a TTNode to JSON-LD. Normally called by a specialised class such as TTEntity or TTDocument serializer
  */
 public class TTArraySerializer extends StdSerializer<TTArray> {
+
   public TTArraySerializer() {
     this(null);
   }

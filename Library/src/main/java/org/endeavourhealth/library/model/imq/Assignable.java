@@ -19,5 +19,4 @@ public interface Assignable {
   Assignable setValueTerm(String valueTerm);
   TTIriRef getUnits();
   Assignable setUnits(TTIriRef units);
-
 }

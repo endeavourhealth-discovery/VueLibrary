@@ -1,11 +1,10 @@
 package org.endeavourhealth.library.model.iml;
 
+import java.util.HashSet;
+import java.util.Set;
 import lombok.Getter;
 import lombok.Setter;
 import org.endeavourhealth.library.model.tripletree.TTIriRef;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Getter
 public class Concept extends Entity {
@@ -17,10 +16,10 @@ public class Concept extends Entity {
   private Integer usage;
   private String codeId;
   private String alternativeCode;
+
   @Getter
   @Setter
   private boolean subsumed;
-
 
   public Concept setAlternativeCode(String alternativeCode) {
     this.alternativeCode = alternativeCode;
@@ -38,8 +37,7 @@ public class Concept extends Entity {
   }
 
   public Concept addSubClassOf(TTIriRef superClass) {
-    if (this.subClassOf == null)
-      this.subClassOf = new HashSet<>();
+    if (this.subClassOf == null) this.subClassOf = new HashSet<>();
     this.subClassOf.add(superClass);
     return this;
   }
@@ -53,7 +51,6 @@ public class Concept extends Entity {
     this.usage = usage;
     return this;
   }
-
 
   public Concept setName(String name) {
     super.setName(name);
@@ -70,7 +67,6 @@ public class Concept extends Entity {
     return this;
   }
 
-
   public Concept setScheme(TTIriRef scheme) {
     super.setScheme(scheme);
     return this;
@@ -82,8 +78,7 @@ public class Concept extends Entity {
   }
 
   public Concept addMatchedFrom(Concept legacy) {
-    if (this.matchedFrom == null)
-      this.matchedFrom = new HashSet<>();
+    if (this.matchedFrom == null) this.matchedFrom = new HashSet<>();
     this.matchedFrom.add(legacy);
     return this;
   }

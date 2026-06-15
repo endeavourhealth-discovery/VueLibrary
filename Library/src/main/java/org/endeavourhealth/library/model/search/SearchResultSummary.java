@@ -4,35 +4,44 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import org.endeavourhealth.library.model.tripletree.TTIriRef;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Consumer;
+import org.endeavourhealth.library.model.tripletree.TTIriRef;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class SearchResultSummary {
+
   @JsonProperty()
   private String name;
+
   @JsonProperty(value = "iri", required = true)
   private String iri;
+
   @JsonProperty()
   private String code;
+
   @JsonProperty()
   private String description;
+
   @JsonProperty(required = true)
   private TTIriRef status;
+
   @JsonProperty(required = true)
   private TTIriRef scheme;
+
   @JsonProperty(required = true)
   private Set<TTIriRef> type = new HashSet<>();
+
   @JsonProperty(defaultValue = "0")
   private Integer usageTotal;
+
   @JsonProperty()
   private String bestMatch;
+
   private String preferredName;
   private Set<String> key;
   private Set<TTIriRef> isA = new HashSet<>();
@@ -71,7 +80,6 @@ public class SearchResultSummary {
     return this;
   }
 
-
   public List<TTIriRef> getQualifier() {
     return qualifier;
   }
@@ -96,7 +104,6 @@ public class SearchResultSummary {
     return this;
   }
 
-
   public String getPreferredName() {
     return preferredName;
   }
@@ -106,7 +113,18 @@ public class SearchResultSummary {
     return this;
   }
 
-  public SearchResultSummary(String name, String iri, String code, String description, TTIriRef status, TTIriRef scheme, Set<TTIriRef> entityTypes, Set<TTIriRef> isDescendentOf, Integer usageTotal, String bestMatch) {
+  public SearchResultSummary(
+    String name,
+    String iri,
+    String code,
+    String description,
+    TTIriRef status,
+    TTIriRef scheme,
+    Set<TTIriRef> entityTypes,
+    Set<TTIriRef> isDescendentOf,
+    Integer usageTotal,
+    String bestMatch
+  ) {
     this.name = name;
     this.iri = iri;
     this.code = code;
@@ -119,8 +137,7 @@ public class SearchResultSummary {
     this.bestMatch = bestMatch;
   }
 
-  public SearchResultSummary() {
-  }
+  public SearchResultSummary() {}
 
   public Set<TTIriRef> getIsA() {
     return isA;
@@ -143,8 +160,7 @@ public class SearchResultSummary {
   @JsonSetter("name")
   public SearchResultSummary setNameFromJson(String name) {
     this.name = name;
-    if (this.bestMatch == null)
-      this.bestMatch = name;
+    if (this.bestMatch == null) this.bestMatch = name;
     return this;
   }
 
@@ -205,8 +221,7 @@ public class SearchResultSummary {
   }
 
   public SearchResultSummary addType(TTIriRef entityType) {
-    if (this.type == null)
-      this.type = new HashSet<>();
+    if (this.type == null) this.type = new HashSet<>();
     this.type.add(entityType);
     return this;
   }

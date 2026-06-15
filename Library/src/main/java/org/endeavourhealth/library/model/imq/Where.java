@@ -4,17 +4,32 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import org.endeavourhealth.library.model.tripletree.TTIriRef;
-import org.endeavourhealth.library.vocabulary.VocabEnum;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import org.endeavourhealth.library.model.tripletree.TTIriRef;
+import org.endeavourhealth.library.vocabulary.VocabEnum;
 
-@JsonPropertyOrder({"description", "nodeRef", "iri", "name", "bool", "match", "property", "range", "operator", "isNull", "value", "intervalUnit", "is", "relativeTo", "anyRoleGroup"})
+@JsonPropertyOrder({
+  "description",
+  "nodeRef",
+  "iri",
+  "name",
+  "bool",
+  "match",
+  "property",
+  "range",
+  "operator",
+  "isNull",
+  "value",
+  "intervalUnit",
+  "is",
+  "relativeTo",
+  "anyRoleGroup"
+})
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-@JsonIgnoreProperties({"key"})
-public class Where extends Element implements Assignable{
+@JsonIgnoreProperties({ "key" })
+public class Where extends Element implements Assignable {
 
   private String description;
   private Range range;
@@ -48,8 +63,6 @@ public class Where extends Element implements Assignable{
   private String valueTerm;
   private Compare compare;
 
-
-
   public String getSubjectVariable() {
     return subjectVariable;
   }
@@ -59,12 +72,11 @@ public class Where extends Element implements Assignable{
     return this;
   }
 
-
-  public boolean isLinked(){
+  public boolean isLinked() {
     return linked;
   }
 
-  public Where setLinked(boolean is){
+  public Where setLinked(boolean is) {
     this.linked = true;
     return this;
   }
@@ -81,13 +93,16 @@ public class Where extends Element implements Assignable{
   public List<Node> getPropertyList() {
     return propertyList;
   }
+
   public String getSubjectParameter() {
     return subjectParameter;
   }
+
   public Where setSubjectParameter(String subject) {
     this.subjectParameter = subject;
     return this;
   }
+
   public Where setParameter(String parameter) {
     super.setParameter(parameter);
     return this;
@@ -97,7 +112,6 @@ public class Where extends Element implements Assignable{
   public String getDescription() {
     return description;
   }
-
 
   @Override
   public Compare getCompare() {
@@ -165,7 +179,6 @@ public class Where extends Element implements Assignable{
     return shortLabel;
   }
 
-
   public boolean isExists() {
     return exists;
   }
@@ -175,29 +188,27 @@ public class Where extends Element implements Assignable{
     return this;
   }
 
-
   public List<IriLD> getExcludeProperty() {
     return excludeProperty;
   }
 
-  public Where setExcludeProperty(List<IriLD> properties){
+  public Where setExcludeProperty(List<IriLD> properties) {
     this.excludeProperty = properties;
     return this;
   }
 
-  public Where addExcludeProperty(IriLD property){
-    if(this.excludeProperty == null) this.excludeProperty = new ArrayList<>();
+  public Where addExcludeProperty(IriLD property) {
+    if (this.excludeProperty == null) this.excludeProperty = new ArrayList<>();
     this.excludeProperty.add(property);
     return this;
   }
 
-  public Where excludeProperty(Consumer<IriLD> builder){
+  public Where excludeProperty(Consumer<IriLD> builder) {
     IriLD property = new IriLD();
     addExcludeProperty(property);
     builder.accept(property);
     return this;
   }
-
 
   public String getNode() {
     return node;
@@ -218,15 +229,13 @@ public class Where extends Element implements Assignable{
   }
 
   public Where setPropertyVariable(String variable) {
-    this.propertyVariable=variable;
+    this.propertyVariable = variable;
     return this;
   }
 
   public String getPropertyVariable() {
     return propertyVariable;
   }
-
-
 
   public Where setPropertyList(List<Node> propertyList) {
     this.propertyList = propertyList;
@@ -239,37 +248,31 @@ public class Where extends Element implements Assignable{
     return this;
   }
 
-
   public Where setNot(boolean not) {
     this.not = not;
     return this;
   }
-
 
   public Where setShortLabel(String shortLabel) {
     this.shortLabel = shortLabel;
     return this;
   }
 
-
   public Where setRoleGroup(boolean roleGroup) {
     this.roleGroup = roleGroup;
     return this;
   }
 
-  public Where() {
-  }
+  public Where() {}
 
   public Where(String iri) {
     super.setIri(iri);
   }
 
-
   public Where setAnd(List<Where> and) {
     this.and = and;
     return this;
   }
-
 
   public Where addAnd(Where and) {
     if (this.and == null) {
@@ -285,7 +288,6 @@ public class Where extends Element implements Assignable{
     builder.accept(and);
     return this;
   }
-
 
   public Where setOr(List<Where> or) {
     this.or = or;
@@ -307,13 +309,11 @@ public class Where extends Element implements Assignable{
     return this;
   }
 
-
   @JsonSetter
   public Where setTypeOf(Node typeOf) {
     this.typeOf = typeOf;
     return this;
   }
-
 
   public Where setTypeOf(String type) {
     this.typeOf = new Node().setIri(type);
@@ -325,17 +325,14 @@ public class Where extends Element implements Assignable{
     return this;
   }
 
-
   public static Where iri(String iri) {
     return new Where(iri);
   }
-
 
   @Override
   public String getValueLabel() {
     return this.valueLabel;
   }
-
 
   public boolean getIsNotNull() {
     return isNotNull;
@@ -355,14 +352,11 @@ public class Where extends Element implements Assignable{
     return this;
   }
 
-
   @Override
   public Where setNodeRef(String nodeRef) {
     super.setNodeRef(nodeRef);
     return this;
   }
-
-
 
   public Where setIri(String iri) {
     super.setIri(iri);
@@ -379,7 +373,6 @@ public class Where extends Element implements Assignable{
     return this;
   }
 
-
   public Where setValueLabel(String valueLabel) {
     this.valueLabel = valueLabel;
     return this;
@@ -389,7 +382,6 @@ public class Where extends Element implements Assignable{
     this.anyRoleGroup = anyRoleGroup;
     return this;
   }
-
 
   public Where setName(String name) {
     super.setName(name);
@@ -408,7 +400,6 @@ public class Where extends Element implements Assignable{
     return this;
   }
 
-
   public Where addIs(Node isItem) {
     if (this.is == null) this.is = new ArrayList<>();
     this.is.add(isItem);
@@ -421,7 +412,6 @@ public class Where extends Element implements Assignable{
     builder.accept(isItem);
     return this;
   }
-
 
   public Where addIs(String isIri) {
     if (this.is == null) this.is = new ArrayList<>();
@@ -439,7 +429,6 @@ public class Where extends Element implements Assignable{
     return this;
   }
 
-
   @Override
   public String getValueTerm() {
     return this.valueTerm;
@@ -451,7 +440,6 @@ public class Where extends Element implements Assignable{
     return this;
   }
 
-
   public String getValue() {
     return this.value;
   }
@@ -461,7 +449,6 @@ public class Where extends Element implements Assignable{
     return this;
   }
 
-
   public Where setQualifier(TTIriRef qualifier) {
     this.qualifier = qualifier;
     return this;
@@ -470,7 +457,6 @@ public class Where extends Element implements Assignable{
   public TTIriRef getQualifier() {
     return this.qualifier;
   }
-
 
   public Range getRange() {
     return range;
@@ -487,7 +473,6 @@ public class Where extends Element implements Assignable{
     return this;
   }
 
-
   public Where setUnits(TTIriRef units) {
     this.units = units;
     return this;
@@ -497,12 +482,9 @@ public class Where extends Element implements Assignable{
     return units;
   }
 
-
   public Where function(Consumer<FunctionClause> builder) {
     this.function = new FunctionClause();
     builder.accept(this.function);
     return this;
   }
-
-
 }

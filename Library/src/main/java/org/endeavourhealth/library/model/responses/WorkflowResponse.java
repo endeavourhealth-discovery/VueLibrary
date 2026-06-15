@@ -1,17 +1,18 @@
 package org.endeavourhealth.library.model.responses;
 
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Getter;
 import org.endeavourhealth.library.model.workflow.Task;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 public class WorkflowResponse {
+
   @Getter
   private Integer page;
+
   @Getter
   private Integer count;
+
   private List<Task> tasks = new ArrayList<>();
 
   public WorkflowResponse setPage(Integer page) {

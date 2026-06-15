@@ -1,14 +1,13 @@
 package org.endeavourhealth.library.model.responses;
 
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Getter;
 import org.endeavourhealth.library.model.search.SearchResultSummary;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 @Getter
 public class SearchResponse {
+
   private Integer page;
   private Integer count;
   private Integer totalCount;

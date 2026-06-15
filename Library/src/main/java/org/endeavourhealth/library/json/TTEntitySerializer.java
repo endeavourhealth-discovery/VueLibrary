@@ -3,11 +3,10 @@ package org.endeavourhealth.library.json;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import java.io.IOException;
 import org.endeavourhealth.library.model.tripletree.TTContext;
 import org.endeavourhealth.library.model.tripletree.TTEntity;
 import org.endeavourhealth.library.model.tripletree.TTIriRef;
-
-import java.io.IOException;
 
 public class TTEntitySerializer extends StdSerializer<TTEntity> {
 
@@ -42,8 +41,7 @@ public class TTEntitySerializer extends StdSerializer<TTEntity> {
     gen.writeFieldName(fieldName);
     gen.writeStartObject();
     gen.writeStringField("iri", helper.prefix(ref.getIri()));
-    if (ref.getName() != null && !ref.getName().isEmpty())
-      gen.writeStringField("name", ref.getName());
+    if (ref.getName() != null && !ref.getName().isEmpty()) gen.writeStringField("name", ref.getName());
     gen.writeEndObject();
   }
 }

@@ -3,7 +3,8 @@ package org.endeavourhealth.library.model.imq;
 import java.util.List;
 import java.util.function.Consumer;
 
-public class When extends Where{
+public class When extends Where {
+
   private String value;
   private Expression then;
 
@@ -42,12 +43,10 @@ public class When extends Where{
     return this;
   }
 
-
   public When or(Consumer<Where> builder) {
     super.or(builder);
     return this;
   }
-
 
   public When and(Consumer<Where> builder) {
     super.and(builder);
@@ -68,7 +67,4 @@ public class When extends Where{
     builder.accept(this.then);
     return this;
   }
-
-
-
 }

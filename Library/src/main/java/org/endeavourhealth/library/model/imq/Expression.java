@@ -1,6 +1,7 @@
 package org.endeavourhealth.library.model.imq;
 
 public class Expression {
+
   private String value;
   private String nodeRef;
   private String iri;

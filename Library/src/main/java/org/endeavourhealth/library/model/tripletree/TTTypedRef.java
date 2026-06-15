@@ -3,6 +3,7 @@ package org.endeavourhealth.library.model.tripletree;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 public class TTTypedRef extends TTIriRef {
+
   private TTIriRef type;
 
   public TTIriRef getType() {

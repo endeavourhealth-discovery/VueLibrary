@@ -2,9 +2,8 @@ package org.endeavourhealth.library.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import org.endeavourhealth.library.model.tripletree.TTIriRef;
-
 import java.io.Serializable;
+import org.endeavourhealth.library.model.tripletree.TTIriRef;
 
 public class DataModelProperty implements Serializable {
 
@@ -17,7 +16,6 @@ public class DataModelProperty implements Serializable {
   private String pattern;
   private TTIriRef inheritedFrom;
   private int order;
-
 
   public int getOrder() {
     return order;

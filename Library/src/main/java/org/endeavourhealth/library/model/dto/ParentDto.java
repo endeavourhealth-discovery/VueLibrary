@@ -1,16 +1,13 @@
 package org.endeavourhealth.library.model.dto;
 
-import org.endeavourhealth.library.model.tripletree.TTIriRef;
-
 import java.util.List;
+import org.endeavourhealth.library.model.tripletree.TTIriRef;
 
 public class ParentDto extends TTIriRef {
 
   private List<ParentDto> parents;
 
-  public ParentDto() {
-
-  }
+  public ParentDto() {}
 
   public ParentDto(String iri, String name, List<ParentDto> parents) {
     super(iri, name);

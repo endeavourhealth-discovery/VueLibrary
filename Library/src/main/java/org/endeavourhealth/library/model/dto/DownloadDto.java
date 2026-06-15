@@ -1,5 +1,7 @@
 package org.endeavourhealth.library.model.dto;
 
+import java.io.Serializable;
+import java.util.List;
 import org.endeavourhealth.library.model.DataModelProperty;
 import org.endeavourhealth.library.model.EntityReferenceNode;
 import org.endeavourhealth.library.model.search.SearchTermCode;
@@ -7,9 +9,6 @@ import org.endeavourhealth.library.model.set.ExportSet;
 import org.endeavourhealth.library.model.tripletree.TTArray;
 import org.endeavourhealth.library.model.tripletree.TTEntity;
 import org.endeavourhealth.library.model.tripletree.TTNode;
-
-import java.io.Serializable;
-import java.util.List;
 
 public class DownloadDto implements Serializable {
 

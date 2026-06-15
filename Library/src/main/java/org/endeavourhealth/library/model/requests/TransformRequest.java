@@ -1,15 +1,15 @@
 package org.endeavourhealth.library.model.requests;
 
 import com.fasterxml.jackson.annotation.JsonSetter;
-import org.endeavourhealth.library.model.tripletree.TTIriRef;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.DataFormatException;
+import org.endeavourhealth.library.model.tripletree.TTIriRef;
 
 public class TransformRequest {
+
   private TTIriRef transformMap;
   private String sourceFormat;
   private String targetFormat;
@@ -33,7 +33,6 @@ public class TransformRequest {
       return this;
     }
   }
-
 
   public String getSourceFormat() {
     return sourceFormat;
@@ -63,8 +62,7 @@ public class TransformRequest {
   }
 
   public TransformRequest addSource(String type, Object source) {
-    if (this.source == null)
-      this.source = new HashMap<>();
+    if (this.source == null) this.source = new HashMap<>();
     this.source.computeIfAbsent(type, t -> new ArrayList<>()).add(source);
     return this;
   }

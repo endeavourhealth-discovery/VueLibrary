@@ -4,6 +4,7 @@ import lombok.Getter;
 
 @Getter
 public class ArrayButtons {
+
   Boolean up;
   Boolean down;
   Boolean plus;
@@ -34,5 +35,4 @@ public class ArrayButtons {
     this.addOnlyIfLast = addOnlyIfLast;
     return this;
   }
-
 }

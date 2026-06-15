@@ -1,9 +1,8 @@
 package org.endeavourhealth.library.model.dto;
 
+import java.util.List;
 import org.endeavourhealth.library.model.tripletree.TTEntity;
 import org.endeavourhealth.library.model.tripletree.TTIriRef;
-
-import java.util.List;
 
 public class InstanceDTO {
 

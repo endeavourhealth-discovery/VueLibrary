@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class TTBundle {
+
   private TTEntity entity;
   private Map<String, String> predicates = new HashMap<>();
 
@@ -26,11 +27,9 @@ public class TTBundle {
   }
 
   public TTBundle addPredicate(TTIriRef predicate) {
-    if (null == this.predicates)
-      this.predicates = new HashMap<>();
+    if (null == this.predicates) this.predicates = new HashMap<>();
 
-    if (predicate != null)
-      predicates.put(predicate.getIri(), predicate.getName());
+    if (predicate != null) predicates.put(predicate.getIri(), predicate.getName());
 
     return this;
   }

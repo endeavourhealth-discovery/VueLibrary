@@ -1,13 +1,13 @@
 package org.endeavourhealth.library.model.set;
 
-import org.endeavourhealth.library.model.tripletree.TTIriRef;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import org.endeavourhealth.library.model.tripletree.TTIriRef;
 
 public class ExportSet implements Serializable {
+
   private TTIriRef valueSet;
   private List<SetMember> members = new ArrayList<>();
   private boolean limited = false;
@@ -31,15 +31,13 @@ public class ExportSet implements Serializable {
   }
 
   public ExportSet addMembers(SetMember vsm) {
-    if (this.members == null)
-      this.members = new ArrayList<>();
+    if (this.members == null) this.members = new ArrayList<>();
     this.members.add(vsm);
     return this;
   }
 
   public ExportSet addAllMembers(Collection<SetMember> vsm) {
-    if (this.members == null)
-      this.members = new ArrayList<>();
+    if (this.members == null) this.members = new ArrayList<>();
     this.members.addAll(vsm);
     return this;
   }

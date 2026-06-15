@@ -5,20 +5,20 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Consumer;
 import lombok.Getter;
 import org.endeavourhealth.library.logic.CachedObjectMapper;
 import org.endeavourhealth.library.model.tripletree.TTContext;
 import org.endeavourhealth.library.model.tripletree.TTEntity;
 import org.endeavourhealth.library.model.tripletree.TTIriRef;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Consumer;
-
-@JsonPropertyOrder({"iri", "status", "label", "comment", "targetShape", "type", "isContainedIn", "subClassOf", "group", "scheme"})
+@JsonPropertyOrder({ "iri", "status", "label", "comment", "targetShape", "type", "isContainedIn", "subClassOf", "group", "scheme" })
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 @Getter
 public class FormGenerator {
+
   private String iri;
   private TTIriRef status;
   private TTIriRef scheme;
@@ -72,7 +72,6 @@ public class FormGenerator {
     return this;
   }
 
-
   @JsonSetter
   public FormGenerator setTargetShape(TTIriRef targetShape) {
     this.targetShape = targetShape;
@@ -107,6 +106,5 @@ public class FormGenerator {
       om.setSerializationInclusion(JsonInclude.Include.NON_DEFAULT);
       return om.writerWithDefaultPrettyPrinter().withAttribute(TTContext.OUTPUT_CONTEXT, true).writeValueAsString(this);
     }
-
   }
 }

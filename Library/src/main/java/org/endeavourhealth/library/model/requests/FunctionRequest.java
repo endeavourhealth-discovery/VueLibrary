@@ -1,15 +1,15 @@
 package org.endeavourhealth.library.model.requests;
 
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Getter;
 import org.endeavourhealth.library.model.iml.Page;
 import org.endeavourhealth.library.model.imq.Argument;
 import org.endeavourhealth.library.vocabulary.GRAPH;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Getter
 public class FunctionRequest {
+
   private String functionIri;
   private List<Argument> arguments;
   private Page page;

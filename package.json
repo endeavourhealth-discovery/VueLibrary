@@ -8,9 +8,10 @@
     "build": ".\\gradlew publishToMavenLocal && vue-tsc -b && vite build",
     "preview": "vite preview",
     "test:unit": "tsc -p tsconfig.tests.json && vitest",
-    "format": "prettier --write \"{src,tests}/**/*.{js,ts,vue,json,css,scss,md}\"",
+    "format": "prettier --write \"{src,tests,Library/src}/**/*.{js,ts,vue,json,css,scss,md,java}\"",
     "format:check": "prettier --list-different \"{src,tests}/**/*.{js,ts,vue,json,css,scss,md}\"",
-    "prepare": "pnpm build && node -e \"try{require('husky').install()}catch(e){}\""
+    "husky": "node -e \"try{require('husky').install()}catch(e){}\"",
+    "prepare": "pnpm build && pnpm format"
   },
   "dependencies": {
     "@vueuse/core": "14.2.1",
@@ -35,6 +36,7 @@
     "husky": "9.1.7",
     "lint-staged": "16.4.0",
     "prettier": "3.8.1",
+    "prettier-plugin-java": "^2.9.7",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "typescript": "6.0.2",
     "vite": "8.0.7",

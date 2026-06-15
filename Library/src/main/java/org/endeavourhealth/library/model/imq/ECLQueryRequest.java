@@ -1,15 +1,15 @@
 package org.endeavourhealth.library.model.imq;
 
+import java.util.HashSet;
+import java.util.Set;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.endeavourhealth.library.model.tripletree.TTIriRef;
 
-import java.util.HashSet;
-import java.util.Set;
-
 @Getter
 @NoArgsConstructor
 public class ECLQueryRequest {
+
   private String ecl;
   private Query query;
   private boolean showNames;
@@ -56,7 +56,6 @@ public class ECLQueryRequest {
     return this;
   }
 
-
   public boolean isIncludeLegacy() {
     return includeLegacy;
   }
@@ -65,6 +64,7 @@ public class ECLQueryRequest {
     this.includeLegacy = includeLegacy;
     return this;
   }
+
   public ECLQueryRequest setEcl(String ecl) {
     this.ecl = ecl;
     return this;

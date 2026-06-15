@@ -1,20 +1,24 @@
 package org.endeavourhealth.library.model.imq;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import java.util.function.Consumer;
 import lombok.Getter;
 import org.endeavourhealth.library.model.tripletree.TTIriRef;
 
-import java.util.function.Consumer;
-
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class Value implements Assignable {
+
   @Getter
   private Operator operator;
+
   @Getter
   private String value;
+
   private String valueLabel;
+
   @Getter
   private String valueParameter;
+
   private FunctionClause function;
   private String description;
   private TTIriRef units;
@@ -22,16 +26,14 @@ public class Value implements Assignable {
   private String valueTerm;
   private Compare compare;
 
-
-
   public boolean isInvalid() {
     return invalid;
   }
+
   public Value setIsInvalid(boolean invalid) {
     this.invalid = invalid;
     return this;
   }
-
 
   @Override
   public String getValueTerm() {
@@ -44,23 +46,20 @@ public class Value implements Assignable {
     return this;
   }
 
-
   public Value setUnits(TTIriRef units) {
     this.units = units;
     return this;
   }
 
-  public TTIriRef getUnits(){
+  public TTIriRef getUnits() {
     return this.units;
   }
-
 
   public Value function(Consumer<FunctionClause> builder) {
     this.function = new FunctionClause();
     builder.accept(this.function);
     return this;
   }
-
 
   public Value setValueParameter(String valueParameter) {
     this.valueParameter = valueParameter;
@@ -72,19 +71,16 @@ public class Value implements Assignable {
     return this;
   }
 
-
   @Override
   public Value setValue(String value) {
     this.value = value;
     return this;
   }
 
-
   @Override
   public String getValueLabel() {
     return this.valueLabel;
   }
-
 
   @Override
   public Assignable setValueLabel(String label) {
@@ -94,7 +90,7 @@ public class Value implements Assignable {
 
   @Override
   public Value setDescription(String description) {
-    this.description= description;
+    this.description = description;
     return this;
   }
 
@@ -102,7 +98,6 @@ public class Value implements Assignable {
   public String getDescription() {
     return description;
   }
-
 
   public Compare getCompare() {
     return this.compare;
@@ -119,11 +114,4 @@ public class Value implements Assignable {
     builder.accept(this.compare);
     return this;
   }
-
-
-
-
-
-
-
 }

@@ -1,6 +1,7 @@
 package org.endeavourhealth.library.model.dto;
 
 public class BooleanBody {
+
   Boolean bool;
 
   public Boolean getBool() {

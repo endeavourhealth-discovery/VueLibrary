@@ -1,11 +1,11 @@
 package org.endeavourhealth.library.model.set;
 
 import com.fasterxml.jackson.annotation.JsonSetter;
+import java.io.Serializable;
 import org.endeavourhealth.library.model.tripletree.TTIriRef;
 
-import java.io.Serializable;
-
 public class SetMember implements Serializable {
+
   private TTIriRef entity;
   private String code;
   private TTIriRef scheme;

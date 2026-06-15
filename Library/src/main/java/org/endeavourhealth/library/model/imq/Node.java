@@ -3,13 +3,12 @@ package org.endeavourhealth.library.model.imq;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonSetter;
-
 import java.util.function.Consumer;
 
-
-@JsonPropertyOrder({"descendantsOrSelfOf","parameter", "iri", "type", "set", "qualifier","match"})
+@JsonPropertyOrder({ "descendantsOrSelfOf", "parameter", "iri", "type", "set", "qualifier", "match" })
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class Node extends Element{
+public class Node extends Element {
+
   private boolean exclude;
   private String code;
   private String type;
@@ -21,14 +20,11 @@ public class Node extends Element{
   public String getQualifier() {
     return qualifier;
   }
+
   public Node setQualifier(String qualifier) {
     this.qualifier = qualifier;
     return this;
   }
-
-
-
-
 
   public Match getMatch() {
     return match;
@@ -55,6 +51,7 @@ public class Node extends Element{
     super.setIsCohort(isCohort);
     return this;
   }
+
   public boolean isInverse() {
     return inverse;
   }
@@ -63,8 +60,6 @@ public class Node extends Element{
     this.inverse = inverse;
     return this;
   }
-
-
 
   public String getType() {
     return type;
@@ -83,7 +78,6 @@ public class Node extends Element{
     this.code = code;
     return this;
   }
-
 
   public boolean isExclude() {
     return exclude;
@@ -105,16 +99,12 @@ public class Node extends Element{
   }
 
   public static Node iri(String iri) {
-    Node node= new Node();
+    Node node = new Node();
     node.setIri(iri);
     return node;
   }
 
-  public Node() {
-  }
-
-
-
+  public Node() {}
 
   public Node setAncestorsOf(boolean ancestorsOf) {
     super.setAncestorsOf(ancestorsOf);
@@ -136,7 +126,6 @@ public class Node extends Element{
     return this;
   }
 
-
   @JsonSetter
   public Node setIri(String iri) {
     super.setIri(iri);
@@ -149,12 +138,11 @@ public class Node extends Element{
   }
 
   public Node setNode(String node) {
-    this.node=node;
+    this.node = node;
     return this;
   }
+
   public String getNode() {
     return node;
   }
-
 }
-

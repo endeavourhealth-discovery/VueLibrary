@@ -7,6 +7,7 @@ import org.endeavourhealth.library.model.workflow.roleRequest.UserRole;
 @Getter
 @Setter
 public class CognitoGroupRequest {
+
   private String username;
   private UserRole groupName;
 }

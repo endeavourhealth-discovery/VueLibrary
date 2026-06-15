@@ -4,12 +4,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
-@JsonPropertyOrder({"inverse", "iri", "name", "variable"})
+@JsonPropertyOrder({ "inverse", "iri", "name", "variable" })
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class TTVariable extends TTIriRef {
+
   private String variable;
   private boolean isType;
-
 
   public boolean isType() {
     return isType;
@@ -34,7 +34,6 @@ public class TTVariable extends TTIriRef {
     return this;
   }
 
-
   public static TTVariable iri(String iri) {
     return new TTVariable().setIri(iri);
   }
@@ -52,10 +51,7 @@ public class TTVariable extends TTIriRef {
     return this;
   }
 
-
-  public TTVariable() {
-  }
-
+  public TTVariable() {}
 
   public TTVariable setIri(String iri) {
     super.setIri(iri);

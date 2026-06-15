@@ -2,20 +2,18 @@ package org.endeavourhealth.library.model.imq;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
 import java.util.List;
 
-@JsonPropertyOrder({"id", "iri", "alias", "case", "aggregate",
-  "where", "orderBy", "direction", "limit", "groupBy", "having", "select"})
+@JsonPropertyOrder({ "id", "iri", "alias", "case", "aggregate", "where", "orderBy", "direction", "limit", "groupBy", "having", "select" })
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class Delete {
+
   private Where property;
   private Node subject;
   private boolean inverse;
   private Node predicate;
   private Node object;
   private List<Delete> delete;
-
 
   public Where getProperty() {
     return property;
@@ -71,6 +69,3 @@ public class Delete {
     return this;
   }
 }
-
-
-

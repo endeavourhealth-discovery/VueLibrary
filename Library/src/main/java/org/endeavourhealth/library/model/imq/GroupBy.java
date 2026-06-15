@@ -1,6 +1,7 @@
 package org.endeavourhealth.library.model.imq;
 
-public class GroupBy extends IriLD{
+public class GroupBy extends IriLD {
+
   private String nodeRef;
   private String valueRef;
   private String propertyRef;

@@ -1,13 +1,13 @@
 package org.endeavourhealth.library.model.search;
 
-import org.endeavourhealth.library.model.imq.Order;
-import org.endeavourhealth.library.model.tripletree.TTIriRef;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import org.endeavourhealth.library.model.imq.Order;
+import org.endeavourhealth.library.model.tripletree.TTIriRef;
 
 public class OrderBy {
+
   private String field;
   private Order direction;
   private List<TTIriRef> iriValue;
@@ -26,8 +26,7 @@ public class OrderBy {
   }
 
   public OrderBy addTextValue(String text) {
-    if (this.textValue == null)
-      this.textValue = new ArrayList<>();
+    if (this.textValue == null) this.textValue = new ArrayList<>();
     this.textValue.add(text);
     return this;
   }

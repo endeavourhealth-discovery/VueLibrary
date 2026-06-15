@@ -1,12 +1,12 @@
 package org.endeavourhealth.library.model.search;
 
 import com.fasterxml.jackson.annotation.JsonSetter;
-import org.endeavourhealth.library.model.tripletree.TTIriRef;
-
 import java.util.Comparator;
 import java.util.Objects;
+import org.endeavourhealth.library.model.tripletree.TTIriRef;
 
 public class SearchTermCode implements Comparable<SearchTermCode> {
+
   String term;
   String code;
   TTIriRef status;
@@ -72,8 +72,10 @@ public class SearchTermCode implements Comparable<SearchTermCode> {
 
   @Override
   public int compareTo(SearchTermCode o) {
-    return Comparator.<SearchTermCode, String>
-        comparing(ts -> ts.getStatus() == null ? null : ts.getStatus().getIri(), Comparator.nullsLast(Comparator.naturalOrder()))
+    return Comparator.<SearchTermCode, String>comparing(
+      ts -> ts.getStatus() == null ? null : ts.getStatus().getIri(),
+      Comparator.nullsLast(Comparator.naturalOrder())
+    )
       .thenComparing(ts -> (ts.getTerm() == null || ts.getTerm().isEmpty()) ? null : ts.getTerm(), Comparator.nullsLast(Comparator.naturalOrder()))
       .compare(this, o);
   }

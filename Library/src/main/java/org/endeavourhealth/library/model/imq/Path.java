@@ -1,14 +1,14 @@
 package org.endeavourhealth.library.model.imq;
 
 import com.fasterxml.jackson.annotation.JsonSetter;
-import org.endeavourhealth.library.model.tripletree.TTIriRef;
-import org.endeavourhealth.library.vocabulary.VocabEnum;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import org.endeavourhealth.library.model.tripletree.TTIriRef;
+import org.endeavourhealth.library.vocabulary.VocabEnum;
 
 public class Path extends Element implements HasPaths {
+
   private boolean inverse;
   private boolean optional;
   private List<Path> path;
@@ -22,7 +22,7 @@ public class Path extends Element implements HasPaths {
   }
 
   public Path setNode(String node) {
-    this.node=node;
+    this.node = node;
     return this;
   }
 
@@ -40,15 +40,12 @@ public class Path extends Element implements HasPaths {
     return pathVariable;
   }
 
-
-  public Path setIri(VocabEnum iri){
+  public Path setIri(VocabEnum iri) {
     super.setIri(iri.toString());
     return this;
   }
 
-
-
-  public Path setTypeOf(VocabEnum iri){
+  public Path setTypeOf(VocabEnum iri) {
     this.setTypeOf(iri.toString());
     return this;
   }
@@ -61,7 +58,6 @@ public class Path extends Element implements HasPaths {
     this.qualifier = qualifier;
     return this;
   }
-
 
   public Node getTypeOf() {
     return typeOf;
@@ -82,7 +78,6 @@ public class Path extends Element implements HasPaths {
     return path;
   }
 
-
   @JsonSetter("path")
   public Path setPath(List<Path> path) {
     this.path = path;
@@ -90,8 +85,7 @@ public class Path extends Element implements HasPaths {
   }
 
   public Path addPath(Path path) {
-    if (this.path == null)
-      this.path = new ArrayList<>();
+    if (this.path == null) this.path = new ArrayList<>();
     this.path.add(path);
     return this;
   }
@@ -107,7 +101,6 @@ public class Path extends Element implements HasPaths {
     this.optional = optional;
     return this;
   }
-
 
   public Path setInverse(boolean inverse) {
     this.inverse = inverse;

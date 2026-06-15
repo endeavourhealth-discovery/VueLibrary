@@ -5,10 +5,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.Getter;
 import lombok.Setter;
 
-
-@JsonPropertyOrder({"parameter", "iri", "parameter", "name"})
+@JsonPropertyOrder({ "parameter", "iri", "parameter", "name" })
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public abstract class Element extends IriLD implements Entailment {
+
   private String parameter;
   private boolean ancestorsOf;
   private boolean descendantsOrSelfOf;
@@ -16,28 +16,32 @@ public abstract class Element extends IriLD implements Entailment {
   private boolean childOrSelfOf;
   private boolean childOf;
   private boolean memberOf;
+
   @Getter
   private boolean cohort;
+
   private String nodeRef;
+
   @Getter
   @Setter
   private boolean invalid;
+
   private boolean resultSet;
 
-  public boolean getResultSet(){
+  public boolean getResultSet() {
     return resultSet;
   }
 
-  public Element setIsResultSet(boolean resultSet){
+  public Element setIsResultSet(boolean resultSet) {
     this.resultSet = resultSet;
     return this;
   }
 
-
   public Element setIsCohort(boolean cohort) {
-    this.cohort= cohort;
+    this.cohort = cohort;
     return this;
   }
+
   public boolean isMemberOf() {
     return memberOf;
   }
@@ -46,7 +50,6 @@ public abstract class Element extends IriLD implements Entailment {
     this.memberOf = memberOf;
     return this;
   }
-
 
   public String getNodeRef() {
     return nodeRef;
@@ -75,9 +78,7 @@ public abstract class Element extends IriLD implements Entailment {
     return this;
   }
 
-
-  public Element() {
-  }
+  public Element() {}
 
   public Element(String iri) {
     setIri(iri);
@@ -93,12 +94,10 @@ public abstract class Element extends IriLD implements Entailment {
     return this;
   }
 
-
   public Element setName(String name) {
     super.setName(name);
     return this;
   }
-
 
   public String getParameter() {
     return parameter;
@@ -109,28 +108,23 @@ public abstract class Element extends IriLD implements Entailment {
     return this;
   }
 
-
   public boolean isAncestorsOf() {
     return ancestorsOf;
   }
-
 
   public Element setAncestorsOf(boolean ancestorsOf) {
     this.ancestorsOf = ancestorsOf;
     return this;
   }
 
-
   public boolean isDescendantsOrSelfOf() {
     return descendantsOrSelfOf;
   }
-
 
   public Element setDescendantsOrSelfOf(boolean descendantsOrSelfOf) {
     this.descendantsOrSelfOf = descendantsOrSelfOf;
     return this;
   }
-
 
   public boolean isDescendantsOf() {
     return descendantsOf;
@@ -140,9 +134,4 @@ public abstract class Element extends IriLD implements Entailment {
     this.descendantsOf = descendantsOf;
     return this;
   }
-
-
-
-
-
 }

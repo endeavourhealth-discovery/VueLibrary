@@ -1,11 +1,11 @@
 package org.endeavourhealth.library.model.dto;
 
-import lombok.Data;
-
 import java.util.List;
+import lombok.Data;
 
 @Data
 public class UserDataDto {
+
   private String preset;
   private String primaryColor;
   private boolean darkMode;

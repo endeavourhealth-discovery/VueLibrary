@@ -7,12 +7,10 @@ import lombok.Getter;
 import org.endeavourhealth.library.errorhandling.UserNotFoundException;
 
 @Getter
-@Schema(
-  name = "Search request",
-  description = "Structure containing search request parameters and filters"
-)
+@Schema(name = "Search request", description = "Structure containing search request parameters and filters")
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class WorkflowRequest {
+
   private Integer page = 1;
   private Integer size = 25;
   private String userId;
@@ -40,5 +38,4 @@ public class WorkflowRequest {
     this.size = size;
     return this;
   }
-
 }

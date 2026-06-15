@@ -1,8 +1,7 @@
 package org.endeavourhealth.library.model.dto;
 
-import org.endeavourhealth.library.model.tripletree.TTIriRef;
-
 import java.util.List;
+import org.endeavourhealth.library.model.tripletree.TTIriRef;
 
 public class UnassignedEntity {
 
@@ -10,8 +9,7 @@ public class UnassignedEntity {
   private String name;
   private List<TTIriRef> suggestions;
 
-  public UnassignedEntity() {
-  }
+  public UnassignedEntity() {}
 
   public UnassignedEntity(String iri, String name, List<TTIriRef> suggestions) {
     this.iri = iri;

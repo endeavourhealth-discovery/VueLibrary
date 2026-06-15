@@ -6,6 +6,7 @@ import org.endeavourhealth.library.vocabulary.NAMESPACE;
 
 @Getter
 public class EditRequest {
+
   private TTEntity entity;
   private String hostUrl;
   private NAMESPACE namespace;
@@ -16,9 +17,7 @@ public class EditRequest {
     this.hostUrl = hostUrl;
   }
 
-  public EditRequest() {
-
-  }
+  public EditRequest() {}
 
   public EditRequest setEntity(TTEntity entity) {
     this.entity = entity;

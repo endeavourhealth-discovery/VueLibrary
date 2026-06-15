@@ -3,11 +3,11 @@ package org.endeavourhealth.library.model.tripletree;
 import com.fasterxml.jackson.annotation.JsonSetter;
 
 public class TTTuple {
+
   private TTIriRef predicate;
   private TTValue value;
 
-  public TTTuple() {
-  }
+  public TTTuple() {}
 
   public TTTuple(TTIriRef predicate, TTValue value) {
     this.predicate = predicate;

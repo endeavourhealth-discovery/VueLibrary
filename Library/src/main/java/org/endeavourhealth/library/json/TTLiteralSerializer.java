@@ -3,13 +3,13 @@ package org.endeavourhealth.library.json;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import java.io.IOException;
 import org.endeavourhealth.library.model.tripletree.TTContext;
 import org.endeavourhealth.library.model.tripletree.TTLiteral;
 import org.endeavourhealth.library.vocabulary.XSD;
 
-import java.io.IOException;
-
 public class TTLiteralSerializer extends StdSerializer<TTLiteral> {
+
   private transient TTNodeSerializerV2 helper;
 
   public TTLiteralSerializer() {
@@ -39,17 +39,13 @@ public class TTLiteralSerializer extends StdSerializer<TTLiteral> {
         case XSD.PATTERN -> {
           gen.writeStartObject();
           gen.writeStringField("value", literal.getValue());
-          gen.writeStringField("type", usePrefixes
-            ? helper.prefix(literal.getType().getIri())
-            : literal.getType().getIri()
-          );
+          gen.writeStringField("type", usePrefixes ? helper.prefix(literal.getType().getIri()) : literal.getType().getIri());
           gen.writeEndObject();
         }
         case null, default -> throw new IOException("Unhandled literal type [" + literal.getType().getIri() + "]");
       }
-
-    } else
-      // No type, assume string
-      gen.writeString(literal.getValue());
+    }
+    // No type, assume string
+    else gen.writeString(literal.getValue());
   }
 }

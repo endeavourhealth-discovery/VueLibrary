@@ -1,7 +1,6 @@
 package org.endeavourhealth.library.model.tripletree;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.io.Serializable;
 
 public interface TTValue extends Serializable {

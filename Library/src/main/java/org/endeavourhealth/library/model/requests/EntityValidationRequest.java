@@ -7,12 +7,12 @@ import org.endeavourhealth.library.vocabulary.VALIDATION;
 
 @Getter
 public class EntityValidationRequest {
+
   private TTEntity entity;
   private String validationIri;
   private GRAPH graph;
 
-  public EntityValidationRequest() {
-  }
+  public EntityValidationRequest() {}
 
   public EntityValidationRequest setEntity(TTEntity entity) {
     this.entity = entity;

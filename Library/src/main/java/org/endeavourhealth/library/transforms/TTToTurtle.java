@@ -1,17 +1,16 @@
 package org.endeavourhealth.library.transforms;
 
-import org.endeavourhealth.library.model.tripletree.*;
-
 import java.util.HashMap;
 import java.util.Map;
+import org.endeavourhealth.library.model.tripletree.*;
 
 /**
  * Transforms a document or entity in the Triple tree node based form to Turtle.
  * The default serializations of TT Classes is JSON-LD. Turtle provides a more easily readable format
  */
 
-
 public class TTToTurtle {
+
   private final Map<String, String> prefixes = new HashMap<>();
   private TTContext context;
   private StringBuilder turtle;
@@ -27,8 +26,7 @@ public class TTToTurtle {
     this.context = document.getContext();
     turtle = new StringBuilder();
     nl();
-    for (TTEntity entity : document.getEntities())
-      appendEntity(entity);
+    for (TTEntity entity : document.getEntities()) appendEntity(entity);
     turtle.append("\n");
 
     insertPrefixes();
@@ -43,7 +41,6 @@ public class TTToTurtle {
     return turtle.toString();
   }
 
-
   private void nl() {
     turtle.append("\n");
     if (level > 0) {
@@ -52,18 +49,15 @@ public class TTToTurtle {
   }
 
   private void insertPrefixes() {
-    if (prefixes == null)
-      return;
+    if (prefixes == null) return;
     for (Map.Entry<String, String> entry : prefixes.entrySet()) {
       turtle.insert(0, "prefix " + entry.getValue() + ": <" + entry.getKey() + "> .\n");
-
     }
   }
 
   public String transformEntity(TTEntity entity) {
     return transformEntity(entity, entity.getContext());
   }
-
 
   private void appendEntity(TTEntity entity) {
     level = 0;
@@ -76,7 +70,6 @@ public class TTToTurtle {
       append(" .");
       level = level - 3;
     }
-
   }
 
   private void setPredicateObjects(TTNode node) {
@@ -123,20 +116,16 @@ public class TTToTurtle {
   }
 
   private void setObject(TTValue value) {
-    if (value.isIriRef())
-      append(getShort(value.asIriRef().getIri()));
+    if (value.isIriRef()) append(getShort(value.asIriRef().getIri()));
     else if (value.isLiteral()) {
-      if (value.asLiteral().getType() == null)
-        append("\"" + value.asLiteral().getValue().replace("\"", "") + "\"");
+      if (value.asLiteral().getType() == null) append("\"" + value.asLiteral().getValue().replace("\"", "") + "\"");
       else {
         append("\"" + value.asLiteral().getValue().replace("\"", "") + "\"^^" + getShort(value.asLiteral().getType().getIri()));
-
       }
     } else {
       append("[");
       setPredicateObjects(value.asNode());
       append("]");
-
     }
   }
 
@@ -146,31 +135,23 @@ public class TTToTurtle {
   }
 
   private String getShort(String iri) {
-    if (prefixes == null)
-      return iri;
+    if (prefixes == null) return iri;
     if (iri.contains("#")) {
       int lnPos = iri.indexOf("#") + 1;
       String ns = iri.substring(0, lnPos);
       String ln = iri.substring(lnPos);
       String prefix = getPrefix(ns);
-      if (prefix != null)
-        return prefix + ":" + ln;
-      else
-        return iri;
-    } else
-      return iri;
+      if (prefix != null) return prefix + ":" + ln;
+      else return iri;
+    } else return iri;
   }
 
   private String getPrefix(String ns) {
-    if (prefixes.get(ns) != null)
-      return prefixes.get(ns);
+    if (prefixes.get(ns) != null) return prefixes.get(ns);
     String prefix = context.getPrefix(ns);
     if (prefix != null) {
       prefixes.put(ns, prefix);
       return prefix;
-    } else
-      return null;
+    } else return null;
   }
-
-
 }

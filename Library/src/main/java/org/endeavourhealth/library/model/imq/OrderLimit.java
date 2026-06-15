@@ -2,17 +2,17 @@ package org.endeavourhealth.library.model.imq;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
 import java.util.ArrayList;
 import java.util.List;
 
-
-@JsonPropertyOrder({"nodeVariable", "id", "count", "direction"})
+@JsonPropertyOrder({ "nodeVariable", "id", "count", "direction" })
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class OrderLimit {
+
   private List<OrderDirection> property;
   private int limit;
   private String description;
+
   public List<OrderDirection> getProperty() {
     return property;
   }
@@ -21,13 +21,12 @@ public class OrderLimit {
     this.property = property;
     return this;
   }
+
   public OrderLimit addProperty(OrderDirection property) {
-    if (this.property == null)
-      this.property = new ArrayList<>();
+    if (this.property == null) this.property = new ArrayList<>();
     this.property.add(property);
     return this;
   }
-
 
   public String getDescription() {
     return description;
@@ -38,7 +37,6 @@ public class OrderLimit {
     return this;
   }
 
-
   public int getLimit() {
     return limit;
   }
@@ -47,6 +45,4 @@ public class OrderLimit {
     this.limit = limit;
     return this;
   }
-
-
 }

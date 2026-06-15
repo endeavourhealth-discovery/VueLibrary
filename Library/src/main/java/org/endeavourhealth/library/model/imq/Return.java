@@ -4,16 +4,16 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import org.endeavourhealth.library.model.tripletree.TTIriRef;
-import org.endeavourhealth.library.vocabulary.VocabEnum;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import org.endeavourhealth.library.model.tripletree.TTIriRef;
+import org.endeavourhealth.library.vocabulary.VocabEnum;
 
-@JsonPropertyOrder({"node", "variable", "iri", "name", "function", "as"})
+@JsonPropertyOrder({ "node", "variable", "iri", "name", "function", "as" })
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class Return implements Returnable{
+public class Return implements Returnable {
+
   private String iri;
   private String nodeRef;
   private String name;
@@ -25,15 +25,18 @@ public class Return implements Returnable{
   private String as;
   private List<Return> returx;
   private TTIriRef dataType;
+
   @JsonProperty("case")
   private Case case_;
+
   private String description;
   private String value;
 
   public String getValue() {
     return value;
   }
-  public Return setValue(String value){
+
+  public Return setValue(String value) {
     this.value = value;
     return this;
   }
@@ -82,7 +85,6 @@ public class Return implements Returnable{
     return this;
   }
 
-
   @JsonProperty("return")
   public List<Return> getReturn() {
     return returx;
@@ -94,8 +96,7 @@ public class Return implements Returnable{
   }
 
   public Return addReturn(Return return_) {
-    if (this.returx == null)
-      this.returx = new ArrayList<>();
+    if (this.returx == null) this.returx = new ArrayList<>();
     this.returx.add(return_);
     return this;
   }
@@ -138,9 +139,6 @@ public class Return implements Returnable{
     return this;
   }
 
-
-
-
   public Return setIri(String iri) {
     this.iri = iri;
     return this;
@@ -155,7 +153,6 @@ public class Return implements Returnable{
     this.propertyRef = propertyRef;
     return this;
   }
-
 
   public Return setDescription(String description) {
     this.description = description;

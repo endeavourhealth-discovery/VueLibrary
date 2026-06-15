@@ -1,31 +1,31 @@
 package org.endeavourhealth.library.model.tripletree;
 
+import static org.endeavourhealth.library.model.tripletree.TTIriRef.iri;
+
 import com.fasterxml.jackson.annotation.JsonGetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSetter;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 import lombok.Getter;
 import org.endeavourhealth.library.json.TTNodeDeserializerV2;
 import org.endeavourhealth.library.json.TTNodeSerializerV2;
 import org.endeavourhealth.library.vocabulary.VocabEnum;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-
-import static org.endeavourhealth.library.model.tripletree.TTIriRef.iri;
-
 @JsonSerialize(using = TTNodeSerializerV2.class)
 @JsonDeserialize(using = TTNodeDeserializerV2.class)
 public class TTNode implements TTValue, Serializable {
+
   private Map<TTIriRef, TTArray> predicateValues = new HashMap<>();
+
   @Getter
   private String iri;
 
   public TTNode setIri(String iri) {
-    if (iri != null && iri.startsWith("null"))
-      System.err.println("Its here!!!!");
+    if (iri != null && iri.startsWith("null")) System.err.println("Its here!!!!");
 
     this.iri = iri;
     return this;
@@ -33,19 +33,15 @@ public class TTNode implements TTValue, Serializable {
 
   @JsonSetter
   public TTNode set(TTIriRef predicate, TTValue value) {
-    if (value == null)
-      predicateValues.remove(predicate);
-    else
-      predicateValues.put(predicate, new TTArray().add(value));
+    if (value == null) predicateValues.remove(predicate);
+    else predicateValues.put(predicate, new TTArray().add(value));
     return this;
   }
 
   @JsonIgnore
   public TTNode set(TTIriRef predicate, String value) {
-    if (value.startsWith("http:"))
-      this.set(predicate, iri(value));
-    else
-      this.set(predicate, TTLiteral.literal(value));
+    if (value.startsWith("http:")) this.set(predicate, iri(value));
+    else this.set(predicate, TTLiteral.literal(value));
     return this;
   }
 
@@ -84,7 +80,6 @@ public class TTNode implements TTValue, Serializable {
     this.set(predicate.asIri(), value);
     return this;
   }
-
 
   @JsonIgnore
   public TTNode set(String predicate, boolean value) {
@@ -161,10 +156,8 @@ public class TTNode implements TTValue, Serializable {
    */
 
   public TTNode addObject(TTIriRef predicate, TTValue object) {
-    if (this.get(predicate) == null)
-      this.set(predicate, new TTArray().add(object));
-    else
-      this.get(predicate).add(object);
+    if (this.get(predicate) == null) this.set(predicate, new TTArray().add(object));
+    else this.get(predicate).add(object);
     return this;
   }
 
@@ -176,10 +169,8 @@ public class TTNode implements TTValue, Serializable {
    */
 
   public TTNode addObject(TTIriRef predicate, String value) {
-    if (value.startsWith("http:"))
-      this.addObject(predicate, iri(value));
-    else
-      this.addObject(predicate, TTLiteral.literal(value));
+    if (value.startsWith("http:")) this.addObject(predicate, iri(value));
+    else this.addObject(predicate, TTLiteral.literal(value));
     return this;
   }
 
@@ -225,5 +216,4 @@ public class TTNode implements TTValue, Serializable {
     }
     return this;
   }
-
 }

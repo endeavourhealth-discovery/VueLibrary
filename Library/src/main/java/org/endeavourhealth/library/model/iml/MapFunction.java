@@ -3,18 +3,18 @@ package org.endeavourhealth.library.model.iml;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonSetter;
-import org.endeavourhealth.library.model.imq.Argument;
-import org.endeavourhealth.library.model.tripletree.TTIriRef;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
+import org.endeavourhealth.library.model.imq.Argument;
+import org.endeavourhealth.library.model.tripletree.TTIriRef;
 
-@JsonPropertyOrder({"iri", "name", "argument"})
+@JsonPropertyOrder({ "iri", "name", "argument" })
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class MapFunction extends TTIriRef {
+
   List<Argument> argument;
   private Map<String, String> conceptMap;
   private TTIriRef defaultValue;
@@ -44,8 +44,7 @@ public class MapFunction extends TTIriRef {
   }
 
   public MapFunction addToConceptMap(String from, String to) {
-    if (this.conceptMap == null)
-      this.conceptMap = new HashMap<>();
+    if (this.conceptMap == null) this.conceptMap = new HashMap<>();
     this.conceptMap.put(from, to);
     return this;
   }
@@ -66,8 +65,7 @@ public class MapFunction extends TTIriRef {
   }
 
   public MapFunction addArgument(Argument argument) {
-    if (this.argument == null)
-      this.argument = new ArrayList<>();
+    if (this.argument == null) this.argument = new ArrayList<>();
     this.argument.add(argument);
     return this;
   }
@@ -79,15 +77,12 @@ public class MapFunction extends TTIriRef {
     return this;
   }
 
-
   public Argument addArgument() {
-    if (this.argument == null)
-      this.argument = new ArrayList<>();
+    if (this.argument == null) this.argument = new ArrayList<>();
     Argument newArg = new Argument();
     this.argument.add(newArg);
     return newArg;
   }
-
 
   @JsonSetter
   public MapFunction setIri(TTIriRef iri) {

@@ -1,7 +1,7 @@
 package org.endeavourhealth.library.model.imq;
 
-
 public class ValueSource {
+
   private String parameter;
   private String iri;
   private String name;
@@ -16,7 +16,6 @@ public class ValueSource {
     this.propertyRef = propertyRef;
     return this;
   }
-
 
   public String getIri() {
     return iri;
@@ -45,8 +44,6 @@ public class ValueSource {
     return this;
   }
 
-
-
   public String getParameter() {
     return parameter;
   }
@@ -55,7 +52,4 @@ public class ValueSource {
     this.parameter = parameter;
     return this;
   }
-
-
-
 }

@@ -8,6 +8,7 @@ import org.endeavourhealth.library.vocabulary.GRAPH;
 @NoArgsConstructor
 @Getter
 public class MatchDisplayRequest {
+
   private Match match;
   private GRAPH graph;
 

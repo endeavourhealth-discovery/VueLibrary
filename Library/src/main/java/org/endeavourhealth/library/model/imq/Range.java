@@ -2,15 +2,13 @@ package org.endeavourhealth.library.model.imq;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
 import java.util.function.Consumer;
 
-
-@JsonPropertyOrder({"match", "from", "to"})
+@JsonPropertyOrder({ "match", "from", "to" })
 public class Range {
+
   private Value from;
   private Value to;
-
 
   @JsonProperty(required = true)
   public Value getFrom() {

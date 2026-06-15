@@ -1,14 +1,32 @@
 package org.endeavourhealth.library.model.imq;
 
 import com.fasterxml.jackson.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
 
-@JsonPropertyOrder({"notExists","ifTrue", "ifFalse", "name", "description", "nodeRef", "header", "typeOf", "is", "path", "and", "or", "not", "where", "return", "then", ""})
+@JsonPropertyOrder({
+  "notExists",
+  "ifTrue",
+  "ifFalse",
+  "name",
+  "description",
+  "nodeRef",
+  "header",
+  "typeOf",
+  "is",
+  "path",
+  "and",
+  "or",
+  "not",
+  "where",
+  "return",
+  "then",
+  ""
+})
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class Match extends IriLD implements HasPaths,Returnable {
+public class Match extends IriLD implements HasPaths, Returnable {
+
   private Node graph;
   private Where where;
   private String description;
@@ -44,45 +62,47 @@ public class Match extends IriLD implements HasPaths,Returnable {
   private Match then;
   private Having having;
 
-public List<Match> getAny() {
-  return any;
-}
+  public List<Match> getAny() {
+    return any;
+  }
 
-public Match setAny(List<Match> any) {
-  this.any = any;
-  return this;
-}
-public Match addAny(Match any) {
-  if (this.any == null)
-    this.any = new ArrayList<>();
-  this.any.add(any);
-  return this;
-}
-public Match any(Consumer<Match> builder) {
-  Match any = new Match();
-  addAny(any);
-  builder.accept(any);
-  return this;
-}
+  public Match setAny(List<Match> any) {
+    this.any = any;
+    return this;
+  }
+
+  public Match addAny(Match any) {
+    if (this.any == null) this.any = new ArrayList<>();
+    this.any.add(any);
+    return this;
+  }
+
+  public Match any(Consumer<Match> builder) {
+    Match any = new Match();
+    addAny(any);
+    builder.accept(any);
+    return this;
+  }
 
   public Having getHaving() {
     return having;
   }
+
   public Match setHaving(Having having) {
     this.having = having;
     return this;
   }
+
   public Match having(Consumer<Having> builder) {
     Having having = new Having();
     setHaving(having);
     return this;
   }
 
-
-
   public Match getThen() {
     return then;
   }
+
   public Match setThen(Match then) {
     this.then = then;
     return this;
@@ -94,7 +114,6 @@ public Match any(Consumer<Match> builder) {
     return this;
   }
 
-
   public boolean isDraft() {
     return draft;
   }
@@ -104,8 +123,6 @@ public Match any(Consumer<Match> builder) {
     return this;
   }
 
-
-
   public String getErrorMessage() {
     return errorMessage;
   }
@@ -114,7 +131,6 @@ public Match any(Consumer<Match> builder) {
     this.errorMessage = errorMessage;
     return this;
   }
-
 
   public boolean isNotExists() {
     return notExists;
@@ -131,11 +147,11 @@ public Match any(Consumer<Match> builder) {
     this.notExists = notExists;
     return this;
   }
+
   @JsonGetter
   public boolean notExists() {
     return notExists;
   }
-
 
   public Node getTypeOf() {
     return typeOf;
@@ -195,8 +211,6 @@ public Match any(Consumer<Match> builder) {
   public boolean isInverse() {
     return inverse;
   }
-
-
 
   public List<Match> getOr() {
     return or;
@@ -260,7 +274,6 @@ public Match any(Consumer<Match> builder) {
     return this;
   }
 
-
   public List<GroupBy> getGroupBy() {
     return groupBy;
   }
@@ -271,8 +284,7 @@ public Match any(Consumer<Match> builder) {
   }
 
   public Match addGroupBy(GroupBy group) {
-    if (this.groupBy == null)
-      this.groupBy = new ArrayList<>();
+    if (this.groupBy == null) this.groupBy = new ArrayList<>();
     this.groupBy.add(group);
     return this;
   }
@@ -284,13 +296,11 @@ public Match any(Consumer<Match> builder) {
     return this;
   }
 
-
   @JsonSetter
   public Match setIs(Node is) {
     this.is = is;
     return this;
   }
-
 
   public Match setLibraryItem(String libraryItem) {
     this.libraryItem = libraryItem;
@@ -323,7 +333,6 @@ public Match any(Consumer<Match> builder) {
     this.rule.add(rule);
     return this;
   }
-
 
   public Match setOr(List<Match> ors) {
     this.or = ors;
@@ -365,9 +374,6 @@ public Match any(Consumer<Match> builder) {
     return this;
   }
 
-
-
-
   public Match setBaseRule(boolean baseRule) {
     this.baseRule = baseRule;
     return this;
@@ -383,11 +389,6 @@ public Match any(Consumer<Match> builder) {
     return this;
   }
 
-
-
-
-
-
   public Match setIfTrue(RuleAction ifTrue) {
     this.ifTrue = ifTrue;
     return this;
@@ -397,7 +398,6 @@ public Match any(Consumer<Match> builder) {
     this.ifFalse = ifFalse;
     return this;
   }
-
 
   @JsonGetter
   public List<Return> getReturn() {
@@ -409,6 +409,7 @@ public Match any(Consumer<Match> builder) {
     this.returx = returns;
     return this;
   }
+
   public Match addReturn(Return returnx) {
     if (this.returx == null) {
       this.returx = new ArrayList<>();
@@ -441,7 +442,6 @@ public Match any(Consumer<Match> builder) {
     return this;
   }
 
-
   public Match setPath(List<Path> path) {
     this.path = path;
     return this;
@@ -462,15 +462,11 @@ public Match any(Consumer<Match> builder) {
     return this;
   }
 
-
   @Override
   public Match setIri(String iri) {
     super.setIri(iri);
     return this;
   }
-
-
-
 
   @JsonIgnore
   public Match is(Consumer<Node> builder) {
@@ -479,13 +475,11 @@ public Match any(Consumer<Match> builder) {
     return this;
   }
 
-
   @JsonSetter
   public Match setTypeOf(Node typeOf) {
     this.typeOf = typeOf;
     return this;
   }
-
 
   public boolean isOptional() {
     return optional;
@@ -505,7 +499,6 @@ public Match any(Consumer<Match> builder) {
     return this;
   }
 
-
   public Node getGraph() {
     return graph;
   }
@@ -515,24 +508,20 @@ public Match any(Consumer<Match> builder) {
     return this;
   }
 
-
   public Match setTypeOf(String type) {
     this.typeOf = new Node().setIri(type);
     return this;
   }
-
 
   public Match setName(String name) {
     this.name = name;
     return this;
   }
 
-
   public Match setDescription(String description) {
     this.description = description;
     return this;
   }
-
 
   public String getNode() {
     return node;

@@ -2,88 +2,83 @@
 
 package org.endeavourhealth.library.vocabulary;
 
+import static org.endeavourhealth.library.model.tripletree.TTIriRef.iri;
+
 import com.fasterxml.jackson.annotation.JsonValue;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 import org.eclipse.rdf4j.model.IRI;
 import org.eclipse.rdf4j.model.util.Values;
 import org.endeavourhealth.library.model.tripletree.TTIriRef;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
-import static org.endeavourhealth.library.model.tripletree.TTIriRef.iri;
-
 public enum ImportType implements VocabEnum {
+  SNOMED("snomed"),
+  SKIP_TCT("tct"),
+  SKIP_SEARCH("search"),
+  FHIR("fhir"),
+  SMARTLIFE("smartlifequery"),
+  SMARTLIFEINDICATOR("smartlifeindicators"),
+  QOF("qof"),
+  CORE("core"),
+  SINGLE_FILE("singlefile"),
+  BNF("bnf"),
+  ICD10("icd10"),
+  EMIS("emis"),
+  CPRD_MED("cprd"),
+  OPCS4("opcs4"),
+  TPP("tpp"),
+  ODS("ods"),
+  PRSB("prsb"),
+  KINGS_APEX("kingsapex"),
+  KINGS_WINPATH("kingswinpath"),
+  VISION("vision"),
+  BARTS_CERNER("barts"),
+  IM1("imv1"),
+  ENCOUNTERS("encounters"),
+  CONFIG("config"),
+  CEG("ceg"),
+  NHS_TFC("nhstfc"),
+  DELTAS("deltas"),
+  QUERY("corequery"),
+  QR("qcodegroups");
 
-    SNOMED("snomed"),
-    SKIP_TCT("tct"),
-    SKIP_SEARCH("search"),
-    FHIR("fhir"),
-    SMARTLIFE("smartlifequery"),
-    SMARTLIFEINDICATOR("smartlifeindicators"),
-    QOF("qof"),
-    CORE("core"),
-    SINGLE_FILE("singlefile"),
-    BNF("bnf"),
-    ICD10("icd10"),
-    EMIS("emis"),
-    CPRD_MED("cprd"),
-    OPCS4("opcs4"),
-    TPP("tpp"),
-    ODS("ods"),
-    PRSB("prsb"),
-    KINGS_APEX("kingsapex"),
-    KINGS_WINPATH("kingswinpath"),
-    VISION("vision"),
-    BARTS_CERNER("barts"),
-    IM1("imv1"),
-    ENCOUNTERS("encounters"),
-    CONFIG("config"),
-    CEG("ceg"),
-    NHS_TFC("nhstfc"),
-    DELTAS("deltas"),
-    QUERY("corequery"),
-    QR("qcodegroups"),
-    ;
+  private final String value;
 
-    private final String value;
+  ImportType(final String value) {
+    this.value = value;
+  }
 
-    ImportType(final String value) {
-        this.value = value;
-    }
+  ImportType(final VocabEnum value) {
+    this.value = value.toString();
+  }
 
-    ImportType(final VocabEnum value) {
-        this.value = value.toString();
-    }
+  @JsonValue
+  @Override
+  public String toString() {
+    return value;
+  }
 
-    @JsonValue
-    @Override
-    public String toString() {
-        return value;
-    }
+  public TTIriRef asIri() {
+    return iri(
+      value,
+      Arrays.stream(this.name().split("_"))
+        .map(i -> i.substring(0, 1).toUpperCase() + i.substring(1).toLowerCase())
+        .collect(Collectors.joining(" "))
+    );
+  }
 
-    public TTIriRef asIri() {
-      return iri(
-        value,
-        Arrays.stream(this.name().split("_"))
-          .map(i -> i.substring(0, 1).toUpperCase() + i.substring(1).toLowerCase())
-          .collect(Collectors.joining(" "))
-      );
-    }
+  public IRI asDbIri() {
+    return Values.iri(value);
+  }
 
-    public IRI asDbIri() {
-      return Values.iri(value);
-    }
+  public static ImportType from(String text) {
+    if (text == null) throw new IllegalArgumentException("no text specified");
 
-    public static ImportType from(String text) {
-      if (text == null)
-        throw new IllegalArgumentException("no text specified");
-
-      for (ImportType b : ImportType.values()) {
-        if (b.value.equals(text)) {
-          return b;
-        }
+    for (ImportType b : ImportType.values()) {
+      if (b.value.equals(text)) {
+        return b;
       }
-      throw new IllegalArgumentException("no enums match text specified");
     }
-
+    throw new IllegalArgumentException("no enums match text specified");
+  }
 }

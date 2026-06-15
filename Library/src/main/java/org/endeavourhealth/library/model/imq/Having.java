@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.function.Consumer;
 
 public class Having {
+
   private Aggregate function;
   private String identifier;
   private Range range;
@@ -17,55 +18,64 @@ public class Having {
   public List<Having> getAnd() {
     return and;
   }
+
   public Having setAnd(List<Having> and) {
     this.and = and;
     return this;
   }
+
   public List<Having> getOr() {
     return or;
   }
+
   public Having setOr(List<Having> or) {
     this.or = or;
     return this;
   }
+
   public boolean isNot() {
     return not;
   }
+
   public Having setNot(boolean not) {
     this.not = not;
     return this;
   }
-  public Having addAnd(Having having){
-    if(this.and == null){
+
+  public Having addAnd(Having having) {
+    if (this.and == null) {
       this.and = new ArrayList<>();
     }
     this.and.add(having);
     return this;
   }
- public Having addOr(Having having){
-    if(this.or == null){
-     this.or = new ArrayList<>();
+
+  public Having addOr(Having having) {
+    if (this.or == null) {
+      this.or = new ArrayList<>();
     }
     this.or.add(having);
     return this;
   }
 
-  public Having and(Consumer<Having> builder){
+  public Having and(Consumer<Having> builder) {
     Having and = new Having();
     addAnd(and);
     builder.accept(and);
     return this;
   }
 
-  public Having or(Consumer<Having> builder){
+  public Having or(Consumer<Having> builder) {
     Having or = new Having();
     addOr(or);
     builder.accept(or);
     return this;
   }
+
   public String getIdentifier() {
     return identifier;
   }
+
   public Having setIdentifier(String identifier) {
     this.identifier = identifier;
     return this;

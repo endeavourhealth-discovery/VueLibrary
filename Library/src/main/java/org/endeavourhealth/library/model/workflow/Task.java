@@ -1,14 +1,13 @@
 package org.endeavourhealth.library.model.workflow;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Getter;
 import org.endeavourhealth.library.model.tripletree.TTIriRef;
 import org.endeavourhealth.library.model.workflow.task.TaskHistory;
 import org.endeavourhealth.library.model.workflow.task.TaskState;
 import org.endeavourhealth.library.model.workflow.task.TaskType;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 public class Task {
@@ -22,7 +21,16 @@ public class Task {
   private List<TaskHistory> history;
   private String hostUrl;
 
-  public Task(TTIriRef id, String createdBy, TaskType type, TaskState state, String assignedTo, LocalDateTime dateCreated, List<TaskHistory> history, String hostUrl) {
+  public Task(
+    TTIriRef id,
+    String createdBy,
+    TaskType type,
+    TaskState state,
+    String assignedTo,
+    LocalDateTime dateCreated,
+    List<TaskHistory> history,
+    String hostUrl
+  ) {
     this.id = id;
     this.createdBy = createdBy;
     this.type = type;
@@ -33,8 +41,7 @@ public class Task {
     this.hostUrl = hostUrl;
   }
 
-  public Task() {
-  }
+  public Task() {}
 
   public Task setId(TTIriRef id) {
     this.id = id;

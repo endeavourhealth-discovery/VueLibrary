@@ -3,6 +3,7 @@ package org.endeavourhealth.library.model.search;
 import org.endeavourhealth.library.model.tripletree.TTIriRef;
 
 public class SearchBinding {
+
   private TTIriRef path;
   private TTIriRef node;
 

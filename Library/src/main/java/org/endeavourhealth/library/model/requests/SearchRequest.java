@@ -3,19 +3,16 @@ package org.endeavourhealth.library.model.requests;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.util.*;
+import java.util.function.Consumer;
 import org.endeavourhealth.library.model.search.Filter;
 import org.endeavourhealth.library.model.search.OrderBy;
 import org.endeavourhealth.library.model.search.SearchBinding;
 
-import java.util.*;
-import java.util.function.Consumer;
-
-@Schema(
-  name = "Search request",
-  description = "Structure containing search request parameters and filters"
-)
+@Schema(name = "Search request", description = "Structure containing search request parameters and filters")
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
 public class SearchRequest {
+
   private String termFilter;
   private String index = System.getenv("OPENSEARCH_INDEX") == null ? "concept" : System.getenv("OPENSEARCH_INDEX");
   private List<String> statusFilter = new ArrayList<>();
@@ -60,12 +57,10 @@ public class SearchRequest {
   }
 
   public SearchRequest addFilter(Filter orderBy) {
-    if (this.filter == null)
-      this.filter = new ArrayList<>();
+    if (this.filter == null) this.filter = new ArrayList<>();
     this.filter.add(orderBy);
     return this;
   }
-
 
   public List<OrderBy> getOrderBy() {
     return orderBy;
@@ -77,8 +72,7 @@ public class SearchRequest {
   }
 
   public SearchRequest addOrderBy(OrderBy orderBy) {
-    if (this.orderBy == null)
-      this.orderBy = new ArrayList<>();
+    if (this.orderBy == null) this.orderBy = new ArrayList<>();
     this.orderBy.add(orderBy);
     return this;
   }
@@ -99,9 +93,11 @@ public class SearchRequest {
     return this;
   }
 
-  @Schema(name = "field selections",
+  @Schema(
+    name = "field selections",
     description = "list of fields or property paths from search result summary to return ",
-    example = "name, iri, entityType.iri")
+    example = "name, iri, entityType.iri"
+  )
   public List<String> getSelect() {
     return select;
   }
@@ -117,9 +113,7 @@ public class SearchRequest {
     return this;
   }
 
-  @Schema(name = "is a  filter",
-    description = "List of IRIs that must be supertypes of the matches",
-    example = "Encounter record")
+  @Schema(name = "is a  filter", description = "List of IRIs that must be supertypes of the matches", example = "Encounter record")
   public List<String> getIsA() {
     return isA;
   }
@@ -129,9 +123,7 @@ public class SearchRequest {
     return this;
   }
 
-  @Schema(name = "member of filter",
-    description = "List of set IRIs that the match must be a member of",
-    example = "Encounter record")
+  @Schema(name = "member of filter", description = "List of set IRIs that the match must be a member of", example = "Encounter record")
   public List<String> getMemberOf() {
     return memberOf;
   }
@@ -141,9 +133,7 @@ public class SearchRequest {
     return this;
   }
 
-  @Schema(name = "Term filter",
-    description = "Plain text, space separated list of terms",
-    example = "Encounter record")
+  @Schema(name = "Term filter", description = "Plain text, space separated list of terms", example = "Encounter record")
   public String getTermFilter() {
     return termFilter;
   }
@@ -153,7 +143,8 @@ public class SearchRequest {
     return this;
   }
 
-  @Schema(name = "Status filter",
+  @Schema(
+    name = "Status filter",
     description = "List of entity status IRI's",
     allowableValues = "http://endhealth.info/im#Draft, http://endhealth.info/im#Active, http://endhealth.info/im#Inactive",
     example = "['http://endhealth.info/im#Draft', 'http://endhealth.info/im#Active']"
@@ -167,9 +158,11 @@ public class SearchRequest {
     return this;
   }
 
-  @Schema(name = "Type filter",
+  @Schema(
+    name = "Type filter",
     description = "List of entity type IRI's",
-    example = "['http://www.w3.org/2002/07/owl#Class', 'http://endhealth.info/im#RecordType']")
+    example = "['http://www.w3.org/2002/07/owl#Class', 'http://endhealth.info/im#RecordType']"
+  )
   public List<String> getTypeFilter() {
     return typeFilter;
   }
@@ -180,15 +173,16 @@ public class SearchRequest {
   }
 
   public SearchRequest addType(String type) {
-    if (this.getTypeFilter() == null)
-      this.setTypeFilter(new ArrayList<>());
+    if (this.getTypeFilter() == null) this.setTypeFilter(new ArrayList<>());
     this.getTypeFilter().add(type);
     return this;
   }
 
-  @Schema(name = "Code scheme filter",
+  @Schema(
+    name = "Code scheme filter",
     description = "List of code scheme IRI's",
-    example = "['http://endhealth.info/im#SnomedCodeScheme', 'http://endhealth.info/im#DiscoveryCodeScheme']")
+    example = "['http://endhealth.info/im#SnomedCodeScheme', 'http://endhealth.info/im#DiscoveryCodeScheme']"
+  )
   public List<String> getSchemeFilter() {
     return schemeFilter;
   }
@@ -198,9 +192,11 @@ public class SearchRequest {
     return this;
   }
 
-  @Schema(name = "Binding filter",
+  @Schema(
+    name = "Binding filter",
     description = "List of binding node and path IRI's",
-    example = "[ { node: 'http://endhealth.info/im#Procedure', path: 'http://endhealth.info/im#concept' }]")
+    example = "[ { node: 'http://endhealth.info/im#Procedure', path: 'http://endhealth.info/im#concept' }]"
+  )
   public List<SearchBinding> getBindingFilter() {
     return bindingFilter;
   }
@@ -210,9 +206,11 @@ public class SearchRequest {
     return this;
   }
 
-  @Schema(name = "SetModel inheritance filter",
+  @Schema(
+    name = "SetModel inheritance filter",
     description = "Marks the results if they are descendants of any of these entities, but does not filter by them",
-    example = "['http://endhealth.info/im#Encounter']")
+    example = "['http://endhealth.info/im#Encounter']"
+  )
   public List<String> getMarkIfDescendentOf() {
     return markIfDescendentOf;
   }
@@ -222,9 +220,7 @@ public class SearchRequest {
     return this;
   }
 
-  @Schema(name = "Search result page number",
-    description = "The search result page number to retrieve",
-    example = "1")
+  @Schema(name = "Search result page number", description = "The search result page number to retrieve", example = "1")
   public int getPage() {
     return page;
   }
@@ -234,9 +230,7 @@ public class SearchRequest {
     return this;
   }
 
-  @Schema(name = "Search result page size",
-    description = "The number of results to retrieve per page",
-    example = "15")
+  @Schema(name = "Search result page size", description = "The number of results to retrieve per page", example = "15")
   public int getSize() {
     return size;
   }
@@ -254,5 +248,4 @@ public class SearchRequest {
     this.index = index;
     return this;
   }
-
 }

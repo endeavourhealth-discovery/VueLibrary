@@ -1,26 +1,30 @@
 package org.endeavourhealth.library.model.iml;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Getter;
 import org.endeavourhealth.library.model.imq.QueryEntity;
 import org.endeavourhealth.library.model.tripletree.TTContext;
 import org.endeavourhealth.library.transforms.TTManager;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * A document containing various instance entities conforming to data model shapes of various kinds
  */
-@JsonPropertyOrder({"context", "query"})
+@JsonPropertyOrder({ "context", "query" })
 public class ModelDocument {
+
   @Getter
   private TTContext context;
+
   @Getter
   private List<Entity> folder;
+
   @Getter
   private List<ConceptSet> conceptSet;
+
   private List<MapFunction> functionClause;
+
   @Getter
   private List<QueryEntity> query;
 
@@ -39,8 +43,7 @@ public class ModelDocument {
   }
 
   public ModelDocument addQuery(QueryEntity query) {
-    if (this.query == null)
-      this.query = new ArrayList<>();
+    if (this.query == null) this.query = new ArrayList<>();
     this.query.add(query);
     return this;
   }
@@ -51,8 +54,7 @@ public class ModelDocument {
   }
 
   public ModelDocument addFolder(Entity folder) {
-    if (this.folder == null)
-      this.folder = new ArrayList<>();
+    if (this.folder == null) this.folder = new ArrayList<>();
     this.folder.add(folder);
     return this;
   }
@@ -63,8 +65,7 @@ public class ModelDocument {
   }
 
   public ModelDocument addConceptSet(ConceptSet set) {
-    if (this.conceptSet == null)
-      this.conceptSet = new ArrayList<>();
+    if (this.conceptSet == null) this.conceptSet = new ArrayList<>();
     this.conceptSet.add(set);
     return this;
   }
@@ -79,8 +80,7 @@ public class ModelDocument {
   }
 
   public ModelDocument addFunction(MapFunction functionClause) {
-    if (this.functionClause == null)
-      this.functionClause = new ArrayList<>();
+    if (this.functionClause == null) this.functionClause = new ArrayList<>();
     this.functionClause.add(functionClause);
     return this;
   }

@@ -3,12 +3,11 @@ package org.endeavourhealth.library.json;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import java.io.IOException;
 import org.endeavourhealth.library.model.tripletree.TTContext;
 import org.endeavourhealth.library.model.tripletree.TTDocument;
 import org.endeavourhealth.library.model.tripletree.TTEntity;
 import org.endeavourhealth.library.model.tripletree.TTIriRef;
-
-import java.io.IOException;
 
 /**
  * JSON LD- Serializer for TTDocument (triple tree node with collection of entities)
@@ -34,8 +33,7 @@ public class TTDocumentSerializer extends StdSerializer<TTDocument> {
     gen.writeFieldName(fieldName);
     gen.writeStartObject();
     gen.writeStringField("iri", helper.prefix(ref.getIri()));
-    if (ref.getName() != null && !ref.getName().isEmpty())
-      gen.writeStringField("name", ref.getName());
+    if (ref.getName() != null && !ref.getName().isEmpty()) gen.writeStringField("name", ref.getName());
     gen.writeEndObject();
   }
 
@@ -44,8 +42,7 @@ public class TTDocumentSerializer extends StdSerializer<TTDocument> {
       gen.writeArrayFieldStart("entities");
       for (TTEntity entity : document.getEntities()) {
         gen.writeStartObject();
-        if (entity.getIri() != null)
-          gen.writeStringField("iri", helper.prefix(entity.getIri()));
+        if (entity.getIri() != null) gen.writeStringField("iri", helper.prefix(entity.getIri()));
         if (entity.getCrud() != null) {
           outputIri(gen, "crud", entity.getCrud(), helper);
         }
@@ -67,9 +64,6 @@ public class TTDocumentSerializer extends StdSerializer<TTDocument> {
     processCrud(document, gen, helper);
     processEntities(document, gen, prov, helper);
 
-
     gen.writeEndObject();
   }
-
 }
-

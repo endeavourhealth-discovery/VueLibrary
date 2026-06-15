@@ -1,11 +1,11 @@
 package org.endeavourhealth.library.model.iml;
 
-import org.endeavourhealth.library.model.tripletree.TTIriRef;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.endeavourhealth.library.model.tripletree.TTIriRef;
 
 public class UIProperty {
+
   private String iri;
   private String name;
   private String propertyType;
@@ -22,8 +22,7 @@ public class UIProperty {
   private List<TTIriRef> qualifierOptions;
   private Integer setMemberCount;
 
-  public UIProperty() {
-  }
+  public UIProperty() {}
 
   public String getIri() {
     return iri;

@@ -2,12 +2,12 @@ package org.endeavourhealth.library.json;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import lombok.Getter;
-
 import java.util.Map;
+import lombok.Getter;
 
 @Getter
 public class JsonLDMapper extends ObjectMapper {
+
   private Map<String, String> iriPrefixMap;
 
   public JsonLDMapper() {
@@ -20,6 +20,4 @@ public class JsonLDMapper extends ObjectMapper {
     this.iriPrefixMap = iriPrefixMap;
     return this;
   }
-
-
 }

@@ -1,11 +1,11 @@
 package org.endeavourhealth.library.model.set;
 
+import java.util.Set;
 import org.endeavourhealth.library.model.tripletree.TTArray;
 import org.endeavourhealth.library.model.tripletree.TTIriRef;
 
-import java.util.Set;
-
 public class SetAsObject {
+
   private String iri;
   private String name;
   private TTArray included;
@@ -18,8 +18,7 @@ public class SetAsObject {
     this.subsets = subsets;
   }
 
-  public SetAsObject() {
-  }
+  public SetAsObject() {}
 
   public TTArray getIncluded() {
     return included;

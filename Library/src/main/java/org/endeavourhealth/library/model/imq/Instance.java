@@ -2,7 +2,8 @@ package org.endeavourhealth.library.model.imq;
 
 import org.endeavourhealth.library.model.tripletree.TTIriRef;
 
-public class Instance extends IriLD{
+public class Instance extends IriLD {
+
   private TTIriRef entailment;
 
   public TTIriRef getEntailment() {

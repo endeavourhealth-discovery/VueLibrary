@@ -1,10 +1,10 @@
 package org.endeavourhealth.library.model.imq;
 
+import java.util.function.Consumer;
 import org.endeavourhealth.library.model.tripletree.TTIriRef;
 
-import java.util.function.Consumer;
-
 public class Compare {
+
   private ValueSource left;
   private ValueSource right;
   private TTIriRef units;
@@ -19,7 +19,7 @@ public class Compare {
   }
 
   public Compare left(Consumer<ValueSource> builder) {
-    this.left= new ValueSource();
+    this.left = new ValueSource();
     builder.accept(this.left);
     return this;
   }
@@ -34,7 +34,7 @@ public class Compare {
   }
 
   public Compare right(Consumer<ValueSource> builder) {
-    this.right= new ValueSource();
+    this.right = new ValueSource();
     builder.accept(this.right);
     return this;
   }

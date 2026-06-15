@@ -1,16 +1,15 @@
 package org.endeavourhealth.library.model.imq;
 
-import org.endeavourhealth.library.model.tripletree.TTIriRef;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;
+import org.endeavourhealth.library.model.tripletree.TTIriRef;
 
 public class Update extends TTIriRef {
+
   private String description;
   private List<Match> match;
   private List<Delete> delete;
-
 
   public Update setName(String name) {
     super.setName(name);
@@ -32,8 +31,7 @@ public class Update extends TTIriRef {
   }
 
   public Update addMatch(Match match) {
-    if (this.match == null)
-      this.match = new ArrayList<>();
+    if (this.match == null) this.match = new ArrayList<>();
     this.match.add(match);
     return this;
   }
@@ -64,8 +62,7 @@ public class Update extends TTIriRef {
   }
 
   public Update addDelete(Delete delete) {
-    if (this.delete == null)
-      this.delete = new ArrayList<>();
+    if (this.delete == null) this.delete = new ArrayList<>();
     this.delete.add(delete);
     return this;
   }

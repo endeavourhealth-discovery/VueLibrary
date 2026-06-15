@@ -2,27 +2,25 @@ package org.endeavourhealth.library.model.tripletree;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import org.endeavourhealth.library.json.TTArrayDeserializer;
-import org.endeavourhealth.library.json.TTArraySerializer;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.stream.Stream;
+import org.endeavourhealth.library.json.TTArrayDeserializer;
+import org.endeavourhealth.library.json.TTArraySerializer;
 
 @JsonSerialize(using = TTArraySerializer.class)
 @JsonDeserialize(using = TTArrayDeserializer.class)
 public class TTArray implements Serializable {
+
   private LinkedHashSet<TTValue> elements = new LinkedHashSet<>();
   private Boolean isList;
 
   public TTArray add(TTValue value) {
-    if (elements != null && elements.contains(value))
-      return this;
+    if (elements != null && elements.contains(value)) return this;
 
-    if (elements == null)
-      elements = new LinkedHashSet<>();
+    if (elements == null) elements = new LinkedHashSet<>();
 
     elements.add(value);
 
@@ -107,11 +105,9 @@ public class TTArray implements Serializable {
   public boolean equals(Object object) {
     if (getElements().size() == 1) {
       if (!(object instanceof TTArray)) {
-        if (getElements().getFirst().equals(object))
-          return true;
+        if (getElements().getFirst().equals(object)) return true;
       }
     }
     return super.equals(object);
   }
-
 }

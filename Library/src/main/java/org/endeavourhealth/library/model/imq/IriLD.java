@@ -2,14 +2,13 @@ package org.endeavourhealth.library.model.imq;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import java.util.Objects;
 import org.endeavourhealth.library.vocabulary.NAMESPACE;
 
-import java.util.Objects;
-
-
 @JsonInclude(JsonInclude.Include.NON_DEFAULT)
-@JsonPropertyOrder({"iri", "qualifier", "name", "description"})
+@JsonPropertyOrder({ "iri", "qualifier", "name", "description" })
 public class IriLD {
+
   private String iri;
   private String name;
   private String description;
@@ -46,8 +45,7 @@ public class IriLD {
   public boolean equals(Object o) {
     if (this == o) return true;
     if (!(o instanceof IriLD ttIriRef)) return false;
-    if (ttIriRef.iri == null || iri == null)
-      return false;
+    if (ttIriRef.iri == null || iri == null) return false;
     return iri.equals(ttIriRef.iri);
   }
 

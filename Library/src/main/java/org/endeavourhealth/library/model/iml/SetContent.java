@@ -2,8 +2,8 @@ package org.endeavourhealth.library.model.iml;
 
 import java.util.Set;
 
-
 public class SetContent {
+
   private String name;
   private String description;
   private String status;

@@ -1,11 +1,11 @@
 package org.endeavourhealth.library.model.iml;
 
-import org.endeavourhealth.library.model.tripletree.TTIriRef;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.endeavourhealth.library.model.tripletree.TTIriRef;
 
 public class ValueTemplate extends Entity {
+
   private String parameter;
   private Integer order;
   private String label;
@@ -47,7 +47,6 @@ public class ValueTemplate extends Entity {
     this.valueOption.add(valueOption);
     return this;
   }
-
 
   public Integer getOrder() {
     return order;
