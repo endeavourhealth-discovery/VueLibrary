@@ -20,7 +20,7 @@ To ensure smooth development without breaking existing code/builds, these steps 
 2. Bump the version in [Typescript](./package.json) to match
 3. Run the node task `pnpmn build`
 
-The pnpm build will automatically perform the java build, typescript generation and publishing to local maven
+The pnpm build will perform the java build, typescript generation and publishing to local maven (and linked npm package once setup)
 
 ### Java Project (e.g. IMAPI)
 
@@ -46,7 +46,7 @@ Once you're changes are complete and all code builds locally
 
 1. Unlink VueLibrary from your local copy `pnpm unlink`
 2. Commit & Push the VueLibrary changes
-    * The CI/CD process will build the changes and push the new versions of the Java and node libraries to the repository
+    * The CI/CD process will build the changes and push the new versions of the Java jar and npm package to the repository
 2. Wait for the VueLibrary build to build successfully
 3. Commit & Push your project changes
     * The CI/CD process will use the new packages from the repository
