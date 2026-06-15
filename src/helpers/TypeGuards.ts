@@ -1,5 +1,5 @@
+import { BugReport, PropertyShape, TTIriRef, Task } from "../interfaces/AutoGen";
 import { TTBundle } from "../interfaces/ExtendedAutoGen";
-import { PropertyShape, TTIriRef, Task, BugReport } from "../interfaces/AutoGen";
 import { isObjectHasKeys } from "./DataTypeCheckers";
 
 export function isTTIriRef(data: unknown): data is TTIriRef {

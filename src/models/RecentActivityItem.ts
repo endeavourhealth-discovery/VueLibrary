@@ -1,20 +1,9 @@
-import {
-  array,
-  optional,
-  date,
-  object,
-  preprocess,
-  type output,
-  string,
-} from "zod/v4";
+import { z } from "zod";
 
-export const RecentActivityItemSchema = object({
-  iri: string(),
-  dateTime: preprocess(
-    (val) => (typeof val === "number" ? new Date(val) : val),
-    date(),
-  ),
-  action: string().prefault(""),
+export const RecentActivityItemSchema = z.object({
+  iri: z.string(),
+  dateTime: z.coerce.date(),
+  action: z.string().prefault("")
 });
 
-export type RecentActivityItem = output<typeof RecentActivityItemSchema>;
+export type RecentActivityItem = z.output<typeof RecentActivityItemSchema>;

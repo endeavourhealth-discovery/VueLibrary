@@ -20,7 +20,8 @@ enum Resource {
   QUERY_RESULTS = "QUERY_RESULTS",
   PAGE_ADMIN = "PAGE_ADMIN",
   PAGE_CREATOR = "PAGE_CREATOR",
-  PAGE_EDITOR = "PAGE_EDITOR"
+  PAGE_EDITOR = "PAGE_EDITOR",
+  UPRN = "UPRN"
 }
 
 export default Resource;

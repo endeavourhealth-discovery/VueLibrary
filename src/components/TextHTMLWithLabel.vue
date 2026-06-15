@@ -7,6 +7,7 @@
 
 <script setup lang="ts">
 import { onMounted, ref, watch } from "vue";
+
 import { isEqual } from "lodash-es";
 
 interface Props {

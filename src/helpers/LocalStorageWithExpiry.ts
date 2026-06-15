@@ -1,22 +1,25 @@
-import { GenericObject } from "../interfaces";
 import { isObjectHasKeys } from "../helpers";
+import { GenericObject } from "../interfaces";
+
+const isClient = () => typeof window !== "undefined" && typeof localStorage != "undefined";
 
 export const localStorageWithExpiry = {
   getItem(key: string) {
-    const lsItem = window.localStorage.getItem(key);
+    if (!isClient()) return null;
+    const lsItem = localStorage.getItem(key);
     if (lsItem) {
       try {
         const result = JSON.parse(lsItem);
         if (isObjectHasKeys(result, ["data", "expireTime"])) {
           if (result.expireTime <= Date.now()) {
-            window.localStorage.removeItem(key);
+            localStorage.removeItem(key);
             return null;
           }
           return result.data;
         }
       } catch (e) {
         console.log(`Error getting item from local storage: ${e}. Removing item wth key: ${key}.`);
-        window.localStorage.removeItem(key);
+        localStorage.removeItem(key);
       }
       return null;
     }
@@ -24,16 +27,19 @@ export const localStorageWithExpiry = {
   },
   setItem(key: string, data: any, maxAge: number = 30 * 24 * 60 * 60 * 1000) {
     // default maxAge 30 days
+    if (!isClient()) return;
     const result: { data: GenericObject; expireTime: number } = {
       data: data,
       expireTime: Date.now() + maxAge
     };
-    window.localStorage.setItem(key, JSON.stringify(result));
+    localStorage.setItem(key, JSON.stringify(result));
   },
   removeItem(key: string) {
-    window.localStorage.removeItem(key);
+    if (!isClient()) return;
+    localStorage.removeItem(key);
   },
   clear() {
-    window.localStorage.clear();
+    if (!isClient()) return;
+    localStorage.clear();
   }
 };

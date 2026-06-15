@@ -1,29 +1,32 @@
-import { boolean, object, string, uuid, array, email, url, enum as zenum, type output, literal } from "zod/v4";
-import { RecentActivityItemSchema } from "./RecentActivityItem";
-import { NamespacePermissionSchema } from "./NamespacePermission";
-import { FontSize, NAMESPACE, PrimeVueColors, PrimeVuePresetThemes } from "../enums";
+import { z } from "zod";
 
-export const UserSchema = object({
-  id: string(),
-  type: string(),
-  username: string(),
-  displayName: string().optional(),
-  email: email().or(literal("")),
-  avatar: url().or(literal("")),
-  roles: array(string()).prefault([]),
-  theme: zenum(PrimeVuePresetThemes).prefault(PrimeVuePresetThemes.LARA),
-  primaryColor: zenum(PrimeVueColors).prefault(PrimeVueColors.EMERALD),
-  surfaceColor: zenum(PrimeVueColors).prefault(PrimeVueColors.SLATE),
-  darkMode: boolean().prefault(false),
-  fontSize: zenum(FontSize).prefault(FontSize.MEDIUM),
-  favourites: array(string()).prefault([]),
-  recentActivity: array(RecentActivityItemSchema).prefault([]),
-  organisations: array(string()).prefault([]),
-  namespaces: array(NamespacePermissionSchema).prefault([])
+import { FontSize, NAMESPACE, PrimeVueColors, PrimeVuePresetThemes } from "../enums";
+import { NamespacePermissionSchema } from "./NamespacePermission";
+import { RecentActivityItemSchema } from "./RecentActivityItem";
+
+export const UserSchema = z.object({
+  id: z.string(),
+  type: z.string(),
+  username: z.string(),
+  displayName: z.string().optional(),
+  email: z.email().or(z.literal("")),
+  avatar: z.url().or(z.literal("")),
+  roles: z.array(z.string()).prefault([]),
+  theme: z.enum(PrimeVuePresetThemes).prefault(PrimeVuePresetThemes.LARA),
+  primaryColor: z.enum(PrimeVueColors).prefault(PrimeVueColors.EMERALD),
+  surfaceColor: z.enum(PrimeVueColors).prefault(PrimeVueColors.SLATE),
+  darkMode: z.boolean().prefault(false),
+  fontSize: z.enum(FontSize).prefault(FontSize.MEDIUM),
+  favourites: z.array(z.string()).prefault([]),
+  recentActivity: z.array(RecentActivityItemSchema).prefault([]),
+  organisations: z.array(z.string()).prefault([]),
+  namespaces: z.array(NamespacePermissionSchema).prefault([])
 });
 
-export type User = output<typeof UserSchema>;
+export type User = z.output<typeof UserSchema>;
 
 export const hasRole = (user: User, role: string) => user.roles?.includes(role);
+
+export const hasRoles = (user: User, roles: string[]) => roles.every(role => user.roles?.includes(role));
 
 export const hasNamespace = (user: User, namespace: NAMESPACE) => user.namespaces.some(n => n.iri === namespace);

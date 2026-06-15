@@ -1,7 +1,9 @@
+import { Ref } from "vue";
+
+import { useToast } from "primevue/usetoast";
+
 import { ToastSeverity } from "../enums";
 import { ToastOptions } from "../models";
-import { useToast } from "primevue/usetoast";
-import { Ref } from "vue";
 
 export function useCopyToClipboard(valueToCopy?: Ref<string>, onCopyMessage?: string, onErrorMessage?: string) {
   const toast = useToast();

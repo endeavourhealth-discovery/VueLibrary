@@ -1,12 +1,17 @@
 {
-  "name": "vue-library",
-  "version": "0.0.0",
+  "name": "@endeavour/vue-library",
+  "version": "1.0.0",
   "type": "module",
+  "packageManager": "pnpm@10.5.2",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build",
+    "build": ".\\gradlew publishToMavenLocal && vue-tsc -b && vite build",
     "preview": "vite preview",
-    "test:unit": "tsc -p tsconfig.tests.json && vitest"
+    "test:unit": "tsc -p tsconfig.tests.json && vitest",
+    "format": "prettier --write \"{src,tests,Library/src}/**/*.{js,ts,vue,json,css,scss,md,java}\"",
+    "format:check": "prettier --list-different \"{src,tests}/**/*.{js,ts,vue,json,css,scss,md}\"",
+    "husky": "node -e \"try{require('husky').install()}catch(e){}\"",
+    "prepare": "pnpm build && pnpm format"
   },
   "dependencies": {
     "@vueuse/core": "14.2.1",
@@ -21,13 +26,18 @@
   "devDependencies": {
     "@originjs/vite-plugin-commonjs": "1.0.3",
     "@pinia/testing": "1.0.3",
+    "@trivago/prettier-plugin-sort-imports": "6.0.2",
     "@types/d3": "7.4.3",
     "@types/lodash-es": "4.17.12",
     "@types/node": "25.5.2",
     "@vitejs/plugin-vue": "6.0.5",
     "@vue/test-utils": "2.4.6",
     "happy-dom": "20.8.9",
+    "husky": "9.1.7",
+    "lint-staged": "16.4.0",
     "prettier": "3.8.1",
+    "prettier-plugin-java": "^2.9.7",
+    "prettier-plugin-tailwindcss": "^0.7.2",
     "typescript": "6.0.2",
     "vite": "8.0.7",
     "vite-plugin-dts": "4.5.4",
@@ -53,7 +63,9 @@
       "default": "./dist/index.js"
     },
     "./interfaces": {
-      "types": "./dist/interfaces/index.d.ts"
+      "types": "./dist/interfaces/index.d.ts",
+      "import": "./dist/interfaces.js",
+      "default": "./dist/interfaces.js"
     },
     "./enums": {
       "types": "./dist/enums/index.d.ts",
@@ -64,6 +76,11 @@
       "types": "./dist/composables/index.d.ts",
       "import": "./dist/composables.js",
       "default": "./dist/composables.js"
+    },
+    "./constants": {
+      "types": "./dist/constants/index.d.ts",
+      "import": "./dist/constants.js",
+      "default": "./dist/constants.js"
     },
     "./helpers": {
       "types": "./dist/helpers/index.d.ts",
@@ -85,5 +102,18 @@
       "import": "./dist/stores.js",
       "default": "./dist/stores.js"
     }
+  },
+  "lint-staged": {
+    "{src,tests}/**/*.{js,ts,vue,json,css,scss,md}": "prettier --write"
+  },
+  "publishConfig": {
+    "registry": "https://artifactory.endhealth.co.uk/repository/npm/"
+  },
+  "pnpm": {
+    "overrides": {},
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "esbuild"
+    ]
   }
 }

@@ -2,9 +2,8 @@
 // Set, Query Set, Value Set
 // Class, Record Type
 // Everything else
-
-import { TTIriRef } from "../interfaces/AutoGen";
 import { IM, OWL, RDF, SHACL } from "../enums";
+import { TTIriRef } from "../interfaces/AutoGen";
 
 export function isOfTypes(conceptTypeElements: TTIriRef[], ...types: string[]): boolean {
   if (!conceptTypeElements?.length) {

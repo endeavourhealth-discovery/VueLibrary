@@ -11,6 +11,8 @@ node_modules
 dist
 dist-ssr
 *.local
+.gradle
+build
 
 # Editor directories and files
 .vscode
@@ -24,3 +26,7 @@ dist-ssr
 *.sw?
 
 dist-tests
+Models/.env
+Models/src/main/resources/application.properties
+Models/src/main/resources/casdoor-cert.txt
+Models/build

@@ -1,4 +1,4 @@
-import { EntityReferenceNode, TTEntity, SearchResultSummary } from "./AutoGen";
+import { EntityReferenceNode, SearchResultSummary, TTEntity } from "./AutoGen";
 import { GenericObject } from "./GenericObject";
 
 export interface ExtendedTTEntity extends TTEntity, GenericObject {}

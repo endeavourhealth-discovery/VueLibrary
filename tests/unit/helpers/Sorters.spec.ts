@@ -1,5 +1,6 @@
-import { byScheme, byPriority, byLabel, byName, byPosition, byOrder } from "../../../src/helpers/Sorters";
-import { describe, it, expect } from "vitest";
+import { describe, expect, it } from "vitest";
+
+import { byLabel, byName, byOrder, byPosition, byPriority, byScheme } from "../../../src/helpers/Sorters";
 
 describe("Sorters", () => {
   describe("byScheme", () => {

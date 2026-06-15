@@ -47,12 +47,14 @@
 </template>
 
 <script setup lang="ts">
+import { Ref, inject, ref } from "vue";
+
 import Popover from "primevue/popover";
 import ProgressSpinner from "primevue/progressspinner";
+
 import { getNamesAsStringFromTypes } from "../helpers/ConceptTypeMethods";
 import injectionKeys from "../injectionKeys/injectionKeys";
-import { TTIriRef, SearchResultSummary } from "../interfaces/AutoGen";
-import { inject, ref, Ref } from "vue";
+import { SearchResultSummary, TTIriRef } from "../interfaces/AutoGen";
 
 const entityService = inject(injectionKeys.entityService);
 if (!entityService) throw new Error("Missing injection: entityService");

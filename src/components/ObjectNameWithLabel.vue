@@ -10,7 +10,8 @@
 
 <script setup lang="ts">
 import { computed } from "vue";
-import { isObjectHasKeys } from "vue-library/helpers";
+
+import { isObjectHasKeys } from "../helpers";
 
 interface Props {
   label: string;

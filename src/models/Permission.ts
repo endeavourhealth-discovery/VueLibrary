@@ -1,12 +1,13 @@
-import { array, optional, date, object, enum as zenum, type output, string } from "zod/v4";
+import { z } from "zod";
+
+import { UserRole } from "../enums";
 import Resource from "../enums/Resource";
 import { NamespacePermissionSchema } from "./NamespacePermission";
-import { UserRole } from "../enums";
 
-export const PermissionSchema = object({
-  resource: zenum(Resource),
-  allowableRoles: array(zenum(UserRole)).prefault([]),
-  requiredNamespaces: array(NamespacePermissionSchema).prefault([])
+export const PermissionSchema = z.object({
+  resource: z.enum(Resource),
+  allowableRoles: z.array(z.enum(UserRole)).prefault([]),
+  requiredNamespaces: z.array(NamespacePermissionSchema).prefault([])
 });
 
-export type Permission = output<typeof PermissionSchema>;
+export type Permission = z.output<typeof PermissionSchema>;

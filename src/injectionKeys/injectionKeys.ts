@@ -1,4 +1,10 @@
+import { InjectionKey } from "vue";
+
+import { OrganizationChartNode } from "primevue";
+import { TreeNode } from "primevue/treenode";
+
 import { PrimeVueColors, PrimeVuePresetThemes } from "../enums";
+import { DisplayMode } from "../enums";
 import { FilterOptions, FiltersAsIris, Namespace, PropertyDisplay, QueryResponse, SetDiffObject, SimpleMap, TermCode } from "../interfaces";
 import {
   ConceptContextMap,
@@ -20,12 +26,8 @@ import {
   SetExportRequest,
   TTIriRef
 } from "../interfaces/AutoGen";
-import { DisplayMode } from "../enums";
-import { ExtendedEntityReferenceNode, TTBundle, ExtendedTTEntity } from "../interfaces/ExtendedAutoGen";
+import { ExtendedEntityReferenceNode, ExtendedTTEntity, TTBundle } from "../interfaces/ExtendedAutoGen";
 import { User } from "../models";
-import { OrganizationChartNode } from "primevue";
-import { TreeNode } from "primevue/treenode";
-import { InjectionKey } from "vue";
 
 const conceptService = Symbol("conceptService") as InjectionKey<{
   getMatchedFrom(iri: string): Promise<SimpleMap[]>;
@@ -38,12 +40,14 @@ const dataModelService = Symbol("dataModelService") as InjectionKey<{
   getPropertiesDisplay(iri: string): Promise<PropertyDisplay[]>;
   getDataModelsFromProperty(propIri: string): Promise<TTIriRef[]>;
 }>;
-const useDirectService = Symbol("useDirectService") as InjectionKey<() =>{
-  select(iri: string): Promise<void>;
-  view(iri: string): Promise<void>;
-  edit(iri: string, openInNewTab?: boolean): Promise<void>;
-  create(typeIri?: string, propertyIri?: string, valueIri?: string): Promise<void>;
-}>;
+const useDirectService = Symbol("useDirectService") as InjectionKey<
+  () => {
+    select(iri: string): Promise<void>;
+    view(iri: string): Promise<void>;
+    edit(iri: string, openInNewTab?: boolean): Promise<void>;
+    create(typeIri?: string, propertyIri?: string, valueIri?: string): Promise<void>;
+  }
+>;
 const eclService = Symbol("eclService") as InjectionKey<{
   ECLSearch(eclSearchRequest: ECLQueryRequest, controller?: AbortController): Promise<SearchResponse>;
   getEcl(query: Query): Promise<string>;

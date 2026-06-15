@@ -1,6 +1,7 @@
-import { deferred } from "../../../src/helpers/Deferred";
-import { describe, it, expect, beforeEach, vi } from "vitest";
 import { flushPromises } from "@vue/test-utils";
+import { beforeEach, describe, expect, it, vi } from "vitest";
+
+import { deferred } from "../../../src/helpers/Deferred";
 
 describe("deferred", () => {
   beforeEach(() => {
