@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": ".\\gradlew publishToMavenLocal && vue-tsc -b && vite build",
-    "build:ci": "./gradlew publish && vue-tsc -b && vite build && pnpm publish",
+    "build:ci": "./gradlew :Library:publish && vue-tsc -b && vite build && pnpm publish",
     "preview": "vite preview",
     "test:unit": "tsc -p tsconfig.tests.json && vitest",
     "format": "prettier --write \"{src,tests,Library/src}/**/*.{js,ts,vue,json,css,scss,md,java}\"",
