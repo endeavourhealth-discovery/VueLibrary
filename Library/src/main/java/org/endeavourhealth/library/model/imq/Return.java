@@ -25,6 +25,16 @@ public class Return implements Returnable {
   private String as;
   private List<Return> returx;
   private TTIriRef dataType;
+  private TTIriRef semanticMap;
+
+  public TTIriRef getSemanticMap() {
+    return semanticMap;
+  }
+
+  public Return setSemanticMap(TTIriRef semanticMap) {
+    this.semanticMap = semanticMap;
+    return this;
+  }
 
   @JsonProperty("case")
   private Case case_;
