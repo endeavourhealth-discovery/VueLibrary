@@ -2,7 +2,7 @@ import { REPO, IMLContext, ListMode, TargetUpdateMode, Aggregate, Bool, Database
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-06-07 10:26:58.
+// Generated using typescript-generator version 3.2.1263 on 2026-06-16 17:10:09.
 
 export interface ConceptContextMap {
     id?: string;
@@ -326,11 +326,11 @@ export interface Assignable {
     value?: string;
     invalid?: boolean;
     units?: TTIriRef;
+    description?: string;
+    operator?: Operator;
     valueTerm?: string;
     valueLabel?: string;
     compare?: Compare;
-    operator?: Operator;
-    description?: string;
 }
 
 export interface Case {
@@ -381,10 +381,10 @@ export interface Element extends IriLD, Entailment {
 }
 
 export interface Entailment {
-    ancestorsOf?: boolean;
+    descendantsOrSelfOf?: boolean;
     memberOf?: boolean;
     descendantsOf?: boolean;
-    descendantsOrSelfOf?: boolean;
+    ancestorsOf?: boolean;
 }
 
 export interface Expression {
@@ -478,8 +478,8 @@ export interface Node extends Element {
     code?: string;
     inverse?: boolean;
     node?: string;
-    isCohort?: boolean;
     isResultSet?: boolean;
+    isCohort?: boolean;
 }
 
 export interface OrderDirection extends IriLD {
@@ -508,8 +508,8 @@ export interface Path extends Element, HasPaths {
     pathVariable?: string;
     typeOf?: Node;
     qualifier?: TTIriRef;
-    isCohort?: boolean;
     isResultSet?: boolean;
+    isCohort?: boolean;
 }
 
 export interface PathDocument {
@@ -570,6 +570,8 @@ export interface Return extends Returnable {
     dataType?: TTIriRef;
     description?: string;
     value?: string;
+    match?: Match;
+    semanticMap?: TTIriRef;
     case?: Case;
 }
 
@@ -633,8 +635,8 @@ export interface Where extends Element, Assignable {
     linked?: boolean;
     notNull?: boolean;
     isInvalid?: boolean;
-    isCohort?: boolean;
     isResultSet?: boolean;
+    isCohort?: boolean;
 }
 
 export interface CognitoGroupRequest {
@@ -939,15 +941,15 @@ export interface TTDocument extends TTNode {
 export interface TTEntity extends TTNode, Serializable {
     context?: TTContext;
     crud?: TTIriRef;
-    name?: string;
     type?: TTArray;
+    status?: TTIriRef;
+    name?: string;
     scheme?: TTIriRef;
     version?: number;
-    types?: TTIriRef[];
-    status?: TTIriRef;
     description?: string;
     prefixes?: TTPrefix[];
     code?: string;
+    types?: TTIriRef[];
 }
 
 export interface BugReport extends Task {
@@ -1032,8 +1034,8 @@ export interface TTArray extends Serializable {
 }
 
 export interface TTContext extends Serializable {
-    nameSpaces?: TTPrefix[];
     prefixes?: TTPrefix[];
+    nameSpaces?: TTPrefix[];
 }
 
 export interface Throwable extends Serializable {
