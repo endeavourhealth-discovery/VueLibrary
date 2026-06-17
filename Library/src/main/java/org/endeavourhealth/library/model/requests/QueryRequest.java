@@ -1,9 +1,8 @@
 package org.endeavourhealth.library.model.requests;
 
 import com.fasterxml.jackson.annotation.*;
-import java.time.LocalDate;
-import java.util.*;
-import java.util.function.Consumer;
+import lombok.Getter;
+import lombok.Setter;
 import org.endeavourhealth.library.model.iml.Page;
 import org.endeavourhealth.library.model.imq.*;
 import org.endeavourhealth.library.model.tripletree.TTContext;
@@ -11,30 +10,37 @@ import org.endeavourhealth.library.model.tripletree.TTIriRef;
 import org.endeavourhealth.library.model.tripletree.TTPrefix;
 import org.endeavourhealth.library.vocabulary.NAMESPACE;
 
-@JsonPropertyOrder({ "context", "textSearch", "argument", "query", "pathQuery", "update" })
-@JsonInclude(JsonInclude.Include.NON_DEFAULT)
-public class QueryRequest implements ContextMap {
+import java.time.LocalDate;
+import java.util.*;
+import java.util.function.Consumer;
 
+@JsonPropertyOrder({"context", "textSearch", "argument", "query", "pathQuery", "update"})
+@JsonInclude(JsonInclude.Include.NON_DEFAULT)
+@Getter
+public class QueryRequest implements ContextMap {
   private String name;
   private Page page;
   private Map<String, String> context;
   private String textSearch;
   private Set<Argument> argument;
-
   @JsonProperty(required = true)
   private Query query;
-
   private PathQuery pathQuery;
   private Update update;
+  @Getter
   private String queryStringDefinition;
   private String askIri;
   private List<Map<Long, String>> timings = new ArrayList<>();
   private Set<TTIriRef> cohort;
+  @Setter
   private boolean includeNames;
+  @Setter
   private TextSearchStyle textSearchStyle;
+  @Getter
   private DatabaseOption language;
 
-  public QueryRequest() {}
+  public QueryRequest() {
+  }
 
   public QueryRequest setCohort(Set<TTIriRef> cohort) {
     this.cohort = cohort;
@@ -49,6 +55,7 @@ public class QueryRequest implements ContextMap {
     return this;
   }
 
+
   public QueryRequest setTimings(List<Map<Long, String>> timings) {
     this.timings = timings;
     return this;
@@ -62,9 +69,11 @@ public class QueryRequest implements ContextMap {
     return this;
   }
 
+
   @JsonIgnore
   public TTContext getAsContext() {
-    if (this.context == null) return null;
+    if (this.context == null)
+      return null;
     TTContext ttContext = new TTContext();
     for (Map.Entry<String, String> prefix : this.context.entrySet()) {
       ttContext.add(prefix.getValue(), prefix.getKey());
@@ -98,7 +107,8 @@ public class QueryRequest implements ContextMap {
   }
 
   public QueryRequest addArgument(Argument argument) {
-    if (this.argument == null) this.argument = new HashSet<>();
+    if (this.argument == null)
+      this.argument = new HashSet<>();
     this.argument.add(argument);
     return this;
   }
@@ -113,19 +123,33 @@ public class QueryRequest implements ContextMap {
   public QueryRequest addArgument(String parameter, Object value) {
     Argument argument = new Argument();
     argument.setParameter(parameter);
-    if (value instanceof String) argument.setValueData((String) value);
-    else if (value instanceof TTIriRef) argument.setValueIri((TTIriRef) value);
-    else throw new IllegalArgumentException("Using add argument this way must include a string value or TTIref value");
+    if (value instanceof String)
+      argument.setValueData((String) value);
+    else if (value instanceof TTIriRef)
+      argument.setValueIri((TTIriRef) value);
+    else
+      throw new IllegalArgumentException("Using add argument this way must include a string value or TTIref value");
     addArgument(argument);
     return this;
   }
 
   public Object getArgumentDataValue(String parameter) {
-    if (this.argument == null) return null;
+    if (this.argument == null)
+      return null;
     else {
       for (Argument arg : this.argument) {
-        if (arg.getParameter().equals(parameter)) return arg.getValueData();
+        if (arg.getParameter().equals(parameter))
+          return arg.getValueData();
       }
+    }
+    return null;
+  }
+
+  public Set<String> getArgumentDataList(String parameter) {
+    if (this.argument == null) return null;
+    for (Argument arg : this.argument) {
+      if (parameter.equals(arg.getParameter()))
+        return arg.getValueDataList();
     }
     return null;
   }
@@ -134,10 +158,6 @@ public class QueryRequest implements ContextMap {
   public QueryRequest setPage(Page page) {
     this.page = page;
     return this;
-  }
-
-  public Page getPage() {
-    return page;
   }
 
   public QueryRequest page(Consumer<Page> builder) {
@@ -228,16 +248,14 @@ public class QueryRequest implements ContextMap {
     return this;
   }
 
-  public TextSearchStyle getTextSearchStyle() {
-    return textSearchStyle;
-  }
-
   public void resolveArgs() {
     if (this.argument == null) this.argument = new HashSet<>();
     List<String> defaultDates = List.of("$searchDate", "$achievementDate");
     for (String date : defaultDates) {
-      boolean hasDate = this.argument.stream().anyMatch(arg -> date.equals(arg.getParameter()));
-      if (!hasDate) this.argument.add(new Argument().setParameter(date).setValueData(LocalDate.now().toString()));
+      boolean hasDate = this.argument.stream()
+        .anyMatch(arg -> date.equals(arg.getParameter()));
+      if (!hasDate)
+        this.argument.add(new Argument().setParameter(date).setValueData(LocalDate.now().toString()));
     }
   }
 }
