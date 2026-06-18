@@ -2,6 +2,7 @@ import { REPO, IMLContext, ListMode, TargetUpdateMode, Aggregate, Bool, Database
 
 /* tslint:disable */
 /* eslint-disable */
+// Generated using typescript-generator version 3.2.1263 on 2026-06-17 09:57:22.
 
 export interface ConceptContextMap {
     id?: string;
@@ -322,14 +323,14 @@ export interface ArgumentReference {
 }
 
 export interface Assignable {
-    value?: string;
-    invalid?: boolean;
+    valueLabel?: string;
     units?: TTIriRef;
+    compare?: Compare;
+    valueTerm?: string;
     description?: string;
     operator?: Operator;
-    valueTerm?: string;
-    valueLabel?: string;
-    compare?: Compare;
+    value?: string;
+    invalid?: boolean;
 }
 
 export interface Case {
@@ -477,8 +478,8 @@ export interface Node extends Element {
     code?: string;
     inverse?: boolean;
     node?: string;
-    isResultSet?: boolean;
     isCohort?: boolean;
+    isResultSet?: boolean;
 }
 
 export interface OrderDirection extends IriLD {
@@ -507,8 +508,8 @@ export interface Path extends Element, HasPaths {
     pathVariable?: string;
     typeOf?: Node;
     qualifier?: TTIriRef;
-    isResultSet?: boolean;
     isCohort?: boolean;
+    isResultSet?: boolean;
 }
 
 export interface PathDocument {
@@ -567,7 +568,6 @@ export interface Return extends Returnable {
     inverse?: boolean;
     units?: TTIriRef;
     dataType?: TTIriRef;
-    semanticMap?: TTIriRef;
     description?: string;
     value?: string;
     case?: Case;
@@ -633,8 +633,8 @@ export interface Where extends Element, Assignable {
     linked?: boolean;
     notNull?: boolean;
     isInvalid?: boolean;
-    isResultSet?: boolean;
     isCohort?: boolean;
+    isResultSet?: boolean;
 }
 
 export interface CognitoGroupRequest {
@@ -784,6 +784,7 @@ export interface ValidatedEntitiesRequest {
  * Structure containing search request parameters and filters
  */
 export interface WorkflowRequest {
+    securityService?: SecurityService;
     page?: number;
     size?: number;
     userId?: string;
@@ -938,15 +939,15 @@ export interface TTDocument extends TTNode {
 export interface TTEntity extends TTNode, Serializable {
     context?: TTContext;
     crud?: TTIriRef;
+    description?: string;
+    version?: number;
+    types?: TTIriRef[];
+    code?: string;
+    prefixes?: TTPrefix[];
+    scheme?: TTIriRef;
+    name?: string;
     type?: TTArray;
     status?: TTIriRef;
-    name?: string;
-    scheme?: TTIriRef;
-    version?: number;
-    description?: string;
-    code?: string;
-    types?: TTIriRef[];
-    prefixes?: TTPrefix[];
 }
 
 export interface BugReport extends Task {
@@ -1055,6 +1056,9 @@ export interface StackTraceElement extends Serializable {
 }
 
 export interface Exception extends Throwable {
+}
+
+export interface SecurityService {
 }
 
 export interface UserJava {

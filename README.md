@@ -16,9 +16,8 @@ To ensure smooth development without breaking existing code/builds, these steps 
 
 ### VueLibrary
 
-1. Bump the version in [Java](./Library/build.gradle.kts)
-2. Bump the version in [Typescript](./package.json) to match
-3. Run the node task `pnpmn build`
+1. Set the new version number using `pnpm setVersion --to=<x.x.x>`
+2. Run the node task `pnpmn build`
 
 The pnpm build will perform the java build, typescript generation and publishing to local maven (and linked npm package once setup)
 
