@@ -2,7 +2,6 @@ import { REPO, IMLContext, ListMode, TargetUpdateMode, Aggregate, Bool, Database
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-06-17 09:57:22.
 
 export interface ConceptContextMap {
     id?: string;
@@ -323,14 +322,14 @@ export interface ArgumentReference {
 }
 
 export interface Assignable {
-    valueLabel?: string;
-    units?: TTIriRef;
-    compare?: Compare;
-    valueTerm?: string;
     description?: string;
-    operator?: Operator;
     value?: string;
     invalid?: boolean;
+    units?: TTIriRef;
+    operator?: Operator;
+    valueLabel?: string;
+    valueTerm?: string;
+    compare?: Compare;
 }
 
 export interface Case {
@@ -381,9 +380,9 @@ export interface Element extends IriLD, Entailment {
 }
 
 export interface Entailment {
+    memberOf?: boolean;
     descendantsOrSelfOf?: boolean;
     ancestorsOf?: boolean;
-    memberOf?: boolean;
     descendantsOf?: boolean;
 }
 
@@ -478,8 +477,8 @@ export interface Node extends Element {
     code?: string;
     inverse?: boolean;
     node?: string;
-    isCohort?: boolean;
     isResultSet?: boolean;
+    isCohort?: boolean;
 }
 
 export interface OrderDirection extends IriLD {
@@ -508,8 +507,8 @@ export interface Path extends Element, HasPaths {
     pathVariable?: string;
     typeOf?: Node;
     qualifier?: TTIriRef;
-    isCohort?: boolean;
     isResultSet?: boolean;
+    isCohort?: boolean;
 }
 
 export interface PathDocument {
@@ -568,6 +567,7 @@ export interface Return extends Returnable {
     inverse?: boolean;
     units?: TTIriRef;
     dataType?: TTIriRef;
+    semanticMap?: TTIriRef;
     description?: string;
     value?: string;
     case?: Case;
@@ -633,8 +633,8 @@ export interface Where extends Element, Assignable {
     linked?: boolean;
     notNull?: boolean;
     isInvalid?: boolean;
-    isCohort?: boolean;
     isResultSet?: boolean;
+    isCohort?: boolean;
 }
 
 export interface CognitoGroupRequest {
@@ -784,7 +784,6 @@ export interface ValidatedEntitiesRequest {
  * Structure containing search request parameters and filters
  */
 export interface WorkflowRequest {
-    securityService?: SecurityService;
     page?: number;
     size?: number;
     userId?: string;
@@ -939,15 +938,15 @@ export interface TTDocument extends TTNode {
 export interface TTEntity extends TTNode, Serializable {
     context?: TTContext;
     crud?: TTIriRef;
-    description?: string;
-    version?: number;
-    types?: TTIriRef[];
-    code?: string;
-    prefixes?: TTPrefix[];
-    scheme?: TTIriRef;
-    name?: string;
     type?: TTArray;
+    description?: string;
     status?: TTIriRef;
+    name?: string;
+    scheme?: TTIriRef;
+    version?: number;
+    code?: string;
+    types?: TTIriRef[];
+    prefixes?: TTPrefix[];
 }
 
 export interface BugReport extends Task {
@@ -1032,8 +1031,8 @@ export interface TTArray extends Serializable {
 }
 
 export interface TTContext extends Serializable {
-    nameSpaces?: TTPrefix[];
     prefixes?: TTPrefix[];
+    nameSpaces?: TTPrefix[];
 }
 
 export interface Throwable extends Serializable {
@@ -1056,9 +1055,6 @@ export interface StackTraceElement extends Serializable {
 }
 
 export interface Exception extends Throwable {
-}
-
-export interface SecurityService {
 }
 
 export interface UserJava {
