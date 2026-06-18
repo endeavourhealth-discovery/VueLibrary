@@ -1,16 +1,19 @@
 {
   "name": "@endeavour/vue-library",
-  "version": "0.22.0",
+  "version": "1.0.1",
   "type": "module",
   "packageManager": "pnpm@10.5.2",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build",
+    "build": ".\\gradlew publishToMavenLocal && vue-tsc -b && vite build",
+    "build:ci": "./gradlew :Library:publish && vue-tsc -b && vite build && pnpm publish",
     "preview": "vite preview",
     "test:unit": "tsc -p tsconfig.tests.json && vitest",
-    "format": "prettier --write \"{src,tests}/**/*.{js,ts,vue,json,css,scss,md}\"",
+    "format": "prettier --write \"{src,tests,Library/src}/**/*.{js,ts,vue,json,css,scss,md,java}\"",
     "format:check": "prettier --list-different \"{src,tests}/**/*.{js,ts,vue,json,css,scss,md}\"",
-    "prepare": "pnpm build && node -e \"try{require('husky').install()}catch(e){}\""
+    "husky": "node -e \"try{require('husky').install()}catch(e){}\"",
+    "setVersion": "npm run dualset",
+    "dualset": "npm version %npm_config_to% --no-git-tag-version && echo %npm_config_to%-SNAPSHOT > Library\\version.txt"
   },
   "dependencies": {
     "@vueuse/core": "14.2.1",
@@ -35,6 +38,7 @@
     "husky": "9.1.7",
     "lint-staged": "16.4.0",
     "prettier": "3.8.1",
+    "prettier-plugin-java": "^2.9.7",
     "prettier-plugin-tailwindcss": "^0.7.2",
     "typescript": "6.0.2",
     "vite": "8.0.7",
@@ -106,5 +110,12 @@
   },
   "publishConfig": {
     "registry": "https://artifactory.endhealth.co.uk/repository/npm/"
+  },
+  "pnpm": {
+    "overrides": {},
+    "onlyBuiltDependencies": [
+      "@parcel/watcher",
+      "esbuild"
+    ]
   }
 }

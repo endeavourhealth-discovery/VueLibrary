@@ -1,0 +1,35 @@
+package org.endeavourhealth.library.json;
+
+import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.SerializerProvider;
+import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import java.io.IOException;
+import org.endeavourhealth.library.model.tripletree.TTArray;
+import org.endeavourhealth.library.model.tripletree.TTValue;
+
+/**
+ * Serializes a TTNode to JSON-LD. Normally called by a specialised class such as TTEntity or TTDocument serializer
+ */
+public class TTArraySerializer extends StdSerializer<TTArray> {
+
+  public TTArraySerializer() {
+    this(null);
+  }
+
+  public TTArraySerializer(Class<TTArray> t) {
+    super(t);
+  }
+
+  public void serialize(TTArray array, JsonGenerator gen, SerializerProvider prov) throws IOException {
+    if (array.isLiteral()) {
+      prov.defaultSerializeValue(array.asLiteral(), gen);
+    } else {
+      gen.writeStartArray();
+
+      for (TTValue v : array.iterator()) {
+        prov.defaultSerializeValue(v, gen);
+      }
+      gen.writeEndArray();
+    }
+  }
+}
