@@ -17,7 +17,7 @@ plugins {
 }
 
 group = "org.endeavourhealth.library"
-version = "1.0.1-SNAPSHOT"
+version = file("version.txt").readText().trim()
 description = "Java library"
 
 
