@@ -2,7 +2,6 @@ import { REPO, IMLContext, ListMode, TargetUpdateMode, Aggregate, Bool, Database
 
 /* tslint:disable */
 /* eslint-disable */
-// Generated using typescript-generator version 3.2.1263 on 2026-06-16 16:58:38.
 
 export interface ConceptContextMap {
     id?: string;
@@ -382,9 +381,9 @@ export interface Element extends IriLD, Entailment {
 
 export interface Entailment {
     descendantsOrSelfOf?: boolean;
+    ancestorsOf?: boolean;
     memberOf?: boolean;
     descendantsOf?: boolean;
-    ancestorsOf?: boolean;
 }
 
 export interface Expression {
@@ -568,10 +567,9 @@ export interface Return extends Returnable {
     inverse?: boolean;
     units?: TTIriRef;
     dataType?: TTIriRef;
+    semanticMap?: TTIriRef;
     description?: string;
     value?: string;
-    match?: Match;
-    semanticMap?: TTIriRef;
     case?: Case;
 }
 
@@ -786,7 +784,6 @@ export interface ValidatedEntitiesRequest {
  * Structure containing search request parameters and filters
  */
 export interface WorkflowRequest {
-    securityService?: SecurityService;
     page?: number;
     size?: number;
     userId?: string;
@@ -947,9 +944,9 @@ export interface TTEntity extends TTNode, Serializable {
     scheme?: TTIriRef;
     version?: number;
     description?: string;
-    prefixes?: TTPrefix[];
     code?: string;
     types?: TTIriRef[];
+    prefixes?: TTPrefix[];
 }
 
 export interface BugReport extends Task {
@@ -1034,8 +1031,8 @@ export interface TTArray extends Serializable {
 }
 
 export interface TTContext extends Serializable {
-    prefixes?: TTPrefix[];
     nameSpaces?: TTPrefix[];
+    prefixes?: TTPrefix[];
 }
 
 export interface Throwable extends Serializable {
@@ -1058,9 +1055,6 @@ export interface StackTraceElement extends Serializable {
 }
 
 export interface Exception extends Throwable {
-}
-
-export interface SecurityService {
 }
 
 export interface UserJava {
