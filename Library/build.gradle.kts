@@ -17,7 +17,7 @@ plugins {
 }
 
 group = "org.endeavourhealth.library"
-version = "1.0.1-SNAPSHOT"
+version = "1.0.2-SNAPSHOT"
 description = "Java library"
 
 
