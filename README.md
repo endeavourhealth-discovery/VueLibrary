@@ -10,6 +10,14 @@ This repository contains the Java model classes (and some necessary/related help
 other repositories/sub projects such as IM Directory and IM Query Runner. This is achieved by generating
 typescript interfaces and enums directly from the Java code.
 
+## Prerequisites
+
+| Tool  | Version |
+|-------|---------|
+| node  | 22.20.0 |
+| npm   | 10.9.3  |
+| pnpm  | 10.34.2 |
+
 ## Making Changes
 
 To ensure smooth development without breaking existing code/builds, these steps should be followed, in this order.
