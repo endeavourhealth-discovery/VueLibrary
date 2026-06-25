@@ -40,7 +40,8 @@ export default defineConfig({
     },
     target: "esnext",
     outDir: "dist",
-    emptyOutDir: true
+    emptyOutDir: true,
+    minify: false
   },
   test: {
     dir: "./tests",
