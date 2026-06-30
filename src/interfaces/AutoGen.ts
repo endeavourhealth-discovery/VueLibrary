@@ -323,13 +323,13 @@ export interface ArgumentReference {
 
 export interface Assignable {
     description?: string;
-    value?: string;
-    invalid?: boolean;
-    units?: TTIriRef;
     operator?: Operator;
+    compare?: Compare;
     valueLabel?: string;
     valueTerm?: string;
-    compare?: Compare;
+    units?: TTIriRef;
+    value?: string;
+    invalid?: boolean;
 }
 
 export interface Case {
@@ -477,8 +477,8 @@ export interface Node extends Element {
     code?: string;
     inverse?: boolean;
     node?: string;
-    isResultSet?: boolean;
     isCohort?: boolean;
+    isResultSet?: boolean;
 }
 
 export interface OrderDirection extends IriLD {
@@ -507,8 +507,8 @@ export interface Path extends Element, HasPaths {
     pathVariable?: string;
     typeOf?: Node;
     qualifier?: TTIriRef;
-    isResultSet?: boolean;
     isCohort?: boolean;
+    isResultSet?: boolean;
 }
 
 export interface PathDocument {
@@ -633,8 +633,8 @@ export interface Where extends Element, Assignable {
     linked?: boolean;
     notNull?: boolean;
     isInvalid?: boolean;
-    isResultSet?: boolean;
     isCohort?: boolean;
+    isResultSet?: boolean;
 }
 
 export interface CognitoGroupRequest {
@@ -938,15 +938,15 @@ export interface TTDocument extends TTNode {
 export interface TTEntity extends TTNode, Serializable {
     context?: TTContext;
     crud?: TTIriRef;
-    type?: TTArray;
     description?: string;
-    status?: TTIriRef;
-    name?: string;
-    scheme?: TTIriRef;
     version?: number;
-    code?: string;
     types?: TTIriRef[];
+    scheme?: TTIriRef;
+    code?: string;
     prefixes?: TTPrefix[];
+    type?: TTArray;
+    name?: string;
+    status?: TTIriRef;
 }
 
 export interface BugReport extends Task {

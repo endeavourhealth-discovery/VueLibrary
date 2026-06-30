@@ -24,7 +24,7 @@ To ensure smooth development without breaking existing code/builds, these steps 
 
 ### VueLibrary
 
-1. Set the new version number using `pnpm setVersion --to=<x.x.x>`
+1. Set the new version number using `pnpm setVersion --to=<x.x.x>`  (note that this will error if its that version already)
 2. Run the node task `pnpmn build`
 
 The pnpm build will perform the java build, typescript generation and publishing to local maven (and linked npm package once setup)

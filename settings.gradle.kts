@@ -14,6 +14,7 @@ pluginManagement {
     }
     mavenLocal()
   }
+
   resolutionStrategy {
     eachPlugin {
       if (requested.id.id == "cz.habarta.typescript-generator") {

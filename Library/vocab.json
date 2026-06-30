@@ -230,6 +230,10 @@
         "value": "NAMESPACE.IM + \"SemanticMap\""
       },
       {
+        "name": "HAS_SEMANTIC_MAP",
+        "value": "NAMESPACE.IM + \"semanticMap\""
+      },
+      {
         "name": "CODEABLE",
         "value": "NAMESPACE.IM + \"Codeable\""
       },
@@ -527,6 +531,10 @@
       },
       {
         "name": " MAP_ENTRY",
+        "value": "NAMESPACE.IM + \"MapEntry\""
+      },
+      {
+        "name": " HAS_MAP_ENTRY",
         "value": "NAMESPACE.IM + \"mapEntry\""
       },
       {
