@@ -322,14 +322,14 @@ export interface ArgumentReference {
 }
 
 export interface Assignable {
-    description?: string;
-    operator?: Operator;
-    compare?: Compare;
-    valueLabel?: string;
-    valueTerm?: string;
-    units?: TTIriRef;
     value?: string;
     invalid?: boolean;
+    units?: TTIriRef;
+    description?: string;
+    operator?: Operator;
+    valueLabel?: string;
+    valueTerm?: string;
+    compare?: Compare;
 }
 
 export interface Case {
@@ -380,10 +380,10 @@ export interface Element extends IriLD, Entailment {
 }
 
 export interface Entailment {
-    memberOf?: boolean;
     descendantsOrSelfOf?: boolean;
-    ancestorsOf?: boolean;
+    memberOf?: boolean;
     descendantsOf?: boolean;
+    ancestorsOf?: boolean;
 }
 
 export interface Expression {
@@ -938,15 +938,15 @@ export interface TTDocument extends TTNode {
 export interface TTEntity extends TTNode, Serializable {
     context?: TTContext;
     crud?: TTIriRef;
-    description?: string;
-    version?: number;
-    types?: TTIriRef[];
-    scheme?: TTIriRef;
-    code?: string;
-    prefixes?: TTPrefix[];
     type?: TTArray;
-    name?: string;
     status?: TTIriRef;
+    name?: string;
+    scheme?: TTIriRef;
+    version?: number;
+    description?: string;
+    code?: string;
+    types?: TTIriRef[];
+    prefixes?: TTPrefix[];
 }
 
 export interface BugReport extends Task {
@@ -1031,8 +1031,8 @@ export interface TTArray extends Serializable {
 }
 
 export interface TTContext extends Serializable {
-    prefixes?: TTPrefix[];
     nameSpaces?: TTPrefix[];
+    prefixes?: TTPrefix[];
 }
 
 export interface Throwable extends Serializable {
