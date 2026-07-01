@@ -5,15 +5,13 @@
   "packageManager": "pnpm@10.34.2",
   "scripts": {
     "dev": "vite",
-    "build": ".\\gradlew publishToMavenLocal && vue-tsc -b && vite build",
-    "build:ci": "./gradlew :Library:publish && vue-tsc -b && vite build && pnpm publish",
+    "build": "vue-tsc -b && vite build",
+    "build:ci": "vue-tsc -b && vite build && pnpm publish",
     "preview": "vite preview",
     "test:unit": "tsc -p tsconfig.tests.json && vitest",
-    "format": "prettier --write \"{src,tests,Library/src}/**/*.{js,ts,vue,json,css,scss,md,java}\"",
+    "format": "prettier --write \"{src,tests}/**/*.{js,ts,vue,json,css,scss,md}\"",
     "format:check": "prettier --list-different \"{src,tests}/**/*.{js,ts,vue,json,css,scss,md}\"",
-    "husky": "node -e \"try{require('husky').install()}catch(e){}\"",
-    "setVersion": "npm run dualset",
-    "dualset": "npm version %npm_config_to% --no-git-tag-version && echo %npm_config_to%-SNAPSHOT > Library\\version.txt"
+    "husky": "node -e \"try{require('husky').install()}catch(e){}\""
   },
   "dependencies": {
     "@endeavour/vue-library": "link:",
