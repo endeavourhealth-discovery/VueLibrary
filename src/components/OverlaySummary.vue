@@ -61,7 +61,7 @@ if (!entityService) throw new Error("Missing injection: entityService");
 
 const hoveredResult: Ref<SearchResultSummary | undefined> = ref();
 const OP = ref();
-const loading = ref(false);
+const loading = ref(true);
 const timer = ref<number | undefined>();
 
 async function showOverlay(event: MouseEvent, iri: string): Promise<void> {
