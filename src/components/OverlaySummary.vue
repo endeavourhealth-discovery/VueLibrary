@@ -72,7 +72,6 @@ async function showOverlay(event: MouseEvent, iri: string): Promise<void> {
     if (!target) return;
     timer.value = window.setTimeout(async () => {
       const popover = OP.value;
-
       if (!popover) return;
 
       loading.value = true;
@@ -86,9 +85,7 @@ async function showOverlay(event: MouseEvent, iri: string): Promise<void> {
 
 function hideOverlay(): void {
   clearTimeout(timer.value);
-
   if (OP.value) OP.value.hide();
-
   hoveredResult.value = undefined;
   loading.value = false;
 }
