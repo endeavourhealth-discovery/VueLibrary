@@ -55,11 +55,13 @@ import ProgressSpinner from "primevue/progressspinner";
 import { getNamesAsStringFromTypes } from "../helpers/ConceptTypeMethods";
 import injectionKeys from "../injectionKeys/injectionKeys";
 import { SearchResultSummary, TTIriRef } from "../interfaces/AutoGen";
+import { currentTarget } from "happy-dom/lib/PropertySymbol";
 
 const entityService = inject(injectionKeys.entityService);
 if (!entityService) throw new Error("Missing injection: entityService");
 
 const hoveredResult: Ref<SearchResultSummary | undefined> = ref();
+const overlayLocation: Ref<any> = ref({});
 const OP = ref();
 const loading = ref(true);
 const timer = ref<number | undefined>();
@@ -77,9 +79,9 @@ async function showOverlay(event: MouseEvent, iri: string): Promise<void> {
       loading.value = true;
       hoveredResult.value = undefined;
       hoveredResult.value = await entityService!.getEntitySummary(iri);
-      popover.show({ currentTarget: target });
+      if (target.checkVisibility()) popover.show({ currentTarget: target });
       loading.value = false;
-    }, 700);
+    }, 500);
   }
 }
 
@@ -87,6 +89,7 @@ function hideOverlay(): void {
   clearTimeout(timer.value);
   if (OP.value) OP.value.hide();
   hoveredResult.value = undefined;
+  overlayLocation.value = {};
   loading.value = false;
 }
 
