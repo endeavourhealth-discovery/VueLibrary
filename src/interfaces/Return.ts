@@ -1,9 +1,8 @@
 import { Case } from "./Case";
 import { FunctionClause } from "./FunctionClause";
-import { Returnable } from "./Returnable";
 import { TTIriRef } from "./TTIriRef";
 
-export interface Return extends Returnable {
+export interface Return {
   iri?: string;
   name?: string;
   function?: FunctionClause;
@@ -18,4 +17,5 @@ export interface Return extends Returnable {
   description?: string;
   value?: string;
   case?: Case;
+  return?: Return[];
 }

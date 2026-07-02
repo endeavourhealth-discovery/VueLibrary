@@ -2,14 +2,13 @@ import { TextSearchStyle } from "@/enums";
 import { DatabaseOption } from "@/enums";
 
 import { Argument } from "./Argument";
-import { ContextMap } from "./ContextMap";
 import { Page } from "./Page";
 import { PathQuery } from "./PathQuery";
 import { Query } from "./Query";
 import { TTIriRef } from "./TTIriRef";
 import { Update } from "./Update";
 
-export interface QueryRequest extends ContextMap {
+export interface QueryRequest {
   textSearch?: string;
   argument?: Argument[];
   query: Query;
@@ -24,4 +23,5 @@ export interface QueryRequest extends ContextMap {
   includeNames?: boolean;
   textSearchStyle?: TextSearchStyle;
   language?: DatabaseOption;
+  context?: { [index: string]: string };
 }

@@ -3,14 +3,14 @@ import { Entail } from "@/enums";
 
 import { FunctionClause } from "./FunctionClause";
 import { GroupBy } from "./GroupBy";
-import { HasPaths } from "./HasPaths";
 import { Having } from "./Having";
 import { IriLD } from "./IriLD";
 import { OrderLimit } from "./OrderLimit";
-import { Returnable } from "./Returnable";
+import { Path } from "./Path";
+import { Return } from "./Return";
 import { Where } from "./Where";
 
-export interface Match extends IriLD, HasPaths, Returnable {
+export interface Match extends IriLD {
   notExists?: boolean;
   ifTrue?: RuleAction;
   ifFalse?: RuleAction;
@@ -40,4 +40,8 @@ export interface Match extends IriLD, HasPaths, Returnable {
   errorMessage?: string;
   draft?: boolean;
   having?: Having;
+  description?: string;
+  path?: Path[];
+  node?: string;
+  return?: Return[];
 }

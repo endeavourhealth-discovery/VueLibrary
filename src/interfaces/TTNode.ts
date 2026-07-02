@@ -1,7 +1,6 @@
 import { TTArray } from "./TTArray";
-import { TTValue } from "./TTValue";
 
-export interface TTNode extends TTValue {
+export interface TTNode {
   iri?: string;
   predicateMap?: { [index: string]: TTArray };
 }
