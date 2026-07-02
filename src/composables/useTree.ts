@@ -7,8 +7,7 @@ import { IM } from "../enums";
 import { getColourFromType, getFAIconFromType } from "../helpers/ConceptTypeVisuals";
 import { isObjectHasKeys } from "../helpers/DataTypeCheckers";
 import injectionKeys from "../injectionKeys/injectionKeys";
-import { TTIriRef } from "../interfaces/AutoGen";
-import { ExtendedTTEntity } from "../interfaces/ExtendedAutoGen";
+import { ExtendedTTEntity, TTIriRef } from "../interfaces";
 
 export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: number) {
   const useDirectService = inject(injectionKeys.useDirectService);

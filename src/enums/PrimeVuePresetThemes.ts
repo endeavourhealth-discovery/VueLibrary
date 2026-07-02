@@ -1,0 +1,6 @@
+export enum PrimeVuePresetThemes {
+  AURA = "Aura",
+  LARA = "Lara",
+  NORA = "Nora",
+  MATERIAL = "Material"
+}

@@ -1,0 +1,51 @@
+import { Operator } from "@/enums";
+
+import { Compare } from "./Compare";
+import { Element } from "./Element";
+import { FunctionClause } from "./FunctionClause";
+import { IriLD } from "./IriLD";
+import { TTIriRef } from "./TTIriRef";
+
+export interface Where extends Element {
+  description?: string;
+  operator?: Operator;
+  value?: string;
+  valueLabel?: string;
+  units?: TTIriRef;
+  function?: FunctionClause;
+  invalid?: boolean;
+  valueTerm?: string;
+  compare?: Compare;
+  nodeRef?: string;
+  range?: Range;
+  isNull?: boolean;
+  is?: Node[];
+  anyRoleGroup?: boolean;
+  parameter?: string;
+  childOrSelfOf?: boolean;
+  childOf?: boolean;
+  cohort?: boolean;
+  resultSet?: boolean;
+  inverse?: boolean;
+  typeOf?: Node;
+  subjectVariable?: string;
+  subjectParameter?: string;
+  not?: boolean;
+  roleGroup?: boolean;
+  isNotNull?: boolean;
+  or?: Where[];
+  and?: Where[];
+  propertyRef?: string;
+  shortLabel?: string;
+  qualifier?: TTIriRef;
+  propertyList?: Node[];
+  propertyVariable?: string;
+  node?: string;
+  excludeProperty?: IriLD[];
+  exists?: boolean;
+  linked?: boolean;
+  notNull?: boolean;
+  isInvalid?: boolean;
+  isCohort?: boolean;
+  isResultSet?: boolean;
+}

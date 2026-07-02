@@ -54,7 +54,7 @@ import ProgressSpinner from "primevue/progressspinner";
 
 import { getNamesAsStringFromTypes } from "../helpers/ConceptTypeMethods";
 import injectionKeys from "../injectionKeys/injectionKeys";
-import { SearchResultSummary, TTIriRef } from "../interfaces/AutoGen";
+import { SearchResultSummary, TTIriRef } from "../interfaces";
 
 const entityService = inject(injectionKeys.entityService);
 if (!entityService) throw new Error("Missing injection: entityService");
