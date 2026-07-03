@@ -25,8 +25,10 @@ import {
   SearchResultSummary,
   SetExportRequest,
   TTIriRef
-} from "../interfaces/AutoGen";
-import { ExtendedEntityReferenceNode, ExtendedTTEntity, TTBundle } from "../interfaces/ExtendedAutoGen";
+} from "../interfaces";
+import { ExtendedEntityReferenceNode } from "../interfaces/ExtendedEntityReferenceNode";
+import { ExtendedTTEntity } from "../interfaces/ExtendedTTEntity";
+import { TTBundle } from "../interfaces/TTBundle";
 import { User } from "../models";
 
 const conceptService = Symbol("conceptService") as InjectionKey<{

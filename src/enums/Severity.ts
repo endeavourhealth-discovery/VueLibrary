@@ -1,0 +1,8 @@
+export enum Severity {
+  CRITICAL = "CRITICAL",
+  MAJOR = "MAJOR",
+  MINOR = "MINOR",
+  TRIVIAL = "TRIVIAL",
+  ENHANCEMENT = "ENHANCEMENT",
+  UNASSIGNED = "UNASSIGNED"
+}

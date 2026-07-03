@@ -1,4 +1,4 @@
-import { ExtendedTTEntity } from "./ExtendedAutoGen";
+import { ExtendedTTEntity } from "./ExtendedTTEntity";
 
 export interface ConceptAggregate {
   children: ExtendedTTEntity[];

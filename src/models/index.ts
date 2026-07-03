@@ -1,3 +1,4 @@
+import { type GithubRelease, GithubReleaseSchema } from "./GithubRelease";
 import { type NamespacePermission, NamespacePermissionSchema } from "./NamespacePermission";
 import { type Permission, PermissionSchema } from "./Permission";
 import { type RecentActivityItem, RecentActivityItemSchema } from "./RecentActivityItem";
@@ -16,5 +17,7 @@ export {
   hasRole,
   hasRoles,
   type RecentActivityItem,
-  RecentActivityItemSchema
+  RecentActivityItemSchema,
+  type GithubRelease,
+  GithubReleaseSchema
 };

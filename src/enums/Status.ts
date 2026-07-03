@@ -1,0 +1,8 @@
+export enum Status {
+  NEW = "NEW",
+  FIXED = "FIXED",
+  ASSIGNED = "ASSIGNED",
+  VERIFIED = "VERIFIED",
+  REOPENED = "REOPENED",
+  WONT_FIX = "WONT_FIX"
+}

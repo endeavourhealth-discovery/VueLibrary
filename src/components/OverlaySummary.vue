@@ -49,13 +49,13 @@
 <script setup lang="ts">
 import { Ref, inject, ref } from "vue";
 
+import { currentTarget } from "happy-dom/lib/PropertySymbol";
 import Popover from "primevue/popover";
 import ProgressSpinner from "primevue/progressspinner";
 
 import { getNamesAsStringFromTypes } from "../helpers/ConceptTypeMethods";
 import injectionKeys from "../injectionKeys/injectionKeys";
-import { SearchResultSummary, TTIriRef } from "../interfaces/AutoGen";
-import { currentTarget } from "happy-dom/lib/PropertySymbol";
+import { SearchResultSummary, TTIriRef } from "../interfaces";
 
 const entityService = inject(injectionKeys.entityService);
 if (!entityService) throw new Error("Missing injection: entityService");

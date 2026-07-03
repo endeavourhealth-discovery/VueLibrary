@@ -1,57 +1,142 @@
-import { ChartMapNode } from "./ChartMapNode";
-import { ChartTableNode } from "./ChartTableNode";
-import { ConceptAggregate } from "./ConceptAggregate";
-import { Context } from "./Context";
-import { DownloadSettings } from "./DownloadSettings";
-import { FilterOptions } from "./FilterOptions";
-import { FiltersAsIris } from "./FiltersAsIris";
-import { GenericObject } from "./GenericObject";
-import { GithubRelease } from "./GithubRelease";
-import { HistoryItem } from "./HistoryItem";
-import { MailOptions } from "./MailOptions";
-import { MapItem } from "./MapItem";
-import { Namespace } from "./Namespace";
-import { Orderable } from "./Orderable";
-import { PropertyDisplay } from "./PropertyDisplay";
-import { QueryResponse } from "./QueryResponse";
-import { SearchOptions } from "./SearchOptions";
-import { SetDiffObject } from "./SetDiffObject";
-import { SimpleMap } from "./SimpleMap";
-import { SimpleMapIri } from "./SimpleMapIri";
-import { TTGraphData } from "./TTGraphData";
-import { TTProperty, UIProperty } from "./TTProperty";
-import { TermCode } from "./TermCode";
-import { TreeParent } from "./TreeParent";
-import { ValidatedEntity } from "./ValidatedEntity";
-
-export type * from "./AutoGen";
-export type * from "./ExtendedAutoGen";
-
-export {
-  type ChartMapNode,
-  type ChartTableNode,
-  type ConceptAggregate,
-  type Context,
-  type DownloadSettings,
-  type FilterOptions,
-  type FiltersAsIris,
-  type GenericObject,
-  type GithubRelease,
-  type HistoryItem,
-  type MapItem,
-  type Namespace,
-  type Orderable,
-  type PropertyDisplay,
-  type QueryResponse,
-  type SearchOptions,
-  type SetDiffObject,
-  type SimpleMap,
-  type SimpleMapIri,
-  type TermCode,
-  type TreeParent,
-  type TTGraphData,
-  type TTProperty,
-  type UIProperty,
-  type ValidatedEntity,
-  type MailOptions
-};
+export type { Argument } from "./Argument";
+export type { ArgumentReference } from "./ArgumentReference";
+export type { ArrayButtons } from "./ArrayButtons";
+export type { Binding } from "./Binding";
+export type { BugReport } from "./BugReport";
+export type { Case } from "./Case";
+export type { ChartMapNode } from "./ChartMapNode";
+export type { ChartTableNode } from "./ChartTableNode";
+export type { CodeGenDto } from "./CodeGenDto";
+export type { CognitoGroupRequest } from "./CognitoGroupRequest";
+export type { Compare } from "./Compare";
+export type { Concept } from "./Concept";
+export type { ConceptAggregate } from "./ConceptAggregate";
+export type { ConceptContextMap } from "./ConceptContextMap";
+export type { ConceptSet } from "./ConceptSet";
+export type { Context } from "./Context";
+export type { DataModelProperty } from "./DataModelProperty";
+export type { Delete } from "./Delete";
+export type { DownloadByQueryOptions } from "./DownloadByQueryOptions";
+export type { DownloadEntityOptions } from "./DownloadEntityOptions";
+export type { DownloadSettings } from "./DownloadSettings";
+export type { ECLQueryRequest } from "./ECLQueryRequest";
+export type { ECLStatus } from "./ECLStatus";
+export type { EditRequest } from "./EditRequest";
+export type { Element } from "./Element";
+export type { Entity } from "./Entity";
+export type { EntityApproval } from "./EntityApproval";
+export type { EntityDocument } from "./EntityDocument";
+export type { EntityReferenceNode } from "./EntityReferenceNode";
+export type { EntityValidationRequest } from "./EntityValidationRequest";
+export type { EntityValidationResponse } from "./EntityValidationResponse";
+export type { Expression } from "./Expression";
+export type { ExtendedEntityReferenceNode } from "./ExtendedEntityReferenceNode";
+export type { ExtendedSearchResultSummary } from "./ExtendedSearchResultSummary";
+export type { ExtendedTTEntity } from "./ExtendedTTEntity";
+export type { FileDocumentRequest } from "./FileDocumentRequest";
+export type { Filter } from "./Filter";
+export type { FilterOptions } from "./FilterOptions";
+export type { FiltersAsIris } from "./FiltersAsIris";
+export type { FormGenerator } from "./FormGenerator";
+export type { FunctionClause } from "./FunctionClause";
+export type { FunctionRequest } from "./FunctionRequest";
+export type { FunctionTemplate } from "./FunctionTemplate";
+export type { GenericObject } from "./GenericObject";
+export type { GroupBy } from "./GroupBy";
+export type { Having } from "./Having";
+export type { HistoryItem } from "./HistoryItem";
+export type { IMLLanguage } from "./IMLLanguage";
+export type { Indicator } from "./Indicator";
+export type { Instance } from "./Instance";
+export type { IriLD } from "./IriLD";
+export type { LoginResponse } from "./LoginResponse";
+export type { LoginResponseES } from "./LoginResponseES";
+export type { MailOptions } from "./MailOptions";
+export type { MapFunction } from "./MapFunction";
+export type { MapItem } from "./MapItem";
+export type { Match } from "./Match";
+export type { MatchDisplayRequest } from "./MatchDisplayRequest";
+export type { ModelDocument } from "./ModelDocument";
+export type { Namespace } from "./Namespace";
+export type { NamespacePermissionJava } from "./NamespacePermissionJava";
+export type { NamespaceRequest } from "./NamespaceRequest";
+export type { Node } from "./Node";
+export type { NodeShape } from "./NodeShape";
+export type { OdsResponse } from "./OdsResponse";
+export type { Orderable } from "./Orderable";
+export type { OrderBy } from "./OrderBy";
+export type { OrderDirection } from "./OrderDirection";
+export type { OrderLimit } from "./OrderLimit";
+export type { Organisation } from "./Organisation";
+export type { OrgGeoLocation } from "./OrgGeoLocation";
+export type { OrgId } from "./OrgId";
+export type { OrgLocation } from "./OrgLocation";
+export type { OrgRelationship } from "./OrgRelationship";
+export type { OrgRelationships } from "./OrgRelationships";
+export type { OrgRelTarget } from "./OrgRelTarget";
+export type { OrgRole } from "./OrgRole";
+export type { OrgRoles } from "./OrgRoles";
+export type { Page } from "./Page";
+export type { Pageable } from "./Pageable";
+export type { ParameterShape } from "./ParameterShape";
+export type { ParameterTemplate } from "./ParameterTemplate";
+export type { Path } from "./Path";
+export type { PathDocument } from "./PathDocument";
+export type { PathQuery } from "./PathQuery";
+export type { Prefix } from "./Prefix";
+export type { PropertyDisplay } from "./PropertyDisplay";
+export type { PropertyRange } from "./PropertyRange";
+export type { PropertyShape } from "./PropertyShape";
+export type { Query } from "./Query";
+export type { QueryDisplayRequest } from "./QueryDisplayRequest";
+export type { QueryEntity } from "./QueryEntity";
+export type { QueryRequest } from "./QueryRequest";
+export type { QueryResponse } from "./QueryResponse";
+export type { Range } from "./Range";
+export type { RecentActivityItemDto } from "./RecentActivityItemDto";
+export type { RequeueQueryRequest } from "./RequeueQueryRequest";
+export type { Return } from "./Return";
+export type { RoleRequest } from "./RoleRequest";
+export type { SearchBinding } from "./SearchBinding";
+export type { SearchOptions } from "./SearchOptions";
+export type { SearchRequest } from "./SearchRequest";
+export type { SearchResponse } from "./SearchResponse";
+export type { SearchResultSummary } from "./SearchResultSummary";
+export type { SearchTermCode } from "./SearchTermCode";
+export type { SetContent } from "./SetContent";
+export type { SetDiffObject } from "./SetDiffObject";
+export type { SetDistillationRequest } from "./SetDistillationRequest";
+export type { SetExportRequest } from "./SetExportRequest";
+export type { SetOptions } from "./SetOptions";
+export type { SimpleMap } from "./SimpleMap";
+export type { SimpleMapIri } from "./SimpleMapIri";
+export type { SubQueryDependency } from "./SubQueryDependency";
+export type { SuperiorPropertiesBoolFocusPagedRequest } from "./SuperiorPropertiesBoolFocusPagedRequest";
+export type { Task } from "./Task";
+export type { TaskHistory } from "./TaskHistory";
+export type { TermCode } from "./TermCode";
+export type { TransformRequest } from "./TransformRequest";
+export type { TreeParent } from "./TreeParent";
+export type { TTArray } from "./TTArray";
+export type { TTBundle } from "./TTBundle";
+export type { TTContext } from "./TTContext";
+export type { TTDocument } from "./TTDocument";
+export type { TTEntity } from "./TTEntity";
+export type { TTGraphData } from "./TTGraphData";
+export type { TTIriRef } from "./TTIriRef";
+export type { TTNode } from "./TTNode";
+export type { TTPrefix } from "./TTPrefix";
+export type { TTProperty } from "./TTProperty";
+export type { TTValue } from "./TTValue";
+export type { UIProperty } from "./UIProperty";
+export type { Update } from "./Update";
+export type { UserJava } from "./UserJava";
+export type { ValidatedEntitiesRequest } from "./ValidatedEntitiesRequest";
+export type { ValidatedEntity } from "./ValidatedEntity";
+export type { Value } from "./Value";
+export type { ValueSource } from "./ValueSource";
+export type { ValueTemplate } from "./ValueTemplate";
+export type { When } from "./When";
+export type { Where } from "./Where";
+export type { WorkflowRequest } from "./WorkflowRequest";
+export type { WorkflowResponse } from "./WorkflowResponse";

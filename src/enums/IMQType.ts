@@ -1,0 +1,5 @@
+export enum IMQType {
+  COHORT = "COHORT",
+  DATASET = "DATASET",
+  INDICATOR = "INDICATOR"
+}

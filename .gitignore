@@ -27,7 +27,3 @@ build
 *.sw?
 
 dist-tests
-Models/.env
-Models/src/main/resources/application.properties
-Models/src/main/resources/casdoor-cert.txt
-Models/build

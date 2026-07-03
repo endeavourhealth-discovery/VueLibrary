@@ -6,7 +6,7 @@ import palette from "google-palette";
 
 import { IM } from "../enums";
 import { isFeature, isFolder, isFunction, isIndicator, isProperty, isQuery, isRecordModel, isTask, isValueSet } from "../helpers/ConceptTypeMethods";
-import { Node, TTIriRef } from "../interfaces/AutoGen";
+import { Node, TTIriRef } from "../interfaces";
 
 export function getFAIconFromType(conceptTypes: TTIriRef[]): string[] {
   if (isRecordModel(conceptTypes)) return ["fa-duotone", "fa-diagram-project"];

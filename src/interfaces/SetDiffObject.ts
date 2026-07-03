@@ -1,4 +1,4 @@
-import { Concept } from "./AutoGen";
+import { Concept } from "./Concept";
 
 export interface SetDiffObject {
   membersA: Concept[];
