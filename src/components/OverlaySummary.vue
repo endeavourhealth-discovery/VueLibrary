@@ -49,6 +49,7 @@
 <script setup lang="ts">
 import { Ref, inject, ref } from "vue";
 
+import { currentTarget } from "happy-dom/lib/PropertySymbol";
 import Popover from "primevue/popover";
 import ProgressSpinner from "primevue/progressspinner";
 
@@ -63,22 +64,33 @@ const hoveredResult: Ref<SearchResultSummary | undefined> = ref();
 const overlayLocation: Ref<any> = ref({});
 const OP = ref();
 const loading = ref(true);
+const timer = ref<number | undefined>();
 
-async function showOverlay(event: any, iri: string): Promise<void> {
+async function showOverlay(event: MouseEvent, iri: string): Promise<void> {
   if (iri) {
-    loading.value = true;
-    const x = OP.value;
-    overlayLocation.value = event;
-    x.show(overlayLocation.value);
-    hoveredResult.value = await entityService!.getEntitySummary(iri);
-    loading.value = false;
+    clearTimeout(timer.value);
+
+    const target = event.currentTarget as HTMLElement;
+    if (!target) return;
+    timer.value = window.setTimeout(async () => {
+      const popover = OP.value;
+      if (!popover) return;
+
+      loading.value = true;
+      hoveredResult.value = undefined;
+      hoveredResult.value = await entityService!.getEntitySummary(iri);
+      if (target.checkVisibility()) popover.show({ currentTarget: target });
+      loading.value = false;
+    }, 500);
   }
 }
 
-function hideOverlay(event: any): void {
-  const x = OP.value;
-  x.hide(event);
+function hideOverlay(): void {
+  clearTimeout(timer.value);
+  if (OP.value) OP.value.hide();
+  hoveredResult.value = undefined;
   overlayLocation.value = {};
+  loading.value = false;
 }
 
 function getConceptTypes(types: TTIriRef[]): string {
