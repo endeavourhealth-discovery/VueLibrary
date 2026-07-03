@@ -5,6 +5,7 @@ import { FunctionClause } from "./FunctionClause";
 import { GroupBy } from "./GroupBy";
 import { Having } from "./Having";
 import { IriLD } from "./IriLD";
+import { Node } from "./Node";
 import { OrderLimit } from "./OrderLimit";
 import { Path } from "./Path";
 import { Return } from "./Return";

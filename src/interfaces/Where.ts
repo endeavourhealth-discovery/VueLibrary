@@ -4,6 +4,8 @@ import { Compare } from "./Compare";
 import { Element } from "./Element";
 import { FunctionClause } from "./FunctionClause";
 import { IriLD } from "./IriLD";
+import { Node } from "./Node";
+import { Range } from "./Range";
 import { TTIriRef } from "./TTIriRef";
 
 export interface Where extends Element {

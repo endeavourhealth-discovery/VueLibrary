@@ -42,7 +42,6 @@ export type { FunctionClause } from "./FunctionClause";
 export type { FunctionRequest } from "./FunctionRequest";
 export type { FunctionTemplate } from "./FunctionTemplate";
 export type { GenericObject } from "./GenericObject";
-export type { GithubRelease } from "./GithubRelease";
 export type { GroupBy } from "./GroupBy";
 export type { Having } from "./Having";
 export type { HistoryItem } from "./HistoryItem";
