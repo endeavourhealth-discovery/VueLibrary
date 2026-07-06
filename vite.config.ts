@@ -41,7 +41,7 @@ export default defineConfig({
     target: "esnext",
     outDir: "dist",
     emptyOutDir: true,
-    minify: false
+    minify: "esbuild"
   },
   test: {
     dir: "./tests",
