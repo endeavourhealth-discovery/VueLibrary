@@ -1,9 +1,21 @@
-import { TTIriRef } from "./TTIriRef";
+import z from "zod";
 
-export interface SearchTermCode {
-  term?: string;
-  code?: string;
-  status?: TTIriRef;
-  length?: number;
-  keyTerm?: string;
-}
+import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
+
+// export interface SearchTermCode {
+//   term?: string;
+//   code?: string;
+//   status?: TTIriRef;
+//   length?: number;
+//   keyTerm?: string;
+// }
+
+export const SearchTermCodeSchema = z.strictObject({
+  term: z.string().optional(),
+  code: z.string().optional(),
+  status: TTIriRefSchema.optional(),
+  length: z.number().optional(),
+  keyTerm: z.string().optional()
+});
+
+export type SearchTermCode = z.output<typeof SearchTermCodeSchema>;

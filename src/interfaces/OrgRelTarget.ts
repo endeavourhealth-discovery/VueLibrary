@@ -1,5 +1,13 @@
-import { OrgId } from "./OrgId";
+import z from "zod";
 
-export interface OrgRelTarget {
-  OrgId?: OrgId;
-}
+import { OrgId, OrgIdSchema } from "./OrgId";
+
+// export interface OrgRelTarget {
+//   OrgId?: OrgId;
+// }
+
+export const OrgRelTargetSchema = z.strictObject({
+  orgId: OrgIdSchema.optional()
+});
+
+export type OrgRelTarget = z.output<typeof OrgRelTargetSchema>;

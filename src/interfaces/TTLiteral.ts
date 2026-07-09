@@ -1,6 +1,15 @@
-import { TTIriRef } from "./TTIriRef";
+import z from "zod";
 
-export interface TTLiteral {
-  value?: string;
-  type?: TTIriRef;
-}
+import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
+
+// export interface TTLiteral {
+//   value?: string;
+//   type?: TTIriRef;
+// }
+
+export const TTLiteralSchema = z.strictObject({
+  value: z.string().optional(),
+  type: TTIriRefSchema.optional()
+});
+
+export type TTLiteral = z.output<typeof TTLiteralSchema>;

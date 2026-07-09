@@ -1,4 +1,12 @@
-import { GenericObject } from "./GenericObject";
-import { TTEntity } from "./TTEntity";
+import z from "zod";
 
-export interface ExtendedTTEntity extends TTEntity, GenericObject {}
+import { GenericObject, GenericObjectSchema } from "./GenericObject";
+import { TTEntity, TTEntitySchema } from "./TTEntity";
+
+// export interface ExtendedTTEntity extends TTEntity, GenericObject {}
+
+export const ExtendedTTEntitySchema = z.object({
+  ...TTEntitySchema.shape
+});
+
+export type ExtendedTTEntity = z.output<typeof ExtendedTTEntitySchema>;

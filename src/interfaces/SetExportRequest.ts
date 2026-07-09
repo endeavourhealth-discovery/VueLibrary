@@ -1,7 +1,17 @@
-import { SetOptions } from "./SetOptions";
+import z from "zod";
 
-export interface SetExportRequest {
-  ownRow?: boolean;
-  format?: string;
-  options?: SetOptions;
-}
+import { SetOptionsSchema } from "./SetOptions";
+
+// export interface SetExportRequest {
+//   ownRow?: boolean;
+//   format?: string;
+//   options?: SetOptions;
+// }
+
+export const SetExportRequestSchema = z.strictObject({
+  ownRow: z.boolean().default(false),
+  format: z.string().optional(),
+  options: SetOptionsSchema.optional()
+});
+
+export type SetExportRequest = z.output<typeof SetExportRequestSchema>;

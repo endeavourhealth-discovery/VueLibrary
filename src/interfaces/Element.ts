@@ -1,15 +1,19 @@
-import { IriLD } from "./IriLD";
+import z from "zod";
 
-export interface Element extends IriLD {
-  parameter?: string;
-  ancestorsOf?: boolean;
-  descendantsOrSelfOf?: boolean;
-  memberOf?: boolean;
-  descendantsOf?: boolean;
-  childOrSelfOf?: boolean;
-  childOf?: boolean;
-  cohort?: boolean;
-  nodeRef?: string;
-  invalid?: boolean;
-  resultSet?: boolean;
-}
+import { IriLDSchema } from "./IriLD";
+
+export const ElementSchema = IriLDSchema.extend({
+  parameter: z.string().optional(),
+  ancestorsOf: z.boolean().default(false),
+  descendantsOrSelfOf: z.boolean().default(false),
+  memberOf: z.boolean().default(false),
+  descendantsOf: z.boolean().default(false),
+  childOrSelfOf: z.boolean().default(false),
+  childOf: z.boolean().default(false),
+  cohort: z.boolean().default(false),
+  nodeRef: z.string().optional(),
+  invalid: z.boolean().default(false),
+  resultSet: z.boolean().default(false)
+});
+
+export type Element = z.output<typeof ElementSchema>;

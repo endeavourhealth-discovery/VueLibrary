@@ -1,5 +1,13 @@
-import { Match } from "./Match";
+import z from "zod";
 
-export interface PathDocument {
-  match?: Match[];
-}
+import { Match, MatchSchema } from "./Match";
+
+// export interface PathDocument {
+//   match?: Match[];
+// }
+
+export const PathDocumentSchema = z.strictObject({
+  match: z.array(MatchSchema).prefault([])
+});
+
+export type PathDocument = z.output<typeof PathDocumentSchema>;

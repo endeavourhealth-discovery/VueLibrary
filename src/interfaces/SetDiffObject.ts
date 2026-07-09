@@ -1,7 +1,17 @@
-import { Concept } from "./Concept";
+import z from "zod";
 
-export interface SetDiffObject {
-  membersA: Concept[];
-  sharedMembers: Concept[];
-  membersB: Concept[];
-}
+import { Concept, ConceptSchema } from "./Concept";
+
+// export interface SetDiffObject {
+//   membersA: Concept[];
+//   sharedMembers: Concept[];
+//   membersB: Concept[];
+// }
+
+export const SetDiffObjectSchema = z.strictObject({
+  membersA: z.array(ConceptSchema).prefault([]),
+  membersB: z.array(ConceptSchema).prefault([]),
+  sharedMembers: z.array(ConceptSchema).prefault([])
+});
+
+export type SetDiffObject = z.output<typeof SetDiffObjectSchema>;

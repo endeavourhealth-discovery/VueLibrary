@@ -1,6 +1,15 @@
-import { TTIriRef } from "./TTIriRef";
+import z from "zod";
 
-export interface SearchBinding {
-  path?: TTIriRef;
-  node?: TTIriRef;
-}
+import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
+
+// export interface SearchBinding {
+//   path?: TTIriRef;
+//   node?: TTIriRef;
+// }
+
+export const SearchBindingSchema = z.strictObject({
+  path: TTIriRefSchema.optional(),
+  node: TTIriRefSchema.optional()
+});
+
+export type SearchBinding = z.output<typeof SearchBindingSchema>;

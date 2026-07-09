@@ -1,6 +1,14 @@
-import { Entity } from "./Entity";
-import { Query } from "./Query";
+import z from "zod";
 
-export interface QueryEntity extends Entity {
-  definition?: Query;
-}
+import { Entity, EntitySchema } from "./Entity";
+import { Query, QuerySchema } from "./Query";
+
+// export interface QueryEntity extends Entity {
+//   definition?: Query;
+// }
+
+export const QueryEntitySchema = EntitySchema.extend({
+  definition: QuerySchema.optional()
+});
+
+export type QueryEntity = z.output<typeof QueryEntitySchema>;

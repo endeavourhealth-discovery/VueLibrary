@@ -1,5 +1,13 @@
-import { OrgRole } from "./OrgRole";
+import z from "zod";
 
-export interface OrgRoles {
-  Role?: OrgRole[];
-}
+import { OrgRoleSchema } from "./OrgRole";
+
+// export interface OrgRoles {
+//   Role?: OrgRole[];
+// }
+
+export const OrgRolesSchema = z.strictObject({
+  role: z.array(OrgRoleSchema).prefault([])
+});
+
+export type OrgRoles = z.output<typeof OrgRoleSchema>;

@@ -1,7 +1,17 @@
-import { UserJava } from "./UserJava";
+import z from "zod";
 
-export interface LoginResponseES {
-  sessionId?: string;
-  user?: UserJava;
-  state?: string;
-}
+import { UserJavaSchema } from "./UserJava";
+
+// export interface LoginResponseES {
+//   sessionId?: string;
+//   user?: UserJava;
+//   state?: string;
+// }
+
+export const LoginResponseESSchema = z.strictObject({
+  sessionId: z.string(),
+  user: UserJavaSchema,
+  state: z.string()
+});
+
+export type LoginResponseES = z.output<typeof LoginResponseESSchema>;

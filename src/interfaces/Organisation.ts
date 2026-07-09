@@ -1,14 +1,28 @@
-import { OrgGeoLocation } from "./OrgGeoLocation";
-import { OrgId } from "./OrgId";
-import { OrgRelationships } from "./OrgRelationships";
-import { OrgRoles } from "./OrgRoles";
+import z from "zod";
 
-export interface Organisation {
-  Name?: string;
-  OrgId?: OrgId;
-  Status?: string;
-  orgRecordClass?: string;
-  GeoLoc?: OrgGeoLocation;
-  Roles?: OrgRoles;
-  Rels?: OrgRelationships;
-}
+import { OrgGeoLocationSchema } from "./OrgGeoLocation";
+import { OrgIdSchema } from "./OrgId";
+import { OrgRelationshipsSchema } from "./OrgRelationships";
+import { OrgRolesSchema } from "./OrgRoles";
+
+// export interface Organisation {
+//   Name?: string;
+//   OrgId?: OrgId;
+//   Status?: string;
+//   orgRecordClass?: string;
+//   GeoLoc?: OrgGeoLocation;
+//   Roles?: OrgRoles;
+//   Rels?: OrgRelationships;
+// }
+
+export const OrganisationSchema = z.strictObject({
+  name: z.string().optional,
+  ordId: OrgIdSchema.optional(),
+  status: z.string().optional(),
+  orgRecordClass: z.string().optional(),
+  geoLoc: OrgGeoLocationSchema.optional(),
+  roles: OrgRolesSchema.optional(),
+  rels: OrgRelationshipsSchema.optional()
+});
+
+export type Organisation = z.output<typeof OrganisationSchema>;

@@ -1,10 +1,24 @@
-import { TTIriRef } from "./TTIriRef";
+import z from "zod";
 
-export interface Indicator extends TTIriRef {
-  isSubIndicatorOf?: TTIriRef[];
-  numerator?: TTIriRef;
-  dataset?: TTIriRef;
-  actionIfFalse?: TTIriRef[];
-  actionIfTrue?: TTIriRef[];
-  denominator?: TTIriRef;
-}
+import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
+
+// export interface Indicator extends TTIriRef {
+//   isSubIndicatorOf?: TTIriRef[];
+//   numerator?: TTIriRef;
+//   dataset?: TTIriRef;
+//   actionIfFalse?: TTIriRef[];
+//   actionIfTrue?: TTIriRef[];
+//   denominator?: TTIriRef;
+// }
+
+export const IndicatorSchema = z.strictObject({
+  ...TTIriRefSchema.shape,
+  isSubIndicatorOf: z.array(TTIriRefSchema).prefault([]),
+  numerator: TTIriRefSchema.optional(),
+  dataset: TTIriRefSchema.optional(),
+  actionIfFalse: z.array(TTIriRefSchema).prefault([]),
+  actionIfTrue: z.array(TTIriRefSchema).prefault([]),
+  denominator: TTIriRefSchema.optional()
+});
+
+export type Indicator = z.output<typeof IndicatorSchema>;

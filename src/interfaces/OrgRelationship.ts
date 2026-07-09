@@ -1,7 +1,17 @@
-import { OrgRelTarget } from "./OrgRelTarget";
+import z from "zod";
 
-export interface OrgRelationship {
-  Status?: string;
-  Target?: OrgRelTarget;
-  id?: string;
-}
+import { OrgRelTargetSchema } from "./OrgRelTarget";
+
+// export interface OrgRelationship {
+//   Status?: string;
+//   Target?: OrgRelTarget;
+//   id?: string;
+// }
+
+export const OrgRelationshipSchema = z.strictObject({
+  status: z.string().optional(),
+  target: OrgRelTargetSchema.optional(),
+  id: z.string().optional()
+});
+
+export type OrgRelationship = z.output<typeof OrgRelationshipSchema>;

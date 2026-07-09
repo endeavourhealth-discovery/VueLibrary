@@ -1,7 +1,16 @@
-import { OrgRole } from "./OrgRole";
-import { Organisation } from "./Organisation";
+import z from "zod";
 
-export interface OdsResponse {
-  Organisation?: Organisation;
-  Roles?: OrgRole[];
-}
+import { OrgRoleSchema } from "./OrgRole";
+import { OrganisationSchema } from "./Organisation";
+
+// export interface OdsResponse {
+//   Organisation?: Organisation;
+//   Roles?: OrgRole[];
+// }
+
+export const OdsResponseSchema = z.strictObject({
+  organisation: OrganisationSchema.optional(),
+  roles: z.array(OrgRoleSchema).prefault([])
+});
+
+export type OdsResponse = z.output<typeof OdsResponseSchema>;

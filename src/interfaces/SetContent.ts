@@ -1,11 +1,25 @@
-import { Concept } from "./Concept";
+import z from "zod";
 
-export interface SetContent {
-  name?: string;
-  description?: string;
-  status?: string;
-  version?: number;
-  setDefinition?: string;
-  subsets?: string[];
-  concepts?: Concept[];
-}
+import { Concept, ConceptSchema } from "./Concept";
+
+// export interface SetContent {
+//   name?: string;
+//   description?: string;
+//   status?: string;
+//   version?: number;
+//   setDefinition?: string;
+//   subsets?: string[];
+//   concepts?: Concept[];
+// }
+
+export const SetContentSchema = z.strictObject({
+  name: z.string().optional(),
+  description: z.string().optional(),
+  status: z.string().optional(),
+  version: z.number().optional(),
+  setDefinition: z.string().optional(),
+  subsets: z.array(z.string()).prefault([]),
+  concepts: z.array(ConceptSchema).prefault([])
+});
+
+export type SetContent = z.output<typeof SetContentSchema>;

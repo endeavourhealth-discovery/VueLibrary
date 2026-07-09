@@ -1,10 +1,23 @@
-import { Context } from "./Context";
+import z from "zod";
 
-export interface ConceptContextMap {
-  id?: string;
-  node?: string;
-  value?: string;
-  regex?: string;
-  property?: string;
-  context?: Context[];
-}
+import { ContextSchema } from "./Context";
+
+// export interface ConceptContextMap {
+//   id?: string;
+//   node?: string;
+//   value?: string;
+//   regex?: string;
+//   property?: string;
+//   context?: Context[];
+// }
+
+export const ConceptContextMapSchema = z.strictObject({
+  id: z.string().optional(),
+  node: z.string().optional(),
+  value: z.string().optional(),
+  regex: z.string().optional(),
+  property: z.string().optional(),
+  context: z.array(ContextSchema).prefault([])
+});
+
+export type ConceptContextMap = z.output<typeof ConceptContextMapSchema>;

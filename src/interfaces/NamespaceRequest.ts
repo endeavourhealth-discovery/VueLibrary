@@ -1,6 +1,15 @@
-import { NamespacePermissionJava } from "./NamespacePermissionJava";
-import { Task } from "./Task";
+import z from "zod";
 
-export interface NamespaceRequest extends Task {
-  namespacePermission?: NamespacePermissionJava;
-}
+import { NamespacePermissionJava, NamespacePermissionJavaSchema } from "./NamespacePermissionJava";
+import { Task, TaskSchema } from "./Task";
+
+// export interface NamespaceRequest extends Task {
+//   namespacePermission?: NamespacePermissionJava;
+// }
+
+export const NamespaceRequestSchema = z.strictObject({
+  ...TaskSchema.shape,
+  namespacePermission: NamespacePermissionJavaSchema.optional()
+});
+
+export type NamespaceRequest = z.output<typeof NamespaceRequestSchema>;

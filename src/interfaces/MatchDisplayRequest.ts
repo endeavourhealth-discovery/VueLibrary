@@ -1,8 +1,17 @@
+import z from "zod";
+
 import { GRAPH } from "@/enums";
 
-import { Match } from "./Match";
+import { MatchSchema } from "./Match";
 
-export interface MatchDisplayRequest {
-  match?: Match;
-  graph?: GRAPH;
-}
+// export interface MatchDisplayRequest {
+//   match?: Match;
+//   graph?: GRAPH;
+// }
+
+export const MatchDisplayRequestSchema = z.strictObject({
+  match: MatchSchema.optional(),
+  graph: z.enum(GRAPH).optional()
+});
+
+export type MatchDisplayRequest = z.output<typeof MatchDisplayRequestSchema>;

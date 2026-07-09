@@ -1,6 +1,15 @@
-import { Expression } from "./Expression";
-import { Where } from "./Where";
+import z from "zod";
 
-export interface When extends Where {
-  then?: Expression;
-}
+import { Expression, ExpressionSchema } from "./Expression";
+import { WhereSchema } from "./Where";
+
+// export interface When extends Where {
+//   then?: Expression;
+// }
+
+export const WhenSchema = z.strictObject({
+  ...WhereSchema.shape,
+  then: ExpressionSchema.optional()
+});
+
+export type When = z.output<typeof WhenSchema>;

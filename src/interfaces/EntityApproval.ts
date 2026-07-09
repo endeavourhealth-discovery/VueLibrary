@@ -1,9 +1,19 @@
+import z from "zod";
+
 import { ApprovalType } from "@/enums";
 
-import { TTIriRef } from "./TTIriRef";
-import { Task } from "./Task";
+import { TTIriRefSchema } from "./TTIriRef";
+import { TaskSchema } from "./Task";
 
-export interface EntityApproval extends Task {
-  entityIri?: TTIriRef;
-  approvalType?: ApprovalType;
-}
+// export interface EntityApproval extends Task {
+//   entityIri?: TTIriRef;
+//   approvalType?: ApprovalType;
+// }
+
+export const EntityApprovalSchema = z.strictObject({
+  ...TaskSchema.shape,
+  entityIri: TTIriRefSchema.optional(),
+  approvalType: z.enum(ApprovalType).optional()
+});
+
+export type EntityApproval = z.output<typeof EntityApprovalSchema>;

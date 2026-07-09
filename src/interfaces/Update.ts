@@ -1,8 +1,17 @@
-import { Delete } from "./Delete";
-import { Match } from "./Match";
-import { TTIriRef } from "./TTIriRef";
+import z from "zod";
 
-export interface Update extends TTIriRef {
-  match?: Match[];
-  delete?: Delete[];
-}
+import { Delete, DeleteSchema } from "./Delete";
+import { Match, MatchSchema } from "./Match";
+import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
+
+// export interface Update extends TTIriRef {
+//   match?: Match[];
+//   delete?: Delete[];
+// }
+
+export const UpdateSchema = TTIriRefSchema.extend({
+  match: z.array(MatchSchema).prefault([]),
+  delete: z.array(DeleteSchema).prefault([])
+});
+
+export type Update = z.output<typeof UpdateSchema>;

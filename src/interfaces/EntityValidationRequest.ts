@@ -1,9 +1,19 @@
+import z from "zod";
+
 import { GRAPH } from "@/enums";
 
-import { TTEntity } from "./TTEntity";
+import { TTEntitySchema } from "./TTEntity";
 
-export interface EntityValidationRequest {
-  entity?: TTEntity;
-  validationIri?: string;
-  graph?: GRAPH;
-}
+// export interface EntityValidationRequest {
+//   entity?: TTEntity;
+//   validationIri?: string;
+//   graph?: GRAPH;
+// }
+
+export const EntityValidationRequestSchema = z.strictObject({
+  entity: TTEntitySchema.optional(),
+  validationIri: z.string().optional(),
+  graph: z.enum(GRAPH).optional()
+});
+
+export type EntityValidationRequest = z.output<typeof EntityValidationRequestSchema>;

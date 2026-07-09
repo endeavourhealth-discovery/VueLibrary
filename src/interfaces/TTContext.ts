@@ -1,6 +1,15 @@
-import { TTPrefix } from "./TTPrefix";
+import z from "zod";
 
-export interface TTContext {
-  nameSpaces?: TTPrefix[];
-  prefixes?: TTPrefix[];
-}
+import { TTPrefixSchema } from "./TTPrefix";
+
+// export interface TTContext {
+//   nameSpaces?: TTPrefix[];
+//   prefixes?: TTPrefix[];
+// }
+
+export const TTContextSchema = z.strictObject({
+  nameSpaces: z.array(TTPrefixSchema).prefault([]),
+  prefixes: z.array(TTPrefixSchema).prefault([])
+});
+
+export type TTContext = z.output<typeof TTContextSchema>;

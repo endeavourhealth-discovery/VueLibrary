@@ -1,6 +1,15 @@
-import { ExtendedTTEntity } from "./ExtendedTTEntity";
+import z from "zod";
 
-export interface ValidatedEntity extends ExtendedTTEntity {
-  validationCode?: string;
-  validationLabel?: string;
-}
+import { ExtendedTTEntity, ExtendedTTEntitySchema } from "./ExtendedTTEntity";
+
+// export interface ValidatedEntity extends ExtendedTTEntity {
+//   validationCode?: string;
+//   validationLabel?: string;
+// }
+
+export const ValidatedEntitySchema = ExtendedTTEntitySchema.extend({
+  validationCode: z.string().optional(),
+  validationLabel: z.string().optional()
+});
+
+export type ValidatedEntity = z.output<typeof ValidatedEntitySchema>;

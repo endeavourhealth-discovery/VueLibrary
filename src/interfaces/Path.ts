@@ -1,13 +1,21 @@
-import { Element } from "./Element";
-import { Node } from "./Node";
-import { TTIriRef } from "./TTIriRef";
+import z from "zod";
 
-export interface Path extends Element {
-  inverse?: boolean;
-  optional?: boolean;
-  path?: Path[];
-  pathVariable?: string;
-  typeOf?: Node;
-  qualifier?: TTIriRef;
-  node?: string;
-}
+import { ElementSchema } from "./Element";
+import { NodeSchema } from "./Node";
+import { TTIriRefSchema } from "./TTIriRef";
+
+export const PathSchema = z.strictObject({
+  inverse: z.boolean().default(false),
+  optional: z.boolean().default(false),
+  get path(): z.ZodPrefault<z.ZodArray<typeof PathSchema>> {
+    return z.array(PathSchema).prefault([]);
+  },
+  pathVariable: z.string().optional(),
+  get typeOf(): typeof NodeSchema {
+    return NodeSchema;
+  },
+  qualifier: TTIriRefSchema,
+  node: z.string()
+});
+
+export type Path = z.output<typeof PathSchema>;

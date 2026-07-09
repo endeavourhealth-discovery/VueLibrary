@@ -1,11 +1,25 @@
-import { SearchResultSummary } from "./SearchResultSummary";
+import z from "zod";
 
-export interface SearchResponse {
-  page?: number;
-  count?: number;
-  totalCount?: number;
-  highestUsage?: number;
-  term?: string;
-  entities?: SearchResultSummary[];
-  exactMatch?: boolean;
-}
+import { SearchResultSummarySchema } from "./SearchResultSummary";
+
+// export interface SearchResponse {
+//   page?: number;
+//   count?: number;
+//   totalCount?: number;
+//   highestUsage?: number;
+//   term?: string;
+//   entities?: SearchResultSummary[];
+//   exactMatch?: boolean;
+// }
+
+export const SearchResponseSchema = z.strictObject({
+  page: z.number().optional(),
+  count: z.number().optional(),
+  totalCount: z.number().optional(),
+  highestUsage: z.number().optional(),
+  term: z.string().optional(),
+  entities: z.array(SearchResultSummarySchema).prefault([]),
+  exactMatch: z.boolean().default(false)
+});
+
+export type SearchResponse = z.output<typeof SearchResponseSchema>;

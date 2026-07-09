@@ -1,6 +1,15 @@
-import { IriLD } from "./IriLD";
-import { TTIriRef } from "./TTIriRef";
+import z from "zod";
 
-export interface Instance extends IriLD {
-  entailment?: TTIriRef;
-}
+import { IriLD, IriLDSchema } from "./IriLD";
+import { TTIriRefSchema } from "./TTIriRef";
+
+// export interface Instance extends IriLD {
+//   entailment?: TTIriRef;
+// }
+
+export const InstanceSchema = z.strictObject({
+  ...IriLDSchema.shape,
+  entailment: TTIriRefSchema.optional()
+});
+
+export type Instance = z.output<typeof InstanceSchema>;
