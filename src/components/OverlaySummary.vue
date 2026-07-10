@@ -1,45 +1,18 @@
 <template>
-  <Popover ref="OP" id="overlay-panel" style="width: 50vw" :breakpoints="{ '960px': '75vw' }">
+  <Popover ref="OP" id="overlay-panel" style="max-width: 30vw" :breakpoints="{ '960px': '75vw' }">
     <div v-if="loading" class="flex flex-row justify-center"><ProgressSpinner /></div>
-    <div v-else-if="hoveredResult?.name" class="justify-contents-start result-overlay flex flex-row" style="width: 100%; gap: 1rem">
-      <div class="left-side" style="width: 50%">
-        <p>
-          <strong>Name: </strong>
-          <span>{{ hoveredResult.name }}</span>
-        </p>
-        <p>
-          <strong>Iri: </strong>
-          <span style="word-break: break-all">{{ hoveredResult.iri }}</span>
-        </p>
+    <div v-else-if="hoveredResult?.status" class="justify-contents-start result-overlay flex flex-row" style="width: 100%; gap: 1rem">
+      <div style="max-width: 75%">
         <p>
           <strong>Description: </strong>
-          <span>{{ hoveredResult.description }}</span>
-        </p>
-        <p v-if="hoveredResult.unit">
-          <strong>Units of measure : </strong>
-          <span>{{ getConceptTypes(hoveredResult.unit) }}</span>
-        </p>
-        <p v-if="hoveredResult.qualifier">
-          <strong>May be qualified by : </strong>
-          <span>{{ getConceptTypes(hoveredResult.qualifier) }}</span>
-        </p>
-        <p v-if="hoveredResult.code">
-          <strong>Code: </strong>
-          <span>{{ hoveredResult.code }}</span>
+          <span v-if="hoveredResult.description" >{{ hoveredResult.description }}</span>
+          <span v-else> N/A </span>
         </p>
       </div>
-      <div class="right-side" style="width: 50%">
-        <p v-if="hoveredResult.status">
+      <div v-if="hoveredResult.status">
+        <p>
           <strong>Status: </strong>
           <span>{{ hoveredResult.status.name }}</span>
-        </p>
-        <p v-if="hoveredResult.scheme">
-          <strong>Scheme: </strong>
-          <span>{{ hoveredResult.scheme.name }}</span>
-        </p>
-        <p v-if="hoveredResult.type">
-          <strong>Type: </strong>
-          <span>{{ getConceptTypes(hoveredResult.type) }}</span>
         </p>
       </div>
     </div>
@@ -52,6 +25,8 @@ import { Ref, inject, ref } from "vue";
 import { currentTarget } from "happy-dom/lib/PropertySymbol";
 import Popover from "primevue/popover";
 import ProgressSpinner from "primevue/progressspinner";
+
+import { isObjectHasKeys } from "@/helpers";
 
 import { getNamesAsStringFromTypes } from "../helpers/ConceptTypeMethods";
 import injectionKeys from "../injectionKeys/injectionKeys";
@@ -66,19 +41,21 @@ const OP = ref();
 const loading = ref(true);
 const timer = ref<number | undefined>();
 
-async function showOverlay(event: MouseEvent, iri: string): Promise<void> {
-  if (iri) {
+async function showOverlay(event: MouseEvent, data: any): Promise<void> {
+  hoveredResult.value = undefined;
+  if (data) {
     clearTimeout(timer.value);
-
     const target = event.currentTarget as HTMLElement;
     if (!target) return;
     timer.value = window.setTimeout(async () => {
       const popover = OP.value;
       if (!popover) return;
-
       loading.value = true;
-      hoveredResult.value = undefined;
-      hoveredResult.value = await entityService!.getEntitySummary(iri);
+      if (isObjectHasKeys(data, ["status"])) {
+        hoveredResult.value = data as SearchResultSummary;
+      } else {
+        hoveredResult.value = await entityService!.getEntitySummary(data);
+      }
       if (target.checkVisibility()) popover.show({ currentTarget: target });
       loading.value = false;
     }, 500);
