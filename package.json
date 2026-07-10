@@ -1,6 +1,6 @@
 {
   "name": "@endeavour/vue-library",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "type": "module",
   "packageManager": "pnpm@10.34.2",
   "scripts": {
