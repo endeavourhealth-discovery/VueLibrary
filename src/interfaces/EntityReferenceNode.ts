@@ -9,4 +9,5 @@ export interface EntityReferenceNode extends TTIriRef {
   hasGrandChildren?: boolean;
   type?: TTArray;
   orderNumber?: number;
+  status?: TTIriRef;
 }
