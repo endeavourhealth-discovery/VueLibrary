@@ -3,7 +3,7 @@
 // Class, Record Type
 // Everything else
 import { IM, OWL, RDF, SHACL } from "../enums";
-import { TTIriRef } from "../interfaces";
+import { TTIriRef } from "../models";
 
 export function isOfTypes(conceptTypeElements: TTIriRef[], ...types: string[]): boolean {
   if (!conceptTypeElements?.length) {

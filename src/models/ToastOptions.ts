@@ -4,7 +4,7 @@ import { ToastSeverity } from "../enums/ToastSeverity";
 import { toTitleCase } from "../helpers/StringManipulators";
 import { getLogger } from "../logger/LogConfig";
 
-export default class ToastOptions {
+export class ToastOptions {
   severity: ToastSeverity;
   summary: string;
   detail: string;

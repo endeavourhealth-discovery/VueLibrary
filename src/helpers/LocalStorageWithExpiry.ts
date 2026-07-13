@@ -1,5 +1,5 @@
 import { isObjectHasKeys } from "../helpers";
-import { GenericObject } from "../interfaces";
+import { GenericObject } from "../models";
 
 const isClient = () => typeof window !== "undefined" && typeof localStorage != "undefined";
 
@@ -11,7 +11,7 @@ export const localStorageWithExpiry = {
       try {
         const result = JSON.parse(lsItem);
         if (isObjectHasKeys(result, ["data", "expireTime"])) {
-          if (result.expireTime <= Date.now()) {
+          if (typeof result.expireTime === "number" && result.expireTime <= Date.now()) {
             localStorage.removeItem(key);
             return null;
           }

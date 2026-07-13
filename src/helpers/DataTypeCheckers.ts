@@ -6,6 +6,10 @@ export function isArrayHasLength(array: unknown): boolean {
   }
 }
 
+export function isArrayOf<T>(value: unknown, itemGuard: (item: unknown) => item is T): value is T[] {
+  return Array.isArray(value) && value.every(itemGuard);
+}
+
 export function isObjectHasKeys(object: any, keys?: string[]): boolean {
   if (!isObject(object)) return false;
   if (!Object.keys(object).length) return false;

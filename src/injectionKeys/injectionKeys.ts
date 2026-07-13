@@ -3,9 +3,11 @@ import { InjectionKey } from "vue";
 import { OrganizationChartNode } from "primevue";
 import { TreeNode } from "primevue/treenode";
 
+import { PageableEntityReferenceNode, PageableNode, PageableTTIriRef } from "@/models/Pageable";
+
 import { PrimeVueColors, PrimeVuePresetThemes } from "../enums";
 import { DisplayMode } from "../enums";
-import { FilterOptions, FiltersAsIris, Namespace, PropertyDisplay, QueryResponse, SetDiffObject, SimpleMap, TermCode } from "../interfaces";
+import { EntityReferenceNode, FilterOptions, FiltersAsIris, Namespace, PropertyDisplay, QueryResponse, SetDiffObject, SimpleMap, TermCode } from "../models";
 import {
   ConceptContextMap,
   DownloadByQueryOptions,
@@ -25,11 +27,11 @@ import {
   SearchResultSummary,
   SetExportRequest,
   TTIriRef
-} from "../interfaces";
-import { ExtendedEntityReferenceNode } from "../interfaces/ExtendedEntityReferenceNode";
-import { ExtendedTTEntity } from "../interfaces/ExtendedTTEntity";
-import { TTBundle } from "../interfaces/TTBundle";
+} from "../models";
 import { User } from "../models";
+import { ExtendedEntityReferenceNode } from "../models/ExtendedEntityReferenceNode";
+import { ExtendedTTEntity } from "../models/ExtendedTTEntity";
+import { TTBundle } from "../models/TTBundle";
 
 const conceptService = Symbol("conceptService") as InjectionKey<{
   getMatchedFrom(iri: string): Promise<SimpleMap[]>;
@@ -72,7 +74,7 @@ const entityService = Symbol("entityService") as InjectionKey<{
     filters?: FiltersAsIris,
     controller?: AbortController,
     typeFilter?: string[]
-  ): Promise<{ totalCount: number; currentPage: number; pageSize: number; result: ExtendedTTEntity[] }>;
+  ): Promise<PageableEntityReferenceNode>;
   getEntityAsEntityReferenceNode(iri: string): Promise<ExtendedEntityReferenceNode>;
   getPathBetweenNodes(descendant: string, ancestor: string): Promise<TTIriRef[]>;
   getAllowableChildTypes(iri: string): Promise<ExtendedTTEntity[]>;
@@ -92,7 +94,7 @@ const entityService = Symbol("entityService") as InjectionKey<{
     pageSize: number,
     filters?: FiltersAsIris,
     controller?: AbortController
-  ): Promise<Pageable<TTIriRef>>;
+  ): Promise<PageableTTIriRef>;
   getPartialEntityBundle(iri: string, predicates: string[]): Promise<TTBundle>;
   getEntityUsages(iri: string, pageIndex: number, pageSize: number): Promise<ExtendedTTEntity[]>;
   getUsagesTotalRecords(iri: string): Promise<number>;
@@ -127,8 +129,8 @@ const setService = Symbol("setService") as InjectionKey<{
   getFullExportSet(setRequest: SetExportRequest, raw?: boolean): Promise<Blob>;
   IMV1(conceptIri: string, raw?: boolean): Promise<Blob>;
   publish(conceptIri: string): Promise<void>;
-  getMembers(iri: string, entailments: boolean, pageIndex: number, pageSize: number, controller?: AbortController): Promise<Pageable<Node>>;
-  getMembersFromQuery(query: Query, pageIndex: number, pageSize: number): Promise<Pageable<Node>>;
+  getMembers(iri: string, entailments: boolean, pageIndex: number, pageSize: number, controller?: AbortController): Promise<PageableNode>;
+  getMembersFromQuery(query: Query, pageIndex: number, pageSize: number): Promise<PageableNode>;
   getSetComparison(iriA?: string, iriB?: string): Promise<SetDiffObject>;
   getSubsets(iri: string): Promise<TTIriRef[]>;
 }>;

@@ -13,7 +13,7 @@ import { computed } from "vue";
 
 import { TagSeverity } from "../enums";
 import { isArrayHasLength, isObjectHasKeys } from "../helpers";
-import type { TTIriRef } from "../interfaces";
+import type { TTIriRef } from "../models";
 
 interface Props {
   label: string;

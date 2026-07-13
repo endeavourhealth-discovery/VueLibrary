@@ -1,4 +1,4 @@
-import { BugReport, PropertyShape, TTBundle, TTIriRef, Task } from "../interfaces";
+import { BugReport, PropertyShape, TTBundle, TTIriRef, Task } from "../models";
 import { isObjectHasKeys } from "./DataTypeCheckers";
 
 export function isTTIriRef(data: unknown): data is TTIriRef {

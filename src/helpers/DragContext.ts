@@ -1,4 +1,4 @@
-import { Match, Where } from "../interfaces";
+import { Match, Where } from "../models";
 
 type DraggedItem = {
   clause: Match | Where;

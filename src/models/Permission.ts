@@ -11,3 +11,7 @@ export const PermissionSchema = z.object({
 });
 
 export type Permission = z.output<typeof PermissionSchema>;
+
+export function isPermission(value: unknown): value is Permission {
+  return PermissionSchema.safeParse(value).success;
+}

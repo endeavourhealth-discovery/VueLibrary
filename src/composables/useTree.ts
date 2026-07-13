@@ -5,9 +5,9 @@ import { useToast } from "primevue/usetoast";
 
 import { IM } from "../enums";
 import { getColourFromType, getFAIconFromType } from "../helpers/ConceptTypeVisuals";
-import { isObjectHasKeys } from "../helpers/DataTypeCheckers";
+import { isArrayHasLength, isObjectHasKeys } from "../helpers/DataTypeCheckers";
 import injectionKeys from "../injectionKeys/injectionKeys";
-import { ExtendedTTEntity, TTIriRef } from "../interfaces";
+import { EntityReferenceNode, ExtendedTTEntity, TTIriRef } from "../models";
 
 export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: number) {
   const useDirectService = inject(injectionKeys.useDirectService);
@@ -122,13 +122,13 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
     node.loading = false;
   }
 
-  async function onNodeExpand(node: any, typeFilter?: string[]) {
+  async function onNodeExpand(node: TreeNode, typeFilter?: string[]) {
     if (!node.data) return;
     if (isObjectHasKeys(node)) {
       node.loading = true;
       if (!isObjectHasKeys(expandedKeys.value, [node.key])) expandedKeys.value[node.key] = true;
       if (!expandedData.value.find(x => x.key === node.key)) expandedData.value.push(node);
-      if (node.data === IM.FAVOURITES && node.children.length <= favourites.value.length) {
+      if (node.data === IM.FAVOURITES && node.children && isArrayHasLength(node.children) && node.children.length <= favourites.value.length) {
         await expandFavouriteNode(node);
       } else {
         await expandNode(node, typeFilter);
@@ -147,7 +147,7 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
     node.children = favChildren;
   }
 
-  function childrenHasNode(newChildren: ExtendedTTEntity[], node: TreeNode): boolean {
+  function childrenHasNode(newChildren: EntityReferenceNode[], node: TreeNode): boolean {
     return !!newChildren.find(child => child.iri === node.data);
   }
 
@@ -196,7 +196,7 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
     }
   }
 
-  function nodeHasChild(node: TreeNode, child: ExtendedTTEntity) {
+  function nodeHasChild(node: TreeNode, child: EntityReferenceNode) {
     return !!node.children?.find(nodeChild => child.iri === nodeChild.data);
   }
 
@@ -262,7 +262,7 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
     }
   }
 
-  async function selectAndExpand(node: any) {
+  async function selectAndExpand(node: TreeNode) {
     selectKey(node.key);
     if (!node.children || node.children.length === 0) {
       await onNodeExpand(node);

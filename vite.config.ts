@@ -6,7 +6,6 @@ import { defineConfig } from "vitest/config";
 
 const entries: Record<string, string> = {
   index: path.resolve(__dirname, "src/index.ts"),
-  interfaces: path.resolve(__dirname, "src/interfaces/index.ts"),
   enums: path.resolve(__dirname, "src/enums/index.ts"),
   composables: path.resolve(__dirname, "src/composables/index.ts"),
   components: path.resolve(__dirname, "src/components/index.ts"),

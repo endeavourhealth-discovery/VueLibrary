@@ -1,6 +1,6 @@
 import z from "zod";
 
-export const GithubReleaseSchema = z.object({
+export const GithubReleaseSchema = z.strictObject({
   version: z.string(),
   title: z.string(),
   createdDate: z.date(),
@@ -11,3 +11,7 @@ export const GithubReleaseSchema = z.object({
 });
 
 export type GithubRelease = z.output<typeof GithubReleaseSchema>;
+
+export function isGithubRelease(value: unknown): value is GithubRelease {
+  return GithubReleaseSchema.safeParse(value).success;
+}

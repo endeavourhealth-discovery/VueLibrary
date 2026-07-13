@@ -5,8 +5,8 @@ import { defineStore } from "pinia";
 import { FontSize, PrimeVueColors, PrimeVuePresetThemes, UserRole } from "../enums";
 import { isObjectHasKeys } from "../helpers";
 import { localStorageWithExpiry } from "../helpers";
-import { HistoryItem } from "../interfaces";
-import { NamespacePermissionJava, RecentActivityItemDto } from "../interfaces";
+import { HistoryItem } from "../models";
+import { NamespacePermissionJava, RecentActivityItemDto } from "../models";
 import { RecentActivityItem, User } from "../models";
 
 export const useUserStore = defineStore("user", () => {
@@ -88,7 +88,7 @@ export const useUserStore = defineStore("user", () => {
     const surfaceColor = localStorageWithExpiry.getItem("surfaceColor");
     if (surfaceColor && Object.values(PrimeVueColors).includes(surfaceColor as PrimeVueColors)) currentSurfaceColor.value = surfaceColor as PrimeVueColors;
     const fontSize = localStorageWithExpiry.getItem("fontSize");
-    if (fontSize) currentFontSize.value = fontSize;
+    if (fontSize && Object.values(FontSize).includes(fontSize as FontSize)) currentFontSize.value = fontSize as FontSize;
   }
 
   function clearAllFromLocalStorage(): void {
