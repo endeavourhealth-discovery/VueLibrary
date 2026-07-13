@@ -24,16 +24,7 @@ import { TTPrefixSchema } from "./TTPrefix";
 export const TTEntitySchema = z.strictObject({
   ...TTNodeSchema.shape,
   context: TTContextSchema.optional(),
-  crud: TTIriRefSchema.optional(),
-  type: TTArraySchema,
-  status: TTIriRefSchema.optional(),
-  name: z.string().optional(),
-  scheme: TTIriRefSchema.optional(),
-  version: z.number().optional(),
-  description: z.string().optional(),
-  code: z.string().optional(),
-  types: z.array(TTIriRefSchema).prefault([]),
-  prefixes: z.array(TTPrefixSchema).prefault([])
+  crud: TTIriRefSchema.optional()
 });
 
 export type TTEntity = z.output<typeof TTEntitySchema>;

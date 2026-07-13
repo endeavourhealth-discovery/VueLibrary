@@ -13,3 +13,4 @@ export * from "./Sorters";
 export * from "./StringManipulators";
 export * as TypeGuards from "./TypeGuards";
 export * from "./LocalStorageWithExpiry";
+export * from "./isEnumValue";
