@@ -20,47 +20,47 @@ export function isOfTypes(conceptTypeElements: TTIriRef[], ...types: string[]): 
   return found;
 }
 
-export function isValueSet(conceptTypes: TTIriRef[]): boolean {
+export function entityIsValueSet(conceptTypes: TTIriRef[]): boolean {
   return isOfTypes(conceptTypes, IM.SET, IM.QUERY_SET, IM.VALUE_SET, IM.CONCEPT_SET, IM.CONCEPT_SET_GROUP);
 }
 
-export function isTask(conceptTypes: TTIriRef[]): boolean {
+export function entityIsTask(conceptTypes: TTIriRef[]): boolean {
   return isOfTypes(conceptTypes, IM.TASK) || isOfTypes(conceptTypes, IM.MAPPING_TASK) || isOfTypes(conceptTypes, IM.UPDATE_TASK);
 }
 
-export function isProperty(conceptTypes: TTIriRef[]): boolean {
+export function entityIsProperty(conceptTypes: TTIriRef[]): boolean {
   return isOfTypes(conceptTypes, RDF.PROPERTY, SHACL.PROPERTY, IM.DATA_PROPERTY, IM.TARGET_PROPERTY, IM.FUNCTION_PROPERTY, OWL.ANNOTATION_PROPERTY);
 }
 
-export function isFunctionalProperty(conceptTypes: TTIriRef[]): boolean {
-  return isProperty(conceptTypes) && isOfTypes(conceptTypes, SHACL.FUNCTION);
+export function entityIsFunctionalProperty(conceptTypes: TTIriRef[]): boolean {
+  return entityIsProperty(conceptTypes) && isOfTypes(conceptTypes, SHACL.FUNCTION);
 }
 
-export function isConcept(conceptTypes: TTIriRef[]): boolean {
+export function entityIsConcept(conceptTypes: TTIriRef[]): boolean {
   return isOfTypes(conceptTypes, IM.CONCEPT);
 }
 
-export function isQuery(entityTypes: TTIriRef[]): boolean {
+export function entityIsQuery(entityTypes: TTIriRef[]): boolean {
   return isOfTypes(entityTypes, IM.QUERY);
 }
 
-export function isIndicator(entityTypes: TTIriRef[]): boolean {
+export function entityIsIndicator(entityTypes: TTIriRef[]): boolean {
   return isOfTypes(entityTypes, IM.INDICATOR);
 }
 
-export function isRecordModel(entityTypes: TTIriRef[]): boolean {
+export function entityIsRecordModel(entityTypes: TTIriRef[]): boolean {
   return isOfTypes(entityTypes, SHACL.NODESHAPE);
 }
 
-export function isFolder(entityTypes: TTIriRef[]): boolean {
+export function entityIsFolder(entityTypes: TTIriRef[]): boolean {
   return isOfTypes(entityTypes, IM.FOLDER);
 }
 
-export function isFeature(entityTypes: TTIriRef[]): boolean {
+export function entityIsFeature(entityTypes: TTIriRef[]): boolean {
   return isOfTypes(entityTypes, IM.FEATURE);
 }
 
-export function isFunction(entityTypes: TTIriRef[]): boolean {
+export function entityIsFunction(entityTypes: TTIriRef[]): boolean {
   return isOfTypes(entityTypes, SHACL.FUNCTION);
 }
 
@@ -76,13 +76,13 @@ export function getNamesAsStringFromTypes(typeList: TTIriRef[]) {
 
 export default {
   isOfTypes,
-  isProperty,
-  isValueSet,
-  isConcept,
-  isFolder,
-  isQuery,
-  isRecordModel,
-  isFeature,
-  isFunction,
+  entityIsProperty,
+  entityIsValueSet,
+  entityIsConcept,
+  entityIsFolder,
+  entityIsQuery,
+  entityIsRecordModel,
+  entityIsFeature,
+  entityIsFunction,
   getNamesAsStringFromTypes
 };
