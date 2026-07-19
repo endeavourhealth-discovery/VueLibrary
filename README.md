@@ -25,35 +25,24 @@ To ensure smooth development without breaking existing code/builds, these steps 
 ### VueLibrary
 
 1. Set the new version number using `pnpm setVersion --to=<x.x.x>`  (note that this will error if its that version already)
-2. Run the node task `pnpmn build`
+2. You can now make your changes in the VueLibrary/Java classes, 
+3. run the `pnpm build` task, return to your Java project and rebuild.
+   All these changes will remain local.
 
 The pnpm build will perform the java build, typescript generation and publishing to local maven (and linked npm package once setup)
 
-### Java Project (e.g. IMAPI)
-
-1. Perform a clean build to ensure everything is building successfully
-2. Bump the version reference in the project (e.g. `libs.versions.toml` or `pom.xml` file)
-3. Perform a clean build to ensure everything is still building successfully
-
-You can now make your changes in the VueLibrary/Java classes, re-run the `pnpm build` task, return to your Java project and rebuild.
-All these changes will remain local.
+### Java project (e.g. IMAPI)
+1. You must make equivalent changes to the Java project model for compatibility if IMAPI is using the new model.
 
 ### Node project (e.g. IMDirectory)
 
-1. Perform a clean build to ensure everything is building successfully
-2. Point your local package to your local VueLibrary `pnpm link ..\VueLibrary\`
-3. Perform a clean build to ensure everything is still building successfully
-
-You can now make your changes in the VueLibrary/Java classes, re-run the `pnpm build` task, return to your Java project and rebuild.
-All these changes will remain local.
+1. bump the version in the package json dependency "@endeavour/vue-library"
+2. perform pnpm install to use it 
+3. You can now use the new model in your project
 
 ## Committing your changes
 
 Once you're changes are complete and all code builds locally
 
-1. Unlink VueLibrary from your local copy `pnpm unlink`
-2. Commit & Push the VueLibrary changes
-    * The CI/CD process will build the changes and push the new versions of the Java jar and npm package to the repository
-2. Wait for the VueLibrary build to build successfully
-3. Commit & Push your project changes
-    * The CI/CD process will use the new packages from the repository
+1. Commit Vue library first
+2. Then commit your projects that use it

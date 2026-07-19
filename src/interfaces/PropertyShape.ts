@@ -48,5 +48,5 @@ export interface PropertyShape {
   highCardinality?: boolean;
   isValidArguments?: Argument[];
   inversePath?: TTIriRef;
-  generic?: boolean;
+  association?: boolean;
 }
