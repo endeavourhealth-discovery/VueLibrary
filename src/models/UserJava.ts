@@ -36,19 +36,19 @@ export const UserJavaSchema = z.strictObject({
   avatar: z.string().optional(),
 
   roles: z.enum(UserRole).optional(),
-  organisations: z.array(z.string()).prefault([]),
+  organisations: z.array(z.string()).optional(),
 
   theme: z.enum(PrimeVuePresetThemes).optional(),
   primaryColor: z.enum(PrimeVueColors).optional(),
   surfaceColor: z.enum(PrimeVueColors).optional(),
 
-  darkMode: z.boolean().default(false),
+  darkMode: z.boolean().optional(),
 
   fontSize: z.enum(FontSize).optional(),
 
-  favourites: z.array(z.string()).prefault([]),
-  recentActivity: z.array(RecentActivityItemDtoSchema).prefault([]),
-  namespaces: z.array(NamespacePermissionJavaSchema).prefault([])
+  favourites: z.array(z.string()).optional(),
+  recentActivity: z.array(RecentActivityItemDtoSchema).optional(),
+  namespaces: z.array(NamespacePermissionJavaSchema).optional()
 });
 
 export type UserJava = z.infer<typeof UserJavaSchema>;

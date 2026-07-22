@@ -17,7 +17,7 @@ export const ConceptContextMapSchema = z.strictObject({
   value: z.string().optional(),
   regex: z.string().optional(),
   property: z.string().optional(),
-  context: z.array(ContextSchema).prefault([])
+  context: z.array(ContextSchema).optional()
 });
 
 export type ConceptContextMap = z.output<typeof ConceptContextMapSchema>;

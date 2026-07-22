@@ -1,3 +1,5 @@
+export { parseArray } from "./parseArray";
+
 export * from "./ConceptTypeMethods";
 export * from "./ConceptTypeVisuals";
 export * from "./Converters";

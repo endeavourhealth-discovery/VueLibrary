@@ -13,13 +13,13 @@ import z from "zod";
 
 export const SetOptionsSchema = z.strictObject({
   setIri: z.string().optional(),
-  schemes: z.array(z.string()).prefault([]),
-  includeIM1id: z.boolean().default(false),
-  subsumptions: z.array(z.string()).prefault([]),
-  includeDefinition: z.boolean().default(false),
-  includeCore: z.boolean().default(false),
-  includeLegacy: z.boolean().default(false),
-  includeSubsets: z.boolean().default(false)
+  schemes: z.array(z.string()).optional(),
+  includeIM1id: z.boolean().optional(),
+  subsumptions: z.array(z.string()).optional(),
+  includeDefinition: z.boolean().optional(),
+  includeCore: z.boolean().optional(),
+  includeLegacy: z.boolean().optional(),
+  includeSubsets: z.boolean().optional()
 });
 
 export type SetOptions = z.output<typeof SetOptionsSchema>;

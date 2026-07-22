@@ -16,14 +16,14 @@ export const PropertyRangeSchema = TTIriRefSchema.extend({
   pattern: z.string().optional(),
   intervalUnit: TTIriRefSchema.optional(),
 
-  get qualifier(): z.ZodPrefault<z.ZodArray<typeof PropertyRangeSchema>> {
-    return z.array(PropertyRangeSchema).prefault([]);
+  get qualifier(): z.ZodOptional<z.ZodArray<typeof PropertyRangeSchema>> {
+    return z.array(PropertyRangeSchema).optional();
   },
 
   type: TTIriRefSchema.optional(),
   units: TTIriRefSchema.optional(),
   operator: TTIriRefSchema.optional(),
-  relativeValue: z.boolean().default(false)
+  relativeValue: z.boolean().optional()
 });
 
 export type PropertyRange = z.output<typeof PropertyRangeSchema>;

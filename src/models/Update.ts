@@ -10,8 +10,8 @@ import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
 // }
 
 export const UpdateSchema = TTIriRefSchema.extend({
-  match: z.array(MatchSchema).prefault([]),
-  delete: z.array(DeleteSchema).prefault([])
+  match: z.array(MatchSchema).optional(),
+  delete: z.array(DeleteSchema).optional()
 });
 
 export type Update = z.output<typeof UpdateSchema>;

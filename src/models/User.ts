@@ -17,9 +17,9 @@ export const UserSchema = z.strictObject({
   surfaceColor: z.enum(PrimeVueColors).prefault(PrimeVueColors.SLATE),
   darkMode: z.boolean().prefault(false),
   fontSize: z.enum(FontSize).prefault(FontSize.MEDIUM),
-  favourites: z.array(z.string()).prefault([]),
+  favourites: z.array(z.string()).optional(),
   recentActivity: z.array(RecentActivityItemSchema).prefault([]),
-  organisations: z.array(z.string()).prefault([]),
+  organisations: z.array(z.string()).optional(),
   namespaces: z.array(NamespacePermissionSchema).prefault([])
 });
 

@@ -33,16 +33,16 @@ export const EntityDocumentSchema = z.strictObject({
   code: z.string().optional(),
   alternativeCode: z.string().optional(),
   scheme: TTIriRefSchema.optional(),
-  type: z.array(TTIriRefSchema).prefault([]),
+  type: z.array(TTIriRefSchema).optional(),
   status: TTIriRefSchema.optional(),
-  termCode: z.array(SearchTermCodeSchema).prefault([]),
+  termCode: z.array(SearchTermCodeSchema).optional(),
   usageTotal: z.number().optional(),
   match: z.string().optional(),
-  isA: z.array(TTIriRefSchema).prefault([]),
-  memberOf: z.array(TTIriRefSchema).prefault([]),
+  isA: z.array(TTIriRefSchema).optional(),
+  memberOf: z.array(TTIriRefSchema).optional(),
   subsumptionCount: z.number().optional(),
-  binding: z.array(z.string()).prefault([]),
-  isDescendentOf: z.array(TTIriRefSchema).prefault([])
+  binding: z.array(z.string()).optional(),
+  isDescendentOf: z.array(TTIriRefSchema).optional()
 });
 
 export type EntityDocument = z.output<typeof EntityDocumentSchema>;

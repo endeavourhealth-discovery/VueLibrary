@@ -65,23 +65,23 @@ export const PropertyShapeSchema = z.strictObject({
   node: PropertyRangeSchema.optional(),
   validation: TTIriRefSchema.optional(),
   search: TTIriRefSchema.optional(),
-  select: z.array(TTIriRefSchema).prefault([]),
-  argument: z.array(ArgumentSchema).prefault([]),
+  select: z.array(TTIriRefSchema).optional(),
+  argument: z.array(ArgumentSchema).optional(),
   valueVariable: z.string().optional(),
   isIri: TTIriRefSchema.optional(),
   isTextValue: z.string().optional(),
   isNumericValue: z.string().optional(),
-  forceIsValue: z.boolean().default(false),
-  builderChild: z.boolean().default(false),
-  showTitle: z.boolean().default(false),
+  forceIsValue: z.boolean().optional(),
+  builderChild: z.boolean().optional(),
+  showTitle: z.boolean().optional(),
   group: TTIriRefSchema.optional(),
-  get property(): z.ZodPrefault<z.ZodArray<typeof PropertyShapeSchema>> {
-    return z.array(PropertyShapeSchema).prefault([]);
+  get property(): z.ZodOptional<z.ZodArray<typeof PropertyShapeSchema>> {
+    return z.array(PropertyShapeSchema).optional();
   },
   clazz: PropertyRangeSchema.optional(),
   validationErrorMessage: z.string().optional(),
   function: TTIriRefSchema.optional(),
-  parameter: z.array(ParameterShapeSchema).prefault([]),
+  parameter: z.array(ParameterShapeSchema).optional(),
   valueIri: TTIriRefSchema.optional(),
   get expression(): z.ZodOptional<typeof NodeShapeSchema> {
     return NodeShapeSchema.optional();
@@ -92,13 +92,13 @@ export const PropertyShapeSchema = z.strictObject({
   definition: z.string().optional(),
   ascending: z.string().optional(),
   descending: z.string().optional(),
-  orderable: z.boolean().default(false),
-  definingProperty: z.boolean().default(false),
-  highCardinality: z.boolean().default(false),
-  generic: z.boolean().default(false),
+  orderable: z.boolean().optional(),
+  definingProperty: z.boolean().optional(),
+  highCardinality: z.boolean().optional(),
+  generic: z.boolean().optional(),
   hasValueSet: TTIriRefSchema.optional(),
   isValidEntity: TTIriRefSchema.optional(),
-  isValidArguments: z.array(ArgumentSchema).prefault([]),
+  isValidArguments: z.array(ArgumentSchema).optional(),
   inversePath: TTIriRefSchema.optional()
 });
 

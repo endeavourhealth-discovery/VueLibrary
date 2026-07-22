@@ -12,7 +12,7 @@ import { ValueTemplateSchema } from "./ValueTemplate";
 export const ParameterTemplateSchema = z.strictObject({
   label: z.string().optional(),
   order: z.string().optional(),
-  valueTemplate: z.array(ValueTemplateSchema).prefault([])
+  valueTemplate: z.array(ValueTemplateSchema).optional()
 });
 
 export type ParameterTemplate = z.output<typeof ParameterTemplateSchema>;

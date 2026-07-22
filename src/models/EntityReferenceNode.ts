@@ -1,9 +1,7 @@
 import z from "zod";
 
 import { TTArraySchema } from "./TTArray";
-import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
-import { TTLiteralSchema } from "./TTLiteral";
-import { TTNodeSchema } from "./TTNode";
+import { TTIriRefSchema } from "./TTIriRef";
 
 // export interface EntityReferenceNode extends TTIriRef {
 //   parents?: EntityReferenceNode[];
@@ -16,17 +14,17 @@ import { TTNodeSchema } from "./TTNode";
 // }
 
 export const EntityReferenceNodeSchema = TTIriRefSchema.extend({
-  get parents(): z.ZodPrefault<z.ZodArray<typeof EntityReferenceNodeSchema>> {
-    return z.array(EntityReferenceNodeSchema).prefault([]);
+  get parents(): z.ZodOptional<z.ZodArray<typeof EntityReferenceNodeSchema>> {
+    return z.array(EntityReferenceNodeSchema).optional();
   },
 
-  get children(): z.ZodPrefault<z.ZodArray<typeof EntityReferenceNodeSchema>> {
-    return z.array(EntityReferenceNodeSchema).prefault([]);
+  get children(): z.ZodOptional<z.ZodArray<typeof EntityReferenceNodeSchema>> {
+    return z.array(EntityReferenceNodeSchema).optional();
   },
 
   moduleId: z.string().optional(),
-  hasChildren: z.boolean().default(false),
-  hasGrandChildren: z.boolean().default(false),
+  hasChildren: z.boolean().optional(),
+  hasGrandChildren: z.boolean().optional(),
   type: TTArraySchema,
   orderNumber: z.number().optional()
 });

@@ -9,11 +9,11 @@ import z from "zod";
 // }
 
 export const ArrayButtonsSchema = z.strictObject({
-  up: z.boolean().default(false),
-  down: z.boolean().default(false),
-  plus: z.boolean().default(false),
-  minus: z.boolean().default(false),
-  addOnlyIfLast: z.boolean().default(false)
+  up: z.boolean().optional(),
+  down: z.boolean().optional(),
+  plus: z.boolean().optional(),
+  minus: z.boolean().optional(),
+  addOnlyIfLast: z.boolean().optional()
 });
 
 export type ArrayButtons = z.output<typeof ArrayButtonsSchema>;

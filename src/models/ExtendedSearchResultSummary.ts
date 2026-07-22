@@ -14,7 +14,7 @@ export const ExtendedSearchResultSummarySchema = z.strictObject({
   icon: z.array(z.string()),
   color: z.string(),
   typeNames: z.string(),
-  favourite: z.boolean().default(false)
+  favourite: z.boolean().optional()
 });
 
 export type ExtendedSearchResultSummary = z.output<typeof ExtendedSearchResultSummarySchema>;

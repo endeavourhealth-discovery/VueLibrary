@@ -10,8 +10,8 @@ import { NAMESPACE } from "@/enums";
 
 export const NamespacePermissionJavaSchema = z.strictObject({
   iri: z.enum(NAMESPACE),
-  read: z.boolean().default(false),
-  write: z.boolean().default(false)
+  read: z.boolean().optional(),
+  write: z.boolean().optional()
 });
 
 export type NamespacePermissionJava = z.output<typeof NamespacePermissionJavaSchema>;

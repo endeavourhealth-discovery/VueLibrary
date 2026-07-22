@@ -6,7 +6,7 @@ import z from "zod";
 // }
 
 export const EntityValidationResponseSchema = z.strictObject({
-  valid: z.boolean().default(false),
+  valid: z.boolean().optional(),
   message: z.string().optional()
 });
 

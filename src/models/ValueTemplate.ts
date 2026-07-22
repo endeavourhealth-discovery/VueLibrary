@@ -18,7 +18,7 @@ export const ValueTemplateSchema = EntitySchema.extend({
   order: z.number().optional(),
   valueType: TTIriRefSchema.optional(),
   defaultValue: z.any(),
-  valueOption: z.array(z.any()).prefault([])
+  valueOption: z.array(z.any()).optional()
 });
 
 export type ValueTemplate = z.output<typeof ValueTemplateSchema>;

@@ -14,10 +14,10 @@ import { Where, WhereSchema } from "./Where";
 
 export const DeleteSchema = z.strictObject({
   property: WhereSchema.optional(),
-  subject: NodeSchema.optional(),
-  inverse: z.boolean().default(false),
-  predicate: NodeSchema.optional(),
-  object: NodeSchema.optional(),
+  subject: z.lazy(() => NodeSchema).optional(),
+  inverse: z.boolean().optional(),
+  predicate: z.lazy(() => NodeSchema).optional(),
+  object: z.lazy(() => NodeSchema).optional(),
   get delete() {
     return z.array(DeleteSchema).optional();
   }

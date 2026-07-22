@@ -18,10 +18,10 @@ export const IMLLanguageSchema = z.strictObject({
   info: z.record(z.string(), z.string()).optional(),
   definitions: z.record(z.string(), z.string()).optional(),
   prefixes: z.record(z.string(), z.string()).optional(),
-  keywords: z.array(z.string()).prefault([]),
-  booleans: z.array(z.string()).prefault([]),
-  alerts: z.array(z.string()).prefault([]),
-  iriVariables: z.record(z.string(), z.array(z.string()).prefault([])).optional()
+  keywords: z.array(z.string()).optional(),
+  booleans: z.array(z.string()).optional(),
+  alerts: z.array(z.string()).optional(),
+  iriVariables: z.record(z.string(), z.array(z.string()).optional()).optional()
 });
 
 export type IMLLanguage = z.output<typeof IMLLanguageSchema>;

@@ -31,11 +31,11 @@ export const SearchResultSummarySchema = z.strictObject({
   usageTotal: z.number().optional(),
   bestMatch: z.string().optional(),
   preferredName: z.string().optional(),
-  key: z.array(z.string()).prefault([]),
-  isA: z.array(TTIriRefSchema).prefault([]),
-  termCode: z.array(SearchTermCodeSchema).prefault([]),
-  unit: z.array(TTIriRefSchema).prefault([]),
-  qualifier: z.array(TTIriRefSchema).prefault([]),
+  key: z.array(z.string()).optional(),
+  isA: z.array(TTIriRefSchema).optional(),
+  termCode: z.array(SearchTermCodeSchema).optional(),
+  unit: z.array(TTIriRefSchema).optional(),
+  qualifier: z.array(TTIriRefSchema).optional(),
   iri: z.url()
 });
 

@@ -4,11 +4,11 @@ import { ElementSchema } from "./Element";
 import { NodeSchema } from "./Node";
 import { TTIriRefSchema } from "./TTIriRef";
 
-export const PathSchema = z.strictObject({
-  inverse: z.boolean().default(false),
-  optional: z.boolean().default(false),
-  get path(): z.ZodPrefault<z.ZodArray<typeof PathSchema>> {
-    return z.array(PathSchema).prefault([]);
+export const PathSchema = ElementSchema.extend({
+  inverse: z.boolean().optional(),
+  optional: z.boolean().optional(),
+  get path(): z.ZodOptional<z.ZodArray<typeof PathSchema>> {
+    return z.array(PathSchema).optional();
   },
   pathVariable: z.string().optional(),
   get typeOf(): typeof NodeSchema {

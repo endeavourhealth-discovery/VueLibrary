@@ -7,7 +7,7 @@ import { Match, MatchSchema } from "./Match";
 // }
 
 export const PathDocumentSchema = z.strictObject({
-  match: z.array(MatchSchema).prefault([])
+  match: z.array(MatchSchema).optional()
 });
 
 export type PathDocument = z.output<typeof PathDocumentSchema>;

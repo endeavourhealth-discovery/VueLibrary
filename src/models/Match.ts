@@ -50,21 +50,21 @@ import { Where, WhereSchema } from "./Where";
 // }
 
 export const MatchSchema = IriLDSchema.extend({
-  notExists: z.boolean().default(false),
+  notExists: z.boolean().optional(),
   ifTrue: z.enum(RuleAction).optional(),
   ifFalse: z.enum(RuleAction).optional(),
   nodeRef: z.string().optional(),
-  get typeOf(): z.ZodOptional<typeof NodeSchema> {
-    return NodeSchema.optional();
+  get typeOf(): z.ZodOptional<z.ZodLazy<typeof NodeSchema>> {
+    return z.lazy(() => NodeSchema).optional();
   },
-  get is(): z.ZodOptional<typeof NodeSchema> {
-    return NodeSchema.optional();
+  get is(): z.ZodOptional<z.ZodLazy<typeof NodeSchema>> {
+    return z.lazy(() => NodeSchema).optional();
   },
-  get and(): z.ZodPrefault<z.ZodArray<typeof MatchSchema>> {
-    return z.array(MatchSchema).prefault([]);
+  get and(): z.ZodOptional<z.ZodArray<typeof MatchSchema>> {
+    return z.array(MatchSchema).optional();
   },
-  get or(): z.ZodPrefault<z.ZodArray<typeof MatchSchema>> {
-    return z.array(MatchSchema).prefault([]);
+  get or(): z.ZodOptional<z.ZodArray<typeof MatchSchema>> {
+    return z.array(MatchSchema).optional();
   },
   get where(): z.ZodOptional<typeof WhereSchema> {
     return WhereSchema.optional();
@@ -72,35 +72,35 @@ export const MatchSchema = IriLDSchema.extend({
   get then(): z.ZodOptional<typeof MatchSchema> {
     return MatchSchema.optional();
   },
-  get graph(): z.ZodOptional<typeof NodeSchema> {
-    return NodeSchema.optional();
+  get graph(): z.ZodOptional<z.ZodLazy<typeof NodeSchema>> {
+    return z.lazy(() => NodeSchema).optional();
   },
-  optional: z.boolean().default(false),
-  parameter: z.string(),
+  optional: z.boolean().optional(),
+  parameter: z.string().optional(),
   function: FunctionClauseSchema.optional(),
   entailment: z.enum(Entail).optional(),
-  baseRule: z.boolean().default(false),
+  baseRule: z.boolean().optional(),
   ruleNumber: z.number().optional(),
-  inverse: z.boolean().default(false),
-  activeOnly: z.boolean().default(false),
-  get rule(): z.ZodPrefault<z.ZodArray<typeof MatchSchema>> {
-    return z.array(MatchSchema).prefault([]);
+  inverse: z.boolean().optional(),
+  activeOnly: z.boolean().optional(),
+  get rule(): z.ZodOptional<z.ZodArray<typeof MatchSchema>> {
+    return z.array(MatchSchema).optional();
   },
-  get any(): z.ZodPrefault<z.ZodArray<typeof MatchSchema>> {
-    return z.array(MatchSchema).prefault([]);
+  get any(): z.ZodOptional<z.ZodArray<typeof MatchSchema>> {
+    return z.array(MatchSchema).optional();
   },
   libraryItem: z.string().optional(),
-  invalid: z.boolean().default(false),
+  invalid: z.boolean().optional(),
   groupBy: z.array(GroupBySchema).optional(),
   orderBy: OrderLimitSchema.optional(),
   asDescription: z.string().optional(),
   errorMessage: z.string().optional(),
-  draft: z.boolean().default(false),
-  having: HavingSchema,
+  draft: z.boolean().optional(),
+  having: HavingSchema.optional(),
   description: z.string().optional(),
   path: z.array(PathSchema).optional(),
   node: z.string().optional(),
-  return: z.array(ReturnSchema)
+  return: z.array(ReturnSchema).optional()
 });
 
 export type Match = z.output<typeof MatchSchema>;

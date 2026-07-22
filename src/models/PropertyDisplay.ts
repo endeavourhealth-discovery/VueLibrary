@@ -18,12 +18,12 @@ export const PropertyDisplaySchema = z.strictObject({
   order: z.number().optional(),
   group: TTIriRefSchema.optional(),
   property: z.array(TTIriRefSchema).prefault([]),
-  type: z.array(TTIriRefSchema).prefault([]),
+  type: z.array(TTIriRefSchema).optional(),
   cardinality: z.string().optional(),
   reverseCardinality: z.string().optional(),
-  isOr: z.boolean().default(false),
-  isType: z.boolean().default(false),
-  node: z.boolean().default(false)
+  isOr: z.boolean().optional(),
+  isType: z.boolean().optional(),
+  node: z.boolean().optional()
 });
 
 export type PropertyDisplay = z.output<typeof PropertyDisplaySchema>;

@@ -9,7 +9,7 @@ import { SetOptionsSchema } from "./SetOptions";
 // }
 
 export const SetExportRequestSchema = z.strictObject({
-  ownRow: z.boolean().default(false),
+  ownRow: z.boolean().optional(),
   format: z.string().optional(),
   options: SetOptionsSchema.optional()
 });

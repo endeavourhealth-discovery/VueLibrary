@@ -12,7 +12,7 @@ import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
 export const FunctionTemplateSchema = z.strictObject({
   ...EntitySchema.shape,
   function: TTIriRefSchema.optional(),
-  parameterTemplate: z.array(ParameterTemplateSchema).prefault([])
+  parameterTemplate: z.array(ParameterTemplateSchema).optional()
 });
 
 export type FunctionTemplate = z.output<typeof FunctionTemplateSchema>;

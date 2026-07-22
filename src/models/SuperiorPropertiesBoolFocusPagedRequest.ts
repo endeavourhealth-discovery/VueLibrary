@@ -13,7 +13,7 @@ export const SuperiorPropertiesBoolFocusPagedRequestSchema = z.strictObject({
   page: z.number().optional(),
   size: z.number().optional(),
   schemeFilters: z.array(z.string()),
-  inactive: z.boolean().default(false)
+  inactive: z.boolean().optional()
 });
 
 export type SuperiorPropertiesBoolFocusPagedRequest = z.output<typeof SuperiorPropertiesBoolFocusPagedRequestSchema>;

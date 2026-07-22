@@ -28,12 +28,12 @@ export const UIPropertySchema = z.strictObject({
   minCount: z.number(),
   valueLabel: z.string(),
   intervalUnitIri: z.string(),
-  intervalUnitOptions: z.array(TTIriRefSchema).prefault([]),
+  intervalUnitOptions: z.array(TTIriRefSchema).optional(),
   unitIri: z.string(),
-  unitOptions: z.array(TTIriRefSchema).prefault([]),
+  unitOptions: z.array(TTIriRefSchema).optional(),
   operatorIri: z.string(),
-  operatorOptions: z.array(z.string()).prefault([]),
-  qualifierOptions: z.array(TTIriRefSchema).prefault([]),
+  operatorOptions: z.array(z.string()).optional(),
+  qualifierOptions: z.array(TTIriRefSchema).optional(),
   setMemberCount: z.number()
 });
 

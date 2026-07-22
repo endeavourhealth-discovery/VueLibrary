@@ -8,8 +8,8 @@ import { TTPrefixSchema } from "./TTPrefix";
 // }
 
 export const TTContextSchema = z.strictObject({
-  nameSpaces: z.array(TTPrefixSchema).prefault([]),
-  prefixes: z.array(TTPrefixSchema).prefault([])
+  nameSpaces: z.array(TTPrefixSchema).optional(),
+  prefixes: z.array(TTPrefixSchema).optional()
 });
 
 export type TTContext = z.output<typeof TTContextSchema>;

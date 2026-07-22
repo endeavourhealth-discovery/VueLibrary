@@ -10,7 +10,7 @@ import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
 // }
 
 export const SetDistillationRequestSchema = z.strictObject({
-  conceptList: z.array(TTIriRefSchema).prefault([]),
+  conceptList: z.array(TTIriRefSchema).optional(),
   graph: z.enum(GRAPH).optional()
 });
 

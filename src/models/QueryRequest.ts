@@ -30,7 +30,7 @@ import { Update, UpdateSchema } from "./Update";
 
 export const QueryRequestSchema = z.strictObject({
   textSearch: z.string().optional(),
-  argument: z.array(ArgumentSchema).prefault([]),
+  argument: z.array(ArgumentSchema).optional(),
   query: QuerySchema.optional(),
   pathQuery: PathQuerySchema.optional(),
   update: UpdateSchema.optional(),
@@ -38,12 +38,12 @@ export const QueryRequestSchema = z.strictObject({
   page: PageSchema.optional(),
   queryStringDefinition: z.string().optional(),
   askIri: z.url().optional(),
-  timings: z.array(z.map(z.string(), z.string())).prefault([]),
-  cohort: z.array(TTIriRefSchema).prefault([]),
-  includeNames: z.boolean().default(false),
+  timings: z.array(z.map(z.string(), z.string())).optional(),
+  cohort: z.array(TTIriRefSchema).optional(),
+  includeNames: z.boolean().optional(),
   textSearchStyle: z.enum(TextSearchStyle).optional(),
   language: z.enum(DatabaseOption).optional(),
-  context: z.map(z.string(), z.string()).default(new Map())
+  context: z.map(z.string(), z.string()).optional()
 });
 
 export type QueryRequest = z.output<typeof QueryRequestSchema>;

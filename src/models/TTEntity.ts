@@ -1,12 +1,5 @@
 import z from "zod";
 
-import { TTArraySchema } from "./TTArray";
-import { TTContextSchema } from "./TTContext";
-import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
-import { TTLiteralSchema } from "./TTLiteral";
-import { TTNodeSchema } from "./TTNode";
-import { TTPrefixSchema } from "./TTPrefix";
-
 // export interface TTEntity extends TTNode {
 //   context?: TTContext;
 //   crud?: TTIriRef;
@@ -21,11 +14,8 @@ import { TTPrefixSchema } from "./TTPrefix";
 //   prefixes?: TTPrefix[];
 // }
 
-export const TTEntitySchema = z.strictObject({
-  ...TTNodeSchema.shape,
-  context: TTContextSchema.optional(),
-  crud: TTIriRefSchema.optional()
-});
+export const TTEntitySchema = z.looseObject({});
+//  z.map(z.string(), z.union([TTValueSchema, TTArraySchema]));
 
 export type TTEntity = z.output<typeof TTEntitySchema>;
 

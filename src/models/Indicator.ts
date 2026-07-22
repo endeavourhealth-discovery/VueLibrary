@@ -13,11 +13,11 @@ import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
 
 export const IndicatorSchema = z.strictObject({
   ...TTIriRefSchema.shape,
-  isSubIndicatorOf: z.array(TTIriRefSchema).prefault([]),
+  isSubIndicatorOf: z.array(TTIriRefSchema).optional(),
   numerator: TTIriRefSchema.optional(),
   dataset: TTIriRefSchema.optional(),
-  actionIfFalse: z.array(TTIriRefSchema).prefault([]),
-  actionIfTrue: z.array(TTIriRefSchema).prefault([]),
+  actionIfFalse: z.array(TTIriRefSchema).optional(),
+  actionIfTrue: z.array(TTIriRefSchema).optional(),
   denominator: TTIriRefSchema.optional()
 });
 

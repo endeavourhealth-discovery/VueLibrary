@@ -24,7 +24,7 @@ export const TaskSchema = z.strictObject({
   state: z.enum(TaskState),
   assignedTo: z.string(),
   dateCreated: z.date(),
-  history: z.array(TaskHistorySchema).prefault([]),
+  history: z.array(TaskHistorySchema).optional(),
   hostUrl: z.url()
 });
 

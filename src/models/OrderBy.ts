@@ -17,13 +17,13 @@ import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
 export const OrderBySchema = z.strictObject({
   field: z.string().optional(),
   direction: z.enum(Order).optional(),
-  iriValue: z.array(TTIriRefSchema).prefault([]),
-  get and(): z.ZodPrefault<z.ZodArray<typeof OrderBySchema>> {
-    return z.array(OrderBySchema).prefault([]);
+  iriValue: z.array(TTIriRefSchema).optional(),
+  get and(): z.ZodOptional<z.ZodArray<typeof OrderBySchema>> {
+    return z.array(OrderBySchema).optional();
   },
-  textValue: z.array(z.string()).prefault([]),
-  not: z.boolean().default(false),
-  startWithTerm: z.boolean().default(false)
+  textValue: z.array(z.string()).optional(),
+  not: z.boolean().optional(),
+  startWithTerm: z.boolean().optional()
 });
 
 export type OrderBy = z.output<typeof OrderBySchema>;

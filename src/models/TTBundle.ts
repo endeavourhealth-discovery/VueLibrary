@@ -1,6 +1,6 @@
 import z from "zod";
 
-import { ExtendedTTEntity, ExtendedTTEntitySchema } from "./ExtendedTTEntity";
+import { TTEntitySchema } from "./TTEntity";
 
 // export interface TTBundle {
 //   entity: ExtendedTTEntity;
@@ -8,8 +8,8 @@ import { ExtendedTTEntity, ExtendedTTEntitySchema } from "./ExtendedTTEntity";
 // }
 
 export const TTBundleSchema = z.strictObject({
-  entity: ExtendedTTEntitySchema,
-  predicates: z.map(z.string(), z.string()).prefault(new Map())
+  entity: TTEntitySchema,
+  predicates: z.looseObject({}).catchall(z.string())
 });
 
 export type TTBundle = z.output<typeof TTBundleSchema>;

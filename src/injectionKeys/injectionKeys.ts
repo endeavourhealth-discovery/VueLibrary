@@ -30,8 +30,8 @@ import {
 } from "../models";
 import { User } from "../models";
 import { ExtendedEntityReferenceNode } from "../models/ExtendedEntityReferenceNode";
-import { ExtendedTTEntity } from "../models/ExtendedTTEntity";
 import { TTBundle } from "../models/TTBundle";
+import { TTEntity } from "../models/TTEntity";
 
 const conceptService = Symbol("conceptService") as InjectionKey<{
   getMatchedFrom(iri: string): Promise<SimpleMap[]>;
@@ -64,7 +64,7 @@ const eclService = Symbol("eclService") as InjectionKey<{
 }>;
 const entityService = Symbol("entityService") as InjectionKey<{
   getEntitySummary(iri: string): Promise<SearchResultSummary>;
-  getPartialEntity(iri: string, predicates: string[]): Promise<ExtendedTTEntity>;
+  getPartialEntity(iri: string, predicates: string[]): Promise<TTEntity>;
   getNamespaces(): Promise<Namespace[]>;
   downloadSearchResults(downloadSettings: DownloadByQueryOptions): Promise<Blob>;
   getPagedChildren(
@@ -77,14 +77,14 @@ const entityService = Symbol("entityService") as InjectionKey<{
   ): Promise<PageableEntityReferenceNode>;
   getEntityAsEntityReferenceNode(iri: string): Promise<ExtendedEntityReferenceNode>;
   getPathBetweenNodes(descendant: string, ancestor: string): Promise<TTIriRef[]>;
-  getAllowableChildTypes(iri: string): Promise<ExtendedTTEntity[]>;
+  getAllowableChildTypes(iri: string): Promise<TTEntity[]>;
   entityExists(iri: string): Promise<boolean>;
   getEntityChildren(iri: string, filters?: FiltersAsIris, controller?: AbortController): Promise<ExtendedEntityReferenceNode[]>;
   getAsEntityReferenceNodes(iris: string[]): Promise<ExtendedEntityReferenceNode[]>;
   downloadEntity(iri: string): Promise<Blob>;
-  getEntityByPredicateExclusions(iri: string, predicates: string[]): Promise<ExtendedTTEntity>;
+  getEntityByPredicateExclusions(iri: string, predicates: string[]): Promise<TTEntity>;
   getFolderPath(iri: string): Promise<TTIriRef[]>;
-  getPartialEntities(typeIris: string[], predicates: string[]): Promise<ExtendedTTEntity[]>;
+  getPartialEntities(typeIris: string[], predicates: string[]): Promise<TTEntity[]>;
   getEntityGraph(iri: string): Promise<OrganizationChartNode>;
   getBundleByPredicateExclusions(iri: string, predicates: string[], graph?: string): Promise<TTBundle>;
   getPartialAndTotalCount(
@@ -96,9 +96,9 @@ const entityService = Symbol("entityService") as InjectionKey<{
     controller?: AbortController
   ): Promise<PageableTTIriRef>;
   getPartialEntityBundle(iri: string, predicates: string[]): Promise<TTBundle>;
-  getEntityUsages(iri: string, pageIndex: number, pageSize: number): Promise<ExtendedTTEntity[]>;
+  getEntityUsages(iri: string, pageIndex: number, pageSize: number): Promise<TTEntity[]>;
   getUsagesTotalRecords(iri: string): Promise<number>;
-  getProvHistory(iri: string): Promise<ExtendedTTEntity[]>;
+  getProvHistory(iri: string): Promise<TTEntity[]>;
   getEntityParents(iri: string, filters?: FiltersAsIris): Promise<ExtendedEntityReferenceNode[]>;
   getEntityDetailsDisplay(iri: string): Promise<TreeNode[]>;
   loadMoreDetailsDisplay(iri: string, predicate: string, pageIndex: number, pageSize: number): Promise<TreeNode[]>;

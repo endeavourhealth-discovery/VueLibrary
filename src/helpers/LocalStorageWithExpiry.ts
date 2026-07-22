@@ -4,7 +4,7 @@ import { GenericObject } from "../models";
 const isClient = () => typeof window !== "undefined" && typeof localStorage != "undefined";
 
 export const localStorageWithExpiry = {
-  getItem(key: string) {
+  getItem<T>(key: string, guard: (value: unknown) => value is T): T | null {
     if (!isClient()) return null;
     const lsItem = localStorage.getItem(key);
     if (lsItem) {
@@ -15,7 +15,9 @@ export const localStorageWithExpiry = {
             localStorage.removeItem(key);
             return null;
           }
-          return result.data;
+          if (guard(result.data)) {
+            return result.data;
+          } else return null;
         }
       } catch (e) {
         console.log(`Error getting item from local storage: ${e}. Removing item wth key: ${key}.`);

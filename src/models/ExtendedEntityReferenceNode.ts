@@ -8,14 +8,13 @@ import { EntityReferenceNode, EntityReferenceNodeSchema } from "./EntityReferenc
 //   hasGrandChildren?: boolean;
 // }
 
-export const ExtendedEntityReferenceNodeSchema = z.strictObject({
-  ...EntityReferenceNodeSchema.shape,
+export const ExtendedEntityReferenceNodeSchema = EntityReferenceNodeSchema.extend({
   name: z.string(),
-  icon: z.array(z.string()),
+  icon: z.array(z.string()).prefault([]),
   hasGrandChildren: z.boolean().default(false)
 });
 
-export type ExtendedEntityReferenceNode = z.output<typeof EntityReferenceNodeSchema>;
+export type ExtendedEntityReferenceNode = z.output<typeof ExtendedEntityReferenceNodeSchema>;
 
 export function isExtendedEntityReferenceNode(value: unknown): value is ExtendedEntityReferenceNode {
   return ExtendedEntityReferenceNodeSchema.safeParse(value).success;

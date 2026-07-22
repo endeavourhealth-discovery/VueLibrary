@@ -23,11 +23,11 @@ export const FormGeneratorSchema = z.strictObject({
   label: z.string().optional(),
   comment: z.string().optional(),
   targetShape: TTIriRefSchema.optional(),
-  type: z.array(TTIriRefSchema).prefault([]),
-  isContainedIn: z.array(TTEntitySchema).prefault([]),
-  subClassOf: z.array(TTIriRefSchema).prefault([]),
+  type: z.array(TTIriRefSchema).optional(),
+  isContainedIn: z.array(TTEntitySchema).optional(),
+  subClassOf: z.array(TTIriRefSchema).optional(),
   scheme: TTIriRefSchema.optional(),
-  property: z.array(PropertyShapeSchema).prefault([])
+  property: z.array(PropertyShapeSchema).optional()
 });
 
 export type FormGenerator = z.output<typeof FormGeneratorSchema>;

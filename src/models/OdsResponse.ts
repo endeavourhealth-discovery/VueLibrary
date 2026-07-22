@@ -10,7 +10,7 @@ import { OrganisationSchema } from "./Organisation";
 
 export const OdsResponseSchema = z.strictObject({
   organisation: OrganisationSchema.optional(),
-  roles: z.array(OrgRoleSchema).prefault([])
+  roles: z.array(OrgRoleSchema).optional()
 });
 
 export type OdsResponse = z.output<typeof OdsResponseSchema>;

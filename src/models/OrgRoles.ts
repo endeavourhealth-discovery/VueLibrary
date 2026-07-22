@@ -7,7 +7,7 @@ import { OrgRoleSchema } from "./OrgRole";
 // }
 
 export const OrgRolesSchema = z.strictObject({
-  role: z.array(OrgRoleSchema).prefault([])
+  role: z.array(OrgRoleSchema).optional()
 });
 
 export type OrgRoles = z.output<typeof OrgRoleSchema>;

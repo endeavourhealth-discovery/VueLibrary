@@ -1,5 +1,6 @@
 import { computed, ref } from "vue";
 
+import { isBoolean, isString } from "lodash-es";
 import { defineStore } from "pinia";
 
 import { FontSize, PrimeVueColors, PrimeVuePresetThemes, UserRole } from "../enums";
@@ -10,8 +11,8 @@ import { NamespacePermissionJava, RecentActivityItemDto } from "../models";
 import { RecentActivityItem, User } from "../models";
 
 export const useUserStore = defineStore("user", () => {
-  const cookiesEssentialAccepted = ref<boolean>(localStorageWithExpiry.getItem("cookiesEssentialAccepted") === true ? true : false);
-  const cookiesOptionalAccepted = ref<boolean>(localStorageWithExpiry.getItem("cookiesOptionalAccepted") === true ? true : false);
+  const cookiesEssentialAccepted = ref<boolean>(localStorageWithExpiry.getItem("cookiesEssentialAccepted", isBoolean) === true ? true : false);
+  const cookiesOptionalAccepted = ref<boolean>(localStorageWithExpiry.getItem("cookiesOptionalAccepted", isBoolean) === true ? true : false);
   const currentPreset = ref<PrimeVuePresetThemes>();
   const currentPrimaryColor = ref<PrimeVueColors>();
   const currentSurfaceColor = ref<PrimeVueColors>();
@@ -21,8 +22,8 @@ export const useUserStore = defineStore("user", () => {
   const favourites = ref<string[]>([]);
   const history = ref<HistoryItem[]>([]);
   const recentLocalActivity = ref<RecentActivityItem[]>([]);
-  const snomedLicenseAccepted = ref<boolean>(localStorageWithExpiry.getItem("snomedLicenseAccepted") === true ? true : false);
-  const uprnAgreementAccepted = ref<boolean>(localStorageWithExpiry.getItem("uprnAgreementAccepted") === true ? true : false);
+  const snomedLicenseAccepted = ref<boolean>(localStorageWithExpiry.getItem("snomedLicenseAccepted", isBoolean) === true ? true : false);
+  const uprnAgreementAccepted = ref<boolean>(localStorageWithExpiry.getItem("uprnAgreementAccepted", isBoolean) === true ? true : false);
   const organisations = ref<string[]>([]);
   const includeUserGraph = ref<boolean>(false);
   const namespaces = ref<NamespacePermissionJava[]>([]);
@@ -78,16 +79,16 @@ export const useUserStore = defineStore("user", () => {
   }
 
   function getAllFromLocalStorage(): void {
-    const preset = localStorageWithExpiry.getItem("preset");
+    const preset = localStorageWithExpiry.getItem("preset", isString);
     if (preset && Object.values(PrimeVuePresetThemes).includes(preset as PrimeVuePresetThemes)) currentPreset.value = preset as PrimeVuePresetThemes;
-    const localDarkMode = localStorageWithExpiry.getItem("darkMode");
+    const localDarkMode = localStorageWithExpiry.getItem("darkMode", isString);
     if (localDarkMode === "true") darkMode.value = true;
     else darkMode.value = false;
-    const primaryColor = localStorageWithExpiry.getItem("primaryColor");
+    const primaryColor = localStorageWithExpiry.getItem("primaryColor", isString);
     if (primaryColor && Object.values(PrimeVueColors).includes(primaryColor as PrimeVueColors)) currentPrimaryColor.value = primaryColor as PrimeVueColors;
-    const surfaceColor = localStorageWithExpiry.getItem("surfaceColor");
+    const surfaceColor = localStorageWithExpiry.getItem("surfaceColor", isString);
     if (surfaceColor && Object.values(PrimeVueColors).includes(surfaceColor as PrimeVueColors)) currentSurfaceColor.value = surfaceColor as PrimeVueColors;
-    const fontSize = localStorageWithExpiry.getItem("fontSize");
+    const fontSize = localStorageWithExpiry.getItem("fontSize", isString);
     if (fontSize && Object.values(FontSize).includes(fontSize as FontSize)) currentFontSize.value = fontSize as FontSize;
   }
 

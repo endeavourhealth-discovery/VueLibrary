@@ -17,7 +17,7 @@ export function numberDescending(a: number, b: number): number {
   return b - a;
 }
 
-export function byPriority(a: GenericObject, b: GenericObject): number {
+export function byPriority(a: unknown, b: unknown): number {
   if (!isObjectHasKeys(a, ["priority"]) || !isObjectHasKeys(b, ["priority"])) return 0;
   if (typeof a.priority === "number" && typeof b.priority === "number") {
     if (a.priority < b.priority) {
@@ -30,7 +30,7 @@ export function byPriority(a: GenericObject, b: GenericObject): number {
   } else throw new Error("Priority must be of type 'number', currently: " + typeof a.priority + ", " + typeof b.priority);
 }
 
-export function byScheme(a: GenericObject, b: GenericObject): number {
+export function byScheme(a: unknown, b: unknown): number {
   if (!isObjectHasKeys(a, ["scheme"]) || !isObjectHasKeys(b, ["scheme"])) return 0;
   if (typeof a.scheme === "string" && typeof b.scheme === "string") {
     if (a.scheme.toLowerCase() < b.scheme.toLowerCase()) {
@@ -43,7 +43,7 @@ export function byScheme(a: GenericObject, b: GenericObject): number {
   } else throw new Error("Scheme must be of type 'string', currently: " + typeof a.scheme + ", " + typeof b.scheme);
 }
 
-export function byLabel(a: GenericObject, b: GenericObject): number {
+export function byLabel(a: unknown, b: unknown): number {
   if (!isObjectHasKeys(a, ["label"]) || !isObjectHasKeys(b, ["label"])) return 0;
   if (typeof a.label === "string" && typeof b.label === "string") {
     if (a.label.toLowerCase() < b.label.toLowerCase()) {
@@ -56,7 +56,7 @@ export function byLabel(a: GenericObject, b: GenericObject): number {
   } else throw new Error("Label must be of type 'string', currently: " + typeof a.label + ", " + typeof b.label);
 }
 
-export function byName(a: GenericObject, b: GenericObject): number {
+export function byName(a: unknown, b: unknown): number {
   if (!isObjectHasKeys(a, ["name"]) || !isObjectHasKeys(b, ["name"])) return 0;
   if (typeof a.name === "string" && typeof b.name === "string") {
     if (a.name.toLowerCase() < b.name.toLowerCase()) {
@@ -69,7 +69,7 @@ export function byName(a: GenericObject, b: GenericObject): number {
   } else throw new Error("Name must be of type 'string', currently: " + typeof a.name + ", " + typeof b.name);
 }
 
-export function byPosition(a: GenericObject, b: GenericObject): number {
+export function byPosition(a: unknown, b: unknown): number {
   if (!isObjectHasKeys(a, ["position"]) || !isObjectHasKeys(b, ["position"])) return 0;
   if (typeof a.position === "number" && typeof b.position === "number") {
     if (a.position < b.position) {
@@ -82,7 +82,7 @@ export function byPosition(a: GenericObject, b: GenericObject): number {
   } else throw new Error("Position must be of type 'number', currently: " + typeof a.position + ", " + typeof b.position);
 }
 
-export function byOrder(a: GenericObject, b: GenericObject): number {
+export function byOrder(a: unknown, b: unknown): number {
   if (!isObjectHasKeys(a, ["order"]) || !isObjectHasKeys(b, ["order"])) return 0;
   if (typeof a.order === "number" && typeof b.order === "number") {
     if (a.order < b.order) {
@@ -95,7 +95,7 @@ export function byOrder(a: GenericObject, b: GenericObject): number {
   } else throw new Error("Order must be of type 'number', currently: " + typeof a.order + ", " + typeof b.order);
 }
 
-export function byKey(a: GenericObject, b: GenericObject): number {
+export function byKey(a: unknown, b: unknown): number {
   if (!isObjectHasKeys(a, ["key"]) || !isObjectHasKeys(b, ["key"])) return 0;
   if (typeof a.key === "number" && typeof b.key === "number") {
     if (a.key < b.key) {

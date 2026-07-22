@@ -13,13 +13,13 @@ import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
 
 export const FilterSchema = z.strictObject({
   field: z.string().optional(),
-  iriValue: z.array(TTIriRefSchema).prefault([]),
+  iriValue: z.array(TTIriRefSchema).optional(),
   get and() {
     return z.array(FilterSchema);
   },
-  not: z.boolean().default(false),
-  textValue: z.array(z.string()).prefault([]),
-  startsWithTerm: z.boolean().default(false)
+  not: z.boolean().optional(),
+  textValue: z.array(z.string()).optional(),
+  startsWithTerm: z.boolean().optional()
 });
 
 export type Filter = z.output<typeof FilterSchema>;

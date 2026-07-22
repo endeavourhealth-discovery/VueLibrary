@@ -18,16 +18,16 @@ import z from "zod";
 export const DownloadEntityOptionsSchema = z.strictObject({
   entityIri: z.url(),
   format: z.string().optional(),
-  includeHasSubtypes: z.boolean().default(false),
-  includeInferred: z.boolean().default(false),
-  includeProperties: z.boolean().default(false),
-  includeMembers: z.boolean().default(false),
-  expandMembers: z.boolean().default(false),
-  expandSubsets: z.boolean().default(false),
-  includeTerms: z.boolean().default(false),
-  includeIsChildOf: z.boolean().default(false),
-  includeHasChildren: z.boolean().default(false),
-  includeInactive: z.boolean().default(false)
+  includeHasSubtypes: z.boolean().optional(),
+  includeInferred: z.boolean().optional(),
+  includeProperties: z.boolean().optional(),
+  includeMembers: z.boolean().optional(),
+  expandMembers: z.boolean().optional(),
+  expandSubsets: z.boolean().optional(),
+  includeTerms: z.boolean().optional(),
+  includeIsChildOf: z.boolean().optional(),
+  includeHasChildren: z.boolean().optional(),
+  includeInactive: z.boolean().optional()
 });
 
 export type DownloadEntityOptions = z.output<typeof DownloadEntityOptionsSchema>;

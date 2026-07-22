@@ -15,10 +15,10 @@ import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
 
 export const EntitySchema = z.strictObject({
   iri: z.url(),
-  type: z.array(TTIriRefSchema).prefault([]),
+  type: z.array(TTIriRefSchema).optional(),
   status: TTIriRefSchema,
   scheme: TTIriRefSchema,
-  isContainedIn: z.array(TTEntitySchema).prefault([]),
+  isContainedIn: z.array(TTEntitySchema).optional(),
   name: z.string(),
   description: z.string().optional()
 });

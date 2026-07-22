@@ -11,7 +11,7 @@ import { Task, TaskSchema } from "./Task";
 export const WorkflowResponseSchema = z.strictObject({
   page: z.number().optional(),
   count: z.number().optional(),
-  tasks: z.array(TaskSchema).prefault([])
+  tasks: z.array(TaskSchema).optional()
 });
 
 export type WorkflowResponse = z.output<typeof WorkflowResponseSchema>;

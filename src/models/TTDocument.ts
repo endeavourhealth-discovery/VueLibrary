@@ -3,7 +3,6 @@ import z from "zod";
 import { TTContext, TTContextSchema } from "./TTContext";
 import { TTEntity, TTEntitySchema } from "./TTEntity";
 import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
-import { TTNode, TTNodeSchema } from "./TTNode";
 import { TTPrefix, TTPrefixSchema } from "./TTPrefix";
 
 // export interface TTDocument extends TTNode {
@@ -14,12 +13,12 @@ import { TTPrefix, TTPrefixSchema } from "./TTPrefix";
 //   prefixes?: TTPrefix[];
 // }
 
-export const TTDocumentSchema = TTNodeSchema.extend({
+export const TTDocumentSchema = TTEntitySchema.extend({
   context: TTContextSchema.optional(),
-  entities: z.array(TTEntitySchema).prefault([]),
+  entities: z.array(TTEntitySchema).optional(),
   crud: TTIriRefSchema.optional(),
   predicates: z.map(z.string(), z.string()).prefault(new Map()),
-  prefixes: z.array(TTPrefixSchema).prefault([])
+  prefixes: z.array(TTPrefixSchema).optional()
 });
 
 export type TTDocument = z.output<typeof TTDocumentSchema>;

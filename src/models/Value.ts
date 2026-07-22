@@ -27,7 +27,7 @@ export const ValueSchema = z.strictObject({
   function: FunctionClauseSchema.optional(),
   description: z.string().optional(),
   units: TTIriRefSchema.optional(),
-  invalid: z.boolean().default(false),
+  invalid: z.boolean().optional(),
   valueTerm: z.string().optional(),
   compare: CompareSchema.optional()
 });

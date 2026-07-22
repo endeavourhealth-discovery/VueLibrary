@@ -6,8 +6,8 @@ import { NamespacePermissionSchema } from "./NamespacePermission";
 
 export const PermissionSchema = z.object({
   resource: z.enum(Resource),
-  allowableRoles: z.array(z.enum(UserRole)).prefault([]),
-  requiredNamespaces: z.array(NamespacePermissionSchema).prefault([])
+  allowableRoles: z.array(z.enum(UserRole)).optional(),
+  requiredNamespaces: z.array(NamespacePermissionSchema).optional()
 });
 
 export type Permission = z.output<typeof PermissionSchema>;

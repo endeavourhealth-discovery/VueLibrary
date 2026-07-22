@@ -3,11 +3,11 @@ import z from "zod";
 export const GithubReleaseSchema = z.strictObject({
   version: z.string(),
   title: z.string(),
-  createdDate: z.date(),
-  publishedDate: z.date(),
+  createdDate: z.coerce.date(),
+  publishedDate: z.coerce.date(),
   releaseNotes: z.array(z.string()),
   author: z.string(),
-  url: z.url()
+  url: z.url().optional()
 });
 
 export type GithubRelease = z.output<typeof GithubReleaseSchema>;

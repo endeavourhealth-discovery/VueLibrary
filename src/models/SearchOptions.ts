@@ -13,8 +13,8 @@ import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
 // }
 
 export const SearchOptionsSchema = FilterOptionsSchema.extend({
-  isA: z.array(TTIriRefSchema).prefault([]),
-  binding: z.array(SearchBindingSchema).prefault([]),
+  isA: z.array(TTIriRefSchema).optional(),
+  binding: z.array(SearchBindingSchema).optional(),
   page: PageSchema.optional(),
   textSearch: z.string().optional()
 });

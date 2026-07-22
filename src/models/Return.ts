@@ -30,15 +30,15 @@ export const ReturnSchema = z.strictObject({
   nodeRef: z.string().optional(),
   propertyRef: z.string().optional(),
   pathRef: z.string().optional(),
-  inverse: z.boolean().default(false),
+  inverse: z.boolean().optional(),
   units: TTIriRefSchema.optional(),
   dataType: TTIriRefSchema.optional(),
   semanticMap: TTIriRefSchema.optional(),
   description: z.string().optional(),
   value: z.string().optional(),
   case: CaseSchema.optional(),
-  get return(): z.ZodPrefault<z.ZodArray<typeof ReturnSchema>> {
-    return z.array(ReturnSchema).prefault([]);
+  get return(): z.ZodOptional<z.ZodArray<typeof ReturnSchema>> {
+    return z.array(ReturnSchema).optional();
   }
 });
 

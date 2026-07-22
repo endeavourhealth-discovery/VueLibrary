@@ -26,20 +26,20 @@ import { SearchBinding, SearchBindingSchema } from "./SearchBinding";
 export const SearchRequestSchema = z.strictObject({
   termFilter: z.string().optional(),
   index: z.string().optional(),
-  statusFilter: z.array(z.string()).prefault([]),
-  typeFilter: z.array(z.string()).prefault([]),
-  schemeFilter: z.array(z.string()).prefault([]),
-  bindingFilter: z.array(SearchBindingSchema).prefault([]),
-  markIfDescendantOf: z.array(z.string()).prefault([]),
-  isA: z.array(z.string()).prefault([]),
-  memberOf: z.array(z.string()).prefault([]),
+  statusFilter: z.array(z.string()).optional(),
+  typeFilter: z.array(z.string()).optional(),
+  schemeFilter: z.array(z.string()).optional(),
+  bindingFilter: z.array(SearchBindingSchema).optional(),
+  markIfDescendantOf: z.array(z.string()).optional(),
+  isA: z.array(z.string()).optional(),
+  memberOf: z.array(z.string()).optional(),
   page: z.number().default(1),
   size: z.number().default(20),
   from: z.number().optional(),
-  select: z.array(z.string()).prefault([]),
-  orderBy: z.array(OrderBySchema).prefault([]),
-  filter: z.array(FilterSchema).prefault([]),
-  timings: z.array(z.map(z.string(), z.string())).prefault([])
+  select: z.array(z.string()).optional(),
+  orderBy: z.array(OrderBySchema).optional(),
+  filter: z.array(FilterSchema).optional(),
+  timings: z.array(z.map(z.string(), z.string())).optional()
 });
 
 export type SearchRequest = z.output<typeof SearchRequestSchema>;

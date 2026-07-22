@@ -18,8 +18,8 @@ export const SearchResponseSchema = z.strictObject({
   totalCount: z.number().optional(),
   highestUsage: z.number().optional(),
   term: z.string().optional(),
-  entities: z.array(SearchResultSummarySchema).prefault([]),
-  exactMatch: z.boolean().default(false)
+  entities: z.array(SearchResultSummarySchema).optional(),
+  exactMatch: z.boolean().optional()
 });
 
 export type SearchResponse = z.output<typeof SearchResponseSchema>;

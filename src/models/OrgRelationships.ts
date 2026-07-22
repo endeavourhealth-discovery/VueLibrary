@@ -8,7 +8,7 @@ import { OrgRelationship } from "./OrgRelationship";
 // }
 
 export const OrgRelationshipsSchema = z.strictObject({
-  rel: z.array(OrgGeoLocationSchema).prefault([])
+  rel: z.array(OrgGeoLocationSchema).optional()
 });
 
 export type OrgRelationships = z.output<typeof OrgRelationshipsSchema>;

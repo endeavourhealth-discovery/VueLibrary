@@ -7,10 +7,7 @@ import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
 //   type?: TTIriRef;
 // }
 
-export const TTLiteralSchema = z.strictObject({
-  value: z.string().optional(),
-  type: TTIriRefSchema.optional()
-});
+export const TTLiteralSchema = z.union([z.string(), z.boolean(), z.number(), z.strictObject({ value: z.string(), type: z.string() })]);
 
 export type TTLiteral = z.output<typeof TTLiteralSchema>;
 

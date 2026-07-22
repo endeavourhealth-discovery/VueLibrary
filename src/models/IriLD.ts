@@ -1,10 +1,10 @@
 import z from "zod";
 
 export const IriLDSchema = z.strictObject({
-  iri: z.url(),
+  iri: z.url().optional(),
   name: z.string().optional(),
   description: z.string().optional(),
-  uuid: z.uuid()
+  uuid: z.uuid().optional()
 });
 
 export type IriLD = z.output<typeof IriLDSchema>;

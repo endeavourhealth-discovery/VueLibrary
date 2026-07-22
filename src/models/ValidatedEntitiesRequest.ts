@@ -5,7 +5,7 @@ import z from "zod";
 // }
 
 export const ValidatedEntitiesRequestSchema = z.strictObject({
-  snomedCodes: z.array(z.url()).prefault([])
+  snomedCodes: z.array(z.url()).optional()
 });
 
 export type ValidatedEntitiesRequest = z.output<typeof ValidatedEntitiesRequestSchema>;

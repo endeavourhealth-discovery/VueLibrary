@@ -16,10 +16,10 @@ import { TTContextSchema } from "./TTContext";
 
 export const ModelDocumentSchema = z.strictObject({
   context: TTContextSchema.optional(),
-  query: z.array(QueryEntitySchema).prefault([]),
-  folder: z.array(EntitySchema).prefault([]),
-  conceptSet: z.array(ConceptSetSchema).prefault([]),
-  function: z.array(MapFunctionSchema).prefault([])
+  query: z.array(QueryEntitySchema).optional(),
+  folder: z.array(EntitySchema).optional(),
+  conceptSet: z.array(ConceptSetSchema).optional(),
+  function: z.array(MapFunctionSchema).optional()
 });
 
 export type ModelDocument = z.output<typeof ModelDocumentSchema>;

@@ -39,7 +39,6 @@ export { isEntityValidationResponse, type EntityValidationResponse, EntityValida
 export { isExpression, type Expression, ExpressionSchema } from "./Expression";
 export { isExtendedEntityReferenceNode, type ExtendedEntityReferenceNode, ExtendedEntityReferenceNodeSchema } from "./ExtendedEntityReferenceNode";
 export { isExtendedSearchResultSummary, type ExtendedSearchResultSummary, ExtendedSearchResultSummarySchema } from "./ExtendedSearchResultSummary";
-export { isExtendedTTEntity, type ExtendedTTEntity, ExtendedTTEntitySchema } from "./ExtendedTTEntity";
 export { isFileDocumentRequest, type FileDocumentRequest, FileDocumentRequestSchema } from "./FileDocumentRequest";
 export { isFilter, type Filter, FilterSchema } from "./Filter";
 export { isFilterOptions, type FilterOptions, FilterOptionsSchema } from "./FilterOptions";
@@ -136,13 +135,14 @@ export { isTaskHistory, type TaskHistory, TaskHistorySchema } from "./TaskHistor
 export { isTermCode, type TermCode, TermCodeSchema } from "./TermCode";
 export { isTransformRequest, type TransformRequest, TransformRequestSchema } from "./TransformRequest";
 export { isTreeParent, type TreeParent, TreeParentSchema } from "./TreeParent";
+export { isTTArray, type TTArray, TTArraySchema } from "./TTArray";
 export { isTTBundle, type TTBundle, TTBundleSchema } from "./TTBundle";
 export { isTTContext, type TTContext, TTContextSchema } from "./TTContext";
 export { isTTDocument, type TTDocument, TTDocumentSchema } from "./TTDocument";
 export { isTTEntity, type TTEntity, TTEntitySchema } from "./TTEntity";
 export { isTTGraphData, type TTGraphData, TTGraphDataSchema } from "./TTGraphData";
 export { isTTIriRef, type TTIriRef, TTIriRefSchema } from "./TTIriRef";
-export { isTTNode, type TTNode, TTNodeSchema } from "./TTNode";
+export { isTTLiteral, type TTLiteral, TTLiteralSchema } from "./TTLiteral";
 export { isTTPrefix, type TTPrefix, TTPrefixSchema } from "./TTPrefix";
 export { isTTProperty, type TTProperty, TTPropertySchema } from "./TTProperty";
 export { isUIProperty, type UIProperty, UIPropertySchema } from "./UIProperty";

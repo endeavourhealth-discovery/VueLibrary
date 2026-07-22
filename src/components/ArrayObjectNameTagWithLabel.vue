@@ -1,7 +1,7 @@
 <template>
   <div class="container" :style="{ width: size }" :id="id">
     <strong class="label" data-testid="label">{{ label }}: </strong>
-    <div v-if="isArrayObject" class="tag-container">
+    <div v-if="isArrayOf(data, isTTIriRef)" class="tag-container">
       <Tag v-for="item of data" :key="item.iri" :value="item.name" :severity="getSeverity(item)" class="data-tag" data-testid="data-tag" />
     </div>
     <span v-else class="tag-container">None</span>
@@ -11,13 +11,15 @@
 <script setup lang="ts">
 import { computed } from "vue";
 
+import { isString } from "lodash-es";
+
 import { TagSeverity } from "../enums";
-import { isArrayHasLength, isObjectHasKeys } from "../helpers";
-import type { TTIriRef } from "../models";
+import { isArrayHasLength, isArrayOf, isObjectHasKeys } from "../helpers";
+import { type TTIriRef, isTTIriRef } from "../models";
 
 interface Props {
   label: string;
-  data: TTIriRef[];
+  data: unknown[];
   tagSeverityMatches: { iri: string; severity: TagSeverity }[];
   size?: string;
   id?: string;
@@ -28,17 +30,9 @@ const props = withDefaults(defineProps<Props>(), {
   id: "array-object-name-tag-with-label"
 });
 
-const isArrayObject = computed(() => {
-  if (props.data && isArrayHasLength(props.data) && isObjectHasKeys(props.data[0], ["iri"])) {
-    return true;
-  } else {
-    return false;
-  }
-});
-
 function getSeverity(item: TTIriRef): TagSeverity {
   let result = TagSeverity.INFO;
-  if (item && isObjectHasKeys(item, ["name"])) {
+  if (isString(item.name)) {
     const found = props.tagSeverityMatches.find((severity: { iri: string; severity: string }) => severity.iri === item.iri);
     if (found) result = found.severity;
     else console.warn("TagWithLabel missing case for severity");

@@ -13,19 +13,19 @@ import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
 // }
 
 export const NodeShapeSchema = TTIriRefSchema.extend({
-  get property(): z.ZodPrefault<z.ZodArray<typeof PropertyShapeSchema>> {
-    return z.array(PropertyShapeSchema).prefault([]);
+  get property(): z.ZodOptional<z.ZodArray<typeof PropertyShapeSchema>> {
+    return z.array(PropertyShapeSchema).optional();
   },
-  subType: z.array(TTIriRefSchema).prefault([]),
+  subType: z.array(TTIriRefSchema).optional(),
   definingProperty: TTIriRefSchema.optional(),
   inverseProperty: TTIriRefSchema.optional(),
 
-  get folder(): z.ZodPrefault<z.ZodArray<typeof NodeShapeSchema>> {
-    return z.array(NodeShapeSchema).prefault([]);
+  get folder(): z.ZodOptional<z.ZodArray<typeof NodeShapeSchema>> {
+    return z.array(NodeShapeSchema).optional();
   },
 
-  get type(): z.ZodPrefault<z.ZodArray<typeof NodeShapeSchema>> {
-    return z.array(NodeShapeSchema).prefault([]);
+  get type(): z.ZodOptional<z.ZodArray<typeof NodeShapeSchema>> {
+    return z.array(NodeShapeSchema).optional();
   }
 });
 

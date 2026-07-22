@@ -21,9 +21,9 @@ import { TTIriRefSchema } from "./TTIriRef";
 
 export const QuerySchema = z.strictObject({
   ...MatchSchema.shape,
-  prefixes: z.array(PrefixSchema).prefault([]),
+  prefixes: z.array(PrefixSchema).optional(),
   description: z.string().optional(),
-  columnGroup: z.array(MatchSchema).prefault([]),
+  columnGroup: z.array(MatchSchema).optional(),
   imQuery: z.string().optional(),
   parentResult: z.any().optional(),
   persistentIri: TTIriRefSchema.optional(),

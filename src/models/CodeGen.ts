@@ -17,7 +17,7 @@ export const CodeGenSchema = z.strictObject({
   collectionWrapper: z.string(),
   datatypeMap: GenericObjectSchema,
   template: z.string(),
-  complexTypes: z.boolean().default(false)
+  complexTypes: z.boolean().optional()
 });
 
 export type CodeGen = z.output<typeof CodeGenSchema>;

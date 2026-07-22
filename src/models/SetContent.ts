@@ -18,8 +18,8 @@ export const SetContentSchema = z.strictObject({
   status: z.string().optional(),
   version: z.number().optional(),
   setDefinition: z.string().optional(),
-  subsets: z.array(z.string()).prefault([]),
-  concepts: z.array(ConceptSchema).prefault([])
+  subsets: z.array(z.string()).optional(),
+  concepts: z.array(ConceptSchema).optional()
 });
 
 export type SetContent = z.output<typeof SetContentSchema>;

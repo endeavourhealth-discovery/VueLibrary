@@ -11,7 +11,7 @@ import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
 export const ParameterShapeSchema = z.strictObject({
   label: z.string().optional(),
   type: TTIriRefSchema.optional(),
-  parameterSubType: z.array(TTIriRefSchema).prefault([])
+  parameterSubType: z.array(TTIriRefSchema).optional()
 });
 
 export type ParameterShape = z.output<typeof ParameterShapeSchema>;

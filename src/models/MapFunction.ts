@@ -11,7 +11,7 @@ import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
 
 export const MapFunctionSchema = z.strictObject({
   ...TTIriRefSchema.shape,
-  argument: z.array(ArgumentSchema).prefault([]),
+  argument: z.array(ArgumentSchema).optional(),
   conceptMap: z.record(z.string(), z.string()).optional(),
   defaultValue: TTIriRefSchema.optional()
 });

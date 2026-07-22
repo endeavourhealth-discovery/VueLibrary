@@ -13,7 +13,9 @@ export const FilterOptionsSchema = z.strictObject({
   status: z.array(TTIriRefSchema).prefault([]),
   schemes: z.array(TTIriRefSchema).prefault([]),
   types: z.array(TTIriRefSchema).prefault([]),
-  typeSchemes: z.record(z.string(), z.array(TTIriRefSchema).prefault([])).optional()
+  typeSchemes: z.record(z.string(), z.array(TTIriRefSchema).optional()).optional(),
+  sortFields: z.array(TTIriRefSchema).prefault([]),
+  sortDirections: z.array(TTIriRefSchema).prefault([])
 });
 
 export type FilterOptions = z.output<typeof FilterOptionsSchema>;

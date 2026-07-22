@@ -15,16 +15,16 @@ import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
 // }
 
 export const ConceptSchema = EntitySchema.extend({
-  subClassOf: z.array(TTIriRefSchema).prefault([]),
+  subClassOf: z.array(TTIriRefSchema).optional(),
   code: z.string().optional(),
   im1Id: z.string().optional(),
-  get matchedFrom(): z.ZodPrefault<z.ZodArray<typeof ConceptSchema>> {
-    return z.array(ConceptSchema).prefault([]);
+  get matchedFrom(): z.ZodOptional<z.ZodArray<typeof ConceptSchema>> {
+    return z.array(ConceptSchema).optional();
   },
   usage: z.number().optional(),
   codeId: z.string().optional(),
   alternativeCode: z.string().optional(),
-  subsumed: z.boolean().default(false)
+  subsumed: z.boolean().optional()
 });
 
 export type Concept = z.output<typeof ConceptSchema>;

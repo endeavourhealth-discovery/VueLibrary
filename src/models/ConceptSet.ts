@@ -13,9 +13,9 @@ import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
 
 export const ConceptSetSchema = z.strictObject({
   ...EntitySchema.shape,
-  hasMember: z.array(TTIriRefSchema).prefault([]),
-  usedIn: z.array(TTIriRefSchema).prefault([]),
-  avoidReplacedBy: z.boolean().default(false)
+  hasMember: z.array(TTIriRefSchema).optional(),
+  usedIn: z.array(TTIriRefSchema).optional(),
+  avoidReplacedBy: z.boolean().optional()
 });
 
 export type ConceptSet = z.output<typeof ConceptSetSchema>;

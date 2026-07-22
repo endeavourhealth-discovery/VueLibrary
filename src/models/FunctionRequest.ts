@@ -14,7 +14,7 @@ import { PageSchema } from "./Page";
 
 export const FunctionRequestSchema = z.strictObject({
   functionIri: z.url(),
-  arguments: z.array(ArgumentSchema).prefault([]),
+  arguments: z.array(ArgumentSchema).optional(),
   page: PageSchema.optional(),
   graph: z.enum(GRAPH).optional()
 });

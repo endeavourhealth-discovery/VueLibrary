@@ -53,32 +53,32 @@ export const WhereSchema = ElementSchema.extend({
   compare: CompareSchema.optional(),
   nodeRef: z.string().optional(),
   range: RangeSchema.optional(),
-  isNull: z.boolean().default(false),
-  is: z.array(NodeSchema).optional(),
-  anyRoleGroup: z.boolean().default(false),
-  inverse: z.boolean().default(false),
-  typeOf: NodeSchema.optional(),
+  isNull: z.boolean().optional(),
+  is: z.lazy(() => z.array(NodeSchema)).optional(),
+  anyRoleGroup: z.boolean().optional(),
+  inverse: z.boolean().optional(),
+  typeOf: z.lazy(() => NodeSchema).optional(),
   subjectVariable: z.string().optional(),
   subjectParameter: z.string().optional(),
-  not: z.boolean().default(false),
-  roleGroup: z.boolean().default(false),
-  isNotNull: z.boolean().default(false),
-  get or(): z.ZodPrefault<z.ZodArray<typeof WhereSchema>> {
-    return z.array(WhereSchema).prefault([]);
+  not: z.boolean().optional(),
+  roleGroup: z.boolean().optional(),
+  isNotNull: z.boolean().optional(),
+  get or(): z.ZodOptional<z.ZodArray<typeof WhereSchema>> {
+    return z.array(WhereSchema).optional();
   },
-  get and(): z.ZodPrefault<z.ZodArray<typeof WhereSchema>> {
-    return z.array(WhereSchema).prefault([]);
+  get and(): z.ZodOptional<z.ZodArray<typeof WhereSchema>> {
+    return z.array(WhereSchema).optional();
   },
   propertyRef: z.string().optional(),
   shortLabel: z.string().optional(),
   qualifier: TTIriRefSchema.optional(),
-  propertyList: z.array(NodeSchema).optional(),
+  propertyList: z.lazy(() => z.array(NodeSchema)).optional(),
   propertyVariable: z.string().optional(),
   node: z.string().optional(),
-  excludeProperty: z.array(IriLDSchema),
-  exists: z.boolean().default(false),
-  linked: z.boolean().default(false),
-  notNull: z.boolean().default(false)
+  excludeProperty: z.array(IriLDSchema).optional(),
+  exists: z.boolean().optional(),
+  linked: z.boolean().optional(),
+  notNull: z.boolean().optional()
 });
 
 export type Where = z.output<typeof WhereSchema>;

@@ -28,7 +28,7 @@ export const HavingSchema = z.strictObject({
   get or() {
     return z.array(HavingSchema);
   },
-  not: z.boolean().default(false)
+  not: z.boolean().optional()
 });
 
 export type Having = z.output<typeof HavingSchema>;

@@ -8,7 +8,7 @@ import z from "zod";
 // }
 
 export const ECLStatusSchema = z.strictObject({
-  valid: z.boolean().default(false),
+  valid: z.boolean().optional(),
   line: z.number().optional(),
   offset: z.number().optional(),
   message: z.string().optional()

@@ -18,11 +18,11 @@ import { TTIriRefSchema } from "./TTIriRef";
 export const ECLQueryRequestSchema = z.strictObject({
   ecl: z.string().optional(),
   query: QuerySchema.optional(),
-  showNames: z.boolean().default(false),
+  showNames: z.boolean().optional(),
   status: ECLStatusSchema.optional(),
-  includeLegacy: z.boolean().default(false),
+  includeLegacy: z.boolean().optional(),
   limit: z.number().default(1000),
-  statusFilter: z.array(TTIriRefSchema).prefault([]),
+  statusFilter: z.array(TTIriRefSchema).optional(),
   page: z.number().default(1),
   size: z.number().default(20)
 });

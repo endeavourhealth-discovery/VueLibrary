@@ -7,7 +7,7 @@ import { IM } from "../enums";
 import { getColourFromType, getFAIconFromType } from "../helpers/ConceptTypeVisuals";
 import { isArrayHasLength, isObjectHasKeys } from "../helpers/DataTypeCheckers";
 import injectionKeys from "../injectionKeys/injectionKeys";
-import { EntityReferenceNode, ExtendedTTEntity, TTIriRef } from "../models";
+import { EntityReferenceNode, TTEntity, TTIriRef } from "../models";
 
 export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: number) {
   const useDirectService = inject(injectionKeys.useDirectService);
@@ -18,10 +18,10 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
 
   const toast = useToast();
 
-  const selectedKeys: Ref<any> = ref({});
+  const selectedKeys: Ref<{ [x: string]: boolean }> = ref({});
   const selectedNode: Ref<TreeNode | undefined> = ref();
   const root: Ref<TreeNode[]> = ref([]);
-  const expandedKeys: Ref<any> = ref({});
+  const expandedKeys: Ref<{ [x: string]: boolean }> = ref({});
   const expandedData: Ref<TreeNode[]> = ref([]);
   const pageSize = ref(customPageSize ?? 50);
 
@@ -126,7 +126,7 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
     if (!node.data) return;
     if (isObjectHasKeys(node)) {
       node.loading = true;
-      if (!isObjectHasKeys(expandedKeys.value, [node.key])) expandedKeys.value[node.key] = true;
+      if (!expandedKeys.value[node.key]) expandedKeys.value[node.key] = true;
       if (!expandedData.value.find(x => x.key === node.key)) expandedData.value.push(node);
       if (node.data === IM.FAVOURITES && node.children && isArrayHasLength(node.children) && node.children.length <= favourites.value.length) {
         await expandFavouriteNode(node);
