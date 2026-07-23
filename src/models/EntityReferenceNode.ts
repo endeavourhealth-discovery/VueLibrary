@@ -26,7 +26,8 @@ export const EntityReferenceNodeSchema = TTIriRefSchema.extend({
   hasChildren: z.boolean().optional(),
   hasGrandChildren: z.boolean().optional(),
   type: TTArraySchema,
-  orderNumber: z.number().optional()
+  orderNumber: z.number().optional(),
+  status: TTIriRefSchema.optional()
 });
 
 export type EntityReferenceNode = z.infer<typeof EntityReferenceNodeSchema>;

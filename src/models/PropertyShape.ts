@@ -95,11 +95,11 @@ export const PropertyShapeSchema = z.strictObject({
   orderable: z.boolean().optional(),
   definingProperty: z.boolean().optional(),
   highCardinality: z.boolean().optional(),
-  generic: z.boolean().optional(),
   hasValueSet: TTIriRefSchema.optional(),
   isValidEntity: TTIriRefSchema.optional(),
   isValidArguments: z.array(ArgumentSchema).optional(),
-  inversePath: TTIriRefSchema.optional()
+  inversePath: TTIriRefSchema.optional(),
+  association: z.boolean().optional()
 });
 
 export type PropertyShape = z.output<typeof PropertyShapeSchema>;
