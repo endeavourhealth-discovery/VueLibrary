@@ -10,7 +10,7 @@ import z from "zod";
 
 export const TTGraphDataSchema = z.strictObject({
   name: z.string(),
-  iri: z.url(),
+  iri: z.string(),
   relToParent: z.string(),
   get children(): z.ZodPrefault<z.ZodArray<typeof TTGraphDataSchema>> {
     return z.array(TTGraphDataSchema).prefault([]);
