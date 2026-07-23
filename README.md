@@ -27,7 +27,7 @@ To ensure smooth development without breaking existing code/builds, these steps 
 1. Set the new version number using `pnpm setVersion --to=<x.x.x>`  (note that this will error if its that version already)
 2. You can now make your changes in the VueLibrary/Java classes, 
 3. run the `pnpm build` task, return to your Java project and rebuild.
-   All these changes will remain local.
+4. Commit the changes when you need the version to be used.
 
 The pnpm build will perform the java build, typescript generation and publishing to local maven (and linked npm package once setup)
 
