@@ -6,8 +6,10 @@ import { RecentActivityItemSchema } from "./RecentActivityItem";
 
 export const UserSchema = z.strictObject({
   id: z.string(),
+  type: z.string(),
   username: z.string(),
   displayName: z.string().optional(),
+  password: z.string().default(""),
   email: z.email().or(z.literal("")),
   avatar: z.url().or(z.literal("")),
   roles: z.array(z.string()).prefault([]),
