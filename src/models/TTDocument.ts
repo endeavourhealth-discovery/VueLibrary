@@ -17,7 +17,7 @@ export const TTDocumentSchema = TTEntitySchema.extend({
   context: TTContextSchema.optional(),
   entities: z.array(TTEntitySchema).optional(),
   crud: TTIriRefSchema.optional(),
-  predicates: z.map(z.string(), z.string()).prefault(new Map()),
+  predicates: z.record(z.string(), z.string()).prefault({}),
   prefixes: z.array(TTPrefixSchema).optional()
 });
 

@@ -39,7 +39,7 @@ export const SearchRequestSchema = z.strictObject({
   select: z.array(z.string()).optional(),
   orderBy: z.array(OrderBySchema).optional(),
   filter: z.array(FilterSchema).optional(),
-  timings: z.array(z.map(z.string(), z.string())).optional()
+  timings: z.array(z.record(z.number(), z.string())).optional()
 });
 
 export type SearchRequest = z.output<typeof SearchRequestSchema>;

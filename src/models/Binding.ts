@@ -6,9 +6,9 @@ import z from "zod";
 // }
 
 export const BindingSchema = z.strictObject({
-  predicateBinding: z.map(z.string(), z.string()).default(new Map()),
+  predicateBinding: z.record(z.string(), z.string()).default({}),
   get predicateObject() {
-    return z.map(z.string(), BindingSchema).default(new Map());
+    return z.record(z.string(), BindingSchema).default({});
   }
 });
 

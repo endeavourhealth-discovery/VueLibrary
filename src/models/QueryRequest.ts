@@ -10,23 +10,23 @@ import { Query, QuerySchema } from "./Query";
 import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
 import { Update, UpdateSchema } from "./Update";
 
-// export interface QueryRequest {
-//   textSearch?: string;
-//   argument?: Argument[];
-//   query: Query;
-//   pathQuery?: PathQuery;
-//   update?: Update;
-//   name?: string;
-//   page?: Page;
-//   queryStringDefinition?: string;
-//   askIri?: string;
-//   timings?: { [index: string]: string }[];
-//   cohort?: TTIriRef[];
-//   includeNames?: boolean;
-//   textSearchStyle?: TextSearchStyle;
-//   language?: DatabaseOption;
-//   context?: { [index: string]: string };
-// }
+export interface QueryRequest {
+  textSearch?: string;
+  argument?: Argument[];
+  query?: Query;
+  pathQuery?: PathQuery;
+  update?: Update;
+  name?: string;
+  page?: Page;
+  queryStringDefinition?: string;
+  askIri?: string;
+  timings?: { [index: string]: string }[];
+  cohort?: TTIriRef[];
+  includeNames?: boolean;
+  textSearchStyle?: TextSearchStyle;
+  language?: DatabaseOption;
+  context?: { [index: string]: string };
+}
 
 export const QueryRequestSchema = z.strictObject({
   textSearch: z.string().optional(),
@@ -38,15 +38,15 @@ export const QueryRequestSchema = z.strictObject({
   page: PageSchema.optional(),
   queryStringDefinition: z.string().optional(),
   askIri: z.url().optional(),
-  timings: z.array(z.map(z.string(), z.string())).optional(),
+  timings: z.array(z.record(z.number(), z.string())).optional(),
   cohort: z.array(TTIriRefSchema).optional(),
   includeNames: z.boolean().optional(),
   textSearchStyle: z.enum(TextSearchStyle).optional(),
   language: z.enum(DatabaseOption).optional(),
-  context: z.map(z.string(), z.string()).optional()
-});
+  context: z.record(z.string(), z.string()).optional()
+}) satisfies z.ZodType<QueryRequest>;
 
-export type QueryRequest = z.output<typeof QueryRequestSchema>;
+// export type QueryRequest = z.output<typeof QueryRequestSchema>;
 
 export function isQueryRequest(value: unknown): value is QueryRequest {
   return QueryRequestSchema.safeParse(value).success;

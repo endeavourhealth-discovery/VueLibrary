@@ -1,19 +1,20 @@
-// export interface ECLQueryRequest {
-//   ecl?: string;
-//   query?: Query;
-//   showNames?: boolean;
-//   status?: ECLStatus;
-//   includeLegacy?: boolean;
-//   limit?: number;
-//   statusFilter?: TTIriRef[];
-//   page?: number;
-//   size?: number;
-// }
 import z from "zod";
 
-import { ECLStatusSchema } from "./ECLStatus";
-import { QuerySchema } from "./Query";
-import { TTIriRefSchema } from "./TTIriRef";
+import { ECLStatus, ECLStatusSchema } from "./ECLStatus";
+import { Query, QuerySchema } from "./Query";
+import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
+
+export interface ECLQueryRequest {
+  ecl?: string;
+  query?: Query;
+  showNames?: boolean;
+  status?: ECLStatus;
+  includeLegacy?: boolean;
+  limit?: number;
+  statusFilter?: TTIriRef[];
+  page?: number;
+  size?: number;
+}
 
 export const ECLQueryRequestSchema = z.strictObject({
   ecl: z.string().optional(),
@@ -25,9 +26,9 @@ export const ECLQueryRequestSchema = z.strictObject({
   statusFilter: z.array(TTIriRefSchema).optional(),
   page: z.number().default(1),
   size: z.number().default(20)
-});
+}) satisfies z.ZodType<ECLQueryRequest>;
 
-export type ECLQueryRequest = z.output<typeof ECLQueryRequestSchema>;
+// export type ECLQueryRequest = z.output<typeof ECLQueryRequestSchema>;
 
 export function isECLQueryRequest(value: unknown): value is ECLQueryRequest {
   return ECLQueryRequestSchema.safeParse(value).success;
