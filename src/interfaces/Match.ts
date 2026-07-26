@@ -20,6 +20,7 @@ export interface Match extends IriLD {
   is?: Node;
   and?: Match[];
   or?: Match[];
+  with? : Match[];
   where?: Where;
   then?: Match;
   graph?: Node;
