@@ -33,7 +33,6 @@ export interface Match extends IriLD {
   inverse?: boolean;
   activeOnly?: boolean;
   rule?: Match[];
-  any?: Match[];
   libraryItem?: string;
   invalid?: boolean;
   groupBy?: GroupBy[];
