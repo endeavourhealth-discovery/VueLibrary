@@ -1,8 +1,8 @@
 import { Delete } from "./Delete";
-import { Match } from "./Match";
+import { Query } from "./Query";
 import { TTIriRef } from "./TTIriRef";
 
 export interface Update extends TTIriRef {
-  match?: Match[];
+  match?: Query[];
   delete?: Delete[];
 }

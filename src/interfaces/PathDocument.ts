@@ -1,5 +1,5 @@
-import { Match } from "./Match";
+import { Query } from "./Query";
 
 export interface PathDocument {
-  match?: Match[];
+  match?: Query[];
 }

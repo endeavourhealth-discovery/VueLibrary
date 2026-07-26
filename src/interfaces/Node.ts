@@ -1,11 +1,11 @@
 import { Element } from "./Element";
-import { Match } from "./Match";
+import { Query } from "./Query";
 
 export interface Node extends Element {
   parameter?: string;
   type?: string;
   qualifier?: string;
-  match?: Match;
+  match?: Query;
   childOrSelfOf?: boolean;
   childOf?: boolean;
   cohort?: boolean;

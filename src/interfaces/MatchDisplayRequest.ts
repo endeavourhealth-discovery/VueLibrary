@@ -1,8 +1,8 @@
 import { GRAPH } from "@/enums";
 
-import { Match } from "./Match";
+import { Query } from "./Query";
 
 export interface MatchDisplayRequest {
-  match?: Match;
+  match?: Query;
   graph?: GRAPH;
 }
