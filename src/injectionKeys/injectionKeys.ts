@@ -15,7 +15,6 @@ import {
   EntityValidationRequest,
   IMLLanguage,
   Indicator,
-  Match,
   NamespacePermissionJava,
   Node,
   NodeShape,
@@ -121,7 +120,7 @@ const queryService = Symbol("queryService") as InjectionKey<{
   getQueryDisplayFromQuery(query: Query, displayMode: DisplayMode): Promise<Query>;
   expandCohort(queryIri: string, cohortIri: string, displayMode: DisplayMode): Promise<Query>;
   getDisplayFromIndicatorIri(iri: string): Promise<Indicator>;
-  flattenBooleans(query: Query | Match): Promise<Query | Match>;
+  flattenBooleans(query: Query | Query): Promise<Query | Query>;
   optimiseECLQuery(query: Query): Promise<Query>;
   queryIM(query: QueryRequest, controller?: AbortController, raw?: boolean): Promise<QueryResponse>;
 }>;

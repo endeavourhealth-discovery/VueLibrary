@@ -1,13 +1,13 @@
 import z from "zod";
 
 import { Element, ElementSchema } from "./Element";
-import { Match, MatchSchema } from "./Match";
+import { Query, QuerySchema } from "./Query";
 
 export interface Node extends Element {
   parameter?: string;
   type?: string;
   qualifier?: string;
-  match?: Match;
+  match?: Query;
   childOrSelfOf?: boolean;
   childOf?: boolean;
   cohort?: boolean;
@@ -26,8 +26,8 @@ export const NodeSchema: z.ZodType<Node> = ElementSchema.extend({
   parameter: z.string().optional(),
   type: z.string().optional(),
   qualifier: z.string().optional(),
-  get match(): z.ZodOptional<z.ZodLazy<typeof MatchSchema>> {
-    return z.lazy(() => MatchSchema).optional();
+  get match(): z.ZodOptional<z.ZodLazy<typeof QuerySchema>> {
+    return z.lazy(() => QuerySchema).optional();
   },
   childOrSelfOf: z.boolean().optional(),
   childOf: z.boolean().optional(),

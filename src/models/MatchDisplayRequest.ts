@@ -2,7 +2,7 @@ import z from "zod";
 
 import { GRAPH } from "@/enums";
 
-import { MatchSchema } from "./Match";
+import { QuerySchema } from "./Query";
 
 // export interface MatchDisplayRequest {
 //   match?: Match;
@@ -10,7 +10,7 @@ import { MatchSchema } from "./Match";
 // }
 
 export const MatchDisplayRequestSchema = z.strictObject({
-  match: MatchSchema.optional(),
+  match: QuerySchema.optional(),
   graph: z.enum(GRAPH).optional()
 });
 

@@ -1,7 +1,7 @@
 import z from "zod";
 
 import { Delete, DeleteSchema } from "./Delete";
-import { Match, MatchSchema } from "./Match";
+import { QuerySchema } from "./Query";
 import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
 
 // export interface Update extends TTIriRef {
@@ -10,7 +10,7 @@ import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
 // }
 
 export const UpdateSchema = TTIriRefSchema.extend({
-  match: z.array(MatchSchema).optional(),
+  match: z.array(QuerySchema).optional(),
   delete: z.array(DeleteSchema).optional()
 });
 

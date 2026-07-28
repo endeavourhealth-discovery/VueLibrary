@@ -60,7 +60,6 @@ export { isLoginResponseES, type LoginResponseES, LoginResponseESSchema } from "
 export { isMailOptions, type MailOptions, MailOptionsSchema } from "./MailOptions";
 export { isMapFunction, type MapFunction, MapFunctionSchema } from "./MapFunction";
 export { isMapItem, type MapItem, MapItemSchema } from "./MapItem";
-export { isMatch, type Match, MatchSchema } from "./Match";
 export { isMatchDisplayRequest, type MatchDisplayRequest, MatchDisplayRequestSchema } from "./MatchDisplayRequest";
 export { isModelDocument, type ModelDocument, ModelDocumentSchema } from "./ModelDocument";
 export { isNamespace, type Namespace, NamespaceSchema } from "./Namespace";
