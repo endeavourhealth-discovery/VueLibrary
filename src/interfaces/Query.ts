@@ -61,4 +61,5 @@ export interface Query extends IriLD {
   queryType?: IMQType;
   iri?: string;
   name?: string;
+  as?: string;
 }
