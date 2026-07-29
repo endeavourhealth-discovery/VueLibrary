@@ -9,9 +9,9 @@ import { TTEntitySchema } from "./TTEntity";
 // }
 
 export const ConceptAggregateSchema = z.strictObject({
-  children: z.array(TTEntitySchema).optional(),
-  concept: z.array(TTEntitySchema).optional(),
-  parents: z.array(TTEntitySchema).optional()
+  children: z.array(TTEntitySchema),
+  concept: TTEntitySchema,
+  parents: z.array(TTEntitySchema)
 });
 
 export type ConceptAggregate = z.output<typeof ConceptAggregateSchema>;
