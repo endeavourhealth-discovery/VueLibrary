@@ -1,25 +1,17 @@
-import { IMQType, RuleAction } from "@/enums";
-import { Entail } from "@/enums";
+import { Entail, IMQType, RuleAction } from "@/enums";
+import { FunctionClause } from "@/interfaces/FunctionClause";
+import { GroupBy } from "@/interfaces/GroupBy";
+import { Having } from "@/interfaces/Having";
+import { Node } from "@/interfaces/Node";
+import { OrderLimit } from "@/interfaces/OrderLimit";
+import { Path } from "@/interfaces/Path";
 import { Prefix } from "@/interfaces/Prefix";
+import { Return } from "@/interfaces/Return";
 import { TTIriRef } from "@/interfaces/TTIriRef";
+import { Where } from "@/interfaces/Where";
+import { IriLD } from "@/interfaces/IriLD";
 
-
-
-import { FunctionClause } from "./FunctionClause";
-import { GroupBy } from "./GroupBy";
-import { Having } from "./Having";
-import { IriLD } from "./IriLD";
-import { Node } from "./Node";
-import { OrderLimit } from "./OrderLimit";
-import { Path } from "./Path";
-import { Return } from "./Return";
-import { Where } from "./Where";
-import { Match } from "@/interfaces/Match";
-
-
-
-
-export interface Query extends Match {
+export interface Match extends IriLD{
   notExists?: boolean;
   ifTrue?: RuleAction;
   ifFalse?: RuleAction;
@@ -27,13 +19,13 @@ export interface Query extends Match {
   from?: string;
   typeOf?: Node;
   is?: Node;
-  and?: Query[];
-  or?: Query[];
-  with? : Query[];
-  union?: Query[];
-  any?: Query[];
+  and?: Match[];
+  or?: Match[];
+  with?: Match[];
+  union?: Match[];
+  any?: Match[];
   where?: Where;
-  then?: Query;
+  then?: Match;
   graph?: Node;
   optional?: boolean;
   parameter?: string;
@@ -43,7 +35,7 @@ export interface Query extends Match {
   ruleNumber?: number;
   inverse?: boolean;
   activeOnly?: boolean;
-  rule?: Query[];
+  rule?: Match[];
   libraryItem?: string;
   invalid?: boolean;
   groupBy?: GroupBy[];
@@ -57,8 +49,8 @@ export interface Query extends Match {
   node?: string;
   return?: Return[];
   prefixes?: Prefix[];
-  columnGroup?: Query[];
-  imQuery?: string;
+  columnGroup?: Match[];
+  imMatch?: string;
   parentResult?: any;
   persistentIri?: TTIriRef;
   bindAs?: string;
