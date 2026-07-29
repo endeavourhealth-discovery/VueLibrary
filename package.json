@@ -1,8 +1,8 @@
 {
   "name": "@endeavour/vue-library",
-  "version": "3.0.3",
+  "version": "3.0.4",
   "type": "module",
-  "packageManager": "pnpm@10.34.2",
+  "packageManager": "pnpm@11.15.1",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
@@ -102,12 +102,5 @@
   },
   "publishConfig": {
     "registry": "https://artifactory.endhealth.co.uk/repository/npm/"
-  },
-  "pnpm": {
-    "overrides": {},
-    "onlyBuiltDependencies": [
-      "@parcel/watcher",
-      "esbuild"
-    ]
   }
 }

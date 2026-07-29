@@ -3,16 +3,16 @@ import { computed, ref } from "vue";
 import { isBoolean, isString } from "lodash-es";
 import { defineStore } from "pinia";
 
-import { FontSize, PrimeVueColors, PrimeVuePresetThemes, UserRole } from "../enums";
-import { isObjectHasKeys } from "../helpers";
-import { localStorageWithExpiry } from "../helpers";
-import { HistoryItem } from "../models";
-import { NamespacePermissionJava, RecentActivityItemDto } from "../models";
-import { RecentActivityItem, User } from "../models";
+import { FontSize, PrimeVueColors, PrimeVuePresetThemes, UserRole } from "@/enums";
+import { isObjectHasKeys } from "@/helpers";
+import { localStorageWithExpiry } from "@/helpers";
+import { HistoryItem } from "@/models";
+import { NamespacePermissionJava, RecentActivityItemDto } from "@/models";
+import { RecentActivityItem, User } from "@/models";
 
 export const useUserStore = defineStore("user", () => {
-  const cookiesEssentialAccepted = ref<boolean>(localStorageWithExpiry.getItem("cookiesEssentialAccepted", isBoolean) === true ? true : false);
-  const cookiesOptionalAccepted = ref<boolean>(localStorageWithExpiry.getItem("cookiesOptionalAccepted", isBoolean) === true ? true : false);
+  const cookiesEssentialAccepted = ref<boolean>(localStorageWithExpiry.getItem("cookiesEssentialAccepted", isBoolean) === true);
+  const cookiesOptionalAccepted = ref<boolean>(localStorageWithExpiry.getItem("cookiesOptionalAccepted", isBoolean) === true);
   const currentPreset = ref<PrimeVuePresetThemes>();
   const currentPrimaryColor = ref<PrimeVueColors>();
   const currentSurfaceColor = ref<PrimeVueColors>();
@@ -22,14 +22,21 @@ export const useUserStore = defineStore("user", () => {
   const favourites = ref<string[]>([]);
   const history = ref<HistoryItem[]>([]);
   const recentLocalActivity = ref<RecentActivityItem[]>([]);
-  const snomedLicenseAccepted = ref<boolean>(localStorageWithExpiry.getItem("snomedLicenseAccepted", isBoolean) === true ? true : false);
-  const uprnAgreementAccepted = ref<boolean>(localStorageWithExpiry.getItem("uprnAgreementAccepted", isBoolean) === true ? true : false);
+  const snomedLicenseAccepted = ref<boolean>(localStorageWithExpiry.getItem("snomedLicenseAccepted", isBoolean) === true);
+  const uprnAgreementAccepted = ref<boolean>(localStorageWithExpiry.getItem("uprnAgreementAccepted", isBoolean) === true);
   const organisations = ref<string[]>([]);
   const includeUserGraph = ref<boolean>(false);
   const namespaces = ref<NamespacePermissionJava[]>([]);
 
   const isLoggedIn = computed(() => isObjectHasKeys(currentUser.value));
-  const isAdmin = computed(() => (currentUser.value?.roles.includes(UserRole.ADMIN) ? true : false));
+  const isAdmin = computed(() => !!currentUser.value?.roles.includes(UserRole.ADMIN));
+
+  function loadFromStorage() {
+    cookiesEssentialAccepted.value = localStorageWithExpiry.getItem("cookiesEssentialAccepted", isBoolean) === true;
+    cookiesOptionalAccepted.value = localStorageWithExpiry.getItem("cookiesOptionalAccepted", isBoolean) === true;
+    snomedLicenseAccepted.value = localStorageWithExpiry.getItem("snomedLicenseAccepted", isBoolean) === true;
+    uprnAgreementAccepted.value = localStorageWithExpiry.getItem("uprnAgreementAccepted", isBoolean) === true;
+  }
 
   function clearAllFromUserDatabase() {
     currentPreset.value = PrimeVuePresetThemes.AURA;
@@ -308,6 +315,7 @@ export const useUserStore = defineStore("user", () => {
     organisations,
     includeUserGraph,
     namespaces,
+    loadFromStorage,
     updateCookiesEssentialAccepted,
     updateCookiesOptionalAccepted,
     updateCurrentFontSize: updateCurrentFontSize,
