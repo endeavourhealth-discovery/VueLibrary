@@ -34,6 +34,7 @@ export const QuerySchema = IriLDSchema.extend({
   ifTrue: z.enum(RuleAction).optional(),
   ifFalse: z.enum(RuleAction).optional(),
   nodeRef: z.string().optional(),
+  from: z.string().optional(),
   get typeOf(): z.ZodOptional<z.ZodLazy<typeof NodeSchema>> {
     return z.lazy(() => NodeSchema).optional();
   },
@@ -47,6 +48,9 @@ export const QuerySchema = IriLDSchema.extend({
     return z.array(QuerySchema).optional();
   },
   get with(): z.ZodOptional<z.ZodArray<typeof QuerySchema>> {
+    return z.array(QuerySchema).optional();
+  },
+  get union(): z.ZodOptional<z.ZodArray<typeof QuerySchema>> {
     return z.array(QuerySchema).optional();
   },
   get where(): z.ZodOptional<typeof WhereSchema> {
@@ -81,7 +85,6 @@ export const QuerySchema = IriLDSchema.extend({
   node: z.string().optional(),
   return: z.array(ReturnSchema).optional(),
   prefixes: z.array(PrefixSchema).optional(),
-  description: z.string().optional(),
   get columnGroup(): z.ZodOptional<z.ZodArray<typeof QuerySchema>> {
     return z.array(QuerySchema).optional();
   },
@@ -90,8 +93,7 @@ export const QuerySchema = IriLDSchema.extend({
   persistentIri: TTIriRefSchema.optional(),
   bindAs: z.string().optional(),
   queryType: z.enum(IMQType).optional(),
-  iri: z.url().optional(),
-  name: z.string().optional()
+  as: z.string().optional()
 });
 
 export type Query = z.output<typeof QuerySchema>;
