@@ -5,9 +5,9 @@ import { useToast } from "primevue/usetoast";
 
 import { IM } from "../enums";
 import { getColourFromType, getFAIconFromType } from "../helpers/ConceptTypeVisuals";
-import { isObjectHasKeys } from "../helpers/DataTypeCheckers";
+import { isArrayHasLength, isObjectHasKeys } from "../helpers/DataTypeCheckers";
 import injectionKeys from "../injectionKeys/injectionKeys";
-import { ExtendedTTEntity, TTIriRef } from "../interfaces";
+import { EntityReferenceNode, ExtendedEntityReferenceNode, TTEntity, TTIriRef } from "../models";
 
 export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: number) {
   const useDirectService = inject(injectionKeys.useDirectService);
@@ -18,10 +18,10 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
 
   const toast = useToast();
 
-  const selectedKeys: Ref<any> = ref({});
+  const selectedKeys: Ref<{ [x: string]: boolean }> = ref({});
   const selectedNode: Ref<TreeNode | undefined> = ref();
   const root: Ref<TreeNode[]> = ref([]);
-  const expandedKeys: Ref<any> = ref({});
+  const expandedKeys: Ref<{ [x: string]: boolean }> = ref({});
   const expandedData: Ref<TreeNode[]> = ref([]);
   const pageSize = ref(customPageSize ?? 50);
 
@@ -106,7 +106,7 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
       node.parentNode.children.pop();
       for (const child of children.result) {
         if (!nodeHasChild(node.parentNode, child) && child.iri) {
-          const summary = { description: child.description, status: child.status }
+          const summary = { description: child.description, status: child.status };
           node.parentNode.children.push(createTreeNode(child.name, child.iri as string, child.type as TTIriRef[], summary, child.hasChildren, node));
         }
       }
@@ -117,9 +117,9 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
       node.parentNode.children.pop();
       for (const child of children.result) {
         if (!nodeHasChild(node.parentNode, child) && child.iri) {
-          const summary = { description: child.description, status: child.status }
+          const summary = { description: child.description, status: child.status };
           node.parentNode.children.push(createTreeNode(child.name, child.iri, child.type as TTIriRef[], summary, child.hasChildren, node.parentNode));
-          }
+        }
       }
     } else {
       node.parentNode.children.pop();
@@ -127,13 +127,13 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
     node.loading = false;
   }
 
-  async function onNodeExpand(node: any, typeFilter?: string[]) {
+  async function onNodeExpand(node: TreeNode, typeFilter?: string[]) {
     if (!node.key) return;
     if (isObjectHasKeys(node)) {
       node.loading = true;
-      if (!isObjectHasKeys(expandedKeys.value, [node.key])) expandedKeys.value[node.key] = true;
+      if (!expandedKeys.value[node.key]) expandedKeys.value[node.key] = true;
       if (!expandedData.value.find(x => x.key === node.key)) expandedData.value.push(node);
-      if (node.key === IM.FAVOURITES && node.children.length <= favourites.value.length) {
+      if (node.key === IM.FAVOURITES && isArrayHasLength(node.children) && node.children.length <= favourites.value.length) {
         await expandFavouriteNode(node);
       } else {
         await expandNode(node, typeFilter);
@@ -147,13 +147,13 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
     let favChildren = [];
     for (const fav of favourites.value) {
       const favChild = await entityService!.getEntityAsEntityReferenceNode(fav);
-      const summary = { description: favChild.description, status: favChild.status }
+      const summary = { description: favChild.description, status: favChild.status };
       if (favChild) favChildren.push(createTreeNode(favChild.name, favChild.iri, favChild.type as TTIriRef[], summary, false, node));
     }
     node.children = favChildren;
   }
 
-  function childrenHasNode(newChildren: ExtendedTTEntity[], node: TreeNode): boolean {
+  function childrenHasNode(newChildren: EntityReferenceNode[], node: TreeNode): boolean {
     return !!newChildren.find(child => child.iri === node.key);
   }
 
@@ -169,7 +169,7 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
     }
     for (const child of children.result) {
       if (!nodeHasChild(node, child) && child.iri) {
-        const summary = { description: child.description, status: child.status }
+        const summary = { description: child.description, status: child.status };
         node.children.push(createTreeNode(child.name, child.iri, child.type as TTIriRef[], summary, child.hasChildren, node));
       }
     }
@@ -205,7 +205,7 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
     }
   }
 
-  function nodeHasChild(node: TreeNode, child: ExtendedTTEntity) {
+  function nodeHasChild(node: TreeNode, child: EntityReferenceNode) {
     return !!node.children?.find(nodeChild => child.iri === nodeChild.key);
   }
 
@@ -271,7 +271,7 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
     }
   }
 
-  async function selectAndExpand(node: any) {
+  async function selectAndExpand(node: TreeNode) {
     selectKey(node.key);
     if (!node.children || node.children.length === 0) {
       await onNodeExpand(node);

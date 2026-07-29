@@ -1,32 +1,6 @@
 {
   "name": "@endeavour/vue-library",
-  "version": "3.0.2",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  "version": "3.0.3",
   "type": "module",
   "packageManager": "pnpm@10.34.2",
   "scripts": {
@@ -47,7 +21,7 @@
     "sass": "1.99.0",
     "typescript-logging-log4ts-style": "2.2.0",
     "uuid": "13.0.0",
-    "zod": "4.3.6"
+    "zod": "4.4.3"
   },
   "devDependencies": {
     "@originjs/vite-plugin-commonjs": "1.0.3",
@@ -86,11 +60,6 @@
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
-    },
-    "./interfaces": {
-      "types": "./dist/interfaces/index.d.ts",
-      "import": "./dist/interfaces.js",
-      "default": "./dist/interfaces.js"
     },
     "./enums": {
       "types": "./dist/enums/index.d.ts",

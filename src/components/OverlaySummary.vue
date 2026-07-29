@@ -5,7 +5,7 @@
       <div style="max-width: 75%">
         <p>
           <strong>Description: </strong>
-          <span v-if="hoveredResult.description" >{{ hoveredResult.description }}</span>
+          <span v-if="hoveredResult.description">{{ hoveredResult.description }}</span>
           <span v-else> N/A </span>
         </p>
       </div>
@@ -30,7 +30,7 @@ import { isObjectHasKeys } from "@/helpers";
 
 import { getNamesAsStringFromTypes } from "../helpers/ConceptTypeMethods";
 import injectionKeys from "../injectionKeys/injectionKeys";
-import { SearchResultSummary, TTIriRef } from "../interfaces";
+import { SearchResultSummary, TTIriRef } from "../models";
 
 const entityService = inject(injectionKeys.entityService);
 if (!entityService) throw new Error("Missing injection: entityService");

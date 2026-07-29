@@ -15,7 +15,7 @@ import { isArrayHasLength, isObjectHasKeys } from "../helpers";
 
 interface Props {
   label: string;
-  data?: string[];
+  data?: unknown[];
   size?: string;
   id?: string;
 }

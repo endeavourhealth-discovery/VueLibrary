@@ -3,9 +3,11 @@ import { InjectionKey } from "vue";
 import { OrganizationChartNode } from "primevue";
 import { TreeNode } from "primevue/treenode";
 
+import { PageableEntityReferenceNode, PageableNode, PageableTTIriRef } from "@/models/Pageable";
+
 import { PrimeVueColors, PrimeVuePresetThemes } from "../enums";
 import { DisplayMode } from "../enums";
-import { FilterOptions, FiltersAsIris, Namespace, PropertyDisplay, QueryResponse, SetDiffObject, SimpleMap, TermCode } from "../interfaces";
+import { EntityReferenceNode, FilterOptions, FiltersAsIris, Namespace, PropertyDisplay, QueryResponse, SetDiffObject, SimpleMap, TermCode } from "../models";
 import {
   ConceptContextMap,
   DownloadByQueryOptions,
@@ -13,22 +15,22 @@ import {
   EntityValidationRequest,
   IMLLanguage,
   Indicator,
-  Query,
   NamespacePermissionJava,
   Node,
   NodeShape,
   Pageable,
+  Query,
   QueryRequest,
   RecentActivityItemDto,
   SearchResponse,
   SearchResultSummary,
   SetExportRequest,
   TTIriRef
-} from "../interfaces";
-import { ExtendedEntityReferenceNode } from "../interfaces/ExtendedEntityReferenceNode";
-import { ExtendedTTEntity } from "../interfaces/ExtendedTTEntity";
-import { TTBundle } from "../interfaces/TTBundle";
+} from "../models";
 import { User } from "../models";
+import { ExtendedEntityReferenceNode } from "../models/ExtendedEntityReferenceNode";
+import { TTBundle } from "../models/TTBundle";
+import { TTEntity } from "../models/TTEntity";
 
 const conceptService = Symbol("conceptService") as InjectionKey<{
   getMatchedFrom(iri: string): Promise<SimpleMap[]>;
@@ -61,7 +63,7 @@ const eclService = Symbol("eclService") as InjectionKey<{
 }>;
 const entityService = Symbol("entityService") as InjectionKey<{
   getEntitySummary(iri: string): Promise<SearchResultSummary>;
-  getPartialEntity(iri: string, predicates: string[]): Promise<ExtendedTTEntity>;
+  getPartialEntity(iri: string, predicates: string[]): Promise<TTEntity>;
   getNamespaces(): Promise<Namespace[]>;
   downloadSearchResults(downloadSettings: DownloadByQueryOptions): Promise<Blob>;
   getPagedChildren(
@@ -71,17 +73,17 @@ const entityService = Symbol("entityService") as InjectionKey<{
     filters?: FiltersAsIris,
     controller?: AbortController,
     typeFilter?: string[]
-  ): Promise<{ totalCount: number; currentPage: number; pageSize: number; result: ExtendedTTEntity[] }>;
+  ): Promise<PageableEntityReferenceNode>;
   getEntityAsEntityReferenceNode(iri: string): Promise<ExtendedEntityReferenceNode>;
   getPathBetweenNodes(descendant: string, ancestor: string): Promise<TTIriRef[]>;
-  getAllowableChildTypes(iri: string): Promise<ExtendedTTEntity[]>;
+  getAllowableChildTypes(iri: string): Promise<TTEntity[]>;
   entityExists(iri: string): Promise<boolean>;
   getEntityChildren(iri: string, filters?: FiltersAsIris, controller?: AbortController): Promise<ExtendedEntityReferenceNode[]>;
   getAsEntityReferenceNodes(iris: string[]): Promise<ExtendedEntityReferenceNode[]>;
   downloadEntity(iri: string): Promise<Blob>;
-  getEntityByPredicateExclusions(iri: string, predicates: string[]): Promise<ExtendedTTEntity>;
+  getEntityByPredicateExclusions(iri: string, predicates: string[]): Promise<TTEntity>;
   getFolderPath(iri: string): Promise<TTIriRef[]>;
-  getPartialEntities(typeIris: string[], predicates: string[]): Promise<ExtendedTTEntity[]>;
+  getPartialEntities(typeIris: string[], predicates: string[]): Promise<TTEntity[]>;
   getEntityGraph(iri: string): Promise<OrganizationChartNode>;
   getBundleByPredicateExclusions(iri: string, predicates: string[], graph?: string): Promise<TTBundle>;
   getPartialAndTotalCount(
@@ -91,11 +93,11 @@ const entityService = Symbol("entityService") as InjectionKey<{
     pageSize: number,
     filters?: FiltersAsIris,
     controller?: AbortController
-  ): Promise<Pageable<TTIriRef>>;
+  ): Promise<PageableTTIriRef>;
   getPartialEntityBundle(iri: string, predicates: string[]): Promise<TTBundle>;
-  getEntityUsages(iri: string, pageIndex: number, pageSize: number): Promise<ExtendedTTEntity[]>;
+  getEntityUsages(iri: string, pageIndex: number, pageSize: number): Promise<TTEntity[]>;
   getUsagesTotalRecords(iri: string): Promise<number>;
-  getProvHistory(iri: string): Promise<ExtendedTTEntity[]>;
+  getProvHistory(iri: string): Promise<TTEntity[]>;
   getEntityParents(iri: string, filters?: FiltersAsIris): Promise<ExtendedEntityReferenceNode[]>;
   getEntityDetailsDisplay(iri: string): Promise<TreeNode[]>;
   loadMoreDetailsDisplay(iri: string, predicate: string, pageIndex: number, pageSize: number): Promise<TreeNode[]>;
@@ -126,8 +128,8 @@ const setService = Symbol("setService") as InjectionKey<{
   getFullExportSet(setRequest: SetExportRequest, raw?: boolean): Promise<Blob>;
   IMV1(conceptIri: string, raw?: boolean): Promise<Blob>;
   publish(conceptIri: string): Promise<void>;
-  getMembers(iri: string, entailments: boolean, pageIndex: number, pageSize: number, controller?: AbortController): Promise<Pageable<Node>>;
-  getMembersFromQuery(query: Query, pageIndex: number, pageSize: number): Promise<Pageable<Node>>;
+  getMembers(iri: string, entailments: boolean, pageIndex: number, pageSize: number, controller?: AbortController): Promise<PageableNode>;
+  getMembersFromQuery(query: Query, pageIndex: number, pageSize: number): Promise<PageableNode>;
   getSetComparison(iriA?: string, iriB?: string): Promise<SetDiffObject>;
   getSubsets(iri: string): Promise<TTIriRef[]>;
 }>;

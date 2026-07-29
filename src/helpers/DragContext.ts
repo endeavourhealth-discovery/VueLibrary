@@ -1,4 +1,4 @@
-import { Query, Where } from "../interfaces";
+import { Query, Where } from "../models";
 
 type DraggedItem = {
   clause: Query | Where;
