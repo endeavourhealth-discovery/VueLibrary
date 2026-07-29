@@ -3,12 +3,12 @@ import { computed, ref } from "vue";
 import { isBoolean, isString } from "lodash-es";
 import { defineStore } from "pinia";
 
-import { FontSize, PrimeVueColors, PrimeVuePresetThemes, UserRole } from "@/enums";
-import { isObjectHasKeys } from "@/helpers";
-import { localStorageWithExpiry } from "@/helpers";
-import { HistoryItem } from "@/models";
-import { NamespacePermissionJava, RecentActivityItemDto } from "@/models";
-import { RecentActivityItem, User } from "@/models";
+import { FontSize, PrimeVueColors, PrimeVuePresetThemes, UserRole } from "../enums";
+import { isObjectHasKeys } from "../helpers";
+import { localStorageWithExpiry } from "../helpers";
+import { HistoryItem } from "../models";
+import { NamespacePermissionJava, RecentActivityItemDto } from "../models";
+import { RecentActivityItem, User } from "../models";
 
 export const useUserStore = defineStore("user", () => {
   const cookiesEssentialAccepted = ref<boolean>(localStorageWithExpiry.getItem("cookiesEssentialAccepted", isBoolean) === true);

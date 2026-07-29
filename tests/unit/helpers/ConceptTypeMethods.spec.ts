@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 
 import { IM } from "../../../src/enums";
-import { isOfTypes, isProperty, isValueSet } from "../../../src/helpers/ConceptTypeMethods";
+import { entityIsProperty, entityIsValueSet, isOfTypes } from "../../../src/helpers/ConceptTypeMethods";
 
 describe("ConceptTypeMethods", () => {
   const testConceptType = [{ iri: "http://endhealth.info/im#Concept", name: "Concept" }];
@@ -29,21 +29,21 @@ describe("ConceptTypeMethods", () => {
 
   describe("isValueSet", () => {
     it("returns true if valueset", () => {
-      expect(isValueSet(testSetType)).toBe(true);
+      expect(entityIsValueSet(testSetType)).toBe(true);
     });
 
     it("returns false if not valueset", () => {
-      expect(isValueSet(testDataModelType)).toBe(false);
+      expect(entityIsValueSet(testDataModelType)).toBe(false);
     });
   });
 
   describe("isProperty", () => {
     it("returns true if property", () => {
-      expect(isProperty(testPropertyType)).toBe(true);
+      expect(entityIsProperty(testPropertyType)).toBe(true);
     });
 
     it("returns false if not property", () => {
-      expect(isValueSet(testDataModelType)).toBe(false);
+      expect(entityIsValueSet(testDataModelType)).toBe(false);
     });
   });
 });

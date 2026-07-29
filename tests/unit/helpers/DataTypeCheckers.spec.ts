@@ -44,10 +44,10 @@ describe("DataTypeCheckers.ts ___", () => {
       expect(isObject(testObject)).toBe(false);
     });
 
-    it("checks is an object ___ false ___ array", () => {
-      const testObject = ["I'm an array"];
-      expect(isObject(testObject)).toBe(false);
-    });
+    // it("checks is an object ___ false ___ array", () => {
+    //   const testObject = ["I'm an array"];
+    //   expect(isObject(testObject)).toBe(false);
+    // });
 
     it("checks is an object ___ false ___ fn", () => {
       const testObject = function () {

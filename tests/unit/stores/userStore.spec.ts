@@ -31,6 +31,7 @@ describe("getters", () => {
     const testUser: User = {
       username: "testUser",
       displayName: "John Doe",
+      password: "",
       email: "john.doe@ergosoft.co.uk",
       avatar: "colour/003-man.png",
       roles: [],
@@ -76,6 +77,7 @@ describe("mutations", () => {
     const testUser: User = {
       username: "testUser",
       displayName: "John Doe",
+      password: "",
       email: "john.doe@ergosoft.co.uk",
       type: "standard",
       avatar: "colour/003-man.png",

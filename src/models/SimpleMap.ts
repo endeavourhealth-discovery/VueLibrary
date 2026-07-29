@@ -14,8 +14,8 @@ export const SimpleMapSchema = z.strictObject({
   code: z.string(),
   name: z.string(),
   scheme: z.string(),
-  alternativeCode: z.string(),
-  codeId: z.string()
+  alternativeCode: z.string().optional(),
+  codeId: z.string().optional()
 });
 
 export type SimpleMap = z.output<typeof SimpleMapSchema>;

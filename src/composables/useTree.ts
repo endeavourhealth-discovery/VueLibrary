@@ -1,13 +1,14 @@
 import { Ref, inject, ref } from "vue";
 
+import { isArray } from "lodash-es";
 import type { TreeNode } from "primevue/treenode";
 import { useToast } from "primevue/usetoast";
 
 import { IM } from "../enums";
 import { getColourFromType, getFAIconFromType } from "../helpers/ConceptTypeVisuals";
-import { isArrayHasLength, isObjectHasKeys } from "../helpers/DataTypeCheckers";
+import { isArrayHasLength, isArrayOf, isObjectHasKeys } from "../helpers/DataTypeCheckers";
 import injectionKeys from "../injectionKeys/injectionKeys";
-import { EntityReferenceNode, ExtendedEntityReferenceNode, TTEntity, TTIriRef } from "../models";
+import { EntityReferenceNode, ExtendedEntityReferenceNode, TTEntity, TTIriRef, isTTIriRef } from "../models";
 
 export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: number) {
   const useDirectService = inject(injectionKeys.useDirectService);
@@ -105,9 +106,9 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
       const children = await entityService!.getPagedChildren(node.parentNode.key, node.nextPage, pageSize.value);
       node.parentNode.children.pop();
       for (const child of children.result) {
-        if (!nodeHasChild(node.parentNode, child) && child.iri) {
+        if (!nodeHasChild(node.parentNode, child) && child.iri && isArrayOf(child.type, isTTIriRef)) {
           const summary = { description: child.description, status: child.status };
-          node.parentNode.children.push(createTreeNode(child.name, child.iri as string, child.type as TTIriRef[], summary, child.hasChildren, node));
+          node.parentNode.children.push(createTreeNode(child.name, child.iri, child.type, summary, child.hasChildren, node));
         }
       }
       node.nextPage = node.nextPage + 1;
@@ -116,9 +117,9 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
       const children = await entityService!.getPagedChildren(node.parentNode.key, node.nextPage, pageSize.value);
       node.parentNode.children.pop();
       for (const child of children.result) {
-        if (!nodeHasChild(node.parentNode, child) && child.iri) {
+        if (!nodeHasChild(node.parentNode, child) && child.iri && isArrayOf(child.type, isTTIriRef)) {
           const summary = { description: child.description, status: child.status };
-          node.parentNode.children.push(createTreeNode(child.name, child.iri, child.type as TTIriRef[], summary, child.hasChildren, node.parentNode));
+          node.parentNode.children.push(createTreeNode(child.name, child.iri, child.type, summary, child.hasChildren, node.parentNode));
         }
       }
     } else {
@@ -142,13 +143,13 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
     }
   }
 
-  async function expandFavouriteNode(node: any) {
+  async function expandFavouriteNode(node: TreeNode) {
     node.children = [];
     let favChildren = [];
     for (const fav of favourites.value) {
       const favChild = await entityService!.getEntityAsEntityReferenceNode(fav);
       const summary = { description: favChild.description, status: favChild.status };
-      if (favChild) favChildren.push(createTreeNode(favChild.name, favChild.iri, favChild.type as TTIriRef[], summary, false, node));
+      if (favChild && isArrayOf(favChild.type, isTTIriRef)) favChildren.push(createTreeNode(favChild.name, favChild.iri, favChild.type, summary, false, node));
     }
     node.children = favChildren;
   }
@@ -157,10 +158,10 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
     return !!newChildren.find(child => child.iri === node.key);
   }
 
-  async function expandNode(node: any, typeFilter?: string[]) {
+  async function expandNode(node: TreeNode, typeFilter?: string[]) {
     const currentChildCount = node.children ? node.children.length : 0;
     const children = await entityService!.getPagedChildren(node.key, 1, pageSize.value, undefined, undefined, typeFilter);
-    if (currentChildCount > 0 && children.result.length < currentChildCount) {
+    if (currentChildCount > 0 && children.result.length < currentChildCount && isArray(node.children)) {
       for (const [index, currentChildNode] of node.children.entries()) {
         if (!childrenHasNode(children.result, currentChildNode)) {
           node.children.splice(index, 1);
@@ -168,12 +169,13 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
       }
     }
     for (const child of children.result) {
-      if (!nodeHasChild(node, child) && child.iri) {
+      if (!nodeHasChild(node, child) && child.iri && isArrayOf(child.type, isTTIriRef)) {
         const summary = { description: child.description, status: child.status };
-        node.children.push(createTreeNode(child.name, child.iri, child.type as TTIriRef[], summary, child.hasChildren, node));
+        node.children?.push(createTreeNode(child.name, child.iri, child.type, summary, child.hasChildren, node));
       }
     }
     if (
+      isArray(node.children) &&
       node.children.length > 0 &&
       children.totalCount >= pageSize.value &&
       node.children.length !== children.totalCount &&
@@ -183,17 +185,17 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
     }
   }
 
-  function onNodeCollapse(node: any) {
+  function onNodeCollapse(node: TreeNode) {
     deleteKeysRecursively(node);
     expandedData.value = expandedData.value.filter(item => item !== node);
     delete expandedKeys.value[node.key];
   }
 
-  function deleteKeysRecursively(node: any) {
+  function deleteKeysRecursively(node: TreeNode) {
     const collapsedKeys = [];
     if (node.children) {
       for (const child of node.children) {
-        if (child.children.length) {
+        if (child.children?.length) {
           collapsedKeys.push(child.key);
 
           deleteKeysRecursively(child);
