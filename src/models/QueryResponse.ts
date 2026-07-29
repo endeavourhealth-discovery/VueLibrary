@@ -7,7 +7,7 @@ import z from "zod";
 
 export const QueryResponseSchema = z.strictObject({
   entities: z.array(z.any()),
-  context: z.any()
+  context: z.any().optional()
 });
 
 export type QueryResponse = z.output<typeof QueryResponseSchema>;
