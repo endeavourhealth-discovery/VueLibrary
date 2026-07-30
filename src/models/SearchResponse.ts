@@ -14,7 +14,7 @@ import { SearchResultSummarySchema } from "./SearchResultSummary";
 
 export const SearchResponseSchema = z.strictObject({
   page: z.number().optional(),
-  count: z.number().optional(),
+  size: z.number().optional(),
   totalCount: z.number().optional(),
   highestUsage: z.number().optional(),
   term: z.string().optional(),
