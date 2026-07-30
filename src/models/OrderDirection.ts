@@ -15,7 +15,7 @@ import { IriLD, IriLDSchema } from "./IriLD";
 export const OrderDirectionSchema = z.strictObject({
   ...IriLDSchema.shape,
   direction: z.enum(Order).optional(),
-  function: FunctionClauseSchema,
+  function: FunctionClauseSchema.optional(),
   nodeRef: z.string().optional(),
   variable: z.string().optional()
 });
