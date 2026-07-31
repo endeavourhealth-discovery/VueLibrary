@@ -60,7 +60,7 @@ export const PropertyShapeSchema = z.strictObject({
   minCount: z.number().optional(),
   maxCount: z.number().optional(),
   componentType: TTIriRefSchema.optional(),
-  path: TTIriRefSchema.optional(),
+  path: TTIriRefSchema,
   datatype: PropertyRangeSchema.optional(),
   node: PropertyRangeSchema.optional(),
   validation: TTIriRefSchema.optional(),
