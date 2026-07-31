@@ -20,21 +20,21 @@ import z from "zod";
 import { TTIriRefSchema } from "./TTIriRef";
 
 export const UIPropertySchema = z.strictObject({
-  iri: z.url(),
-  name: z.string(),
-  propertyType: z.enum(["class", "datatype", "node"]),
-  valueType: z.string(),
-  maxCount: z.number(),
-  minCount: z.number(),
-  valueLabel: z.string(),
-  intervalUnitIri: z.string(),
+  iri: z.url().optional(),
+  name: z.string().optional(),
+  propertyType: z.enum(["class", "datatype", "node"]).optional(),
+  valueType: z.string().optional(),
+  maxCount: z.number().optional(),
+  minCount: z.number().optional(),
+  valueLabel: z.string().optional(),
+  intervalUnitIri: z.string().optional(),
   intervalUnitOptions: z.array(TTIriRefSchema).optional(),
-  unitIri: z.string(),
+  unitIri: z.string().optional(),
   unitOptions: z.array(TTIriRefSchema).optional(),
-  operatorIri: z.string(),
+  operatorIri: z.string().optional(),
   operatorOptions: z.array(z.string()).optional(),
   qualifierOptions: z.array(TTIriRefSchema).optional(),
-  setMemberCount: z.number()
+  setMemberCount: z.number().optional()
 });
 
 export type UIProperty = z.output<typeof UIPropertySchema>;
