@@ -25,7 +25,6 @@ export { isDataModelProperty, type DataModelProperty, DataModelPropertySchema } 
 export { isDelete, type Delete, DeleteSchema } from "./Delete";
 export { isDownloadByQueryOptions, type DownloadByQueryOptions, DownloadByQueryOptionsSchema } from "./DownloadByQueryOptions";
 export { isDownloadEntityOptions, type DownloadEntityOptions, DownloadEntityOptionsSchema } from "./DownloadEntityOptions";
-export { isDownloadSettings, type DownloadSettings, DownloadSettingsSchema } from "./DownloadSettings";
 export { isECLQueryRequest, type ECLQueryRequest, ECLQueryRequestSchema } from "./ECLQueryRequest";
 export { isECLStatus, type ECLStatus, ECLStatusSchema } from "./ECLStatus";
 export { isEditRequest, type EditRequest, EditRequestSchema } from "./EditRequest";
