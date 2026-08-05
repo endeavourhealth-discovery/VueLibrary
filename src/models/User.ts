@@ -26,9 +26,11 @@ export const UserSchema = z.strictObject({
 
 export type User = z.output<typeof UserSchema>;
 
-export const hasRole = (user: User, role: string) => user.roles?.includes(role);
+export const hasRole = (user: User, role: string) => user.roles.includes(role);
 
-export const hasRoles = (user: User, roles: string[]) => roles.every(role => user.roles?.includes(role));
+export const hasAllRoles = (user: User, roles: string[]) => roles.every(role => user.roles.includes(role));
+
+export const hasAnyRole = (user: User, roles: string[]) => user.roles.some(role => roles.includes(role));
 
 export const hasNamespace = (user: User, namespace: NAMESPACE) => user.namespaces.some(n => n.iri === namespace);
 

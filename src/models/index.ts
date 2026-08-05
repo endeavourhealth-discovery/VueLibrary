@@ -3,7 +3,7 @@ export { isNamespacePermission, type NamespacePermission, NamespacePermissionSch
 export { isPermission, type Permission, PermissionSchema } from "./Permission";
 export { isRecentActivityItem, type RecentActivityItem, RecentActivityItemSchema } from "./RecentActivityItem";
 export { ToastOptions } from "./ToastOptions";
-export { isUser, type User, UserSchema, hasNamespace, hasRole, hasRoles } from "./User";
+export { isUser, type User, UserSchema, hasNamespace, hasRole, hasAllRoles, hasAnyRole } from "./User";
 
 export { isArgument, type Argument, ArgumentSchema } from "./Argument";
 export { isArgumentReference, type ArgumentReference, ArgumentReferenceSchema } from "./ArgumentReference";
