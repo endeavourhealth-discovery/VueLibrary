@@ -1,6 +1,6 @@
 {
   "name": "@endeavour/vue-library",
-  "version": "3.0.13",
+  "version": "3.0.14",
   "type": "module",
   "packageManager": "pnpm@11.15.1",
   "scripts": {
@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@vueuse/core": "14.2.1",
-    "@vueuse/integrations": "14.2.1",
+    "@vueuse/integrations": "14.Y2.1",
     "google-palette": "1.1.1",
     "lodash-es": "4.17.23",
     "sass": "1.99.0",
