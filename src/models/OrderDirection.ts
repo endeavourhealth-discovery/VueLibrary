@@ -1,7 +1,6 @@
 import z from "zod";
 
-import { Order } from "@/enums";
-
+import { Order } from "../enums";
 import { FunctionClause, FunctionClauseSchema } from "./FunctionClause";
 import { IriLD, IriLDSchema } from "./IriLD";
 

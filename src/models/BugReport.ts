@@ -1,11 +1,10 @@
 import z from "zod";
 
-import { TaskModule } from "@/enums";
-import { OperatingSystem } from "@/enums";
-import { Browser } from "@/enums";
-import { Severity } from "@/enums";
-import { Status } from "@/enums";
-
+import { TaskModule } from "../enums";
+import { OperatingSystem } from "../enums";
+import { Browser } from "../enums";
+import { Severity } from "../enums";
+import { Status } from "../enums";
 import { TaskSchema } from "./Task";
 
 // export interface BugReport extends Task {

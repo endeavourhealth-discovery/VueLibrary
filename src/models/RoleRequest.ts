@@ -1,7 +1,6 @@
 import z from "zod";
 
-import { UserRole } from "@/enums";
-
+import { UserRole } from "../enums";
 import { Task, TaskSchema } from "./Task";
 
 // export interface RoleRequest extends Task {

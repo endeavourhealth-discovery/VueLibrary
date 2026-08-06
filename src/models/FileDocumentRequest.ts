@@ -1,7 +1,6 @@
 import z from "zod";
 
-import { NAMESPACE } from "@/enums";
-
+import { NAMESPACE } from "../enums";
 import { TTDocumentSchema } from "./TTDocument";
 
 // export interface FileDocumentRequest {

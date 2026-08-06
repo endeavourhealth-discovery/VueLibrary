@@ -1,8 +1,7 @@
 import z from "zod";
 
-import { TaskType } from "@/enums";
-import { TaskState } from "@/enums";
-
+import { TaskType } from "../enums";
+import { TaskState } from "../enums";
 import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
 import { TaskHistorySchema } from "./TaskHistory";
 

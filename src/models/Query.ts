@@ -1,9 +1,8 @@
 import z from "zod";
 
-import { IMQType } from "@/enums";
-import { RuleAction } from "@/enums";
-import { Entail } from "@/enums";
-
+import { IMQType } from "../enums";
+import { RuleAction } from "../enums";
+import { Entail } from "../enums";
 import { FunctionClause, FunctionClauseSchema } from "./FunctionClause";
 import { GroupBy, GroupBySchema } from "./GroupBy";
 import { Having, HavingSchema } from "./Having";
@@ -81,7 +80,9 @@ export const QuerySchema = IriLDSchema.extend({
   errorMessage: z.string().optional(),
   draft: z.boolean().optional(),
   having: HavingSchema.optional(),
-  path: z.array(PathSchema).optional(),
+  get path(): z.ZodOptional<z.ZodArray<z.ZodLazy<typeof PathSchema>>> {
+    return z.array(z.lazy(() => PathSchema)).optional();
+  },
   node: z.string().optional(),
   return: z.array(ReturnSchema).optional(),
   prefixes: z.array(PrefixSchema).optional(),

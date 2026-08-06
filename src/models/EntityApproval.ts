@@ -1,7 +1,6 @@
 import z from "zod";
 
-import { ApprovalType } from "@/enums";
-
+import { ApprovalType } from "../enums";
 import { TTIriRefSchema } from "./TTIriRef";
 import { TaskSchema } from "./Task";
 

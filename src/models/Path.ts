@@ -7,15 +7,15 @@ import { TTIriRefSchema } from "./TTIriRef";
 export const PathSchema = ElementSchema.extend({
   inverse: z.boolean().optional(),
   optional: z.boolean().optional(),
-  get path(): z.ZodOptional<z.ZodArray<typeof PathSchema>> {
-    return z.array(PathSchema).optional();
+  get path(): z.ZodOptional<z.ZodArray<z.ZodLazy<typeof PathSchema>>> {
+    return z.array(z.lazy(() => PathSchema)).optional();
   },
   pathVariable: z.string().optional(),
-  get typeOf(): typeof NodeSchema {
-    return NodeSchema;
+  get typeOf(): z.ZodOptional<z.ZodLazy<typeof NodeSchema>> {
+    return z.lazy(() => NodeSchema).optional();
   },
-  qualifier: TTIriRefSchema,
-  node: z.string()
+  qualifier: TTIriRefSchema.optional(),
+  node: z.string().optional()
 });
 
 export type Path = z.output<typeof PathSchema>;

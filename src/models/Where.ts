@@ -1,7 +1,6 @@
 import z, { boolean } from "zod";
 
-import { Operator } from "@/enums";
-
+import { Operator } from "../enums";
 import { Compare, CompareSchema } from "./Compare";
 import { Element, ElementSchema } from "./Element";
 import { FunctionClause, FunctionClauseSchema } from "./FunctionClause";
