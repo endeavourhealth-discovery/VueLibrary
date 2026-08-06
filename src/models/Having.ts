@@ -1,8 +1,7 @@
 import z from "zod";
 
-import { Aggregate } from "@/enums";
-import { Operator } from "@/enums";
-
+import { Aggregate } from "../enums";
+import { Operator } from "../enums";
 import { Range, RangeSchema } from "./Range";
 
 // export interface Having {

@@ -1,6 +1,6 @@
 import z from "zod";
 
-import { NAMESPACE } from "@/enums";
+import { NAMESPACE } from "../enums";
 
 // export interface NamespacePermissionJava {
 //   iri?: NAMESPACE;

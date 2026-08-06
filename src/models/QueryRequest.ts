@@ -1,8 +1,7 @@
 import z from "zod";
 
-import { TextSearchStyle } from "@/enums";
-import { DatabaseOption } from "@/enums";
-
+import { TextSearchStyle } from "../enums";
+import { DatabaseOption } from "../enums";
 import { Argument, ArgumentSchema } from "./Argument";
 import { Page, PageSchema } from "./Page";
 import { PathQuery, PathQuerySchema } from "./PathQuery";

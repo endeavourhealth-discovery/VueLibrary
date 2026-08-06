@@ -1,10 +1,9 @@
 import z from "zod";
 
-import { UserRole } from "@/enums";
-import { PrimeVuePresetThemes } from "@/enums";
-import { PrimeVueColors } from "@/enums";
-import { FontSize } from "@/enums";
-
+import { UserRole } from "../enums";
+import { PrimeVuePresetThemes } from "../enums";
+import { PrimeVueColors } from "../enums";
+import { FontSize } from "../enums";
 import { NamespacePermissionJavaSchema } from "./NamespacePermissionJava";
 import { RecentActivityItemDtoSchema } from "./RecentActivityItemDto";
 

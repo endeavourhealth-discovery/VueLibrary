@@ -1,7 +1,6 @@
 import z from "zod";
 
-import { NAMESPACE } from "@/enums";
-
+import { NAMESPACE } from "../enums";
 import { TTEntitySchema } from "./TTEntity";
 
 // export interface EditRequest {
