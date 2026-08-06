@@ -23,7 +23,7 @@ export const PropertyDisplaySchema = z.strictObject({
   reverseCardinality: z.string().optional(),
   isOr: z.boolean().optional(),
   isType: z.boolean().optional(),
-  node: z.boolean().optional()
+  isNode: z.boolean().optional()
 });
 
 export type PropertyDisplay = z.output<typeof PropertyDisplaySchema>;
