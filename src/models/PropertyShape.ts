@@ -56,7 +56,7 @@ export const PropertyShapeSchema = z.strictObject({
   label: z.string().optional(),
   comment: z.string().optional(),
   name: z.string().optional(),
-  order: z.number(),
+  order: z.number().optional(),
   minCount: z.number().optional(),
   maxCount: z.number().optional(),
   componentType: TTIriRefSchema.optional(),
