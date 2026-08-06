@@ -3,6 +3,7 @@ export enum COMPONENT {
   TAB_LAYOUT = "http://endhealth.info/im#Component_TabLayout",
   TEXT_DISPLAY = "http://endhealth.info/im#Component_textDisplay",
   TEXT_INPUT = "http://endhealth.info/im#Component_textInput",
+  NUMBER_INPUT = "http://endhealth.info/im#Component_numberInput",
   HTML_INPUT = "http://endhealth.info/im#Component_htmlInput",
   ENTITY_MULTI_SEARCH = "http://endhealth.info/im#Component_entityMultiSearch",
   ENTITY_SEARCH = "http://endhealth.info/im#Component_entitySearch",
