@@ -11,11 +11,11 @@ export const PathSchema = ElementSchema.extend({
     return z.array(z.lazy(() => PathSchema)).optional();
   },
   pathVariable: z.string().optional(),
-  get typeOf(): z.ZodLazy<typeof NodeSchema> {
-    return z.lazy(() => NodeSchema);
+  get typeOf(): z.ZodOptional<z.ZodLazy<typeof NodeSchema>> {
+    return z.lazy(() => NodeSchema).optional();
   },
   qualifier: TTIriRefSchema.optional(),
-  node: z.string()
+  node: z.string().optional()
 });
 
 export type Path = z.output<typeof PathSchema>;
