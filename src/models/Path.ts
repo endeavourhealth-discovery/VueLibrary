@@ -3,6 +3,7 @@ import z from "zod";
 import { ElementSchema } from "./Element";
 import { NodeSchema } from "./Node";
 import { TTIriRefSchema } from "./TTIriRef";
+import { WhereSchema } from "./Where";
 
 export const PathSchema = ElementSchema.extend({
   inverse: z.boolean().optional(),
@@ -13,6 +14,9 @@ export const PathSchema = ElementSchema.extend({
   pathVariable: z.string().optional(),
   get typeOf(): z.ZodOptional<z.ZodLazy<typeof NodeSchema>> {
     return z.lazy(() => NodeSchema).optional();
+  },
+  get where(): z.ZodOptional<z.ZodLazy<typeof WhereSchema>> {
+    return z.lazy(() => WhereSchema).optional();
   },
   qualifier: TTIriRefSchema.optional(),
   node: z.string().optional()
