@@ -27,3 +27,5 @@ build
 *.sw?
 
 dist-tests
+
+.env
