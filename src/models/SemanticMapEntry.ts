@@ -1,5 +1,6 @@
 import z from "zod";
 
+import { Node } from "@/models/Node";
 import { TTIriRefSchema } from "@/models/TTIriRef";
 
 export const SemanticMapEntrySchema = z.strictObject({
@@ -14,3 +15,7 @@ export const SemanticMapEntrySchema = z.strictObject({
 });
 
 export type SemanticMapEntry = z.output<typeof SemanticMapEntrySchema>;
+
+export function isSemanticMapEntry(value: unknown): value is Node {
+  return SemanticMapEntrySchema.safeParse(value).success;
+}
