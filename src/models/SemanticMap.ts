@@ -15,3 +15,5 @@ export const SemanticMapSchema = {
     return z.array(SemanticMapEntrySchema).optional();
   }
 };
+
+export type SemanticMap = z.output<typeof SemanticMapSchema>;
