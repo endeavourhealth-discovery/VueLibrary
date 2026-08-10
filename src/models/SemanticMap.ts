@@ -9,7 +9,7 @@ export const SemanticMapSchema = z.strictObject({
   defaultValue: z.number().optional(),
   defaultText: z.string().optional(),
   sourceType: TTIriRefSchema.optional(),
-  sourceEntityProperty: TTIriRefSchema.optional(),
+  sourceEntityProperty: TTIriRefSchema,
   sourceValueProperty: TTIriRefSchema.optional(),
   function: TTIriRefSchema.optional(),
   get entries(): z.ZodOptional<z.ZodArray<typeof SemanticMapEntrySchema>> {
