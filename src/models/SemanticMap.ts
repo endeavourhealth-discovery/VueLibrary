@@ -11,6 +11,7 @@ export const SemanticMapSchema = z.strictObject({
   sourceType: TTIriRefSchema.optional(),
   sourceEntityProperty: TTIriRefSchema.optional(),
   sourceValueProperty: TTIriRefSchema.optional(),
+  function: TTIriRefSchema.optional(),
   get entries(): z.ZodOptional<z.ZodArray<typeof SemanticMapEntrySchema>> {
     return z.array(SemanticMapEntrySchema).optional();
   }
