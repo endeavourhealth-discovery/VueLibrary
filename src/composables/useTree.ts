@@ -8,7 +8,7 @@ import { IM } from "../enums";
 import { getColourFromType, getFAIconFromType } from "../helpers/ConceptTypeVisuals";
 import { isArrayHasLength, isArrayOf, isObjectHasKeys } from "../helpers/DataTypeCheckers";
 import injectionKeys from "../injectionKeys/injectionKeys";
-import { EntityReferenceNode, ExtendedEntityReferenceNode, TTEntity, TTIriRef, isTTIriRef } from "../models";
+import { EntityReferenceNode, ExtendedEntityReferenceNode, SearchResultSummary, TTEntity, TTIriRef, isTTIriRef } from "../models";
 
 export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: number) {
   const useDirectService = inject(injectionKeys.useDirectService);
@@ -30,7 +30,7 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
     conceptName: string | undefined,
     conceptIri: string,
     conceptTypes: TTIriRef[],
-    conceptSummary: any,
+    conceptSummary: SearchResultSummary | undefined,
     hasChildren: boolean | undefined,
     parent: TreeNode | null,
     order?: number
@@ -56,7 +56,7 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
       label: "Load more...",
       typeIcon: null,
       color: null,
-      data: "loadMore",
+      data: undefined,
       leaf: true,
       loading: false,
       children: [] as TreeNode[],
@@ -68,7 +68,7 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
   }
 
   async function onNodeSelect(node: TreeNode): Promise<void> {
-    if (node.data === "loadMore") {
+    if (node.data === undefined) {
       if (!node.loading) await loadMore(node);
     } else {
       selectedNode.value = node;
@@ -77,7 +77,7 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
   }
 
   async function onNodeDblClick($event: MouseEvent, node: TreeNode) {
-    if (!(node.data === "loadMore" || node.key === IM.FAVOURITES)) await directService!.view(node.key);
+    if (node.data !== undefined || node.key !== IM.FAVOURITES) await directService!.view(node.key);
   }
 
   async function customOnClick(event: MouseEvent, node: TreeNode, useEmits?: boolean, updateSelectedKeys?: boolean) {
@@ -100,6 +100,10 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
     return event.metaKey || event.ctrlKey;
   }
 
+  function createNodeSummary(object: any): SearchResultSummary {
+    return { iri: object.iri, scheme: object.scheme, description: object.description, status: object.status } as SearchResultSummary;
+  }
+
   async function loadMore(node: TreeNode) {
     node.loading = true;
     if (node.nextPage * pageSize.value <= node.totalCount) {
@@ -107,8 +111,7 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
       node.parentNode.children.pop();
       for (const child of children.result) {
         if (!nodeHasChild(node.parentNode, child) && child.iri && isArrayOf(child.type, isTTIriRef)) {
-          const summary = { description: child.description, status: child.status };
-          node.parentNode.children.push(createTreeNode(child.name, child.iri, child.type, summary, child.hasChildren, node));
+          node.parentNode.children.push(createTreeNode(child.name, child.iri, child.type, createNodeSummary(child), child.hasChildren, node));
         }
       }
       node.nextPage = node.nextPage + 1;
@@ -118,8 +121,7 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
       node.parentNode.children.pop();
       for (const child of children.result) {
         if (!nodeHasChild(node.parentNode, child) && child.iri && isArrayOf(child.type, isTTIriRef)) {
-          const summary = { description: child.description, status: child.status };
-          node.parentNode.children.push(createTreeNode(child.name, child.iri, child.type, summary, child.hasChildren, node.parentNode));
+          node.parentNode.children.push(createTreeNode(child.name, child.iri, child.type, createNodeSummary(child), child.hasChildren, node.parentNode));
         }
       }
     } else {
@@ -148,8 +150,8 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
     let favChildren = [];
     for (const fav of favourites.value) {
       const favChild = await entityService!.getEntityAsEntityReferenceNode(fav);
-      const summary = { description: favChild.description, status: favChild.status };
-      if (favChild && isArrayOf(favChild.type, isTTIriRef)) favChildren.push(createTreeNode(favChild.name, favChild.iri, favChild.type, summary, false, node));
+      if (favChild && isArrayOf(favChild.type, isTTIriRef))
+        favChildren.push(createTreeNode(favChild.name, favChild.iri, favChild.type, createNodeSummary(favChild), false, node));
     }
     node.children = favChildren;
   }
@@ -170,8 +172,7 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
     }
     for (const child of children.result) {
       if (!nodeHasChild(node, child) && child.iri && isArrayOf(child.type, isTTIriRef)) {
-        const summary = { description: child.description, status: child.status };
-        node.children?.push(createTreeNode(child.name, child.iri, child.type, summary, child.hasChildren, node));
+        node.children?.push(createTreeNode(child.name, child.iri, child.type, createNodeSummary(child), child.hasChildren, node));
       }
     }
     if (
@@ -179,7 +180,8 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
       node.children.length > 0 &&
       children.totalCount >= pageSize.value &&
       node.children.length !== children.totalCount &&
-      node.children[node.children.length - 1].data !== "loadMore"
+      node.children[node.children.length - 1].data !== undefined &&
+      node.key !== IM.FAVOURITES
     ) {
       node.children.push(createLoadMoreNode(node, 2, children.totalCount));
     }
@@ -260,7 +262,7 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
   }
 
   async function locateChildInLoadMore(n: TreeNode, path: TTIriRef[]): Promise<TreeNode | undefined> {
-    if (n.children?.find(c => c.data === "loadMore")) {
+    if (n.children?.find(c => c.data === undefined)) {
       const found = n.children.find(c => path.find(p => p.iri === c.key));
       if (found) {
         return n.children.find(c => path.find(p => p.iri === c.key));
@@ -292,7 +294,7 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
   }
 
   async function loadMoreChildren(node: any) {
-    if (node.children?.length > 0 && node.children[node.children.length - 1].data === "loadMore") {
+    if (node.children?.length > 0 && node.children[node.children.length - 1].data !== undefined) {
       await loadMore(node.children[node.children.length - 1]);
     }
   }
@@ -304,6 +306,7 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
     expandedKeys,
     expandedData,
     createTreeNode,
+    createNodeSummary,
     createLoadMoreNode,
     expandFavouriteNode,
     onNodeCollapse,
