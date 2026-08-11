@@ -1,6 +1,6 @@
 import z from "zod";
 
-import { TTEntitySchema } from "./TTEntity";
+import { ExtendedEntityReferenceNodeSchema } from "./ExtendedEntityReferenceNode";
 
 // export interface ConceptAggregate {
 //   children: ExtendedTTEntity[];
@@ -9,9 +9,9 @@ import { TTEntitySchema } from "./TTEntity";
 // }
 
 export const ConceptAggregateSchema = z.strictObject({
-  children: z.array(TTEntitySchema),
-  concept: TTEntitySchema,
-  parents: z.array(TTEntitySchema)
+  children: z.array(ExtendedEntityReferenceNodeSchema),
+  concept: ExtendedEntityReferenceNodeSchema,
+  parents: z.array(ExtendedEntityReferenceNodeSchema)
 });
 
 export type ConceptAggregate = z.output<typeof ConceptAggregateSchema>;

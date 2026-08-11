@@ -1,10 +1,16 @@
 import { ref } from "vue";
 
+import { ExtendedEntityReferenceNode, SearchResultSummary } from "@/models";
+
 export function useOverlay() {
   const OS = ref();
 
-  async function showOverlay(event: MouseEvent, data: any): Promise<void> {
+  async function showOverlay(event: MouseEvent, data: string | undefined): Promise<void> {
     if (OS.value) await OS.value.showOverlay(event, data);
+  }
+
+  async function showOverlayTreeNode(event: MouseEvent, data: SearchResultSummary | undefined): Promise<void> {
+    if (OS.value) await OS.value.showOverlayTreeNode(event, data);
   }
 
   function hideOverlay(): void {
@@ -14,6 +20,7 @@ export function useOverlay() {
   return {
     OS,
     showOverlay,
+    showOverlayTreeNode,
     hideOverlay
   };
 }
