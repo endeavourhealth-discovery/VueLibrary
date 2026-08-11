@@ -7,6 +7,11 @@ import { FunctionClauseSchema } from "./FunctionClause";
 import { TTIriRefSchema } from "./TTIriRef";
 
 // export interface Value {
+//iri?: string;
+//name?: string;
+//nodeRef? string;
+//   name?: string;
+//   nodeRef?: string;
 //   operator?: Operator;
 //   value?: string;
 //   valueLabel?: string;
