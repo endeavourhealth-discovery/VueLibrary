@@ -68,7 +68,7 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
   }
 
   async function onNodeSelect(node: TreeNode): Promise<void> {
-    if (node.data === undefined) {
+    if (node.key.includes("loadMore")) {
       if (!node.loading) await loadMore(node);
     } else {
       selectedNode.value = node;
@@ -77,7 +77,7 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
   }
 
   async function onNodeDblClick($event: MouseEvent, node: TreeNode) {
-    if (node.data !== undefined || node.key !== IM.FAVOURITES) await directService!.view(node.key);
+    if (node.key.includes("loadMore") || node.key !== IM.FAVOURITES) await directService!.view(node.key);
   }
 
   async function customOnClick(event: MouseEvent, node: TreeNode, useEmits?: boolean, updateSelectedKeys?: boolean) {
@@ -180,7 +180,7 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
       node.children.length > 0 &&
       children.totalCount >= pageSize.value &&
       node.children.length !== children.totalCount &&
-      node.children[node.children.length - 1].data !== undefined &&
+      !node.children[node.children.length - 1].key.includes("loadMore") &&
       node.key !== IM.FAVOURITES
     ) {
       node.children.push(createLoadMoreNode(node, 2, children.totalCount));
@@ -262,7 +262,7 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
   }
 
   async function locateChildInLoadMore(n: TreeNode, path: TTIriRef[]): Promise<TreeNode | undefined> {
-    if (n.children?.find(c => c.data === undefined)) {
+    if (n.children?.find(c => c.key.includes("loadMore"))) {
       const found = n.children.find(c => path.find(p => p.iri === c.key));
       if (found) {
         return n.children.find(c => path.find(p => p.iri === c.key));
@@ -294,7 +294,7 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
   }
 
   async function loadMoreChildren(node: any) {
-    if (node.children?.length > 0 && node.children[node.children.length - 1].data !== undefined) {
+    if (node.children?.length > 0 && node.children[node.children.length - 1].key.includes("loadMore")) {
       await loadMore(node.children[node.children.length - 1]);
     }
   }
