@@ -1,11 +1,17 @@
 import z from "zod";
 
-import { Operator } from "../enums";
-import { Compare, CompareSchema } from "./Compare";
-import { FunctionClause, FunctionClauseSchema } from "./FunctionClause";
-import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
+import { Operator } from "@/enums";
+
+import { CompareSchema } from "./Compare";
+import { FunctionClauseSchema } from "./FunctionClause";
+import { TTIriRefSchema } from "./TTIriRef";
 
 // export interface Value {
+//iri?: string;
+//name?: string;
+//nodeRef? string;
+//   name?: string;
+//   nodeRef?: string;
 //   operator?: Operator;
 //   value?: string;
 //   valueLabel?: string;
@@ -19,6 +25,9 @@ import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
 // }
 
 export const ValueSchema = z.strictObject({
+  iri: z.string().optional(),
+  name: z.string().optional(),
+  nodeRef: z.string().optional(),
   operator: z.enum(Operator).optional(),
   value: z.string().optional(),
   valueLabel: z.string().optional(),

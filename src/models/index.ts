@@ -156,3 +156,5 @@ export { isWhen, type When, WhenSchema } from "./When";
 export { isWhere, type Where, WhereSchema } from "./Where";
 export { isWorkflowRequest, type WorkflowRequest, WorkflowRequestSchema } from "./WorkflowRequest";
 export { isWorkflowResponse, type WorkflowResponse, WorkflowResponseSchema } from "./WorkflowResponse";
+export { isSemanticMap, type SemanticMap, SemanticMapSchema } from "./SemanticMap";
+export { isSemanticMapEntry, type SemanticMapEntry, SemanticMapEntrySchema } from "./SemanticMapEntry";
