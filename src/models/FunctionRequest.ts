@@ -1,7 +1,6 @@
 import z from "zod";
 
-import { GRAPH } from "@/enums";
-
+import { GRAPH } from "../enums";
 import { Argument, ArgumentSchema } from "./Argument";
 import { PageSchema } from "./Page";
 

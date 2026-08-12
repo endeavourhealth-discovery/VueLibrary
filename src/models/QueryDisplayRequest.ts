@@ -1,7 +1,6 @@
 import z from "zod";
 
-import { DisplayMode } from "@/enums";
-
+import { DisplayMode } from "../enums";
 import { Query, QuerySchema } from "./Query";
 import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
 

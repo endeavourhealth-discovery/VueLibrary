@@ -3,7 +3,7 @@ export { isNamespacePermission, type NamespacePermission, NamespacePermissionSch
 export { isPermission, type Permission, PermissionSchema } from "./Permission";
 export { isRecentActivityItem, type RecentActivityItem, RecentActivityItemSchema } from "./RecentActivityItem";
 export { ToastOptions } from "./ToastOptions";
-export { isUser, type User, UserSchema, hasNamespace, hasRole, hasRoles } from "./User";
+export { isUser, type User, UserSchema, hasNamespace, hasRole, hasAllRoles, hasAnyRole } from "./User";
 
 export { isArgument, type Argument, ArgumentSchema } from "./Argument";
 export { isArgumentReference, type ArgumentReference, ArgumentReferenceSchema } from "./ArgumentReference";
@@ -155,3 +155,5 @@ export { isWhen, type When, WhenSchema } from "./When";
 export { isWhere, type Where, WhereSchema } from "./Where";
 export { isWorkflowRequest, type WorkflowRequest, WorkflowRequestSchema } from "./WorkflowRequest";
 export { isWorkflowResponse, type WorkflowResponse, WorkflowResponseSchema } from "./WorkflowResponse";
+export { isSemanticMap, type SemanticMap, SemanticMapSchema } from "./SemanticMap";
+export { isSemanticMapEntry, type SemanticMapEntry, SemanticMapEntrySchema } from "./SemanticMapEntry";

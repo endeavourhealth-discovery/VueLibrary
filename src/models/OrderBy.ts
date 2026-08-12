@@ -1,7 +1,6 @@
 import z from "zod";
 
-import { Order } from "@/enums";
-
+import { Order } from "../enums";
 import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
 
 // export interface OrderBy {

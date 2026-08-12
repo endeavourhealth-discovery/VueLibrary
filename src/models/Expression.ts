@@ -11,6 +11,7 @@ export const ExpressionSchema = z.strictObject({
   value: z.string().optional(),
   nodeRef: z.string().optional(),
   iri: z.url().optional(),
+  name: z.string().optional(),
   propertyRef: z.string().optional()
 });
 
