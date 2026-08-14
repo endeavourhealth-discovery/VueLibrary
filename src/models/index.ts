@@ -25,7 +25,6 @@ export { isDataModelProperty, type DataModelProperty, DataModelPropertySchema } 
 export { isDelete, type Delete, DeleteSchema } from "./Delete";
 export { isDownloadByQueryOptions, type DownloadByQueryOptions, DownloadByQueryOptionsSchema } from "./DownloadByQueryOptions";
 export { isDownloadEntityOptions, type DownloadEntityOptions, DownloadEntityOptionsSchema } from "./DownloadEntityOptions";
-export { isDownloadSettings, type DownloadSettings, DownloadSettingsSchema } from "./DownloadSettings";
 export { isECLQueryRequest, type ECLQueryRequest, ECLQueryRequestSchema } from "./ECLQueryRequest";
 export { isECLStatus, type ECLStatus, ECLStatusSchema } from "./ECLStatus";
 export { isEditRequest, type EditRequest, EditRequestSchema } from "./EditRequest";
@@ -59,7 +58,6 @@ export { isLoginResponse, type LoginResponse, LoginResponseSchema } from "./Logi
 export { isLoginResponseES, type LoginResponseES, LoginResponseESSchema } from "./LoginResponseES";
 export { isMailOptions, type MailOptions, MailOptionsSchema } from "./MailOptions";
 export { isMapFunction, type MapFunction, MapFunctionSchema } from "./MapFunction";
-export { isMapItem, type MapItem, MapItemSchema } from "./MapItem";
 export { isMatchDisplayRequest, type MatchDisplayRequest, MatchDisplayRequestSchema } from "./MatchDisplayRequest";
 export { isModelDocument, type ModelDocument, ModelDocumentSchema } from "./ModelDocument";
 export { isNamespace, type Namespace, NamespaceSchema } from "./Namespace";
@@ -112,7 +110,6 @@ export { isRequeueQueryRequest, type RequeueQueryRequest, RequeueQueryRequestSch
 export { isReturn, type Return, ReturnSchema } from "./Return";
 export { isRoleRequest, type RoleRequest, RoleRequestSchema } from "./RoleRequest";
 export { isSearchBinding, type SearchBinding, SearchBindingSchema } from "./SearchBinding";
-export { isSearchOptions, type SearchOptions, SearchOptionsSchema } from "./SearchOptions";
 export { isSearchRequest, type SearchRequest, SearchRequestSchema } from "./SearchRequest";
 export { isSearchResponse, type SearchResponse, SearchResponseSchema } from "./SearchResponse";
 export { isSearchResultSummary, type SearchResultSummary, SearchResultSummarySchema } from "./SearchResultSummary";
