@@ -6,7 +6,7 @@ import { defineStore } from "pinia";
 import { FontSize, PrimeVueColors, PrimeVuePresetThemes, UserRole } from "../enums";
 import { isObjectHasKeys } from "../helpers";
 import { localStorageWithExpiry } from "../helpers";
-import { HistoryItem } from "../models";
+import { HistoryItem, isUser } from "../models";
 import { NamespacePermissionJava, RecentActivityItemDto } from "../models";
 import { RecentActivityItem, User } from "../models";
 
@@ -28,7 +28,7 @@ export const useUserStore = defineStore("user", () => {
   const includeUserGraph = ref<boolean>(false);
   const namespaces = ref<NamespacePermissionJava[]>([]);
 
-  const isLoggedIn = computed(() => isObjectHasKeys(currentUser.value));
+  const isLoggedIn = computed(() => isUser(currentUser.value));
   const isAdmin = computed(() => !!currentUser.value?.roles.includes(UserRole.ADMIN));
 
   function loadFromStorage() {
