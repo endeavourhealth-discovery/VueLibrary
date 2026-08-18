@@ -1,5 +1,7 @@
 import z from "zod";
 
+import { FromSchema } from "@/models/From";
+
 import { IMQType } from "../enums";
 import { RuleAction } from "../enums";
 import { Entail } from "../enums";
@@ -15,27 +17,16 @@ import { Return, ReturnSchema } from "./Return";
 import { TTIriRefSchema } from "./TTIriRef";
 import { Where, WhereSchema } from "./Where";
 
-// export interface Query extends Match {
-//   prefixes?: Prefix[];
-//   description?: string;
-//   columnGroup?: Match[];
-//   imQuery?: string;
-//   parentResult?: any;
-//   persistentIri?: TTIriRef;
-//   bindAs?: string;
-//   queryType?: IMQType;
-//   iri?: string;
-//   name?: string;
-// }
-
 export const QuerySchema = IriLDSchema.extend({
   notExists: z.boolean().optional(),
   ifTrue: z.enum(RuleAction).optional(),
   ifFalse: z.enum(RuleAction).optional(),
   nodeRef: z.string().optional(),
-  from: z.string().optional(),
   get typeOf(): z.ZodOptional<z.ZodLazy<typeof NodeSchema>> {
     return z.lazy(() => NodeSchema).optional();
+  },
+  get from(): z.ZodOptional<z.ZodArray<typeof FromSchema>> {
+    return z.array(FromSchema).optional();
   },
   get is(): z.ZodOptional<z.ZodLazy<typeof NodeSchema>> {
     return z.lazy(() => NodeSchema).optional();
@@ -87,6 +78,9 @@ export const QuerySchema = IriLDSchema.extend({
   return: z.array(ReturnSchema).optional(),
   prefixes: z.array(PrefixSchema).optional(),
   get columnGroup(): z.ZodOptional<z.ZodArray<typeof QuerySchema>> {
+    return z.array(QuerySchema).optional();
+  },
+  get each(): z.ZodOptional<z.ZodArray<typeof QuerySchema>> {
     return z.array(QuerySchema).optional();
   },
   imQuery: z.string().optional(),
