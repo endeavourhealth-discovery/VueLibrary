@@ -127,7 +127,6 @@ export {
   SuperiorPropertiesBoolFocusPagedRequestSchema
 } from "./SuperiorPropertiesBoolFocusPagedRequest";
 export { isTask, type Task, TaskSchema } from "./Task";
-export { isSearchOptions, type SearchOptions, SearchOptionsSchema } from "./SearchOptions";
 export { isTaskHistory, type TaskHistory, TaskHistorySchema } from "./TaskHistory";
 export { isTermCode, type TermCode, TermCodeSchema } from "./TermCode";
 export { isTransformRequest, type TransformRequest, TransformRequestSchema } from "./TransformRequest";
