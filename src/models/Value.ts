@@ -1,7 +1,6 @@
 import z from "zod";
 
-import { Operator } from "@/enums";
-
+import { Operator } from "../enums";
 import { CompareSchema } from "./Compare";
 import { FunctionClauseSchema } from "./FunctionClause";
 import { TTIriRefSchema } from "./TTIriRef";

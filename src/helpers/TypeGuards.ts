@@ -1,4 +1,3 @@
-import { BugReport, PropertyShape, TTBundle, TTIriRef, Task } from "../models";
 import { isObjectHasKeys } from "./DataTypeCheckers";
 
 export function isAliasIriRef(data: unknown): data is { iri: string; name?: string } {
