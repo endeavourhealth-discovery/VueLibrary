@@ -1,6 +1,6 @@
 import z from "zod";
 
-import { NodeSchema } from "@/models/Node";
+import { NodeSchema } from "../models/Node";
 
 export const FromSchema = z.strictObject({
   get typeOf(): z.ZodOptional<z.ZodLazy<typeof NodeSchema>> {

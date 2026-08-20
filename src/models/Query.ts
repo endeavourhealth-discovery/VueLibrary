@@ -1,21 +1,18 @@
 import z from "zod";
 
-import { FromSchema } from "@/models/From";
-
-import { IMQType } from "../enums";
-import { RuleAction } from "../enums";
-import { Entail } from "../enums";
-import { FunctionClause, FunctionClauseSchema } from "./FunctionClause";
-import { GroupBy, GroupBySchema } from "./GroupBy";
-import { Having, HavingSchema } from "./Having";
-import { IriLD, IriLDSchema } from "./IriLD";
-import { Node, NodeSchema } from "./Node";
-import { OrderLimit, OrderLimitSchema } from "./OrderLimit";
-import { Path, PathSchema } from "./Path";
+import { Entail, IMQType, RuleAction } from "../enums";
+import { FromSchema } from "./From";
+import { FunctionClauseSchema } from "./FunctionClause";
+import { GroupBySchema } from "./GroupBy";
+import { HavingSchema } from "./Having";
+import { IriLDSchema } from "./IriLD";
+import { NodeSchema } from "./Node";
+import { OrderLimitSchema } from "./OrderLimit";
+import { PathSchema } from "./Path";
 import { PrefixSchema } from "./Prefix";
-import { Return, ReturnSchema } from "./Return";
+import { ReturnSchema } from "./Return";
 import { TTIriRefSchema } from "./TTIriRef";
-import { Where, WhereSchema } from "./Where";
+import { WhereSchema } from "./Where";
 
 export const QuerySchema = IriLDSchema.extend({
   notExists: z.boolean().optional(),

@@ -8,7 +8,7 @@ import { IM } from "../enums";
 import { getColourFromType, getFAIconFromType } from "../helpers/ConceptTypeVisuals";
 import { isArrayHasLength, isArrayOf, isObjectHasKeys } from "../helpers/DataTypeCheckers";
 import injectionKeys from "../injectionKeys/injectionKeys";
-import { EntityReferenceNode, ExtendedEntityReferenceNode, SearchResultSummary, TTEntity, TTIriRef, isTTIriRef } from "../models";
+import { EntityReferenceNode, SearchResultSummary, TTIriRef, isTTIriRef } from "../models";
 
 export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: number) {
   const useDirectService = inject(injectionKeys.useDirectService);

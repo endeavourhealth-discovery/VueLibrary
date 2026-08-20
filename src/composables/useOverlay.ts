@@ -1,6 +1,6 @@
 import { ref } from "vue";
 
-import { ExtendedEntityReferenceNode, SearchResultSummary } from "@/models";
+import { SearchResultSummary } from "../models";
 
 export function useOverlay() {
   const OS = ref();
