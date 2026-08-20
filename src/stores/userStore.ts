@@ -1,10 +1,9 @@
 import { computed, ref } from "vue";
 
-import { isBoolean, isString } from "lodash-es";
+import { isBoolean, isNumber, isString } from "lodash-es";
 import { defineStore } from "pinia";
 
 import { FontSize, PrimeVueColors, PrimeVuePresetThemes, UserRole } from "../enums";
-import { isObjectHasKeys } from "../helpers";
 import { localStorageWithExpiry } from "../helpers";
 import { HistoryItem, NamespacePermissionJava, RecentActivityItem, RecentActivityItemDto, User, isUser } from "../models";
 
@@ -25,6 +24,7 @@ export const useUserStore = defineStore("user", () => {
   const organisations = ref<string[]>([]);
   const includeUserGraph = ref<boolean>(false);
   const namespaces = ref<NamespacePermissionJava[]>([]);
+  const refreshInterval = ref<number | null>(localStorageWithExpiry.getItem("refreshInterval", isNumber));
 
   const isLoggedIn = computed(() => isUser(currentUser.value));
   const isAdmin = computed(() => !!currentUser.value?.roles.includes(UserRole.ADMIN));
@@ -34,6 +34,7 @@ export const useUserStore = defineStore("user", () => {
     cookiesOptionalAccepted.value = localStorageWithExpiry.getItem("cookiesOptionalAccepted", isBoolean) === true;
     snomedLicenseAccepted.value = localStorageWithExpiry.getItem("snomedLicenseAccepted", isBoolean) === true;
     uprnAgreementAccepted.value = localStorageWithExpiry.getItem("uprnAgreementAccepted", isBoolean) === true;
+    refreshInterval.value = localStorageWithExpiry.getItem("refreshInterval", isNumber);
   }
 
   function clearAllFromUserDatabase() {
@@ -267,6 +268,11 @@ export const useUserStore = defineStore("user", () => {
     localStorageWithExpiry.setItem("uprnAgreementAccepted", bool);
   }
 
+  function updateRefreshInterval(interval: number) {
+    refreshInterval.value = interval;
+    localStorageWithExpiry.setItem("refreshInterval", interval);
+  }
+
   async function updateOrganisations(
     orgs: string[],
     UserService: {
@@ -313,6 +319,7 @@ export const useUserStore = defineStore("user", () => {
     organisations,
     includeUserGraph,
     namespaces,
+    refreshInterval,
     loadFromStorage,
     updateCookiesEssentialAccepted,
     updateCookiesOptionalAccepted,
@@ -325,6 +332,7 @@ export const useUserStore = defineStore("user", () => {
     updatePreset,
     updatePrimaryColor,
     updateRecentLocalActivity,
+    updateRefreshInterval,
     updateSnomedLicenseAccepted,
     updateSurfaceColor,
     updateUprnAgreementAccepted,
