@@ -1,8 +1,9 @@
 import z from "zod";
 
 import { CaseSchema } from "./Case";
-import { FunctionClause, FunctionClauseSchema } from "./FunctionClause";
-import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
+import { ExpressionSchema } from "./Expression";
+import { FunctionClauseSchema } from "./FunctionClause";
+import { TTIriRefSchema } from "./TTIriRef";
 
 // export interface Return {
 //   iri?: string;
@@ -20,6 +21,7 @@ import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
 //   value?: string;
 //   case?: Case;
 //   return?: Return[];
+//   coalesce?: Expression[];
 // }
 
 export const ReturnSchema = z.strictObject({
@@ -39,6 +41,9 @@ export const ReturnSchema = z.strictObject({
   case: CaseSchema.optional(),
   get return(): z.ZodOptional<z.ZodArray<typeof ReturnSchema>> {
     return z.array(ReturnSchema).optional();
+  },
+  get coalesce(): z.ZodOptional<z.ZodArray<typeof ExpressionSchema>> {
+    return z.array(ExpressionSchema).optional();
   }
 });
 
