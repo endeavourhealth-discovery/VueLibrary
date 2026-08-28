@@ -24,7 +24,7 @@ export const useUserStore = defineStore("user", () => {
   const organisations = ref<string[]>([]);
   const includeUserGraph = ref<boolean>(false);
   const namespaces = ref<NamespacePermissionJava[]>([]);
-  const refreshInterval = ref<number | null>(localStorageWithExpiry.getItem("refreshInterval", isNumber));
+  const refreshInterval = ref<string | null>(localStorageWithExpiry.getItem("refreshInterval", isString));
 
   const isLoggedIn = computed(() => isUser(currentUser.value));
   const isAdmin = computed(() => !!currentUser.value?.roles.includes(UserRole.ADMIN));
@@ -34,7 +34,7 @@ export const useUserStore = defineStore("user", () => {
     cookiesOptionalAccepted.value = localStorageWithExpiry.getItem("cookiesOptionalAccepted", isBoolean) === true;
     snomedLicenseAccepted.value = localStorageWithExpiry.getItem("snomedLicenseAccepted", isBoolean) === true;
     uprnAgreementAccepted.value = localStorageWithExpiry.getItem("uprnAgreementAccepted", isBoolean) === true;
-    refreshInterval.value = localStorageWithExpiry.getItem("refreshInterval", isNumber);
+    refreshInterval.value = localStorageWithExpiry.getItem("refreshInterval", isString);
   }
 
   function clearAllFromUserDatabase() {
@@ -268,7 +268,7 @@ export const useUserStore = defineStore("user", () => {
     localStorageWithExpiry.setItem("uprnAgreementAccepted", bool);
   }
 
-  function updateRefreshInterval(interval: number) {
+  function updateRefreshInterval(interval: string) {
     refreshInterval.value = interval;
     localStorageWithExpiry.setItem("refreshInterval", interval);
   }
