@@ -33,12 +33,13 @@
 <script setup lang="ts">
 import { Ref, computed, inject, onMounted, ref } from "vue";
 
-import { IMFontAwesomeIcon } from "@endeavour/vue-library/components";
 import { Button } from "primevue";
 import { DynamicDialogOptions } from "primevue/dynamicdialogoptions";
 
 import { AlertDialogOptions } from "@/models";
 import { useDialogStore } from "@/stores/dialogStore";
+
+import IMFontAwesomeIcon from "./IMFontAwesomeIcon.vue";
 
 interface TypedDynamicDialogOptions<T = unknown> extends Omit<DynamicDialogOptions, "data"> {
   data?: T;
