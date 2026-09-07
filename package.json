@@ -1,6 +1,6 @@
 {
   "name": "@endeavour/vue-library",
-  "version": "4.0.4",
+  "version": "4.1.0",
   "type": "module",
   "packageManager": "pnpm@11.15.1",
   "scripts": {
@@ -45,8 +45,11 @@
   },
   "peerDependencies": {
     "@primeuix/themes": "2.0.3",
-    "pinia": "3.0.4",
+    "@tailwindcss/vite": "4.3.3",
+    "pinia": "4.0.2",
     "primevue": "4.5.5",
+    "tailwindcss": "4.3.3",
+    "tailwindcss-primeui": "0.6.1",
     "vue": "3.5.32",
     "vue-router": "5.0.4"
   },
@@ -90,6 +93,10 @@
       "types": "./dist/components/index.d.ts",
       "import": "./dist/components.js",
       "default": "./dist/components.js"
+    },
+    "./components.css": {
+      "import": "./dist/assets/components.css",
+      "default": "./dist/assets/components.css"
     },
     "./stores": {
       "types": "./dist/stores/index.d.ts",

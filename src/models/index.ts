@@ -3,10 +3,11 @@ export { isPermission, type Permission, PermissionSchema } from "./Permission";
 export { isRecentActivityItem, type RecentActivityItem, RecentActivityItemSchema } from "./RecentActivityItem";
 export { ToastOptions } from "./ToastOptions";
 export { isUser, type User, UserSchema, hasNamespace, hasRole, hasAllRoles, hasAnyRole } from "./User";
-
+export { type AlertDialogOptions, AlertDialogOptionsSchema, isAlertDialogOptions } from "./AlertDialogOptions";
 export { isArgument, type Argument, ArgumentSchema } from "./Argument";
 export { isArgumentReference, type ArgumentReference, ArgumentReferenceSchema } from "./ArgumentReference";
 export { isArrayButtons, type ArrayButtons, ArrayButtonsSchema } from "./ArrayButtons";
+export { type BugReport, BugReportSchema, isBugReport } from "./BugReport";
 export { isCase, type Case, CaseSchema } from "./Case";
 
 export { isCompare, type Compare, CompareSchema } from "./Compare";
@@ -50,11 +51,13 @@ export { isQueryRequest, type QueryRequest, QueryRequestSchema } from "./QueryRe
 export { isRange, type Range, RangeSchema } from "./Range";
 export { isRecentActivityItemDto, type RecentActivityItemDto, RecentActivityItemDtoSchema } from "./RecentActivityItemDto";
 export { isReturn, type Return, ReturnSchema } from "./Return";
+export { isRoleRequest, type RoleRequest, RoleRequestSchema } from "./RoleRequest";
 export { isSearchResponse, type SearchResponse, SearchResponseSchema } from "./SearchResponse";
 export { isSearchResultSummary, type SearchResultSummary, SearchResultSummarySchema } from "./SearchResultSummary";
 export { isSearchTermCode, type SearchTermCode, SearchTermCodeSchema } from "./SearchTermCode";
 export { isSubQueryDependency, type SubQueryDependency, SubQueryDependencySchema } from "./SubQueryDependency";
-
+export { isTask, type Task, TaskSchema } from "./Task";
+export { isTaskHistory, type TaskHistory, TaskHistorySchema } from "./TaskHistory";
 export { isTTArray, type TTArray, TTArraySchema } from "./TTArray";
 export { isTTEntity, type TTEntity, TTEntitySchema } from "./TTEntity";
 export { isTTIriRef, type TTIriRef, TTIriRefSchema } from "./TTIriRef";

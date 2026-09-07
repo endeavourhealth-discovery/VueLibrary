@@ -1,3 +1,4 @@
+import AlertDialog from "./AlertDialog.vue";
 import ArrayObjectNameListboxWithLabel from "./ArrayObjectNameListboxWithLabel.vue";
 import ArrayObjectNameTagWithLabel from "./ArrayObjectNameTagWithLabel.vue";
 import ArrayObjectNamesToStringWithLabel from "./ArrayObjectNamesToStringWithLabel.vue";
@@ -13,6 +14,7 @@ import TextSectionHeader from "./TextSectionHeader.vue";
 import TextWithLabel from "./TextWithLabel.vue";
 
 export {
+  AlertDialog,
   OverlaySummary,
   IMFontAwesomeIcon,
   BatteryBar,
