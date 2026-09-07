@@ -32,6 +32,13 @@ export default defineConfig({
         format: "es",
         exports: "named",
         entryFileNames: "[name].js",
+        assetFileNames: assetInfo => {
+          if (assetInfo.name?.endsWith(".css")) {
+            return "assets/[name][extname]";
+          }
+
+          return "assets/[name]-[hash][extname]";
+        },
         globals: {
           vue: "Vue"
         }
