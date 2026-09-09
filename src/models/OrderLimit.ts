@@ -1,7 +1,5 @@
 import z from "zod";
 
-import { IriLDSchema } from "@/models/IriLD";
-
 import { OrderDirectionSchema } from "./OrderDirection";
 
 // export interface OrderLimit {
@@ -11,7 +9,6 @@ import { OrderDirectionSchema } from "./OrderDirection";
 // }
 
 export const OrderLimitSchema = z.strictObject({
-  partition: z.array(IriLDSchema).optional(),
   property: z.array(OrderDirectionSchema).optional(),
   limit: z.number().optional(),
   description: z.string().optional()
