@@ -1,7 +1,7 @@
 import z from "zod";
 
-import { Entail, IMQType, RuleAction } from "../enums";
-import { FromSchema } from "./From";
+import { Entail, IMQType, RuleAction } from "@/enums";
+
 import { FunctionClauseSchema } from "./FunctionClause";
 import { GroupBySchema } from "./GroupBy";
 import { HavingSchema } from "./Having";
@@ -22,9 +22,7 @@ export const QuerySchema = IriLDSchema.extend({
   get typeOf(): z.ZodOptional<z.ZodLazy<typeof NodeSchema>> {
     return z.lazy(() => NodeSchema).optional();
   },
-  get from(): z.ZodOptional<z.ZodArray<typeof FromSchema>> {
-    return z.array(FromSchema).optional();
-  },
+  from: z.string().optional(),
   get is(): z.ZodOptional<z.ZodLazy<typeof NodeSchema>> {
     return z.lazy(() => NodeSchema).optional();
   },
@@ -43,9 +41,7 @@ export const QuerySchema = IriLDSchema.extend({
   get where(): z.ZodOptional<typeof WhereSchema> {
     return WhereSchema.optional();
   },
-  get then(): z.ZodOptional<typeof QuerySchema> {
-    return QuerySchema.optional();
-  },
+
   get graph(): z.ZodOptional<z.ZodLazy<typeof NodeSchema>> {
     return z.lazy(() => NodeSchema).optional();
   },
