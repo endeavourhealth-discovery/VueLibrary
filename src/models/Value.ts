@@ -1,7 +1,7 @@
 import z from "zod";
 
-import { Operator } from "../enums";
-import { CompareSchema } from "./Compare";
+import { Operator } from "@/enums";
+
 import { FunctionClauseSchema } from "./FunctionClause";
 import { TTIriRefSchema } from "./TTIriRef";
 
@@ -35,8 +35,7 @@ export const ValueSchema = z.strictObject({
   description: z.string().optional(),
   units: TTIriRefSchema.optional(),
   invalid: z.boolean().optional(),
-  valueTerm: z.string().optional(),
-  compare: CompareSchema.optional()
+  valueTerm: z.string().optional()
 });
 
 export type Value = z.output<typeof ValueSchema>;

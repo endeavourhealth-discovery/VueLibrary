@@ -79,6 +79,7 @@ export const QuerySchema = IriLDSchema.extend({
   },
   imQuery: z.string().optional(),
   parentResult: z.any().optional(),
+  fromTypeIri: z.string().optional(),
   persistentIri: TTIriRefSchema.optional(),
   bindAs: z.string().optional(),
   queryType: z.enum(IMQType).optional(),
