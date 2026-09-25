@@ -26,6 +26,9 @@ export const QuerySchema = IriLDSchema.extend({
   get is(): z.ZodOptional<z.ZodLazy<typeof NodeSchema>> {
     return z.lazy(() => NodeSchema).optional();
   },
+  get then(): z.ZodOptional<z.ZodLazy<typeof QuerySchema>> {
+    return z.lazy(() => QuerySchema).optional();
+  },
   get and(): z.ZodOptional<z.ZodArray<typeof QuerySchema>> {
     return z.array(QuerySchema).optional();
   },
