@@ -16,6 +16,7 @@ import { WhereSchema } from "./Where";
 
 export const QuerySchema = IriLDSchema.extend({
   notExists: z.boolean().optional(),
+  referenced: z.boolean().optional(),
   ifTrue: z.enum(RuleAction).optional(),
   ifFalse: z.enum(RuleAction).optional(),
   nodeRef: z.string().optional(),
