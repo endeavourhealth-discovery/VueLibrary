@@ -112,37 +112,24 @@ export const useUserStore = defineStore("user", () => {
       updateUserRecentActivity(recentActivity: RecentActivityItemDto[]): Promise<User>;
     }
   ) {
-    let activity: RecentActivityItemDto[] = [];
+    const source = (isLoggedIn.value && currentUser.value ? currentUser.value.recentActivity : recentLocalActivity.value) ?? [];
+    // work on a copy so the store is only changed once the new list is complete
+    let activity: RecentActivityItemDto[] = source.map(item => ({ ...item, dateTime: item.dateTime ? new Date(item.dateTime) : item.dateTime }));
 
-    if (isLoggedIn.value && currentUser.value) activity = currentUser.value?.recentActivity;
-    else activity = recentLocalActivity.value ? recentLocalActivity.value : [];
-
-    activity.forEach(activityItem => {
-      if (activityItem.dateTime) activityItem.dateTime = new Date(activityItem.dateTime);
-    });
     const foundIndex = activity.findIndex(activityItem => activityItem.iri === recentActivityItem.iri && activityItem.action === recentActivityItem.action);
     if (foundIndex !== -1) {
       activity[foundIndex].dateTime = recentActivityItem.dateTime;
-      activity.sort((a, b) => {
-        if (a.dateTime && b.dateTime && a.dateTime.getTime() > b.dateTime.getTime()) {
-          return 1;
-        } else if (a.dateTime && b.dateTime && b.dateTime.getTime() > a.dateTime.getTime()) {
-          return -1;
-        } else {
-          return 0;
-        }
-      });
+      activity.sort((a, b) => (a.dateTime?.getTime() ?? 0) - (b.dateTime?.getTime() ?? 0));
     } else {
-      while (activity.length > 4) activity.shift();
-      if (recentActivityItem.iri !== "http://endhealth.info/im#Favourites") {
-        activity.push(recentActivityItem);
-      }
+      activity = activity.slice(-4);
+      if (recentActivityItem.iri !== "http://endhealth.info/im#Favourites") activity.push(recentActivityItem);
     }
+
     if (isLoggedIn.value) {
       const updatedUser = await UserService.updateUserRecentActivity(activity);
       currentUser.value = updatedUser;
       getAllFromUserDatabase();
-    }
+    } else recentLocalActivity.value = activity as RecentActivityItem[];
   }
 
   async function clearRecentLocalActivity(UserService: { updateUserRecentActivity(recentActivity: RecentActivityItemDto[]): Promise<User> }) {

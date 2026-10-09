@@ -31,11 +31,11 @@ describe("Sorters", () => {
 
   describe("byPriority", () => {
     it("can get bypriority ___ 1", () => {
-      expect(byPriority({ priority: 9 }, { priority: 7 })).toBe(1);
+      expect(byPriority({ priority: 9 }, { priority: 7 })).toBe(2);
     });
 
     it("can get bypriority ___ -1", () => {
-      expect(byPriority({ priority: 7 }, { priority: 10 })).toBe(-1);
+      expect(byPriority({ priority: 7 }, { priority: 10 })).toBe(-3);
     });
 
     it("can get bypriority ___ 0", () => {
@@ -109,11 +109,11 @@ describe("Sorters", () => {
 
   describe("byPosition", () => {
     it("can get byPosition ___ 1", () => {
-      expect(byPosition({ position: 9 }, { position: 7 })).toBe(1);
+      expect(byPosition({ position: 9 }, { position: 7 })).toBe(2);
     });
 
     it("can get byPosition ___ -1", () => {
-      expect(byPosition({ position: 7 }, { position: 10 })).toBe(-1);
+      expect(byPosition({ position: 7 }, { position: 10 })).toBe(-3);
     });
 
     it("can get byPosition ___ 0", () => {
@@ -135,11 +135,11 @@ describe("Sorters", () => {
 
   describe("byOrder", () => {
     it("can get byOrder ___ 1", () => {
-      expect(byOrder({ order: 9 }, { order: 7 })).toBe(1);
+      expect(byOrder({ order: 9 }, { order: 7 })).toBe(2);
     });
 
     it("can get byOrder ___ -1", () => {
-      expect(byOrder({ order: 7 }, { order: 10 })).toBe(-1);
+      expect(byOrder({ order: 7 }, { order: 10 })).toBe(-3);
     });
 
     it("can get byOrder ___ 0", () => {

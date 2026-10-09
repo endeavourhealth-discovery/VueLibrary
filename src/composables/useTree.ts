@@ -109,8 +109,10 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
     if (node.nextPage * pageSize.value <= node.totalCount) {
       const children = await entityService!.getPagedChildren(node.parentNode.key, node.nextPage, pageSize.value);
       node.parentNode.children.pop();
+      const existingKeys = childKeys(node.parentNode);
       for (const child of children.result) {
-        if (!nodeHasChild(node.parentNode, child) && child.iri && isArrayOf(child.type, isTTIriRef)) {
+        if (child.iri && !existingKeys.has(child.iri) && isArrayOf(child.type, isTTIriRef)) {
+          existingKeys.add(child.iri);
           node.parentNode.children.push(createTreeNode(child.name, child.iri, child.type, createNodeSummary(child), child.hasChildren, node));
         }
       }
@@ -119,8 +121,10 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
     } else if (node.nextPage * pageSize.value > node.totalCount) {
       const children = await entityService!.getPagedChildren(node.parentNode.key, node.nextPage, pageSize.value);
       node.parentNode.children.pop();
+      const existingKeys = childKeys(node.parentNode);
       for (const child of children.result) {
-        if (!nodeHasChild(node.parentNode, child) && child.iri && isArrayOf(child.type, isTTIriRef)) {
+        if (child.iri && !existingKeys.has(child.iri) && isArrayOf(child.type, isTTIriRef)) {
+          existingKeys.add(child.iri);
           node.parentNode.children.push(createTreeNode(child.name, child.iri, child.type, createNodeSummary(child), child.hasChildren, node.parentNode));
         }
       }
@@ -147,31 +151,30 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
 
   async function expandFavouriteNode(node: TreeNode) {
     node.children = [];
-    let favChildren = [];
-    for (const fav of favourites.value) {
-      const favChild = await entityService!.getEntityAsEntityReferenceNode(fav);
+    const favChildren: TreeNode[] = [];
+    const results = await Promise.all(favourites.value.map(fav => entityService!.getEntityAsEntityReferenceNode(fav)));
+    for (const favChild of results) {
       if (favChild && isArrayOf(favChild.type, isTTIriRef))
         favChildren.push(createTreeNode(favChild.name, favChild.iri, favChild.type, createNodeSummary(favChild), false, node));
     }
     node.children = favChildren;
   }
 
-  function childrenHasNode(newChildren: EntityReferenceNode[], node: TreeNode): boolean {
-    return !!newChildren.find(child => child.iri === node.key);
+  function childKeys(node: TreeNode): Set<string> {
+    return new Set((node.children ?? []).map((child: TreeNode) => child.key));
   }
 
   async function expandNode(node: TreeNode, typeFilter?: string[]) {
     const currentChildCount = node.children ? node.children.length : 0;
     const children = await entityService!.getPagedChildren(node.key, 1, pageSize.value, undefined, undefined, typeFilter);
     if (currentChildCount > 0 && children.result.length < currentChildCount && isArray(node.children)) {
-      for (const [index, currentChildNode] of node.children.entries()) {
-        if (!childrenHasNode(children.result, currentChildNode)) {
-          node.children.splice(index, 1);
-        }
-      }
+      const returnedKeys = new Set(children.result.map(child => child.iri));
+      node.children = node.children.filter(currentChildNode => returnedKeys.has(currentChildNode.key));
     }
+    const existingKeys = childKeys(node);
     for (const child of children.result) {
-      if (!nodeHasChild(node, child) && child.iri && isArrayOf(child.type, isTTIriRef)) {
+      if (child.iri && !existingKeys.has(child.iri) && isArrayOf(child.type, isTTIriRef)) {
+        existingKeys.add(child.iri);
         node.children?.push(createTreeNode(child.name, child.iri, child.type, createNodeSummary(child), child.hasChildren, node));
       }
     }
@@ -241,15 +244,19 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
     if (n && n.key === path[0].iri) {
       await selectAndExpand(n);
 
-      while (!n.children?.some(child => child.key === iri)) {
+      while (!n.children?.some(child => child.key === iri) && hasLoadMoreNode(n)) {
         await loadMoreChildren(n);
       }
-      for (const gc of n.children) {
-        if (gc.key === iri && gc.key) {
-          selectKey(gc.key);
-        }
+      if (n.children?.some(child => child.key === iri)) {
+        selectKey(iri);
+        selectedNode.value = n;
+      } else {
+        toast.add({
+          severity: "warn",
+          summary: "Unable to locate",
+          detail: "Unable to locate concept in the current hierarchy"
+        });
       }
-      selectedNode.value = n;
     } else {
       toast.add({
         severity: "warn",
@@ -259,6 +266,10 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
     }
     scrollToHighlighted(treeContainerId);
     loading.value = false;
+  }
+
+  function hasLoadMoreNode(node: TreeNode): boolean {
+    return !!node.children?.length && node.children[node.children.length - 1].key.includes("loadMore");
   }
 
   async function locateChildInLoadMore(n: TreeNode, path: TTIriRef[]): Promise<TreeNode | undefined> {
@@ -282,7 +293,7 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
     }
     expandedKeys.value[node.key] = true;
     expandedKeys.value = { ...expandedKeys.value };
-    expandedData.value.push(node);
+    if (!expandedData.value.some(x => x.key === node.key)) expandedData.value.push(node);
   }
 
   function scrollToHighlighted(containerId: string) {
