@@ -31,9 +31,9 @@ export function getFAIconFromType(conceptTypes: TTIriRef[]): string[] {
   else return ["fa-duotone", "fa-lightbulb"];
 }
 
+const bgsFixed: string[] = palette("tol-rainbow", 10).map((color: string) => "#" + color + "88");
+
 export function getColourFromType(conceptTypes: TTIriRef[]): string {
-  const bgs = palette("tol-rainbow", 10);
-  const bgsFixed = bgs.map((color: string) => "#" + color + "88");
   if (entityIsRecordModel(conceptTypes)) return bgsFixed[0];
   else if (entityIsTask(conceptTypes)) return bgsFixed[6];
   else if (entityIsProperty(conceptTypes)) return bgsFixed[4];

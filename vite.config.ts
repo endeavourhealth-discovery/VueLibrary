@@ -16,6 +16,9 @@ const entries: Record<string, string> = {
 };
 
 export default defineConfig({
+  resolve: {
+    alias: { "@": path.resolve(__dirname, "src") }
+  },
   plugins: [vue(), dts({ insertTypesEntry: true, include: ["src"] })],
   optimizeDeps: {
     rolldownOptions: {
@@ -26,7 +29,7 @@ export default defineConfig({
     rollupOptions: {
       preserveEntrySignatures: "strict",
       input: entries,
-      external: ["vue", "vue-router", "pinia", "@primeuix/themes", "primevue", /primevue\/.+/],
+      external: ["vue", "vue-router", "pinia", "primevue", "zod", "lodash-es", "google-palette", "uuid", /^@primeuix\/themes(\/.+)?$/, /^primevue\/.+/, /^lodash-es\/.+/],
       output: {
         dir: "dist",
         format: "es",
