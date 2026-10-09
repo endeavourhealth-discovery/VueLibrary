@@ -2,8 +2,6 @@
 // Set, Query Set, Value Set
 // Class, Record Type
 // Everything else
-import palette from "google-palette";
-
 import { IM } from "../enums";
 import {
   entityIsFeature,
@@ -31,7 +29,10 @@ export function getFAIconFromType(conceptTypes: TTIriRef[]): string[] {
   else return ["fa-duotone", "fa-lightbulb"];
 }
 
-const bgsFixed: string[] = palette("tol-rainbow", 10).map((color: string) => "#" + color + "88");
+// Paul Tol's "rainbow" palette (10 colours) with 53% alpha, matching google-palette's palette("tol-rainbow", 10)
+const bgsFixed: string[] = ["781c81", "43328d", "416fb8", "519cb8", "70b484", "99bd5c", "c3ba45", "e0a239", "e66b2d", "d92120"].map(
+  color => "#" + color + "88"
+);
 
 export function getColourFromType(conceptTypes: TTIriRef[]): string {
   if (entityIsRecordModel(conceptTypes)) return bgsFixed[0];

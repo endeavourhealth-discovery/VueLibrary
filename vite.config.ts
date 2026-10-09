@@ -1,4 +1,3 @@
-import { esbuildCommonjs } from "@originjs/vite-plugin-commonjs";
 import vue from "@vitejs/plugin-vue";
 import * as path from "path";
 import dts from "vite-plugin-dts";
@@ -20,16 +19,11 @@ export default defineConfig({
     alias: { "@": path.resolve(__dirname, "src") }
   },
   plugins: [vue(), dts({ insertTypesEntry: true, include: ["src"] })],
-  optimizeDeps: {
-    rolldownOptions: {
-      plugins: [esbuildCommonjs(["google-palette"])]
-    }
-  },
   build: {
     rollupOptions: {
       preserveEntrySignatures: "strict",
       input: entries,
-      external: ["vue", "vue-router", "pinia", "primevue", "zod", "lodash-es", "google-palette", "uuid", /^@primeuix\/themes(\/.+)?$/, /^primevue\/.+/, /^lodash-es\/.+/],
+      external: ["vue", "vue-router", "pinia", "primevue", "zod", "lodash-es", "uuid", /^@primeuix\/themes(\/.+)?$/, /^primevue\/.+/, /^lodash-es\/.+/],
       output: {
         dir: "dist",
         format: "es",
@@ -41,16 +35,12 @@ export default defineConfig({
           }
 
           return "assets/[name]-[hash][extname]";
-        },
-        globals: {
-          vue: "Vue"
         }
       }
     },
     target: "esnext",
     outDir: "dist",
-    emptyOutDir: true,
-    minify: "esbuild"
+    emptyOutDir: true
   },
   test: {
     dir: "./tests",
