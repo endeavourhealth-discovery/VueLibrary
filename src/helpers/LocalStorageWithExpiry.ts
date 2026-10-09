@@ -1,5 +1,5 @@
-import { isObjectHasKeys } from "../helpers";
 import { GenericObject } from "../models";
+import { isObjectHasKeys } from "./DataTypeCheckers";
 
 const isClient = () => typeof window !== "undefined" && typeof localStorage != "undefined";
 
