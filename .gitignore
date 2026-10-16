@@ -29,3 +29,4 @@ build
 dist-tests
 
 .env
+VueLibrary.iml

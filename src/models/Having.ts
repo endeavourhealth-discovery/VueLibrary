@@ -17,7 +17,7 @@ import { Range, RangeSchema } from "./Range";
 
 export const HavingSchema = z.strictObject({
   function: z.enum(Aggregate).optional(),
-  ideintifier: z.string().optional(),
+  identifier: z.string().optional(),
   range: RangeSchema.optional(),
   operator: z.enum(Operator).optional(),
   value: z.string().optional(),
