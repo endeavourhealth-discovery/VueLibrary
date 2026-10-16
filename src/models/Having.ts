@@ -22,10 +22,10 @@ export const HavingSchema = z.strictObject({
   operator: z.enum(Operator).optional(),
   value: z.string().optional(),
   get and() {
-    return z.array(HavingSchema);
+    return z.array(HavingSchema).optional();
   },
   get or() {
-    return z.array(HavingSchema);
+    return z.array(HavingSchema).optional();
   },
   not: z.boolean().optional()
 });
