@@ -31,4 +31,17 @@ describe("parseQuery", () => {
     expect(QuerySchema.safeParse({}).success).toBe(true);
     expect(QuerySchema.safeParse(testQuery).success).toBe(true);
   });
+
+  it("parses a where function with arguments", () => {
+    const testQuery = {
+      iri: "http://endhealth.info/im#Q1",
+      where: {
+        function: {
+          iri: "http://endhealth.info/im#F1",
+          argument: [{ parameter: "p", valueData: "1" }]
+        }
+      }
+    };
+    expect(() => QuerySchema.parse(testQuery)).not.toThrow();
+  });
 });

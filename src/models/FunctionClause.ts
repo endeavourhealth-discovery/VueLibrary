@@ -9,7 +9,9 @@ import { IriLD, IriLDSchema } from "./IriLD";
 
 export const FunctionClauseSchema = z.strictObject({
   ...IriLDSchema.shape,
-  argument: z.array(ArgumentSchema).optional()
+  get argument(): z.ZodOptional<z.ZodArray<typeof ArgumentSchema>> {
+    return z.array(ArgumentSchema).optional();
+  }
 });
 
 export type FunctionClause = z.output<typeof FunctionClauseSchema>;
