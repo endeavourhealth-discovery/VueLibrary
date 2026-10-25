@@ -27,6 +27,9 @@ export const QuerySchema = IriLDSchema.extend({
   get is(): z.ZodOptional<z.ZodLazy<typeof NodeSchema>> {
     return z.lazy(() => NodeSchema).optional();
   },
+  get base(): z.ZodOptional<z.ZodLazy<typeof NodeSchema>> {
+    return z.lazy(() => NodeSchema).optional();
+  },
   get then(): z.ZodOptional<z.ZodLazy<typeof QuerySchema>> {
     return z.lazy(() => QuerySchema).optional();
   },
@@ -67,7 +70,6 @@ export const QuerySchema = IriLDSchema.extend({
   asDescription: z.string().optional(),
   errorMessage: z.string().optional(),
   draft: z.boolean().optional(),
-  base: z.boolean().optional(),
   having: HavingSchema.optional(),
   get path(): z.ZodOptional<z.ZodArray<z.ZodLazy<typeof PathSchema>>> {
     return z.array(z.lazy(() => PathSchema)).optional();
