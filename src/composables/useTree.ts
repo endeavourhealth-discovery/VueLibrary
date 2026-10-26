@@ -8,9 +8,9 @@ import { IM } from "../enums";
 import { getColourFromType, getFAIconFromType } from "../helpers/ConceptTypeVisuals";
 import { isArrayHasLength, isArrayOf, isObjectHasKeys } from "../helpers/DataTypeCheckers";
 import injectionKeys from "../injectionKeys/injectionKeys";
-import { EntityReferenceNode, SearchResultSummary, TTIriRef, isTTIriRef } from "../models";
+import { EntityReferenceNode, PageableEntityReferenceNode, SearchResultSummary, TTIriRef, isTTIriRef } from "../models";
 
-export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: number) {
+export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: number, predicate?: string) {
   const useDirectService = inject(injectionKeys.useDirectService);
   if (!useDirectService) throw new Error("Missing injection: directService");
   const directService = useDirectService();
@@ -107,7 +107,10 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
   async function loadMore(node: TreeNode) {
     node.loading = true;
     if (node.nextPage * pageSize.value <= node.totalCount) {
-      const children = await entityService!.getPagedChildren(node.parentNode.key, node.nextPage, pageSize.value);
+      let children: PageableEntityReferenceNode;
+      if (predicate) children = await entityService!.getPagedChildrenForTree(node.parentNode.key, node.nextPage, pageSize.value, predicate);
+      else children = await entityService!.getPagedChildren(node.parentNode.key, node.nextPage, pageSize.value);
+
       node.parentNode.children.pop();
       const existingKeys = childKeys(node.parentNode);
       for (const child of children.result) {
@@ -119,7 +122,10 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
       node.nextPage = node.nextPage + 1;
       node.parentNode.children.push(createLoadMoreNode(node.parentNode, node.nextPage, node.totalCount));
     } else if (node.nextPage * pageSize.value > node.totalCount) {
-      const children = await entityService!.getPagedChildren(node.parentNode.key, node.nextPage, pageSize.value);
+      let children: PageableEntityReferenceNode;
+      if (predicate) children = await entityService!.getPagedChildrenForTree(node.parentNode.key, node.nextPage, pageSize.value, predicate);
+      else children = await entityService!.getPagedChildren(node.parentNode.key, node.nextPage, pageSize.value);
+
       node.parentNode.children.pop();
       const existingKeys = childKeys(node.parentNode);
       for (const child of children.result) {
@@ -166,7 +172,9 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
 
   async function expandNode(node: TreeNode, typeFilter?: string[]) {
     const currentChildCount = node.children ? node.children.length : 0;
-    const children = await entityService!.getPagedChildren(node.key, 1, pageSize.value, undefined, undefined, typeFilter);
+    let children: PageableEntityReferenceNode;
+    if (predicate) children = await entityService!.getPagedChildrenForTree(node.key, 1, pageSize.value, predicate, undefined, undefined, typeFilter);
+    else children = await entityService!.getPagedChildren(node.key, 1, pageSize.value, undefined, undefined, typeFilter);
     if (currentChildCount > 0 && children.result.length < currentChildCount && isArray(node.children)) {
       const returnedKeys = new Set(children.result.map(child => child.iri));
       node.children = node.children.filter(currentChildNode => returnedKeys.has(currentChildNode.key));
