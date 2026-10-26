@@ -173,7 +173,6 @@ export function useTree(favourites: Ref<string[]>, emit?: any, customPageSize?: 
   async function expandNode(node: TreeNode, typeFilter?: string[]) {
     const currentChildCount = node.children ? node.children.length : 0;
     let children: PageableEntityReferenceNode;
-    console.log(predicate);
     if (predicate) children = await entityService!.getPagedChildrenForTree(node.key, 1, pageSize.value, predicate, undefined, undefined, typeFilter);
     else children = await entityService!.getPagedChildren(node.key, 1, pageSize.value, undefined, undefined, typeFilter);
     if (currentChildCount > 0 && children.result.length < currentChildCount && isArray(node.children)) {
