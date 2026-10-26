@@ -28,6 +28,15 @@ const entityService = Symbol("entityService") as InjectionKey<{
     controller?: AbortController,
     typeFilter?: string[]
   ): Promise<PageableEntityReferenceNode>;
+  getPagedChildrenForTree(
+    iri: string,
+    pageIndex: number,
+    pageSize: number,
+    predicate?: string,
+    filters?: FiltersAsIris,
+    controller?: AbortController,
+    typeFilter?: string[]
+  ): Promise<PageableEntityReferenceNode>;
   getEntityAsEntityReferenceNode(iri: string): Promise<ExtendedEntityReferenceNode>;
   getPathBetweenNodes(descendant: string, ancestor: string): Promise<TTIriRef[]>;
 }>;
