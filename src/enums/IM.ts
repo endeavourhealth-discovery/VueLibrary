@@ -212,7 +212,6 @@ export enum IM {
   IS_SUBINDICATOR_OF = "http://endhealth.info/im#isSubIndicatorOf",
   QUERY_SET = "http://endhealth.info/im#QuerySet",
   DEPENDENT_ON = "http://endhealth.info/im#dependentOn",
-  IS_SUBQUERY = "http://endhealth.info/im#isSubquery",
   CARE_ACTIVITY = "http://endhealth.info/im#CareActivity",
   CARE_TARGET = "http://endhealth.info/im#CareTarget",
   QUERY_TEMPLATE = "http://endhealth.info/im#QueryTemplate",
