@@ -4,12 +4,14 @@ import z from "zod";
 //   iri?: string;
 //   label?: string;
 //   depth?: number;
+//   parentIris?: string[] | null;
 // }
 
 export const SubQueryDependencySchema = z.strictObject({
   iri: z.url().optional(),
   label: z.string().optional(),
-  depth: z.number().optional()
+  depth: z.number().optional(),
+  parentIris: z.array(z.string()).nullish()
 });
 
 export type SubQueryDependency = z.output<typeof SubQueryDependencySchema>;
