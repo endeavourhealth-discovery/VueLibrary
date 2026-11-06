@@ -88,8 +88,7 @@ export const QuerySchema = IriLDSchema.extend({
   as: z.string().optional()
 });
 
-export type Query = z.output<typeof QuerySchema>;
-
+export interface Query extends z.output<typeof QuerySchema> {}
 export function isQuery(value: unknown): value is Query {
   return QuerySchema.safeParse(value).success;
 }
