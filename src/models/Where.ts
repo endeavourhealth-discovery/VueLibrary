@@ -1,46 +1,14 @@
-import z, { boolean } from "zod";
+import z from "zod";
 
-import { Operator } from "../enums";
-import { Compare, CompareSchema } from "./Compare";
-import { Element, ElementSchema } from "./Element";
-import { FunctionClause, FunctionClauseSchema } from "./FunctionClause";
-import { IriLD, IriLDSchema } from "./IriLD";
-import { Node, NodeSchema } from "./Node";
-import { Range, RangeSchema } from "./Range";
-import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
+import { Operator } from "@/enums";
 
-// export interface Where extends Element {
-//   operator?: Operator;
-//   value?: string;
-//   valueLabel?: string;
-//   units?: TTIriRef;
-//   function?: FunctionClause;
-//   valueTerm?: string;
-//   compare?: Compare;
-//   range?: Range;
-//   isNull?: boolean;
-//   is?: Node[];
-//   anyRoleGroup?: boolean;
-//   inverse?: boolean;
-//   typeOf?: Node;
-//   subjectVariable?: string;
-//   subjectParameter?: string;
-//   not?: boolean;
-//   roleGroup?: boolean;
-//   isNotNull?: boolean;
-//   or?: Where[];
-//   and?: Where[];
-//   propertyRef?: string;
-//   shortLabel?: string;
-//   qualifier?: TTIriRef;
-//   propertyList?: Node[];
-//   propertyVariable?: string;
-//   node?: string;
-//   excludeProperty?: IriLD[];
-//   exists?: boolean;
-//   linked?: boolean;
-//   notNull?: boolean;
-// }
+import { CompareSchema } from "./Compare";
+import { ElementSchema } from "./Element";
+import { FunctionClauseSchema } from "./FunctionClause";
+import { IriLDSchema } from "./IriLD";
+import { NodeSchema } from "./Node";
+import { RangeSchema } from "./Range";
+import { TTIriRefSchema } from "./TTIriRef";
 
 export const WhereSchema = ElementSchema.extend({
   operator: z.enum(Operator).optional(),
@@ -80,7 +48,7 @@ export const WhereSchema = ElementSchema.extend({
   notNull: z.boolean().optional()
 });
 
-export type Where = z.output<typeof WhereSchema>;
+export interface Where extends z.output<typeof WhereSchema> {}
 
 export function isWhere(value: unknown): value is Where {
   return WhereSchema.safeParse(value).success;
