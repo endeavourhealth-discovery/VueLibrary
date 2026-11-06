@@ -2,7 +2,7 @@
 // Set, Query Set, Value Set
 // Class, Record Type
 // Everything else
-import { IM } from "../enums";
+import { Entail, IM } from "@/enums";
 import {
   entityIsFeature,
   entityIsFolder,
@@ -13,8 +13,8 @@ import {
   entityIsRecordModel,
   entityIsTask,
   entityIsValueSet
-} from "../helpers/ConceptTypeMethods";
-import { Node, TTIriRef } from "../models";
+} from "@/helpers/ConceptTypeMethods";
+import { Node, TTIriRef } from "@/models";
 
 export function getFAIconFromType(conceptTypes: TTIriRef[]): string[] {
   if (entityIsRecordModel(conceptTypes)) return ["fa-duotone", "fa-diagram-project"];
@@ -47,13 +47,13 @@ export function getColourFromType(conceptTypes: TTIriRef[]): string {
   else return bgsFixed[8];
 }
 export function getTypeIcon(is: Node) {
-  if (is.memberOf) {
+  if (is.entails == Entail.memberOf) {
     return getFAIconFromType([{ iri: IM.CONCEPT_SET }]);
   } else return getFAIconFromType([{ iri: IM.CONCEPT }]);
 }
 
 export function getIconColor(is: Node) {
-  if (is.memberOf) {
+  if (is.entails == Entail.memberOf) {
     return getColourFromType([{ iri: IM.CONCEPT_SET }]);
   } else return getColourFromType([{ iri: IM.CONCEPT }]);
 }

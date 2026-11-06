@@ -1,7 +1,9 @@
 export enum Entail {
-  descendantsOrSelfOf = "descendantsOrSelfOf",
-  memberOf = "memberOf",
-  descendantsOf = "descendantsOf",
-  ancestorsOf = "ancestorsOf",
+  descendantsOrSelfOf = "<<",
+  memberOf = "^",
+  descendantsOf = "<",
+  ancestorsOf = ">",
+  childOf = "<!",
+  childOfOrSelfOf = "<<!",
   equal = "equal"
 }

@@ -71,7 +71,6 @@ export const QuerySchema = IriLDSchema.extend({
   get path(): z.ZodOptional<z.ZodArray<z.ZodLazy<typeof PathSchema>>> {
     return z.array(z.lazy(() => PathSchema)).optional();
   },
-  node: z.string().optional(),
   return: z.array(ReturnSchema).optional(),
   prefixes: z.array(PrefixSchema).optional(),
   get columnGroup(): z.ZodOptional<z.ZodArray<typeof QuerySchema>> {

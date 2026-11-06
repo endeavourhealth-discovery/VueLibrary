@@ -2,6 +2,6 @@ export enum Bool {
   and = "and",
   or = "or",
   rule = "rule",
-  each = "each",
+  with = "each",
   union = "union"
 }

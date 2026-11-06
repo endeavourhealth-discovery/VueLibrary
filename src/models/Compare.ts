@@ -2,16 +2,7 @@ import z from "zod";
 
 import { ValueSourceSchema } from "./ValueSource";
 
-// export interface Compare {
-//   left?: ValueSource;
-//   right?: ValueSource;
-//   units?: TTIriRef;
-// }
-
-export const CompareSchema = z.strictObject({
-  left: ValueSourceSchema.optional(),
-  right: ValueSourceSchema.optional()
-});
+export const CompareSchema = ValueSourceSchema.extend({});
 
 export type Compare = z.output<typeof CompareSchema>;
 
