@@ -1,7 +1,7 @@
 import z from "zod";
 
-import { Node, NodeSchema } from "./Node";
-import { Where, WhereSchema } from "./Where";
+import { NodeSchema } from "./Node";
+import { WhereSchema } from "./Where";
 
 // export interface Delete {
 //   property?: Where;
@@ -23,7 +23,7 @@ export const DeleteSchema = z.strictObject({
   }
 });
 
-export type Delete = z.output<typeof DeleteSchema>;
+export interface Delete extends z.output<typeof DeleteSchema> {}
 
 export function isDelete(value: unknown): value is Delete {
   return DeleteSchema.safeParse(value).success;

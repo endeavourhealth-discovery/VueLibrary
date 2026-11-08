@@ -1,6 +1,6 @@
 import z from "zod";
 
-import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
+import { TTIriRefSchema } from "./TTIriRef";
 
 // export interface PropertyRange extends TTIriRef {
 //   pattern?: string;
@@ -26,7 +26,7 @@ export const PropertyRangeSchema = TTIriRefSchema.extend({
   relativeValue: z.boolean().optional()
 });
 
-export type PropertyRange = z.output<typeof PropertyRangeSchema>;
+export interface PropertyRange extends z.output<typeof PropertyRangeSchema> {}
 
 export function isPropertyRange(value: unknown): value is PropertyRange {
   return PropertyRangeSchema.safeParse(value).success;

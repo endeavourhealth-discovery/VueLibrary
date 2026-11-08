@@ -102,7 +102,7 @@ export const PropertyShapeSchema = z.strictObject({
   association: z.boolean().optional()
 });
 
-export type PropertyShape = z.output<typeof PropertyShapeSchema>;
+export interface PropertyShape extends z.output<typeof PropertyShapeSchema> {}
 
 export function isPropertyShape(value: unknown): value is PropertyShape {
   return PropertyShapeSchema.safeParse(value).success;

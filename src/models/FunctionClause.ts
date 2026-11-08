@@ -1,7 +1,7 @@
 import z from "zod";
 
 import { ArgumentSchema } from "./Argument";
-import { IriLD, IriLDSchema } from "./IriLD";
+import { IriLDSchema } from "./IriLD";
 
 // export interface FunctionClause extends IriLD {
 //   argument?: Argument[];
@@ -14,7 +14,7 @@ export const FunctionClauseSchema = z.strictObject({
   }
 });
 
-export type FunctionClause = z.output<typeof FunctionClauseSchema>;
+export interface FunctionClause extends z.output<typeof FunctionClauseSchema> {}
 
 export function isFunctionClause(value: unknown): value is FunctionClause {
   return FunctionClauseSchema.safeParse(value).success;

@@ -22,7 +22,7 @@ export const PathSchema = ElementSchema.extend({
   node: z.string().optional()
 });
 
-export type Path = z.output<typeof PathSchema>;
+export interface Path extends z.output<typeof PathSchema> {}
 
 export function isPath(value: unknown): value is Path {
   return PathSchema.safeParse(value).success;

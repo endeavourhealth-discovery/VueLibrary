@@ -47,7 +47,7 @@ export const ReturnSchema = z.strictObject({
   }
 });
 
-export type Return = z.output<typeof ReturnSchema>;
+export interface Return extends z.output<typeof ReturnSchema> {}
 
 export function isReturn(value: unknown): value is Return {
   return ReturnSchema.safeParse(value).success;

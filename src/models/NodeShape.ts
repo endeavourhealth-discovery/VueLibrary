@@ -1,7 +1,7 @@
 import z from "zod";
 
-import { PropertyShape, PropertyShapeSchema } from "./PropertyShape";
-import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
+import { PropertyShapeSchema } from "./PropertyShape";
+import { TTIriRefSchema } from "./TTIriRef";
 
 // export interface NodeShape extends TTIriRef {
 //   property?: PropertyShape[];
@@ -29,7 +29,7 @@ export const NodeShapeSchema = TTIriRefSchema.extend({
   }
 });
 
-export type NodeShape = z.output<typeof NodeShapeSchema>;
+export interface NodeShape extends z.output<typeof NodeShapeSchema> {}
 
 export function isNodeShape(value: unknown): value is NodeShape {
   return NodeShapeSchema.safeParse(value).success;

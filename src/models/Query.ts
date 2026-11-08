@@ -2,19 +2,68 @@ import z from "zod";
 
 import { Entail, IMQType, RuleAction } from "@/enums";
 
-import { FunctionClauseSchema } from "./FunctionClause";
-import { GroupBySchema } from "./GroupBy";
-import { HavingSchema } from "./Having";
-import { IriLDSchema } from "./IriLD";
-import { NodeSchema } from "./Node";
-import { OrderLimitSchema } from "./OrderLimit";
-import { PathSchema } from "./Path";
-import { PrefixSchema } from "./Prefix";
-import { ReturnSchema } from "./Return";
-import { TTIriRefSchema } from "./TTIriRef";
-import { WhereSchema } from "./Where";
+import { FunctionClause, FunctionClauseSchema } from "./FunctionClause";
+import { GroupBy, GroupBySchema } from "./GroupBy";
+import { Having, HavingSchema } from "./Having";
+import { IriLD, IriLDSchema } from "./IriLD";
+import { Node, NodeSchema } from "./Node";
+import { OrderLimit, OrderLimitSchema } from "./OrderLimit";
+import { Path, PathSchema } from "./Path";
+import { Prefix, PrefixSchema } from "./Prefix";
+import { Return, ReturnSchema } from "./Return";
+import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
+import { Where, WhereSchema } from "./Where";
 
-export const QuerySchema = IriLDSchema.extend({
+// Declared explicitly (rather than inferred via z.output) because the schema is self-referential:
+// inferring the type from the recursive schema triggers TS2589 "Type instantiation is excessively deep".
+export interface Query extends IriLD {
+  notExists?: boolean;
+  referenced?: boolean;
+  ifTrue?: RuleAction;
+  ifFalse?: RuleAction;
+  nodeRef?: string;
+  typeOf?: Node;
+  from?: string;
+  is?: Node;
+  then?: Query;
+  and?: Query[];
+  or?: Query[];
+  with?: Query[];
+  union?: Query[];
+  where?: Where;
+  graph?: Node;
+  optional?: boolean;
+  parameter?: string;
+  function?: FunctionClause;
+  entailment?: Entail;
+  baseRule?: boolean;
+  ruleNumber?: number;
+  inverse?: boolean;
+  activeOnly?: boolean;
+  rule?: Query[];
+  libraryItem?: string;
+  invalid?: boolean;
+  groupBy?: GroupBy[];
+  orderBy?: OrderLimit;
+  asDescription?: string;
+  errorMessage?: string;
+  draft?: boolean;
+  having?: Having;
+  path?: Path[];
+  return?: Return[];
+  prefixes?: Prefix[];
+  columnGroup?: Query[];
+  each?: Query[];
+  imQuery?: string;
+  parentResult?: any;
+  fromTypeIri?: string;
+  persistentIri?: TTIriRef;
+  bindAs?: string;
+  queryType?: IMQType;
+  as?: string;
+}
+
+export const QuerySchema: z.ZodType<Query> = IriLDSchema.extend({
   notExists: z.boolean().optional(),
   referenced: z.boolean().optional(),
   ifTrue: z.enum(RuleAction).optional(),
@@ -88,7 +137,6 @@ export const QuerySchema = IriLDSchema.extend({
   as: z.string().optional()
 });
 
-export interface Query extends z.output<typeof QuerySchema> {}
 export function isQuery(value: unknown): value is Query {
   return QuerySchema.safeParse(value).success;
 }

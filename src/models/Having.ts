@@ -1,8 +1,9 @@
 import z from "zod";
 
-import { Aggregate } from "../enums";
-import { Operator } from "../enums";
-import { Range, RangeSchema } from "./Range";
+import { Aggregate } from "@/enums";
+import { Operator } from "@/enums";
+
+import { RangeSchema } from "./Range";
 
 // export interface Having {
 //   function?: Aggregate;
@@ -30,7 +31,7 @@ export const HavingSchema = z.strictObject({
   not: z.boolean().optional()
 });
 
-export type Having = z.output<typeof HavingSchema>;
+export interface Having extends z.output<typeof HavingSchema> {}
 
 export function isHaving(value: unknown): value is Having {
   return HavingSchema.safeParse(value).success;

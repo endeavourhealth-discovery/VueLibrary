@@ -31,7 +31,7 @@ export const EntityReferenceNodeSchema = TTIriRefSchema.extend({
   scheme: TTIriRefSchema.optional()
 });
 
-export type EntityReferenceNode = z.infer<typeof EntityReferenceNodeSchema>;
+export interface EntityReferenceNode extends z.infer<typeof EntityReferenceNodeSchema> {}
 
 export function isEntityReferenceNode(value: unknown): value is EntityReferenceNode {
   return EntityReferenceNodeSchema.safeParse(value).success;
