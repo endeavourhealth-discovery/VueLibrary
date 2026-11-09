@@ -1,7 +1,7 @@
 import z from "zod";
 
 import { SearchTermCodeSchema } from "./SearchTermCode";
-import { TTIriRef, TTIriRefSchema } from "./TTIriRef";
+import { TTIriRefSchema } from "./TTIriRef";
 
 // export interface SearchResultSummary {
 //   name?: string;
@@ -25,8 +25,8 @@ export const SearchResultSummarySchema = z.strictObject({
   name: z.string().optional(),
   code: z.string().optional(),
   description: z.string().optional(),
-  status: TTIriRefSchema,
-  scheme: TTIriRefSchema,
+  status: TTIriRefSchema.optional(),
+  scheme: TTIriRefSchema.optional(),
   type: z.array(TTIriRefSchema).prefault([]),
   usageTotal: z.number().optional(),
   bestMatch: z.string().optional(),
@@ -36,7 +36,7 @@ export const SearchResultSummarySchema = z.strictObject({
   termCode: z.array(SearchTermCodeSchema).optional(),
   unit: z.array(TTIriRefSchema).optional(),
   qualifier: z.array(TTIriRefSchema).optional(),
-  iri: z.url()
+  iri: z.url().optional()
 });
 
 export type SearchResultSummary = z.output<typeof SearchResultSummarySchema>;
