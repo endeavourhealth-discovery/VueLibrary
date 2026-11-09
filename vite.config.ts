@@ -3,6 +3,15 @@ import * as path from "path";
 import dts from "vite-plugin-dts";
 import { defineConfig } from "vitest/config";
 
+
+
+
+
+
+
+
+
+
 const entries: Record<string, string> = {
   index: path.resolve(__dirname, "src/index.ts"),
   enums: path.resolve(__dirname, "src/enums/index.ts"),
@@ -47,9 +56,9 @@ export default defineConfig({
     globals: true,
     environment: "happy-dom",
     coverage: {
-      include: ["./tests/**/*.{js,ts}"],
+      include: ["src/**/*.ts"],
       provider: "v8",
-      reporter: ["text", "lcov"]
+      reporter: ["text-summary", "lcov"]
     },
     setupFiles: "./tests/unit/setupTests.js"
   }
