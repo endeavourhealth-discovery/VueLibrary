@@ -1,14 +1,14 @@
 {
   "name": "@endeavour/vue-library",
-  "version": "6.0.3",
+  "version": "6.0.4",
   "type": "module",
   "packageManager": "pnpm@11.15.1",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
-    "build:ci": "vue-tsc -b && vite build && pnpm --package=@sonar/scan dlx sonar-scanner-npm && pnpm publish",
+    "build:ci": "vue-tsc -b && vite build && vitest run --coverage && pnpm --package=@sonar/scan dlx sonar-scanner-npm && pnpm publish",
     "preview": "vite preview",
-    "test:unit": "tsc -p tsconfig.tests.json && vitest",
+    "test:unit": "tsc -p tsconfig.tests.json && vitest run --coverage",
     "format": "prettier --write \"{src,tests}/**/*.{js,ts,vue,json,css,scss,md}\"",
     "format:check": "prettier --list-different \"{src,tests}/**/*.{js,ts,vue,json,css,scss,md}\"",
     "prepare": "husky"
