@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc -b && vite build",
-    "build:ci": "vue-tsc -b && vite build && pnpm publish",
+    "build:ci": "vue-tsc -b && vite build && pnpm --package=@sonar/scan dlx sonar-scanner-npm && pnpm publish",
     "preview": "vite preview",
     "test:unit": "tsc -p tsconfig.tests.json && vitest",
     "format": "prettier --write \"{src,tests}/**/*.{js,ts,vue,json,css,scss,md}\"",
