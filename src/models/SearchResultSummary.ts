@@ -36,7 +36,7 @@ export const SearchResultSummarySchema = z.strictObject({
   termCode: z.array(SearchTermCodeSchema).optional(),
   unit: z.array(TTIriRefSchema).optional(),
   qualifier: z.array(TTIriRefSchema).optional(),
-  iri: z.url().optional()
+  iri: z.url()
 });
 
 export type SearchResultSummary = z.output<typeof SearchResultSummarySchema>;
