@@ -14,7 +14,7 @@ describe("parseQuery", () => {
             iri: "http://endhealth.info/im#Codeable",
             name: "Codeable"
           },
-          node: "stagen_0"
+          as: "stagen_0"
         }
       ],
       return: [
