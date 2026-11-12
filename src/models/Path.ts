@@ -19,7 +19,7 @@ export const PathSchema = ElementSchema.extend({
     return z.lazy(() => WhereSchema).optional();
   },
   qualifier: TTIriRefSchema.optional(),
-  node: z.string().optional()
+  as: z.string().optional()
 });
 
 export interface Path extends z.output<typeof PathSchema> {}
