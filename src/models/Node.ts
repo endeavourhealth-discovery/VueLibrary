@@ -1,5 +1,7 @@
 import z from "zod";
 
+import { IriLD, IriLDSchema } from "@/models/IriLD";
+
 import { Element, ElementSchema } from "./Element";
 import { Query, QuerySchema } from "./Query";
 
@@ -15,6 +17,7 @@ export interface Node extends Element {
   code?: string;
   inverse?: boolean;
   node?: string;
+  in?: IriLD[];
 }
 
 export const NodeSchema: z.ZodType<Node> = ElementSchema.extend({
@@ -31,7 +34,10 @@ export const NodeSchema: z.ZodType<Node> = ElementSchema.extend({
   code: z.string().optional(),
   inverse: z.boolean().optional(),
   node: z.string().optional(),
-  isCohort: z.boolean().optional()
+  isCohort: z.boolean().optional(),
+  get in(): z.ZodOptional<z.ZodArray<typeof IriLDSchema>> {
+    return z.array(IriLDSchema).optional();
+  }
 });
 
 // export type Node = z.output<typeof NodeSchema>;
